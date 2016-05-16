@@ -1,7 +1,7 @@
 <link rel="icon" href="folder-icon.png">
 <pre class=metadata>
-Title: File and Directory Data Transfer
-Shortname: FileDirDataTransfer
+Title: File and Directory Entries
+Shortname: FileDirEntries
 Abstract: This specification documents web browser support for file and directory upload by drag-and-drop operations. It introduces types representing directories with methods for asynchronous traversal, and extends {{HTMLInputElement}} and {{DataTransferItem}} [[HTML]].
 Status: ED
 ED: http://example.com/tbd
