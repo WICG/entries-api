@@ -8,7 +8,7 @@ access to the contents of directories made available to web pages by
 drag-and-drop operations in Google Chrome and other web browsers that
 have implemented the API for compatibility.
 
-For more context, please read the [Explainer](Explainer.md)
+For more context, please read the [Explainer](EXPLAINER.md).
 
 ## Draft Specification
 
