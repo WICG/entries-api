@@ -46,14 +46,14 @@ operations.
 
 Where possible, this document will attempt to describe the behavior of
 the implemented API in a forward-looking, content-compatible manner.
-For example, previous descriptions used
+For example, previous descriptions used obsolete
 [Web IDL](heycam.github.io/webidl/) constructs such as __T[]__ to
-describe iterable collections of typed objects, but that syntax is no
-longer present; the similar syntax __sequence<T>__ and
-__FrozenArray<T>__ will be used which may not have identical semantics
-but which are believed to be compatible with deployed content.
+describe iterable collections of typed objects; the similar
+syntax __sequence&lt;T&gt;__ and __FrozenArray&lt;T&gt;__ will be used
+which may not have identical semantics but which are believed to be
+compatible with deployed content.
 
-It is not a goal of this document to modify the described API in
+It is _not_ a goal of this document to modify the described API in
 content-incompatible ways or improve the usability of the API; for
 example the script API contains several methods that accept success
 and error callback pairs. Newer web standards use the
@@ -61,7 +61,7 @@ and error callback pairs. Newer web standards use the
 Promise type. This document does not propose changes to the methods to
 drop the callbacks and instead return Promises.
 
-Finally, it is also very explicitly not a goal of this document to
+Finally, it is also very explicitly _not_ a goal of this document to
 preclude further exploration of this area with APIs by other
 specifications that may improve the usability of this functionality.
 [Directory Upload](https://wicg.github.io/directory-upload/proposal.html)
