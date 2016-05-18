@@ -15,9 +15,10 @@ spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
         type: dfn
             text: strictly splitting; url: #strictly-split-a-string
     urlPrefix: forms.html
-        type: dfn
+        type: interface
             text: input; url: #the-input-element
-            text: type; url: #attr-input-type
+            text: type; for: input; url: #attr-input-type
+        type: dfn
             text: selected files; url: #concept-input-type-file-selected
             text: file upload; url: #file-upload-state-(type=file)
     urlPrefix: webappapis.html
@@ -250,7 +251,7 @@ partial interface HTMLInputElement {
 };
 </pre>
 
-When an <a><code>input</code></a> element's <a><code>type</code></a>
+When an <{input}> element's <{input/type}>
 attribute is in the <a>File Upload</a> state, the rules in this
 section apply.
 
