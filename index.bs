@@ -539,6 +539,13 @@ interface Entry {
 };
 </pre>
 
+<div class=issue>
+WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
+present on these in Chrome, hiding the types from the global
+namespace. Is it web-compatible to remove it, and simply expose these
+types in the global namespace as is done for most web APIs?
+</div>
+
 An {{Entry}} has an associated <a>entry</a>.
 
 The {{isFile}} attribute of the {{Entry}} interface must return true if the

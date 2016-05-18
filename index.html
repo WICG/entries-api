@@ -1795,6 +1795,10 @@ interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-expor
                    optional <a data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-2">ErrorCallback</a> <dfn class="idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 </pre>
+   <div class="issue" id="issue-bc889e2e"><a class="self-link" href="#issue-bc889e2e"></a> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
+present on these in Chrome, hiding the types from the global
+namespace. Is it web-compatible to remove it, and simply expose these
+types in the global namespace as is done for most web APIs? </div>
    <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isdirectory" id="ref-for-dom-entry-isdirectory-1">isDirectory</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-8">Entry</a></code> interface must return true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-2">directory entry</a> and false otherwise.</p>
@@ -2471,6 +2475,10 @@ web-compat?
 "<code class="idl"><a data-link-type="idl" href="#dom-errors-typemismatcherror">TypeMismatchError</a></code>" = 11 vs. native <code>TypeError</code>.</p>
      <a href="#issue-f0c9415f"> ↵ </a>
    </div>
+   <div class="issue"> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
+present on these in Chrome, hiding the types from the global
+namespace. Is it web-compatible to remove it, and simply expose these
+types in the global namespace as is done for most web APIs? <a href="#issue-bc889e2e"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
 If the file is not present, Chrome gives
 "<code class="idl"><a data-link-type="idl" href="#dom-errors-securityerror">SecurityError</a></code>" if <code>{create:true}</code> is
