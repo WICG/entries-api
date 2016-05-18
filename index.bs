@@ -126,21 +126,21 @@ interaction with the API.
 <h3 id=entries>Entries</h3>
 <!-- ============================================================ -->
 
-An <dfn lt=entry-concept>entry</dfn> is either a <dfn>file entry</dfn> or
+An <dfn id=entry-concept>entry</dfn> is either a <dfn>file entry</dfn> or
 a <dfn>directory entry</dfn>.
 
-An <a lt=entry-concept>entry</a> has an <dfn>entry name</dfn> (a
+An <a>entry</a> has an <dfn>entry name</dfn> (a
 <a>name</a>) and a <dfn>full path</dfn> (an <a>absolute path</a>).
 
-An <a lt=entry-concept>entry</a> also has a <dfn>root</dfn>, which is
+An <a>entry</a> also has a <dfn>root</dfn>, which is
 an associated <a>root directory</a>.
 
 <div class=note>
-<a lt=entry-concept>Entries</a> are defined in terms of <a>paths</a>
+<a>Entries</a> are defined in terms of <a>paths</a>
 relative to a <a>root directory</a> to account for the fact that a
 file system backing the interaction with the API may be modified
 asynchronously during operations such as enumerating the contents of a
-directory. Operations exposed on <a lt=entry-concept>entries</a> may
+directory. Operations exposed on <a>entries</a> may
 produce errors in such cases where the <a>paths</a> no longer
 reference the same entity.
 </div>
@@ -277,10 +277,9 @@ This section should be merged into [[HTML]].
 </div>
 
 During a <em>drag-and-drop operation</em>, <a>file</a> and
-<a>directory</a> items are associated with <a
-lt=entry-concept>entries</a>. Each <a lt=entry-concept>entry</a> is a
-member of a <a>root directory</a> unique to the <a>drag data
-store</a>.
+<a>directory</a> items are associated with <a>entries</a>. Each
+<a>entry</a> is a member of a <a>root directory</a> unique to the
+<a>drag data store</a>.
 
 Additionally, each <a>directory</a> item is represented in the <a>drag
 data store item list</a> as a <i>File</i>. If it is accessed via
@@ -302,11 +301,14 @@ partial interface DataTransferItem {
 
 The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 
-1. If the {{DataTransferItem}} object is not in the <a>read/write mode</a> or the <a>read-only mode</a>, return null and abort these steps.
+1. If the {{DataTransferItem}} object is not in the <a>read/write
+    mode</a> or the <a>read-only mode</a>, return null and abort these
+    steps.
 
-2. If the <a>drag data item kind</a> is not <em>File</em>, then return null and abort these steps.
+2. If the <a>drag data item kind</a> is not <em>File</em>, then return
+    null and abort these steps.
 
-3. Return a new {{Entry}} object representing the <a lt=entry-concept>entry</a>.
+3. Return a new {{Entry}} object representing the <a>entry</a>.
 
 <div class=example>
 Handling drag and drop of files and directories:
@@ -499,31 +501,31 @@ interface Entry {
 };
 </pre>
 
-An {{Entry}} has an associated <a lt=entry-concept>entry</a>.
+An {{Entry}} has an associated <a>entry</a>.
 
 The {{isFile}} attribute of the {{Entry}} interface must return true if the
-<a lt=entry-concept>entry</a> is a <a>file entry</a> and false otherwise.
+<a>entry</a> is a <a>file entry</a> and false otherwise.
 
 The {{isDirectory}} attribute of the {{Entry}} interface must return true if the
-<a lt=entry-concept>entry</a> is a <a>directory entry</a> and false otherwise.
+<a>entry</a> is a <a>directory entry</a> and false otherwise.
 
 The {{name}} attribute of the {{Entry}} interface must return
-the <a>entry name</a> of the <a lt=entry-concept>entry</a>.
+the <a>entry name</a> of the <a>entry</a>.
 
 The {{fullPath}} attribute of the {{Entry}} interface must return
-the <a>full path</a> of the <a lt=entry-concept>entry</a>.
+the <a>full path</a> of the <a>entry</a>.
 
 The <dfn method for=Entry><code>getParent(<var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method, when invoked, must run the following steps:
 
 1. <a>Queue a task</a> to perform the following substeps:
 
     1. Let <var>path</var> be the result of running the steps to
-        <a>resolve a relative path</a> with the <a lt=entry-concept>entry</a>'s
+        <a>resolve a relative path</a> with the <a>entry</a>'s
         <a>full path</a> and '..'.
 
     2. Let <var>item</var> be the result of running the steps to
-        <a>evaluate a path</a> with the <a
-        lt=entry-concept>entry</a>'s <a>root</a> and <var>path</var>.
+        <a>evaluate a path</a> with the <a>entry</a>'s <a>root</a> and
+        <var>path</var>.
 
     3. If <var>item</var> is <em>failure</em>, <a>invoke the
         callback</a> <var>errorCallback</var> (if given) with a
@@ -582,7 +584,7 @@ dictionary Flags {};
 callback EntryCallback = void (Entry entry);
 </pre>
 
-A {{DirectoryEntry}}'s associated <a lt=entry-concept>entry</a>
+A {{DirectoryEntry}}'s associated <a>entry</a>
 is a <a>directory entry</a>.
 
 
@@ -721,9 +723,8 @@ The <dfn method for="DirectoryEntry"><code>readEntries(<var>successCallback</var
     3. If <var>dir</var> is null, run these substeps:
 
         1. Let <var>dir</var> be the result of running the steps to
-            <a>evaluate a path</a> with the <a
-            lt=entry-concept>entry</a>'s <a>root</a> and <a>full
-            path</a>.
+            <a>evaluate a path</a> with the <a>entry</a>'s <a>root</a>
+            and <a>full path</a>.
 
         2. If <var>dir</var> is failure, set the <a>directory
             reader</a>'s <a>reader error</a> to a new
@@ -793,7 +794,7 @@ interface FileEntry : Entry {
 callback FileCallback = void (File file);
 </pre>
 
-A {{FileEntry}}'s associated <a lt=entry-concept>entry</a>
+A {{FileEntry}}'s associated <a>entry</a>
 is a <a>file entry</a>.
 
 The <dfn method for="FileEntry"><code>file(<var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method, when invoked, must run the following steps:
