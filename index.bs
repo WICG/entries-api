@@ -385,73 +385,73 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <tr>
     <td>"<dfn><code>NotFoundError</code></dfn>"</td>
     <td class=long>A requested file or directory could not be found at the time an operation was processed.</td>
-    <td><code>NOT_FOUND_ERR</code> (1)</td>
+    <td>{{NOT_FOUND_ERR}} (1)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>SecurityError</code></dfn>"</td>
     <td class=long>It was determined that certain files are unsafe for access within a Web application, or that too many calls are being made on file resources.</td>
-    <td><code>SECURITY_ERR</code> (2)</td>
+    <td>{{SECURITY_ERR}} (2)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>AbortError</code></dfn>"</td>
     <td class=long>An ongoing operation was aborted, typically with a call to abort().</td>
-    <td><code>ABORT_ERR</code> (3)</td>
+    <td>{{ABORT_ERR}} (3)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>NotReadableError</code></dfn>"</td>
     <td class=long>The requested file could not be read, typically due to permission problems that have occurred after a reference to a file was acquired.</td>
-    <td><code>NOT_READABLE_ERR</code> (4)</td>
+    <td>{{NOT_READABLE_ERR}} (4)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>EncodingError</code></dfn>"</td>
     <td class=long>A URI supplied to the API was malformed, or the resulting Data URL has exceeded the URL length limitations for Data URLs.</td>
-    <td><code>ENCODING_ERR</code> (5)</td>
+    <td>{{ENCODING_ERR}} (5)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>NoModificationAllowedError</code></dfn>"</td>
     <td class=long>An attempt was made to write to a file or directory which could not be modified due to the state of the underlying filesystem.</td>
-    <td><code>NO_MODIFICATION_ALLOWED_ERR</code> (6)</td>
+    <td>{{NO_MODIFICATION_ALLOWED_ERR}} (6)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>InvalidStateError</code></dfn>"</td>
     <td class=long>An operation that depends on state cached in an interface object was made but the state had changed since it was read from disk.</td>
-    <td><code>INVALID_STATE_ERR</code> (7)</td>
+    <td>{{INVALID_STATE_ERR}} (7)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>SyntaxError</code></dfn>"</td>
     <td class=long>An invalid or unsupported argument was given, like an invalid line ending specifier.</td>
-    <td><code>SYNTAX_ERR</code> (8)</td>
+    <td>{{SYNTAX_ERR}} (8)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>InvalidModificationError</code></dfn>"</td>
     <td class=long>An operation that depends on state cached in an interface object was made but the state had changed since it was read from disk.</td>
-    <td><code>INVALID_MODIFICATION_ERR</code> (9)</td>
+    <td>{{INVALID_MODIFICATION_ERR}} (9)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>QuotaExceededError</code></dfn>"</td>
     <td class=long>The operation failed because it would cause the application to exceed its storage quota.</td>
-    <td><code>QUOTA_EXCEEDED_ERR</code> (10)</td>
+    <td>{{QUOTA_EXCEEDED_ERR}} (10)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>TypeMismatchError</code></dfn>"</td>
     <td class=long>The path supplied exists, but was not an entry of requested type.</td>
-    <td><code>TYPE_MISMATCH_ERR</code> (11)</td>
+    <td>{{TYPE_MISMATCH_ERR}} (11)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>PathExistsError</code></dfn>"</td>
     <td class=long>An attempt was made to create a file or directory where an element already exists.</td>
-    <td><code>PATH_EXISTS_ERR</code> (12)</td>
+    <td>{{PATH_EXISTS_ERR}} (12)</td>
     <td class=unused></td>
   </tr>
 </table>
@@ -818,7 +818,7 @@ The <dfn method for="FileEntry"><code>file(<var>successCallback</var>, <var>erro
         {{File}} object representing <var>item</var>.
 
 <div class=example>
-Read the contents of a dropped file using {{FileReader}} [[FileAPI]]:
+Read the contents of a dropped file using {{FileReader}} [[!FileAPI]]:
 <pre class=lang-javascript>
 function readFileEntry(entry) {
   entry.file(file => {
