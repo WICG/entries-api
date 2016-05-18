@@ -71,7 +71,7 @@ A <dfn>name</dfn> is a string which:
     * is not '.' (U+002E FULL STOP)
     * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
 
-A <dfn>path segment</dfn> is a non-empty <a>name</a>, '.' (U+002E FULL
+A <dfn>path segment</dfn> is a non-empty <a for=/>name</a>, '.' (U+002E FULL
 STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).
 
 A <dfn>relative path</dfn> is a string consisting of one or more
@@ -95,15 +95,15 @@ encoding behavior needs to be defined. Is this web-compatible?
 <!-- ============================================================ -->
 
 A <dfn>file</dfn> consists of binary data and a <dfn
-lt=file-name>name</dfn> (a non-empty <a>name</a>).
+for=file>name</dfn> (a non-empty <a for=/>name</a>).
 
-A <dfn>directory</dfn> consists of a <dfn lt=directory-name>name</dfn>
-(a <a>name</a>) and an ordered list of members. Each member is
+A <dfn>directory</dfn> consists of a <dfn for=directory>name</dfn>
+(a <a for=/>name</a>) and an ordered list of members. Each member is
 either a <a>file</a> or a <a>directory</a>. Each member of a
-<a>directory</a> must have a distinct non-empty <a>name</a>.
+<a>directory</a> must have a distinct non-empty <a for=/>name</a>.
 
 A <dfn>root directory</dfn> is a <a>directory</a> that is not a member
-of a <a>directory</a>. A <a>root directory</a>'s <a>name</a> is empty.
+of a <a>directory</a>. A <a>root directory</a>'s <a for=/>name</a> is empty.
 
 The <dfn>parent</dfn> of a <a>file</a> or
 <a>directory</a> is the <a>directory</a> it is a member of. A <a>root
@@ -129,8 +129,8 @@ interaction with the API.
 An <dfn id=entry-concept>entry</dfn> is either a <dfn>file entry</dfn> or
 a <dfn>directory entry</dfn>.
 
-An <a>entry</a> has an <dfn>entry name</dfn> (a
-<a>name</a>) and a <dfn>full path</dfn> (an <a>absolute path</a>).
+An <a>entry</a> has an <dfn for=entry>name</dfn> (a
+<a for=/>name</a>) and a <dfn>full path</dfn> (an <a>absolute path</a>).
 
 An <a>entry</a> also has a <dfn>root</dfn>, which is
 an associated <a>root directory</a>.
@@ -223,7 +223,7 @@ following steps which return a <a>file</a>, <a>directory</a>, or
          Run these substeps:
 
          1. Let <var>item</var> be the member of <var>directory</var>
-            with <a>name</a> equal to <var>segment</var>, or return
+            with <a for=/>name</a> equal to <var>segment</var>, or return
             <em>failure</em> if none.
 
          2. If <var>segment</var> is the last item in <var>segments</var>,
@@ -386,73 +386,111 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   </tr>
   <tr>
     <td>"<dfn><code>NotFoundError</code></dfn>"</td>
-    <td class=long>A requested file or directory could not be found at the time an operation was processed.</td>
+    <td class=long>
+      A requested file or directory could not be found at the time an
+      operation was processed.
+    </td>
     <td>{{NOT_FOUND_ERR}} (1)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>SecurityError</code></dfn>"</td>
-    <td class=long>It was determined that certain files are unsafe for access within a Web application, or that too many calls are being made on file resources.</td>
+    <td class=long>
+      It was determined that certain files are unsafe for access
+      within a Web application, or thattoo many calls are being made
+      on file resources.
+    </td>
     <td>{{SECURITY_ERR}} (2)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>AbortError</code></dfn>"</td>
-    <td class=long>An ongoing operation was aborted, typically with a call to abort().</td>
+    <td class=long>
+      An ongoing operation was aborted, typically with a call to
+      abort().
+    </td>
     <td>{{ABORT_ERR}} (3)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>NotReadableError</code></dfn>"</td>
-    <td class=long>The requested file could not be read, typically due to permission problems that have occurred after a reference to a file was acquired.</td>
+    <td class=long>
+      The requested file could not be read, typically due to
+      permission problems that have occurred after a reference to a
+      file was acquired.
+    </td>
     <td>{{NOT_READABLE_ERR}} (4)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>EncodingError</code></dfn>"</td>
-    <td class=long>A URI supplied to the API was malformed, or the resulting Data URL has exceeded the URL length limitations for Data URLs.</td>
+    <td class=long>
+      A URI supplied to the API was malformed, or the resulting Data
+      URL has exceeded the URL length limitations for Data URLs.
+    </td>
     <td>{{ENCODING_ERR}} (5)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>NoModificationAllowedError</code></dfn>"</td>
-    <td class=long>An attempt was made to write to a file or directory which could not be modified due to the state of the underlying filesystem.</td>
+    <td class=long>
+      An attempt was made to write to a file or directory which could
+      not be modified due to the state of the underlying filesystem.
+    </td>
     <td>{{NO_MODIFICATION_ALLOWED_ERR}} (6)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>InvalidStateError</code></dfn>"</td>
-    <td class=long>An operation that depends on state cached in an interface object was made but the state had changed since it was read from disk.</td>
+    <td class=long>
+      An operation that depends on state cached in an interface object
+      was made but the state had changed since it was read from disk.
+    </td>
     <td>{{INVALID_STATE_ERR}} (7)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>SyntaxError</code></dfn>"</td>
-    <td class=long>An invalid or unsupported argument was given, like an invalid line ending specifier.</td>
+    <td class=long>
+      An invalid or unsupported argument was given, like an invalid
+      line ending specifier.
+    </td>
     <td>{{SYNTAX_ERR}} (8)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>InvalidModificationError</code></dfn>"</td>
-    <td class=long>An operation that depends on state cached in an interface object was made but the state had changed since it was read from disk.</td>
+    <td class=long>
+      An operation that depends on state cached in an interface object
+      was made but the state had changed since it was read from disk.
+    </td>
     <td>{{INVALID_MODIFICATION_ERR}} (9)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>QuotaExceededError</code></dfn>"</td>
-    <td class=long>The operation failed because it would cause the application to exceed its storage quota.</td>
+    <td class=long>
+      The operation failed because it would cause the application to
+      exceed its storage quota.
+    </td>
     <td>{{QUOTA_EXCEEDED_ERR}} (10)</td>
     <td class=unused></td>
   </tr>
   <tr>
     <td>"<dfn><code>TypeMismatchError</code></dfn>"</td>
-    <td class=long>The path supplied exists, but was not an entry of requested type.</td>
+    <td class=long>
+      The path supplied exists, but was not an entry of requested
+      type.
+    </td>
     <td>{{TYPE_MISMATCH_ERR}} (11)</td>
     <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn><code>PathExistsError</code></dfn>"</td>
-    <td class=long>An attempt was made to create a file or directory where an element already exists.</td>
+    <td class=long>
+      An attempt was made to create a file or directory where an
+      element already exists.
+    </td>
     <td>{{PATH_EXISTS_ERR}} (12)</td>
     <td class=unused></td>
   </tr>
@@ -510,7 +548,7 @@ The {{isDirectory}} attribute of the {{Entry}} interface must return true if the
 <a>entry</a> is a <a>directory entry</a> and false otherwise.
 
 The {{name}} attribute of the {{Entry}} interface must return
-the <a>entry name</a> of the <a>entry</a>.
+the <a for=entry>name</a> of the <a>entry</a>.
 
 The {{fullPath}} attribute of the {{Entry}} interface must return
 the <a>full path</a> of the <a>entry</a>.
@@ -533,7 +571,7 @@ The <dfn method for=Entry><code>getParent(<var>successCallback</var>, <var>error
         terminate these steps.
 
     4. Let <var>entry</var> be a new <a>directory entry</a> with
-        <var>item</var>'s <a lt=directory-name>name</a> as <a>entry name</a>
+        <var>item</var>'s <a for=directory>name</a> as <a for=entry>name</a>
         and <var>path</var> as <a>full path</a>.
 
     5. <a>Invoke the callback</a> <var>successCallback</var> with a
@@ -624,7 +662,7 @@ The <dfn method for=DirectoryEntry><code>getFile(<var>path</var>, <var>options</
         terminate these steps.
 
     6. Let <var>entry</var> be a new <a>file entry</a> with
-        <var>item</var>'s <a lt=file-name>name</a> as <a>entry name</a>
+        <var>item</var>'s <a for=file>name</a> as <a for=entry>name</a>
         and <var>path</var> as <a>full path</a>.
 
     7. <a>Invoke the callback</a> <var>successCallback</var> (if
@@ -659,8 +697,8 @@ The <dfn method for=DirectoryEntry><code>getDirectory(<var>path</var>, <var>opti
         terminate these steps.
 
     6. Let <var>entry</var> be a new <a>directory entry</a> with
-        <var>item</var>'s <a lt=directory-name>name</a> as <a>entry
-        name</a> and <var>path</var> as <a>full path</a>.
+        <var>item</var>'s <a for=directory>name</a> as <a
+        for=entry>name</a> and <var>path</var> as <a>full path</a>.
 
     7. <a>Invoke the callback</a> <var>successCallback</var> (if
         given) with a new {{DirectoryEntry}} associated with
