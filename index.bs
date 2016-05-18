@@ -508,7 +508,7 @@ The {{isDirectory}} attribute of the {{Entry}} interface must return true if the
 <a lt=entry-concept>entry</a> is a <a>directory entry</a> and false otherwise.
 
 The {{name}} attribute of the {{Entry}} interface must return
-the <a lt=file-name>name</a> of the <a lt=entry-concept>entry</a>.
+the <a>entry name</a> of the <a lt=entry-concept>entry</a>.
 
 The {{fullPath}} attribute of the {{Entry}} interface must return
 the <a>full path</a> of the <a lt=entry-concept>entry</a>.
