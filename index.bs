@@ -880,3 +880,9 @@ This specification is based heavily on the work of Eric Uhrhane in
 Thanks to Tab Atkins, Jr. for creating and maintaining <a
 href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
 specification authoring tool used to create this document.
+
+And thanks to
+Ali Alabbas
+and
+Marijn Kruisselbrink
+for suggestions, reviews, and other feedback.
