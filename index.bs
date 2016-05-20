@@ -606,6 +606,17 @@ function handleEntry(entry) {
 </pre>
 </div>
 
+<div class=example>
+Helper function to adapt {{getParent()}} for use with promises:
+<pre class=lang-javascript>
+function getParentAsPromise(entry) {
+  return new Promise((resolve, reject) => {
+    entry.getParent(resolve, reject);
+  });
+}
+</pre>
+</div>
+
 <!-- ============================================================ -->
 <h3 id=api-directoryentry>The {{DirectoryEntry}} Interface</h3>
 <!-- ============================================================ -->
@@ -728,6 +739,22 @@ passed as <var>options</var>, and "{{NotFoundError}}"
 otherwise. Is this necessary for web-compat?
 </div>
 
+<div class=example>
+Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
+with promises:
+<pre class=lang-javascript>
+function getFileAsPromise(entry, path) {
+  return new Promise((resolve, reject) => {
+    entry.getFile(path, {}, resolve, reject);
+  });
+}
+function getDirectoryAsPromise(entry, path) {
+  return new Promise((resolve, reject) => {
+    entry.getDirectory(path, {}, resolve, reject);
+  });
+}
+</pre>
+</div>
 
 
 <!-- ============================================================ -->
@@ -832,6 +859,33 @@ readBatch();
 </pre>
 </div>
 
+<div class=example>
+Helper function to adapt {{DirectoryReader}} for use with promises.
+<pre class=lang-javascript>
+function getEntriesAsPromise(entry) {
+  return new Promise((resolve, reject) => {
+    let result = [];
+    let reader = dirEntry.createReader();
+
+    (function readBatch() {
+      reader.readEntries(entries => {
+        if (entries.length > 0) {
+          entries.forEach(e => result.push(e));
+          readBatch();
+        } else {
+          resolve(result);
+        }
+      }, reject);
+    }());
+  });
+}
+</pre>
+</div>
+
+<div class=issue>
+Add example for Observables, when those are a thing.
+</div>
+
 
 <!-- ============================================================ -->
 <h3 id=api-fileentry>The {{FileEntry}} Interface</h3>
@@ -886,6 +940,18 @@ function readFileEntry(entry) {
 }
 </pre>
 </div>
+
+<div class=example>
+Helper function to adapt {{file()}} for use with promises:
+<pre class=lang-javascript>
+function fileAsPromise(entry) {
+  return new Promise((resolve, reject) => {
+    entry.file(resolve, reject);
+  });
+}
+</pre>
+</div>
+
 
 <h2 id=acknowledgements>Acknowledgements</h2>
 
