@@ -1392,7 +1392,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-05-18">18 May 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-05-20">20 May 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1603,8 +1603,8 @@ This section should be merged into <a data-link-type="biblio" href="#biblio-html
     readonly attribute FrozenArray&lt;<a data-link-type="idl-name" href="#entry" id="ref-for-entry-1">Entry</a>> <dfn class="dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export="" data-lt="webkitEntries" data-readonly="" data-type="FrozenArray<Entry>" id="dom-htmlinputelement-webkitentries">webkitEntries<span class="dfn-panel" data-deco=""><b><a href="#dom-htmlinputelement-webkitentries">#dom-htmlinputelement-webkitentries</a></b><b>Referenced in:</b><span><a href="#ref-for-dom-htmlinputelement-webkitentries-1">4. HTML Forms</a></span></span></dfn>;
 };
 </pre>
-   <p>When an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element’s <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/forms.html#attr-input-type">type</a></code> attribute is in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">File Upload</a> state, the rules in this
-section apply.</p>
+   <p>When an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element’s <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/forms.html#attr-input-type">type</a></code> attribute is in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">File
+Upload</a> state, the rules in this section apply.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to access the
 element’s selected entries. On getting, if the IDL attribute applies,
 it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that represent the
@@ -2049,8 +2049,8 @@ terminate these steps.</p>
        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> object representing <var>item</var>.</p>
      </ol>
    </ol>
-   <div class="example" id="example-3ca18a79">
-    <a class="self-link" href="#example-3ca18a79"></a> Read the contents of a dropped file using <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-filereader">FileReader</a></code> <a data-link-type="biblio" href="#biblio-fileapi">[FileAPI]</a>: 
+   <div class="example" id="example-119380e0">
+    <a class="self-link" href="#example-119380e0"></a> Read the contents of a dropped file using <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-filereader">FileReader</a></code>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">readFileEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">entry</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="nx">file</span> <span class="o">=></span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FileReader</span><span class="p">();</span>
@@ -2358,8 +2358,6 @@ for suggestions, reviews, and other feedback.</p>
   <dl>
    <dt id="biblio-file-1">[FILE-1]
    <dd>File API URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
-   <dt id="biblio-fileapi">[FileAPI]
-   <dd>Arun Ranganathan; Jonas Sicking. <a href="http://www.w3.org/TR/FileAPI/">File API</a>. 21 April 2015. WD. URL: <a href="http://www.w3.org/TR/FileAPI/">http://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-html">[HTML]
    <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-rfc2119">[RFC2119]

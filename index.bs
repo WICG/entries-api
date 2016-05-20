@@ -2,7 +2,7 @@
 <pre class=metadata>
 Title: File and Directory Entries API
 Shortname: EntriesAPI
-Abstract: This specification documents web browser support for file and directory upload by drag-and-drop operations. It introduces types representing directories with methods for asynchronous traversal, and extends {{HTMLInputElement}} and {{DataTransferItem}} [[HTML]].
+Abstract: This specification documents web browser support for file and directory upload by drag-and-drop operations. It introduces types representing directories with methods for asynchronous traversal, and extends {{HTMLInputElement}} and {{DataTransferItem}} [[!HTML]].
 Status: ED
 ED: http://inexorabletash.github.io/entries-api/
 Level: 1
@@ -251,9 +251,8 @@ partial interface HTMLInputElement {
 };
 </pre>
 
-When an <{input}> element's <{input/type}>
-attribute is in the <a>File Upload</a> state, the rules in this
-section apply.
+When an <{input}> element's <{input/type}> attribute is in the <a>File
+Upload</a> state, the rules in this section apply.
 
 The {{webkitEntries}} IDL attribute allows scripts to access the
 element's selected entries. On getting, if the IDL attribute applies,
@@ -560,7 +559,9 @@ the <a for=entry>name</a> of the <a>entry</a>.
 The {{fullPath}} attribute of the {{Entry}} interface must return
 the <a>full path</a> of the <a>entry</a>.
 
-The <dfn method for=Entry>getParent(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following steps:
+The
+<dfn method for=Entry>getParent(<var>successCallback</var>, <var>errorCallback</var>)</dfn>
+method, when invoked, must run the following steps:
 
 1. <a>Queue a task</a> to perform the following substeps:
 
@@ -610,7 +611,6 @@ function handleEntry(entry) {
 <!-- ============================================================ -->
 
 <pre class=idl>
-
 [NoInterfaceObject]
 interface DirectoryEntry : Entry {
     DirectoryReader createReader();
@@ -641,7 +641,9 @@ The <dfn method for=DirectoryEntry>createReader()</dfn> method, when invoked, mu
 2. Return a newly created {{DirectoryReader}} object associated with <var>reader</var>.
 
 
-The <dfn method for=DirectoryEntry>getFile(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following steps:
+The
+<dfn method for=DirectoryEntry>getFile(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</dfn>
+ method, when invoked, must run the following steps:
 
 1. <a>Queue a task</a> to run the following substeps:
 
@@ -676,7 +678,9 @@ The <dfn method for=DirectoryEntry>getFile(<var>path</var>, <var>options</var>, 
         given) with a new {{FileEntry}} object associated with
         <var>entry</var>.
 
-The <dfn method for=DirectoryEntry>getDirectory(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following steps:
+The
+<dfn method for=DirectoryEntry>getDirectory(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</dfn>
+method, when invoked, must run the following steps:
 
 1. <a>Queue a task</a> to run the following substeps:
 
@@ -739,7 +743,9 @@ interface DirectoryReader {
 callback EntriesCallback = void (sequence&lt;Entry&gt; entries);
 </pre>
 
-The <dfn method for="DirectoryEntry">readEntries(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following steps:
+The
+<dfn method for="DirectoryEntry">readEntries(<var>successCallback</var>, <var>errorCallback</var>)</dfn>
+method, when invoked, must run the following steps:
 
 1. If the <a>directory reader</a>'s <a>reading flag</a> is set,
     <a>queue a task</a> to <a>invoke the callback</a>
@@ -842,7 +848,9 @@ callback FileCallback = void (File file);
 A {{FileEntry}}'s associated <a>entry</a>
 is a <a>file entry</a>.
 
-The <dfn method for="FileEntry">file(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following steps:
+The
+<dfn method for="FileEntry">file(<var>successCallback</var>, <var>errorCallback</var>)</dfn>
+method, when invoked, must run the following steps:
 
 1. <a>Queue a task</a> to perform the following substeps:
 
@@ -864,7 +872,7 @@ The <dfn method for="FileEntry">file(<var>successCallback</var>, <var>errorCallb
         {{File}} object representing <var>item</var>.
 
 <div class=example>
-Read the contents of a dropped file using {{FileReader}} [[!FileAPI]]:
+Read the contents of a dropped file using {{FileReader}}:
 <pre class=lang-javascript>
 function readFileEntry(entry) {
   entry.file(file => {
