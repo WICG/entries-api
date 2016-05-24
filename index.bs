@@ -500,14 +500,19 @@ We would like to eliminate {{DOMError}} from the platform in favor of
 web-compat?
 
 Note that the codes here differ from those in {{DOMException}}:
-"{{NotFoundError}}" = 1 vs. 8,
-"{{SecurityError}}" = 2 vs. 18,
-"{{AbortError}}" = 3 vs. 20,
-"{{InvalidStateError}}" = 7 vs. 11,
-"{{SyntaxError}}" = 8 vs. 12,
-"{{InvalidModificationError}}" = 9 vs. 13,
-"{{QuotaExceededError}}" = 10 vs. 22,
-"{{TypeMismatchError}}" = 11 vs. native <code>TypeError</code>.
+{{NOT_FOUND_ERR}} = 1 vs. 8,
+{{SECURITY_ERR}} = 2 vs. 18,
+{{ABORT_ERR}} = 3 vs. 20,
+{{INVALID_STATE_ERR}} = 7 vs. 11,
+{{SYNTAX_ERR}} = 8 vs. 12,
+{{INVALID_MODIFICATION_ERR}} = 9 vs. 13,
+{{QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
+{{TYPE_MISMATCH_ERR}} = 11 vs. native <code>TypeError</code>.
+
+<a href="http://httparchive.org/">HTTP Archive</a> search for
+<code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
+all from either FileReader, use of Chrome's File System API, or
+PhoneGap/Cordova libraries.
 </div>
 
 <pre class=idl>
@@ -881,7 +886,9 @@ function getEntriesAsPromise(entry) {
 </div>
 
 <div class=issue>
-Add example for Observables, when those are a thing.
+Add example for <a
+href="https://github.com/zenparsing/es-observable">Observables</a>,
+when those are a thing.
 </div>
 
 
@@ -890,6 +897,7 @@ Add example for Observables, when those are a thing.
 <!-- ============================================================ -->
 
 <pre class=idl>
+[NoInterfaceObject]
 interface FileEntry : Entry {
     void file(FileCallback successCallback,
               optional ErrorCallback errorCallback);
