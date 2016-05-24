@@ -1835,8 +1835,8 @@ new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for
   <span class="p">}</span>
 <span class="p">}</span></pre>
    </div>
-   <div class="example" id="example-f15c6b25">
-    <a class="self-link" href="#example-f15c6b25"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-2">getParent()</a></code> for use with promises: 
+   <div class="example" id="example-83dca107">
+    <a class="self-link" href="#example-83dca107"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-2">getParent()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getParentAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="nx">entry</span><span class="p">.</span><span class="nx">getParent</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">);</span>
@@ -1940,9 +1940,9 @@ If the file is not present, Chrome gives
 "<code class="idl"><a data-link-type="idl" href="#dom-errors-securityerror" id="ref-for-dom-errors-securityerror-1">SecurityError</a></code>" if <code>{create:true}</code> is
 passed as <var>options</var>, and "<code class="idl"><a data-link-type="idl" href="#dom-errors-notfounderror" id="ref-for-dom-errors-notfounderror-4">NotFoundError</a></code>"
 otherwise. Is this necessary for web-compat? </div>
-   <div class="example" id="example-88d4b836">
-    <a class="self-link" href="#example-88d4b836"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
-with promises: 
+   <div class="example" id="example-a5767159">
+    <a class="self-link" href="#example-a5767159"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
+with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getFileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="nx">entry</span><span class="p">.</span><span class="nx">getFile</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="p">{},</span> <span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">);</span>
@@ -1956,7 +1956,7 @@ with promises:
    </div>
    <h3 class="heading settled" data-level="6.4" id="api-directoryreader"><span class="secno">6.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-3">DirectoryReader</a></code> Interface</span><a class="self-link" href="#api-directoryreader"></a></h3>
 <pre class="idl def">[NoInterfaceObject]
-interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export="" data-lt="DirectoryReader" id="directoryreader">DirectoryReader<span class="dfn-panel" data-deco=""><b><a href="#directoryreader">#directoryreader</a></b><b>Referenced in:</b><span><a href="#ref-for-directoryreader-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryreader-2">(2)</a></span><span><a href="#ref-for-directoryreader-3">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a></span></span></dfn> {
+interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export="" data-lt="DirectoryReader" id="directoryreader">DirectoryReader<span class="dfn-panel" data-deco=""><b><a href="#directoryreader">#directoryreader</a></b><b>Referenced in:</b><span><a href="#ref-for-directoryreader-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryreader-2">(2)</a></span><span><a href="#ref-for-directoryreader-3">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a> <a href="#ref-for-directoryreader-5">(3)</a></span></span></dfn> {
     void <dfn class="idl-code" data-dfn-for="DirectoryReader" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)|readEntries(successCallback)" id="dom-directoryreader-readentries">readEntries<a class="self-link" href="#dom-directoryreader-readentries"></a></dfn>(<a data-link-type="idl-name" href="#callbackdef-entriescallback" id="ref-for-callbackdef-entriescallback-1">EntriesCallback</a> <dfn class="idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback"></a></dfn>,
                      optional <a data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-5">ErrorCallback</a> <dfn class="idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
@@ -2012,10 +2012,10 @@ reader</a>’s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2
        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with <var>entries</var>.</p>
      </ol>
    </ol>
-   <div class="example" id="example-2137ea94">
-    <a class="self-link" href="#example-2137ea94"></a> Enumerating a directory: 
+   <div class="example" id="example-ff51a073">
+    <a class="self-link" href="#example-ff51a073"></a> Enumerating a directory: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">dirEntry</span><span class="p">.</span><span class="nx">createReader</span><span class="p">();</span>
-<span class="kd">let</span> <span class="nx">readBatch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="kd">let</span> <span class="nx">doBatch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
     <span class="c1">// Read a batch.</span>
     <span class="nx">reader</span><span class="p">.</span><span class="nx">readEntries</span><span class="p">(</span><span class="nx">entries</span> <span class="o">=></span> <span class="p">{</span>
@@ -2029,36 +2029,53 @@ reader</a>’s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2
       <span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">handleEntry</span><span class="p">);</span>
 
       <span class="c1">// Read the next batch.</span>
-      <span class="nx">readBatch</span><span class="p">();</span>
+      <span class="nx">doBatch</span><span class="p">();</span>
 
     <span class="p">},</span> <span class="nx">error</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
   <span class="p">};</span>
 
 <span class="c1">// Start reading</span>
-<span class="nx">readBatch</span><span class="p">();</span></pre>
+<span class="nx">doBatch</span><span class="p">();</span></pre>
    </div>
-   <div class="example" id="example-04eaf6e1">
-    <a class="self-link" href="#example-04eaf6e1"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> for use with promises. 
+   <div class="example" id="example-2798de37">
+    <a class="self-link" href="#example-2798de37"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">dirEntry</span><span class="p">.</span><span class="nx">createReader</span><span class="p">();</span>
-
-    <span class="p">(</span><span class="kd">function</span> <span class="nx">readBatch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">doBatch</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> <span class="p">{</span>
       <span class="nx">reader</span><span class="p">.</span><span class="nx">readEntries</span><span class="p">(</span><span class="nx">entries</span> <span class="o">=></span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span> <span class="o">></span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
           <span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">e</span> <span class="o">=></span> <span class="nx">result</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
-          <span class="nx">readBatch</span><span class="p">();</span>
+          <span class="nx">doBatch</span><span class="p">();</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
           <span class="nx">resolve</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
         <span class="p">}</span>
       <span class="p">},</span> <span class="nx">reject</span><span class="p">);</span>
-    <span class="p">}());</span>
+    <span class="p">};</span>
+    <span class="nx">doBatch</span><span class="p">();</span>
   <span class="p">});</span>
 <span class="p">}</span></pre>
    </div>
-   <div class="issue" id="issue-d2747a7d"><a class="self-link" href="#issue-d2747a7d"></a> Add example for <a href="https://github.com/zenparsing/es-observable">Observables</a>,
-when those are a thing. </div>
+   <div class="example" id="example-1d8582b3">
+    <a class="self-link" href="#example-1d8582b3"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-5">DirectoryReader</a></code> for use with <a href="https://github.com/zenparsing/es-observable">Observables</a>: 
+<pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsObservable</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Observable</span><span class="p">(</span><span class="nx">observer</span> <span class="o">=></span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">dirEntry</span><span class="p">.</span><span class="nx">createReader</span><span class="p">();</span>
+    <span class="kd">let</span> <span class="nx">doBatch</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> <span class="p">{</span>
+      <span class="nx">reader</span><span class="p">.</span><span class="nx">readEntries</span><span class="p">(</span><span class="nx">entries</span> <span class="o">=></span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span> <span class="o">></span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">entries</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">e</span> <span class="o">=></span> <span class="nx">observer</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">e</span><span class="p">));</span>
+          <span class="nx">doBatch</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">observer</span><span class="p">.</span><span class="nx">complete</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="nx">reject</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">doBatch</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">}</span></pre>
+   </div>
    <h3 class="heading settled" data-level="6.5" id="api-fileentry"><span class="secno">6.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
 <pre class="idl def">[NoInterfaceObject]
 interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export="" data-lt="FileEntry" id="fileentry">FileEntry<span class="dfn-panel" data-deco=""><b><a href="#fileentry">#fileentry</a></b><b>Referenced in:</b><span><a href="#ref-for-fileentry-1">6.3. The DirectoryEntry Interface</a></span><span><a href="#ref-for-fileentry-2">6.5. The FileEntry Interface</a> <a href="#ref-for-fileentry-3">(2)</a></span></span></dfn> : <a data-link-type="idl-name" href="#entry" id="ref-for-entry-15">Entry</a> {
@@ -2102,8 +2119,8 @@ terminate these steps.</p>
   <span class="p">},</span> <span class="nx">error</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
 <span class="p">}</span></pre>
    </div>
-   <div class="example" id="example-274f0ea4">
-    <a class="self-link" href="#example-274f0ea4"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-2">file()</a></code> for use with promises: 
+   <div class="example" id="example-52d8dbf1">
+    <a class="self-link" href="#example-52d8dbf1"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-2">file()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">fileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="nx">entry</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">);</span>
@@ -2369,6 +2386,11 @@ for suggestions, reviews, and other feedback.</p>
      <li><a href="https://dom.spec.whatwg.org/#domerror">DOMError</a>
     </ul>
    <li>
+    <a data-link-type="biblio">[ecma262]</a> defines the following terms:
+    <ul>
+     <li><a href="https://tc39.github.io/ecma262/#sec-promise-objects">promise</a>
+    </ul>
+   <li>
     <a data-link-type="biblio">[file-1]</a> defines the following terms:
     <ul>
      <li><a href="https://w3c.github.io/FileAPI/#dfn-file">File</a>
@@ -2416,6 +2438,8 @@ for suggestions, reviews, and other feedback.</p>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
   <dl>
+   <dt id="biblio-ecma-262">[ECMA-262]
+   <dd><a href="https://tc39.github.io/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a>
    <dt id="biblio-file-system-api">[FILE-SYSTEM-API]
    <dd>Eric Uhrhane. <a href="http://www.w3.org/TR/file-system-api/">File API: Directories and System</a>. 24 April 2014. NOTE. URL: <a href="http://www.w3.org/TR/file-system-api/">http://www.w3.org/TR/file-system-api/</a>
   </dl>
@@ -2523,8 +2547,6 @@ If the file is not present, Chrome gives
 "<code class="idl"><a data-link-type="idl" href="#dom-errors-securityerror">SecurityError</a></code>" if <code>{create:true}</code> is
 passed as <var>options</var>, and "<code class="idl"><a data-link-type="idl" href="#dom-errors-notfounderror">NotFoundError</a></code>"
 otherwise. Is this necessary for web-compat? <a href="#issue-b9162655"> ↵ </a></div>
-   <div class="issue"> Add example for <a href="https://github.com/zenparsing/es-observable">Observables</a>,
-when those are a thing. <a href="#issue-d2747a7d"> ↵ </a></div>
   </div>
 <script>/* script-dfn-panel */
 
