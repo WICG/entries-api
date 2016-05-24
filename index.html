@@ -1392,7 +1392,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-05-20">20 May 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-05-24">24 May 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1468,8 +1468,9 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
    </ol>
   </nav>
   <main>
-   <div class="issue" id="issue-95235530"><a class="self-link" href="#issue-95235530"></a> EDITORIAL:
-Need a better name/short name for this spec. Suggestions? </div>
+   <div class="issue" id="issue-852eb51b"><a class="self-link" href="#issue-852eb51b"></a> EDITORIAL: Proposed for WICG but not actually published by WICG yet, despite what
+it says above. <a href="https://discourse.wicg.io/t/specify-chromes-file-directory-drag-and-drop-behavior/1520">Discussion
+on Specifiction</a> </div>
    <h2 class="heading settled" data-level="1" id="goals"><span class="secno">1. </span><span class="content">Goals</span><a class="self-link" href="#goals"></a></h2>
    <p>This specification documents the types and operations made available
 by web browsers to script when a hierarchy of files and directories
@@ -1495,7 +1496,7 @@ but which has not been broadly adopted by web browsers.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="path segment" data-noexport="" id="path-segment">path segment<span class="dfn-panel" data-deco=""><b><a href="#path-segment">#path-segment</a></b><b>Referenced in:</b><span><a href="#ref-for-path-segment-1">2.1. Names and Paths</a></span></span></dfn> is a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-1">name</a>, '.' (U+002E FULL
 STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="relative path" data-noexport="" id="relative-path">relative path<span class="dfn-panel" data-deco=""><b><a href="#relative-path">#relative-path</a></b><b>Referenced in:</b><span><a href="#ref-for-relative-path-1">2.1. Names and Paths</a> <a href="#ref-for-relative-path-2">(2)</a></span><span><a href="#ref-for-relative-path-3">3. Algorithms</a></span></span></dfn> is a string consisting of one or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment-1">path segments</a> joined by '/' (U+002F SOLIDUS).</p>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="absolute path" data-noexport="" id="absolute-path">absolute path<span class="dfn-panel" data-deco=""><b><a href="#absolute-path">#absolute-path</a></b><b>Referenced in:</b><span><a href="#ref-for-absolute-path-1">2.1. Names and Paths</a></span><span><a href="#ref-for-absolute-path-2">2.3. Entries</a></span><span><a href="#ref-for-absolute-path-3">3. Algorithms</a> <a href="#ref-for-absolute-path-4">(2)</a> <a href="#ref-for-absolute-path-5">(3)</a> <a href="#ref-for-absolute-path-6">(4)</a></span></span></dfn> is a string consisting of '/' (U+002F SOLIDUS),
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="absolute path" data-noexport="" id="absolute-path">absolute path<span class="dfn-panel" data-deco=""><b><a href="#absolute-path">#absolute-path</a></b><b>Referenced in:</b><span><a href="#ref-for-absolute-path-1">2.1. Names and Paths</a></span><span><a href="#ref-for-absolute-path-2">2.3. Entries</a></span><span><a href="#ref-for-absolute-path-3">3. Algorithms</a> <a href="#ref-for-absolute-path-4">(2)</a> <a href="#ref-for-absolute-path-5">(3)</a> <a href="#ref-for-absolute-path-6">(4)</a> <a href="#ref-for-absolute-path-7">(5)</a></span></span></dfn> is a string consisting of '/' (U+002F SOLIDUS),
 optionally followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="path" data-noexport="" id="path">path<span class="dfn-panel" data-deco=""><b><a href="#path">#path</a></b><b>Referenced in:</b><span><a href="#ref-for-path-1">2.1. Names and Paths</a></span><span><a href="#ref-for-path-2">2.3. Entries</a> <a href="#ref-for-path-3">(2)</a></span></span></dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="valid path" data-noexport="" id="valid-path">valid path<span class="dfn-panel" data-deco=""><b><a href="#valid-path">#valid-path</a></b><b>Referenced in:</b><span><a href="#ref-for-valid-path-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-valid-path-2">(2)</a></span></span></dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
@@ -1540,7 +1541,7 @@ and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="reader error" data-n
 run the following steps which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-4">absolute path</a>:</p>
    <ol>
     <li data-md="">
-     <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-5">absolute path</a>, return <var>relpath</var>..</p>
+     <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-5">absolute path</a>, return <var>relpath</var>.</p>
     <li data-md="">
      <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly
 splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
@@ -1571,7 +1572,9 @@ following steps which return a <a data-link-type="dfn" href="#file" id="ref-for-
     <li data-md="">
      <p>Let <var>segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>path</var> on '/' (U+002F SOLIDUS).</p>
     <li data-md="">
-     <p>Remove the first (empty) entry from <var>segments</var>.</p>
+     <p>Remove the first entry from <var>segments</var>.</p>
+     <div class="note" role="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-7">absolute path</a>,
+  this first entry will always be empty.</div>
     <li data-md="">
      <p>For each <var>segment</var> in <var>segments</var>, switch on <var>segment</var>:</p>
      <dl class="switch">
@@ -2496,8 +2499,9 @@ callback <a href="#callbackdef-filecallback">FileCallback</a> = void (<a data-li
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> EDITORIAL:
-Need a better name/short name for this spec. Suggestions? <a href="#issue-95235530"> ↵ </a></div>
+   <div class="issue"> EDITORIAL: Proposed for WICG but not actually published by WICG yet, despite what
+it says above. <a href="https://discourse.wicg.io/t/specify-chromes-file-directory-drag-and-drop-behavior/1520">Discussion
+on Specifiction</a> <a href="#issue-852eb51b"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
 Can we replace <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> with <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> everywhere? If not,
 encoding behavior needs to be defined. Is this web-compatible? <a href="#issue-a8156116"> ↵ </a></div>

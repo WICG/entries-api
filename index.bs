@@ -37,8 +37,10 @@ spec: webidl; urlPrefix: https://heycam.github.io/webidl/
 </pre>
 
 <div class=issue>
-EDITORIAL:
-Need a better name/short name for this spec. Suggestions?
+EDITORIAL: Proposed for WICG but not actually published by WICG yet, despite what
+it says above. <a
+href="https://discourse.wicg.io/t/specify-chromes-file-directory-drag-and-drop-behavior/1520">Discussion
+on Specifiction</a>
 </div>
 
 <!-- ============================================================ -->
@@ -166,7 +168,7 @@ To <dfn>resolve a relative path</dfn> with <var>abspath</var> (an
 run the following steps which return an <a>absolute path</a>:
 
 1. If <var>relpath</var> is an <a>absolute path</a>, return
-    <var>relpath</var>..
+    <var>relpath</var>.
 
 2. Let <var>abspath segments</var> be the result of <a>strictly
     splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).
@@ -196,7 +198,6 @@ run the following steps which return an <a>absolute path</a>:
 5. Return <var>abspath segments</var> joined by '/' (U+002F SOLIDUS).
 
 
-
 To <dfn>evaluate a path</dfn> with <var>directory</var> (an <a>root
 directory</a>) and <var>path</var> (an <a>absolute path</a>), run the
 following steps which return a <a>file</a>, <a>directory</a>, or
@@ -205,7 +206,10 @@ following steps which return a <a>file</a>, <a>directory</a>, or
 1. Let <var>segments</var> be the result of <a>strictly splitting</a>
     <var>path</var> on '/' (U+002F SOLIDUS).
 
-2. Remove the first (empty) entry from <var>segments</var>.
+2. Remove the first entry from <var>segments</var>.
+
+    <div class=note>Since <var>path</var> was an <a>absolute path</a>,
+      this first entry will always be empty.</div>
 
 3. For each <var>segment</var> in <var>segments</var>, switch on <var>segment</var>:
 
