@@ -84,13 +84,7 @@ optionally followed by a <a>relative path</a>.
 
 A <dfn>path</dfn> is either a <a>relative path</a> or an <a>absolute path</a>.
 
-A <dfn>valid path</dfn> is a {{DOMString}} which is a <a>path</a>.
-
-<div class=issue>
-WEB-COMPAT:
-Can we replace {{DOMString}} with {{USVString}} everywhere? If not,
-encoding behavior needs to be defined. Is this web-compatible?
-</div>
+A <dfn>valid path</dfn> is a {{USVString}} which is a <a>path</a>.
 
 <!-- ============================================================ -->
 <h3 id=files-dirs>Files and Directories</h3>
@@ -534,8 +528,8 @@ error asynchronously.
 interface Entry {
     readonly attribute boolean isFile;
     readonly attribute boolean isDirectory;
-    readonly attribute DOMString name;
-    readonly attribute DOMString fullPath;
+    readonly attribute USVString name;
+    readonly attribute USVString fullPath;
 
     void getParent(optional EntryCallback successCallback,
                    optional ErrorCallback errorCallback);
@@ -629,11 +623,11 @@ function getParentAsPromise(entry) {
 [NoInterfaceObject]
 interface DirectoryEntry : Entry {
     DirectoryReader createReader();
-    void getFile(DOMString path,
+    void getFile(USVString path,
                  optional Flags options,
                  optional EntryCallback successCallback,
                  optional ErrorCallback errorCallback);
-    void getDirectory(DOMString path,
+    void getDirectory(USVString path,
                       optional Flags options,
                       optional EntryCallback successCallback,
                       optional ErrorCallback errorCallback);
