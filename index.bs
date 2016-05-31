@@ -165,6 +165,8 @@ To <dfn>resolve a relative path</dfn> with |abspath| (an
 <a>absolute path</a>) and |relpath| (a <a>relative path</a>),
 run the following steps which return an <a>absolute path</a>:
 
+<div class=algorithm>
+
 1. If |relpath| is an <a>absolute path</a>, return
     |relpath|.
 
@@ -195,11 +197,14 @@ run the following steps which return an <a>absolute path</a>:
 
 5. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
 
+</div>
 
 To <dfn>evaluate a path</dfn> with |directory| (an <a>root
 directory</a>) and |path| (an <a>absolute path</a>), run the following
 steps which return a <a>file</a>, <a>directory</a>, or
 <em>failure</em>.
+
+<div class=algorithm>
 
 1. Let |segments| be the result of <a>strictly splitting</a>
     |path| on '/' (U+002F SOLIDUS).
@@ -237,6 +242,7 @@ steps which return a <a>file</a>, <a>directory</a>, or
 
     </dl>
 
+</div>
 
 <!-- ============================================================ -->
 <h2 id=html-forms>HTML Forms</h2>
@@ -302,6 +308,8 @@ partial interface DataTransferItem {
 
 The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 
+<div class=algorithm>
+
 1. If the {{DataTransferItem}} object is not in the <a>read/write
     mode</a> or the <a>read-only mode</a>, return null and abort these
     steps.
@@ -310,6 +318,8 @@ The {{webkitGetAsEntry()}} method must run the following steps when invoked:
     null and abort these steps.
 
 3. Return a new {{Entry}} object representing the <a>entry</a>.
+
+</div>
 
 <div class=example>
 Handling drag and drop of files and directories:
@@ -378,7 +388,7 @@ table.deets .used:after { color: #080; content: "\2713"; font-size: 200%; }
 table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
 </style>
 
-<table class=deets dfn-for=errors>
+<table class=deets>
   <tr>
     <th>Name</th>
     <th>Description</th>
@@ -511,7 +521,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   {{SYNTAX_ERR}} = 8 vs. 12,
   {{INVALID_MODIFICATION_ERR}} = 9 vs. 13,
   {{QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
-  {{TYPE_MISMATCH_ERR}} = 11 vs. native <code>TypeError</code>.
+  {{TYPE_MISMATCH_ERR}} = 11 vs. <a>simple exception</a> <code>TypeError</code>.
 
   <a href="http://httparchive.org/">HTTP Archive</a> search for
   <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
@@ -554,21 +564,24 @@ interface Entry {
 
 An {{Entry}} has an associated <a>entry</a>.
 
-The {{isFile}} attribute of the {{Entry}} interface must return true if the
-<a>entry</a> is a <a>file entry</a> and false otherwise.
+The {{isFile}} attribute of the {{Entry}} interface must return true
+if the <a>entry</a> is a <a>file entry</a> and false otherwise.
 
-The {{isDirectory}} attribute of the {{Entry}} interface must return true if the
-<a>entry</a> is a <a>directory entry</a> and false otherwise.
+The {{isDirectory}} attribute of the {{Entry}} interface must return
+true if the <a>entry</a> is a <a>directory entry</a> and false
+otherwise.
 
-The {{name}} attribute of the {{Entry}} interface must return
-the <a for=entry>name</a> of the <a>entry</a>.
+The {{name}} attribute of the {{Entry}} interface must return the <a
+for=entry>name</a> of the <a>entry</a>.
 
-The {{fullPath}} attribute of the {{Entry}} interface must return
-the <a>full path</a> of the <a>entry</a>.
+The {{fullPath}} attribute of the {{Entry}} interface must return the
+<a>full path</a> of the <a>entry</a>.
 
-The
-<dfn method for=Entry>getParent(|successCallback|, |errorCallback|)</dfn>
-method, when invoked, must run the following steps:
+The <dfn method for=Entry>getParent(|successCallback|,
+|errorCallback|)</dfn> method, when invoked, must run the following
+steps:
+
+<div class=algorithm>
 
 1. <a>Queue a task</a> to perform the following substeps:
 
@@ -592,6 +605,8 @@ method, when invoked, must run the following steps:
     5. <a>Invoke the callback</a> |successCallback| with a
         new {{DirectoryEntry}} object associated with
         |entry|.
+
+</div>
 
 <div class=note>
   An error is possible if files have been modified on disk since the
@@ -652,17 +667,25 @@ A {{DirectoryEntry}}'s associated <a>entry</a>
 is a <a>directory entry</a>.
 
 
-The <dfn method for=DirectoryEntry>createReader()</dfn> method, when invoked, must run the following steps:
+The <dfn method for=DirectoryEntry>createReader()</dfn> method, when
+invoked, must run the following steps:
+
+<div class=algorithm>
 
 1. Let |reader| be a new <a>directory reader</a> associated with the
     <a>directory entry</a>'s <a>directory</a>.
 
-2. Return a newly created {{DirectoryReader}} object associated with |reader|.
+2. Return a newly created {{DirectoryReader}} object associated with
+    |reader|.
+
+</div>
 
 
-The
-<dfn method for=DirectoryEntry>getFile(|path|, |options|, |successCallback|, |errorCallback|)</dfn>
- method, when invoked, must run the following steps:
+The <dfn method for=DirectoryEntry>getFile(|path|, |options|,
+|successCallback|, |errorCallback|)</dfn> method, when invoked, must
+run the following steps:
+
+<div class=algorithm>
 
 1. <a>Queue a task</a> to run the following substeps:
 
@@ -697,9 +720,13 @@ The
         given) with a new {{FileEntry}} object associated with
         |entry|.
 
-The
-<dfn method for=DirectoryEntry>getDirectory(|path|, |options|, |successCallback|, |errorCallback|)</dfn>
-method, when invoked, must run the following steps:
+</div>
+
+The <dfn method for=DirectoryEntry>getDirectory(|path|, |options|,
+|successCallback|, |errorCallback|)</dfn> method, when invoked, must
+run the following steps:
+
+<div class=algorithm>
 
 1. <a>Queue a task</a> to run the following substeps:
 
@@ -733,6 +760,8 @@ method, when invoked, must run the following steps:
     7. <a>Invoke the callback</a> |successCallback| (if
         given) with a new {{DirectoryEntry}} associated with
         |entry|.
+
+</div>
 
 <div class=note>
   The {{Flags}} dictionary has no defined members and is present for
@@ -777,9 +806,11 @@ interface DirectoryReader {
 callback EntriesCallback = void (sequence&lt;Entry&gt; entries);
 </pre>
 
-The
-<dfn method for="DirectoryEntry">readEntries(|successCallback|, |errorCallback|)</dfn>
-method, when invoked, must run the following steps:
+The <dfn method for="DirectoryEntry">readEntries(|successCallback|,
+|errorCallback|)</dfn> method, when invoked, must run the following
+steps:
+
+<div class=algorithm>
 
 1. If the <a>directory reader</a>'s <a>reading flag</a> is set,
     <a>queue a task</a> to <a>invoke the callback</a>
@@ -836,6 +867,8 @@ method, when invoked, must run the following steps:
 
     7. <a>Invoke the callback</a> |successCallback| with
         |entries|.
+
+</div>
 
 
 <div class=example>
@@ -929,9 +962,11 @@ callback FileCallback = void (File file);
 A {{FileEntry}}'s associated <a>entry</a>
 is a <a>file entry</a>.
 
-The
-<dfn method for="FileEntry">file(|successCallback|, |errorCallback|)</dfn>
-method, when invoked, must run the following steps:
+The <dfn method for="FileEntry">file(|successCallback|,
+|errorCallback|)</dfn> method, when invoked, must run the following
+steps:
+
+<div class=algorithm>
 
 1. <a>Queue a task</a> to perform the following substeps:
 
@@ -951,6 +986,8 @@ method, when invoked, must run the following steps:
 
     3. <a>Invoke the callback</a> |successCallback| with a new
         {{File}} object representing |item|.
+
+</div>
 
 <div class=example>
 Read the contents of a dropped file using {{FileReader}}:
