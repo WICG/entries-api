@@ -12,4 +12,4 @@ For more context, please read the [Explainer](EXPLAINER.md).
 
 ## Draft Specification
 
-http://inexorabletash.github.io/entries-api/
+http://wicg.github.io/entries-api/
