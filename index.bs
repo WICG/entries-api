@@ -8,7 +8,7 @@ Abstract: This specification documents web browser support for file
     traversal, and extends {{HTMLInputElement}} and
     {{DataTransferItem}} [[!HTML]].
 Status: ED
-ED: http://inexorabletash.github.io/entries-api/
+ED: https://wicg.github.io/entries-api/
 Level: 1
 Editor: Joshua Bell, jsbell@google.com
 Group: wicg
@@ -43,12 +43,6 @@ spec: webidl; urlPrefix: https://heycam.github.io/webidl/
         text: invoke the callback; url: #es-invoking-callback-functions
 </pre>
 
-<div class=issue>
-  EDITORIAL: Proposed for WICG but not actually published by WICG yet, despite what
-  it says above. <a
-                     href="https://discourse.wicg.io/t/specify-chromes-file-directory-drag-and-drop-behavior/1520">Discussion
-  on Specifiction</a>
-</div>
 
 <!-- ============================================================ -->
 <h2 id=goals>Goals</h2>
