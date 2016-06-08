@@ -12,4 +12,4 @@ For more context, please read the [Explainer](EXPLAINER.md).
 
 ## Draft Specification
 
-http://wicg.github.io/entries-api/
+https://wicg.github.io/entries-api/
