@@ -74,41 +74,42 @@ A <dfn>name</dfn> is a string which:
     * is not '.' (U+002E FULL STOP)
     * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
 
-A <dfn>path segment</dfn> is a non-empty <a for=/>name</a>, '.' (U+002E FULL
+A <dfn>path segment</dfn> is a non-empty [=/name=], '.' (U+002E FULL
 STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).
 
 A <dfn>relative path</dfn> is a string consisting of one or more
-<a>path segments</a> joined by '/' (U+002F SOLIDUS).
+[=path segments=] joined by '/' (U+002F SOLIDUS).
 
-An <dfn>absolute path</dfn> is a string consisting of '/' (U+002F SOLIDUS),
-optionally followed by a <a>relative path</a>.
+An <dfn>absolute path</dfn> is a string consisting of '/' (U+002F
+SOLIDUS), optionally followed by a [=relative path=].
 
-A <dfn>path</dfn> is either a <a>relative path</a> or an <a>absolute path</a>.
+A <dfn>path</dfn> is either a [=relative path=] or an [=absolute
+path=].
 
-A <dfn>valid path</dfn> is a {{USVString}} which is a <a>path</a>.
+A <dfn>valid path</dfn> is a {{USVString}} which is a [=path=].
 
 <!-- ============================================================ -->
 <h3 id=files-dirs>Files and Directories</h3>
 <!-- ============================================================ -->
 
 A <dfn>file</dfn> consists of binary data and a <dfn
-for=file>name</dfn> (a non-empty <a for=/>name</a>).
+for=file>name</dfn> (a non-empty [=/name=]).
 
-A <dfn>directory</dfn> consists of a <dfn for=directory>name</dfn>
-(a <a for=/>name</a>) and an ordered list of members. Each member is
-either a <a>file</a> or a <a>directory</a>. Each member of a
-<a>directory</a> must have a distinct non-empty <a for=/>name</a>.
+A <dfn>directory</dfn> consists of a <dfn for=directory>name</dfn> (a
+[=/name=]) and an ordered list of members. Each member is either a
+[=file=] or a [=directory=]. Each member of a [=directory=] must have
+a distinct non-empty [=/name=].
 
-A <dfn>root directory</dfn> is a <a>directory</a> that is not a member
-of a <a>directory</a>. A <a>root directory</a>'s <a for=/>name</a> is empty.
+A <dfn>root directory</dfn> is a [=directory=] that is not a member of
+a [=directory=]. A [=root directory=]'s [=/name=] is empty.
 
-The <dfn>parent</dfn> of a <a>file</a> or
-<a>directory</a> is the <a>directory</a> it is a member of. A <a>root
-directory</a> has no <a>parent</a>.
+The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
+[=directory=] it is a member of. A [=root directory=] has no
+[=parent=].
 
 <div class=issue>
   EDITORIAL:
-  Should <a>directory</a> be defined as a special type of <a>file</a>
+  Should [=directory=] be defined as a special type of [=file=]
   so that minimal changes are necessary in [[HTML]]?
 </div>
 
@@ -123,57 +124,55 @@ directory</a> has no <a>parent</a>.
 <h3 id=entries>Entries</h3>
 <!-- ============================================================ -->
 
-An <dfn id=entry-concept>entry</dfn> is either a <dfn>file entry</dfn> or
-a <dfn>directory entry</dfn>.
+An <dfn id=entry-concept>entry</dfn> is either a <dfn>file entry</dfn>
+or a <dfn>directory entry</dfn>.
 
-An <a>entry</a> has an <dfn for=entry>name</dfn> (a
-<a for=/>name</a>) and a <dfn>full path</dfn> (an <a>absolute path</a>).
+An [=entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
+<dfn>full path</dfn> (an [=absolute path=]).
 
-An <a>entry</a> also has a <dfn>root</dfn>, which is
-an associated <a>root directory</a>.
+An [=entry=] also has a <dfn>root</dfn>, which is an associated [=root
+directory=].
 
 <div class=note>
-  <a>Entries</a> are defined in terms of <a>paths</a> relative to a
-  <a>root directory</a> to account for the fact that a file system
-  backing the interaction with the API may be modified asynchronously
-  during operations such as enumerating the contents of a directory.
-  Operations exposed on <a>entries</a> may produce errors in such
-  cases where the <a>paths</a> no longer reference the same entity.
+  [=Entries=] are defined in terms of [=paths=] relative to a [=root
+  directory=] to account for the fact that a file system backing the
+  interaction with the API may be modified asynchronously during
+  operations such as enumerating the contents of a directory.
+  Operations exposed on [=entries=] may produce errors in such cases
+  where the [=paths=] no longer reference the same entity.
 </div>
 
 <!-- ============================================================ -->
 <h3 id=dir-reader>Directory Reader</h3>
 <!-- ============================================================ -->
 
-A <dfn>directory reader</dfn> consists of an associated <a>directory
-entry</a>, an associated <a>directory</a> (initially null), a
-<dfn>reading flag</dfn> (initially unset), a <dfn>done flag</dfn>
-(initially unset), and a <dfn>reader error</dfn> (initially null).
+A <dfn>directory reader</dfn> consists of an associated [=directory
+entry=], an associated [=directory=] (initially null), a <dfn>reading
+flag</dfn> (initially unset), a <dfn>done flag</dfn> (initially
+unset), and a <dfn>reader error</dfn> (initially null).
 
 
 <!-- ============================================================ -->
 <h2 id=algorithms>Algorithms</h2>
 <!-- ============================================================ -->
 
-To <dfn>resolve a relative path</dfn> with |abspath| (an
-<a>absolute path</a>) and |relpath| (a <a>relative path</a>),
-run the following steps which return an <a>absolute path</a>:
+To <dfn>resolve a relative path</dfn> with |abspath| (an [=absolute
+path=]) and |relpath| (a [=relative path=]), run the following steps
+which return an [=absolute path=]:
 
 <div class=algorithm>
 
-1. If |relpath| is an <a>absolute path</a>, return
-    |relpath|.
+1. If |relpath| is an [=absolute path=], return |relpath|.
 
-2. Let |abspath segments| be the result of <a>strictly
-    splitting</a> |abspath| on '/' (U+002F SOLIDUS).
+2. Let |abspath segments| be the result of [=strictly splitting=]
+    |abspath| on '/' (U+002F SOLIDUS).
 
     <div class=note>The first string will be empty.</div>
 
-3. Let |relpath segments| be the result of <a>strictly
-    splitting</a> |relpath| on '/' (U+002F SOLIDUS).
+3. Let |relpath segments| be the result of [=strictly splitting=]
+    |relpath| on '/' (U+002F SOLIDUS).
 
-4. For each |segment| in |relpath segments|,
-    switch on |segment|:
+4. For each |segment| in |relpath segments|, switch on |segment|:
 
     <dl class=switch>
 
@@ -193,19 +192,18 @@ run the following steps which return an <a>absolute path</a>:
 
 </div>
 
-To <dfn>evaluate a path</dfn> with |directory| (an <a>root
-directory</a>) and |path| (an <a>absolute path</a>), run the following
-steps which return a <a>file</a>, <a>directory</a>, or
-<em>failure</em>.
+To <dfn>evaluate a path</dfn> with |directory| (an [=root directory=])
+and |path| (an [=absolute path=]), run the following steps which
+return a [=file=], [=directory=], or <em>failure</em>.
 
 <div class=algorithm>
 
-1. Let |segments| be the result of <a>strictly splitting</a>
-    |path| on '/' (U+002F SOLIDUS).
+1. Let |segments| be the result of [=strictly splitting=] |path| on
+    '/' (U+002F SOLIDUS).
 
 2. Remove the first entry from |segments|.
 
-    <div class=note>Since |path| was an <a>absolute path</a>,
+    <div class=note>Since |path| was an [=absolute path=],
       this first entry will always be empty.</div>
 
 3. For each |segment| in |segments|, switch on |segment|:
@@ -216,24 +214,22 @@ steps which return a <a>file</a>, <a>directory</a>, or
       <dd>Continue.
 
       <dt>'..' (U+002E FULL STOP, U+002E FULL STOP)
-      <dd>Let |directory| be |directory|'s <a>parent</a>,
+      <dd>Let |directory| be |directory|'s [=parent=],
           or |directory| if none.
 
       <dt>Otherwise
       <dd>
          Run these substeps:
 
-         1. Let |item| be the member of |directory|
-            with <a for=/>name</a> equal to |segment|, or return
-            <em>failure</em> if none.
+         1. Let |item| be the member of |directory| with [=/name=]
+            equal to |segment|, or return <em>failure</em> if none.
 
-         2. If |segment| is the last item in |segments|,
-            return |item|.
+         2. If |segment| is the last item in |segments|, return
+            |item|.
 
-         3. If |item| is a <a>file</a>, return <em>failure</em>.
+         3. If |item| is a [=file=], return <em>failure</em>.
 
          4. Let |directory| be |item|.
-
     </dl>
 
 </div>
@@ -253,14 +249,14 @@ partial interface HTMLInputElement {
 };
 </pre>
 
-When an <{input}> element's <{input/type}> attribute is in the <a>File
-Upload</a> state, the rules in this section apply.
+When an <{input}> element's <{input/type}> attribute is in the [=File
+Upload=] state, the rules in this section apply.
 
 The {{webkitEntries}} IDL attribute allows scripts to access the
 element's selected entries. On getting, if the IDL attribute applies,
 it must return an array of {{Entry}} objects that represent the
-current <a>selected files</a> (including directories, if permitted).
-If the IDL attribute does not apply, then it must instead return null.
+current [=selected files=] (including directories, if permitted). If
+the IDL attribute does not apply, then it must instead return null.
 
 <div class=issue>
   TODO:
@@ -277,13 +273,13 @@ EDITORIAL:
 This section should be merged into [[HTML]].
 </div>
 
-During a <em>drag-and-drop operation</em>, <a>file</a> and
-<a>directory</a> items are associated with <a>entries</a>. Each
-<a>entry</a> is a member of a <a>root directory</a> unique to the
-<a>drag data store</a>.
+During a <em>drag-and-drop operation</em>, [=file=] and
+[=directory=] items are associated with [=entries=]. Each
+[=entry=] is a member of a [=root directory=] unique to the
+[=drag data store=].
 
-Additionally, each <a>directory</a> item is represented in the <a>drag
-data store item list</a> as a <i>File</i>. If it is accessed via
+Additionally, each [=directory=] item is represented in the [=drag
+data store item list=] as a <i>File</i>. If it is accessed via
 {{getAsFile()}} a zero-length {{File}} is returned.
 
 <div class=note>
@@ -305,13 +301,13 @@ The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 <div class=algorithm>
 
 1. If the {{DataTransferItem}} object is not in the <a>read/write
-    mode</a> or the <a>read-only mode</a>, return null and abort these
+    mode</a> or the [=read-only mode=], return null and abort these
     steps.
 
-2. If the <a>drag data item kind</a> is not <em>File</em>, then return
+2. If the [=drag data item kind=] is not <em>File</em>, then return
     null and abort these steps.
 
-3. Return a new {{Entry}} object representing the <a>entry</a>.
+3. Return a new {{Entry}} object representing the [=entry=].
 
 </div>
 
@@ -503,8 +499,8 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
 
 <div class=issue>
   WEB-COMPAT:
-  We would like to eliminate {{DOMError}} from the platform in favor of
-  {{DOMException}}. Is using {{FileError}} here necessary for
+  We would like to eliminate {{DOMError}} from the platform in favor
+  of {{DOMException}}. Is using {{FileError}} here necessary for
   web-compat?
 
   Note that the codes here differ from those in {{DOMException}}:
@@ -515,12 +511,14 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   {{SYNTAX_ERR}} = 8 vs. 12,
   {{INVALID_MODIFICATION_ERR}} = 9 vs. 13,
   {{QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
-  {{TYPE_MISMATCH_ERR}} = 11 vs. <a>simple exception</a> <code>TypeError</code>.
+  {{TYPE_MISMATCH_ERR}} = 11 vs. [=simple exception=] <code>TypeError</code>.
 
   <a href="http://httparchive.org/">HTTP Archive</a> search for
   <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
   all from either FileReader, use of Chrome's File System API, or
   PhoneGap/Cordova libraries.
+
+  Chrome is planning to attempt the removal.
 </div>
 
 <pre class=idl>
@@ -550,26 +548,25 @@ interface Entry {
 </pre>
 
 <div class=issue>
-  WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
-  present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose these
-  types in the global namespace as is done for most web APIs?
+  WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
+  is present on these in Chrome, hiding the types from the global
+  namespace. Is it web-compatible to remove it, and simply expose
+  these types in the global namespace as is done for most web APIs?
 </div>
 
-An {{Entry}} has an associated <a>entry</a>.
+An {{Entry}} has an associated [=entry=].
 
 The {{isFile}} attribute of the {{Entry}} interface must return true
-if the <a>entry</a> is a <a>file entry</a> and false otherwise.
+if the [=entry=] is a [=file entry=] and false otherwise.
 
 The {{isDirectory}} attribute of the {{Entry}} interface must return
-true if the <a>entry</a> is a <a>directory entry</a> and false
-otherwise.
+true if the [=entry=] is a [=directory entry=] and false otherwise.
 
-The {{name}} attribute of the {{Entry}} interface must return the <a
-for=entry>name</a> of the <a>entry</a>.
+The {{name}} attribute of the {{Entry}} interface must return the
+[=entry/name=] of the [=entry=].
 
 The {{fullPath}} attribute of the {{Entry}} interface must return the
-<a>full path</a> of the <a>entry</a>.
+[=full path=] of the [=entry=].
 
 The <dfn method for=Entry>getParent(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
@@ -577,26 +574,26 @@ steps:
 
 <div class=algorithm>
 
-1. <a>Queue a task</a> to perform the following substeps:
+1. [=Queue a task=] to perform the following substeps:
 
     1. Let |path| be the result of running the steps to
-        <a>resolve a relative path</a> with the <a>entry</a>'s
-        <a>full path</a> and '..'.
+        [=resolve a relative path=] with the [=entry=]'s
+        [=full path=] and '..'.
 
     2. Let |item| be the result of running the steps to
-        <a>evaluate a path</a> with the <a>entry</a>'s <a>root</a> and
+        [=evaluate a path=] with the [=entry=]'s [=root=] and
         |path|.
 
-    3. If |item| is <em>failure</em>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{NotFoundError}}" <a>file error</a>, and
+    3. If |item| is <em>failure</em>, [=invoke the
+        callback=] |errorCallback| (if given) with a
+        "{{NotFoundError}}" [=file error=], and
         terminate these steps.
 
-    4. Let |entry| be a new <a>directory entry</a> with
-        |item|'s <a for=directory>name</a> as <a for=entry>name</a>
-        and |path| as <a>full path</a>.
+    4. Let |entry| be a new [=directory entry=] with
+        |item|'s [=directory/name=] as [=entry/name=]
+        and |path| as [=full path=].
 
-    5. <a>Invoke the callback</a> |successCallback| with a
+    5. [=Invoke the callback=] |successCallback| with a
         new {{DirectoryEntry}} object associated with
         |entry|.
 
@@ -623,7 +620,7 @@ function handleEntry(entry) {
 </div>
 
 <div class=example>
-Helper function to adapt {{getParent()}} for use with <a>Promises</a>
+Helper function to adapt {{getParent()}} for use with [=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
 function getParentAsPromise(entry) {
@@ -657,17 +654,15 @@ dictionary Flags {};
 callback EntryCallback = void (Entry entry);
 </pre>
 
-A {{DirectoryEntry}}'s associated <a>entry</a>
-is a <a>directory entry</a>.
-
+A {{DirectoryEntry}}'s associated [=entry=] is a [=directory entry=].
 
 The <dfn method for=DirectoryEntry>createReader()</dfn> method, when
 invoked, must run the following steps:
 
 <div class=algorithm>
 
-1. Let |reader| be a new <a>directory reader</a> associated with the
-    <a>directory entry</a>'s <a>directory</a>.
+1. Let |reader| be a new [=directory reader=] associated with the
+    [=directory entry=]'s [=directory=].
 
 2. Return a newly created {{DirectoryReader}} object associated with
     |reader|.
@@ -681,38 +676,32 @@ run the following steps:
 
 <div class=algorithm>
 
-1. <a>Queue a task</a> to run the following substeps:
+1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is not a <a>valid path</a>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{TypeMismatchError}}" <a>file error</a>, and
-        terminate these steps.
+    1. If |path| is not a [=valid path=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
-    2. Let |path| be the result of running the steps to
-        <a>resolve a relative path</a> with the <a>directory
-        entry</a>'s <a>full path</a> and |path|.
+    2. Let |path| be the result of running the steps to [=resolve a
+        relative path=] with the [=directory entry=]'s [=full path=]
+        and |path|.
 
-    3. Let |item| be the result of running the steps to
-        <a>evaluate a path</a> with the <a>directory entry</a>'s
-        <a>root</a> and |path|.
+    3. Let |item| be the result of running the steps to [=evaluate a
+        path=] with the [=directory entry=]'s [=root=] and |path|.
 
-    4. If |item| is <em>failure</em>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{NotFoundError}}" <a>file error</a>, and
-        terminate these steps.
+    4. If |item| is <em>failure</em>, [=invoke the callback=]
+        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
+        error=], and terminate these steps.
 
-    5. If |item| is not a <a>file</a>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{TypeMismatchError}}" <a>file error</a>, and
-        terminate these steps.
+    5. If |item| is not a [=file=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}" [=file
+        error=], and terminate these steps.
 
-    6. Let |entry| be a new <a>file entry</a> with
-        |item|'s <a for=file>name</a> as <a for=entry>name</a>
-        and |path| as <a>full path</a>.
+    6. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
+        as [=entry/name=] and |path| as [=full path=].
 
-    7. <a>Invoke the callback</a> |successCallback| (if
-        given) with a new {{FileEntry}} object associated with
-        |entry|.
+    7. [=Invoke the callback=] |successCallback| (if given) with a new
+        {{FileEntry}} object associated with |entry|.
 
 </div>
 
@@ -722,38 +711,33 @@ run the following steps:
 
 <div class=algorithm>
 
-1. <a>Queue a task</a> to run the following substeps:
+1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is not a <a>valid path</a>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{TypeMismatchError}}" <a>file error</a>, and
-        terminate these steps.
+    1. If |path| is not a [=valid path=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
-    2. Let |path| be the result of running the steps to
-        <a>resolve a relative path</a> with the <a>directory
-        entry</a>'s <a>full path</a> and |path|.
+    2. Let |path| be the result of running the steps to [=resolve a
+        relative path=] with the [=directory entry=]'s [=full path=]
+        and |path|.
 
-    3. Let |item| be the result of running the steps to
-        <a>evaluate a path</a> with the <a>directory entry</a>'s
-        <a>root</a> and |path|.
+    3. Let |item| be the result of running the steps to [=evaluate a
+        path=] with the [=directory entry=]'s [=root=] and |path|.
 
-    4. If |item| is <em>failure</em>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{NotFoundError}}" <a>file error</a>, and
-        terminate these steps.
+    4. If |item| is <em>failure</em>, [=invoke the callback=]
+        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
+        error=], and terminate these steps.
 
-    5. If |item| is not a <a>directory</a>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{TypeMismatchError}}" <a>file error</a>, and
-        terminate these steps.
+    5. If |item| is not a [=directory=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
-    6. Let |entry| be a new <a>directory entry</a> with
-        |item|'s <a for=directory>name</a> as <a
-        for=entry>name</a> and |path| as <a>full path</a>.
+    6. Let |entry| be a new [=directory entry=] with |item|'s
+        [=directory/name=] as [=entry/name=] and |path| as [=full
+        path=].
 
-    7. <a>Invoke the callback</a> |successCallback| (if
-        given) with a new {{DirectoryEntry}} associated with
-        |entry|.
+    7. [=Invoke the callback=] |successCallback| (if given) with a new
+        {{DirectoryEntry}} associated with |entry|.
 
 </div>
 
@@ -771,7 +755,7 @@ run the following steps:
 
 <div class=example>
 Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
-with <a>Promises</a> [[ECMA-262]]:
+with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function getFileAsPromise(entry, path) {
   return new Promise((resolve, reject) => {
@@ -806,61 +790,52 @@ steps:
 
 <div class=algorithm>
 
-1. If the <a>directory reader</a>'s <a>reading flag</a> is set,
-    <a>queue a task</a> to <a>invoke the callback</a>
-    |errorCallback| with an
-    "{{InvalidStateError}}" <a>file error</a>, and
-    terminate these steps.
+1. If the [=directory reader=]'s [=reading flag=] is set, [=queue a
+    task=] to [=invoke the callback=] |errorCallback| with an
+    "{{InvalidStateError}}" [=file error=], and terminate these steps.
 
-2. If the <a>directory reader</a>'s <a>reader error</a> is not null,
-    <a>queue a task</a> to <a>invoke the callback</a>
-    |errorCallback| (if given) with <a>reader error</a>, and
-    terminate these steps.
+2. If the [=directory reader=]'s [=reader error=] is not null, [=queue
+    a task=] to [=invoke the callback=] |errorCallback| (if given)
+    with [=reader error=], and terminate these steps.
 
-3. If the <a>directory reader</a>'s <a>done flag</a> is set, <a>queue
-    a task</a> to <a>invoke the callback</a>
-    |successCallback| with an empty sequence and terminate
-    these steps.
+3. If the [=directory reader=]'s [=done flag=] is set, [=queue a
+    task=] to [=invoke the callback=] |successCallback| with an empty
+    sequence and terminate these steps.
 
-4. Set the <a>directory reader</a>'s <a>reading flag</a>.
+4. Set the [=directory reader=]'s [=reading flag=].
 
-5. <a>Queue a task</a> to perform the following substeps:
+5. [=Queue a task=] to perform the following substeps:
 
-    1. Clear the <a>directory reader</a>'s <a>reading flag</a>.
+    1. Clear the [=directory reader=]'s [=reading flag=].
 
-    2. Let |dir| be the <a>directory reader</a>'s <a>directory</a>.
+    2. Let |dir| be the [=directory reader=]'s [=directory=].
 
     3. If |dir| is null, run these substeps:
 
-        1. Let |dir| be the result of running the steps to
-            <a>evaluate a path</a> with the <a>entry</a>'s <a>root</a>
-            and <a>full path</a>.
+        1. Let |dir| be the result of running the steps to [=evaluate
+            a path=] with the [=entry=]'s [=root=] and [=full path=].
 
-        2. If |dir| is failure, set the <a>directory
-            reader</a>'s <a>reader error</a> to a new
-            "{{NotFoundError}}" <a>file error</a>,
-            <a>invoke the callback</a> |errorCallback| (if
-            given) with <a>reader error</a>, and terminate these
-            steps.
+        2. If |dir| is failure, set the [=directory reader=]'s
+            [=reader error=] to a new "{{NotFoundError}}" [=file
+            error=], [=invoke the callback=] |errorCallback| (if
+            given) with [=reader error=], and terminate these steps.
 
-        3. Set the <a>directory reader</a>'s <a>directory</a> to |dir|.
+        3. Set the [=directory reader=]'s [=directory=] to |dir|.
 
     4. Let |entries| be a non-zero number of entries from the
         |dir| that have not yet been produced by this
-        <a>directory reader</a>, if any.
+        [=directory reader=], if any.
 
-    5. If the previous step failed (for example, the <a>directory</a>
-        was deleted or permission is denied), then set the <a>directory
-        reader</a>'s <a>reader error</a> to an appropriate <a>file
-        error</a>, <a>invoke the callback</a> |errorCallback|
-        (if given) with <a>reader error</a>, and terminate these
-        steps.
+    5. If the previous step failed (for example, the [=directory=] was
+        deleted or permission is denied), then set the [=directory
+        reader=]'s [=reader error=] to an appropriate [=file error=],
+        [=invoke the callback=] |errorCallback| (if given) with
+        [=reader error=], and terminate these steps.
 
-    6. If |entries| is empty, set the <a>directory
-        reader</a>'s <a>done flag</a>.
+    6. If |entries| is empty, set the [=directory reader=]'s [=done
+        flag=].
 
-    7. <a>Invoke the callback</a> |successCallback| with
-        |entries|.
+    7. [=Invoke the callback=] |successCallback| with |entries|.
 
 </div>
 
@@ -895,7 +870,7 @@ doBatch();
 
 <div class=example>
 Helper function to adapt {{DirectoryReader}} for use with
-<a>Promises</a> [[ECMA-262]]:
+[=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function getEntriesAsPromise(entry) {
   return new Promise((resolve, reject) => {
@@ -953,8 +928,8 @@ interface FileEntry : Entry {
 callback FileCallback = void (File file);
 </pre>
 
-A {{FileEntry}}'s associated <a>entry</a>
-is a <a>file entry</a>.
+A {{FileEntry}}'s associated [=entry=]
+is a [=file entry=].
 
 The <dfn method for="FileEntry">file(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
@@ -962,24 +937,21 @@ steps:
 
 <div class=algorithm>
 
-1. <a>Queue a task</a> to perform the following substeps:
+1. [=Queue a task=] to perform the following substeps:
 
-    1. Let |item| be the result of running the steps to
-        <a>evaluate a path</a> with the <a>file entry</a>'s
-        <a>root</a> and <a>full path</a>.
+    1. Let |item| be the result of running the steps to [=evaluate a
+        path=] with the [=file entry=]'s [=root=] and [=full path=].
 
-    2. If |item| is <em>failure</em>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{NotFoundError}}" <a>file error</a>, and
-        terminate these steps.
+    2. If |item| is <em>failure</em>, [=invoke the callback=]
+        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
+        error=], and terminate these steps.
 
-    3. If |item| is a <a>directory</a>, <a>invoke the
-        callback</a> |errorCallback| (if given) with a
-        "{{TypeMismatchError}}" <a>file error</a>, and
-        terminate these steps.
+    3. If |item| is a [=directory=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
-    3. <a>Invoke the callback</a> |successCallback| with a new
-        {{File}} object representing |item|.
+    4. [=Invoke the callback=] |successCallback| with a new {{File}}
+        object representing |item|.
 
 </div>
 
@@ -1000,7 +972,7 @@ function readFileEntry(entry) {
 </div>
 
 <div class=example>
-Helper function to adapt {{file()}} for use with <a>Promises</a>
+Helper function to adapt {{file()}} for use with [=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
 function fileAsPromise(entry) {

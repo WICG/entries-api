@@ -1409,7 +1409,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-06-08">8 June 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-06-09">9 June 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1514,54 +1514,54 @@ but which has not been broadly adopted by web browsers.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path-segment">path segment</dfn> is a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-1">name</a>, '.' (U+002E FULL
 STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="relative-path">relative path</dfn> is a string consisting of one or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment-1">path segments</a> joined by '/' (U+002F SOLIDUS).</p>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="absolute-path">absolute path</dfn> is a string consisting of '/' (U+002F SOLIDUS),
-optionally followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute path</a>.</p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="absolute-path">absolute path</dfn> is a string consisting of '/' (U+002F
+SOLIDUS), optionally followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute
+path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
    <h3 class="heading settled" data-level="2.2" id="files-dirs"><span class="secno">2.2. </span><span class="content">Files and Directories</span><a class="self-link" href="#files-dirs"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file">file</dfn> consists of binary data and a <dfn class="dfn-paneled" data-dfn-for="file" data-dfn-type="dfn" data-noexport="" id="file-name">name</dfn> (a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-2">name</a>).</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory">directory</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="directory" data-dfn-type="dfn" data-noexport="" id="directory-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-3">name</a>) and an ordered list of members. Each member is
-either a <a data-link-type="dfn" href="#file" id="ref-for-file-1">file</a> or a <a data-link-type="dfn" href="#directory" id="ref-for-directory-1">directory</a>. Each member of a <a data-link-type="dfn" href="#directory" id="ref-for-directory-2">directory</a> must have a distinct non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-4">name</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root-directory">root directory</dfn> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-3">directory</a> that is not a member
-of a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-1">root directory</a>’s <a data-link-type="dfn" href="#name" id="ref-for-name-5">name</a> is empty.</p>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="parent">parent</dfn> of a <a data-link-type="dfn" href="#file" id="ref-for-file-2">file</a> or <a data-link-type="dfn" href="#directory" id="ref-for-directory-5">directory</a> is the <a data-link-type="dfn" href="#directory" id="ref-for-directory-6">directory</a> it is a member of. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-2">root
-directory</a> has no <a data-link-type="dfn" href="#parent" id="ref-for-parent-1">parent</a>.</p>
-   <div class="issue" id="issue-b07cd280"><a class="self-link" href="#issue-b07cd280"></a> EDITORIAL:
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory">directory</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="directory" data-dfn-type="dfn" data-noexport="" id="directory-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-3">name</a>) and an ordered list of members. Each member is either a <a data-link-type="dfn" href="#file" id="ref-for-file-1">file</a> or a <a data-link-type="dfn" href="#directory" id="ref-for-directory-1">directory</a>. Each member of a <a data-link-type="dfn" href="#directory" id="ref-for-directory-2">directory</a> must have
+a distinct non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-4">name</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root-directory">root directory</dfn> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-3">directory</a> that is not a member of
+a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-1">root directory</a>'s <a data-link-type="dfn" href="#name" id="ref-for-name-5">name</a> is empty.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="parent">parent</dfn> of a <a data-link-type="dfn" href="#file" id="ref-for-file-2">file</a> or <a data-link-type="dfn" href="#directory" id="ref-for-directory-5">directory</a> is the <a data-link-type="dfn" href="#directory" id="ref-for-directory-6">directory</a> it is a member of. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-2">root directory</a> has no <a data-link-type="dfn" href="#parent" id="ref-for-parent-1">parent</a>.</p>
+   <div class="issue" id="issue-e0fa4438"><a class="self-link" href="#issue-e0fa4438"></a> EDITORIAL:
   Should <a data-link-type="dfn" href="#directory" id="ref-for-directory-7">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file" id="ref-for-file-3">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? </div>
    <div class="note" role="note"> In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual file system backing
   the interaction with the API. </div>
    <h3 class="heading settled" data-level="2.3" id="entries"><span class="secno">2.3. </span><span class="content">Entries</span><a class="self-link" href="#entries"></a></h3>
-   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="entry-concept">entry</dfn> is either a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-entry">file entry</dfn> or
-a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-entry">directory entry</dfn>.</p>
+   <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="entry-concept">entry</dfn> is either a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-entry">file entry</dfn> or a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-entry">directory entry</dfn>.</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-1">entry</a> has an <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-6">name</a>) and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="full-path">full path</dfn> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-2">absolute path</a>).</p>
-   <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root">root</dfn>, which is
-an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root directory</a>.</p>
-   <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> to account for the fact that a file system
-  backing the interaction with the API may be modified asynchronously
-  during operations such as enumerating the contents of a directory.
-  Operations exposed on <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-4">entries</a> may produce errors in such
-  cases where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </div>
+   <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root">root</dfn>, which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
+directory</a>.</p>
+   <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root
+  directory</a> to account for the fact that a file system backing the
+  interaction with the API may be modified asynchronously during
+  operations such as enumerating the contents of a directory.
+  Operations exposed on <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-4">entries</a> may produce errors in such cases
+  where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </div>
    <h3 class="heading settled" data-level="2.4" id="dir-reader"><span class="secno">2.4. </span><span class="content">Directory Reader</span><a class="self-link" href="#dir-reader"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-reader">directory reader</dfn> consists of an associated <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-1">directory
-entry</a>, an associated <a data-link-type="dfn" href="#directory" id="ref-for-directory-8">directory</a> (initially null), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reading-flag">reading flag</dfn> (initially unset), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="done-flag">done flag</dfn> (initially unset), and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reader-error">reader error</dfn> (initially null).</p>
+entry</a>, an associated <a data-link-type="dfn" href="#directory" id="ref-for-directory-8">directory</a> (initially null), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="reading flag" data-noexport="" id="reading-flag">reading
+flag</dfn> (initially unset), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="done-flag">done flag</dfn> (initially
+unset), and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reader-error">reader error</dfn> (initially null).</p>
    <h2 class="heading settled" data-level="3" id="algorithms"><span class="secno">3. </span><span class="content">Algorithms</span><a class="self-link" href="#algorithms"></a></h2>
-   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="resolve-a-relative-path">resolve a relative path</dfn> with <var>abspath</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-3">absolute path</a>) and <var>relpath</var> (a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-3">relative path</a>),
-run the following steps which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-4">absolute path</a>:</p>
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="resolve-a-relative-path">resolve a relative path</dfn> with <var>abspath</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-3">absolute
+path</a>) and <var>relpath</var> (a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-3">relative path</a>), run the following steps
+which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-4">absolute path</a>:</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
       <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-5">absolute path</a>, return <var>relpath</var>.</p>
      <li data-md="">
-      <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly
-splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
+      <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
       <div class="note" role="note">The first string will be empty.</div>
      <li data-md="">
-      <p>Let <var>relpath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly
-splitting</a> <var>relpath</var> on '/' (U+002F SOLIDUS).</p>
+      <p>Let <var>relpath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>relpath</var> on '/' (U+002F SOLIDUS).</p>
      <li data-md="">
-      <p>For each <var>segment</var> in <var>relpath segments</var>,
-switch on <var>segment</var>:</p>
+      <p>For each <var>segment</var> in <var>relpath segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
        <dt>'.' (U+002E FULL STOP) 
        <dd>Continue. 
@@ -1576,13 +1576,14 @@ switch on <var>segment</var>:</p>
       <p>Return <var>abspath segments</var> joined by '/' (U+002F SOLIDUS).</p>
     </ol>
    </div>
-   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="evaluate-a-path">evaluate a path</dfn> with <var>directory</var> (an <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root
-directory</a>) and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-6">absolute path</a>), run the following
-steps which return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a data-link-type="dfn" href="#directory" id="ref-for-directory-9">directory</a>, or <em>failure</em>.</p>
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="evaluate-a-path">evaluate a path</dfn> with <var>directory</var> (an <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root directory</a>)
+and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-6">absolute path</a>), run the following steps which
+return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a data-link-type="dfn" href="#directory" id="ref-for-directory-9">directory</a>, or <em>failure</em>.</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>Let <var>segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>path</var> on '/' (U+002F SOLIDUS).</p>
+      <p>Let <var>segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>path</var> on
+'/' (U+002F SOLIDUS).</p>
      <li data-md="">
       <p>Remove the first entry from <var>segments</var>.</p>
       <div class="note" role="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-7">absolute path</a>,
@@ -1602,8 +1603,7 @@ steps which return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">fi
          <li data-md="">
           <p>Let <var>item</var> be the member of <var>directory</var> with <a data-link-type="dfn" href="#name" id="ref-for-name-7">name</a> equal to <var>segment</var>, or return <em>failure</em> if none.</p>
          <li data-md="">
-          <p>If <var>segment</var> is the last item in <var>segments</var>,
-return <var>item</var>.</p>
+          <p>If <var>segment</var> is the last item in <var>segments</var>, return <var>item</var>.</p>
          <li data-md="">
           <p>If <var>item</var> is a <a data-link-type="dfn" href="#file" id="ref-for-file-5">file</a>, return <em>failure</em>.</p>
          <li data-md="">
@@ -1624,8 +1624,8 @@ Upload</a> state, the rules in this section apply.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to access the
 element’s selected entries. On getting, if the IDL attribute applies,
 it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that represent the
-current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a> (including directories, if permitted).
-If the IDL attribute does not apply, then it must instead return null.</p>
+current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a> (including directories, if permitted). If
+the IDL attribute does not apply, then it must instead return null.</p>
    <div class="issue" id="issue-fb600938"><a class="self-link" href="#issue-fb600938"></a> TODO:
   Define <code>webkitDirectory</code> and <code>webkitRelativePath</code>. </div>
    <h2 class="heading settled" data-level="5" id="api-data"><span class="secno">5. </span><span class="content">Data Transfer</span><a class="self-link" href="#api-data"></a></h2>
@@ -1783,14 +1783,16 @@ description from the table below.</p>
       <td><code class="idl"><a data-link-type="idl" href="#dom-fileerror-path_exists_err" id="ref-for-dom-fileerror-path_exists_err-1">PATH_EXISTS_ERR</a></code> (12)
       <td class="unused">
    </table>
-   <div class="issue" id="issue-f48b62b8">
-    <a class="self-link" href="#issue-f48b62b8"></a> WEB-COMPAT:
-  We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-2">FileError</a></code> here necessary for
+   <div class="issue" id="issue-be2cba00">
+    <a class="self-link" href="#issue-be2cba00"></a> WEB-COMPAT:
+  We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor
+  of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-2">FileError</a></code> here necessary for
   web-compat? 
     <p>Note that the codes here differ from those in <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>: <code class="idl"><a data-link-type="idl" href="#dom-fileerror-not_found_err" id="ref-for-dom-fileerror-not_found_err-2">NOT_FOUND_ERR</a></code> = 1 vs. 8, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-security_err" id="ref-for-dom-fileerror-security_err-2">SECURITY_ERR</a></code> = 2 vs. 18, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-abort_err" id="ref-for-dom-fileerror-abort_err-2">ABORT_ERR</a></code> = 3 vs. 20, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-invalid_state_err" id="ref-for-dom-fileerror-invalid_state_err-2">INVALID_STATE_ERR</a></code> = 7 vs. 11, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-syntax_err" id="ref-for-dom-fileerror-syntax_err-2">SYNTAX_ERR</a></code> = 8 vs. 12, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-invalid_modification_err" id="ref-for-dom-fileerror-invalid_modification_err-2">INVALID_MODIFICATION_ERR</a></code> = 9 vs. 13, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-quota_exceeded_err" id="ref-for-dom-fileerror-quota_exceeded_err-2">QUOTA_EXCEEDED_ERR</a></code> = 10 vs. 22, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-type_mismatch_err" id="ref-for-dom-fileerror-type_mismatch_err-2">TYPE_MISMATCH_ERR</a></code> = 11 vs. <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a> <code>TypeError</code>.</p>
     <p><a href="http://httparchive.org/">HTTP Archive</a> search for <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
   all from either FileReader, use of Chrome’s File System API, or
   PhoneGap/Cordova libraries.</p>
+    <p>Chrome is planning to attempt the removal.</p>
    </div>
 <pre class="idl def">callback <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> = void (<a data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-3">FileError</a> <dfn class="idl-code" data-dfn-for="ErrorCallback" data-dfn-type="argument" data-export="" id="dom-errorcallback-err">err<a class="self-link" href="#dom-errorcallback-err"></a></dfn>);
 </pre>
@@ -1808,16 +1810,15 @@ interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-expor
                    optional <a data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-2">ErrorCallback</a> <dfn class="idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 </pre>
-   <div class="issue" id="issue-50f3aee9"><a class="self-link" href="#issue-50f3aee9"></a> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
-  present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose these
-  types in the global namespace as is done for most web APIs? </div>
+   <div class="issue" id="issue-e6c0a36d"><a class="self-link" href="#issue-e6c0a36d"></a> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
+  is present on these in Chrome, hiding the types from the global
+  namespace. Is it web-compatible to remove it, and simply expose
+  these types in the global namespace as is done for most web APIs? </div>
    <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return true
 if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isdirectory" id="ref-for-dom-entry-isdirectory-1">isDirectory</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-8">Entry</a></code> interface must return
-true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-2">directory entry</a> and false
-otherwise.</p>
+true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-2">directory entry</a> and false otherwise.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-name" id="ref-for-dom-entry-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-9">Entry</a></code> interface must return the <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-1">name</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-11">entry</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-fullpath" id="ref-for-dom-entry-fullpath-1">fullPath</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-10">Entry</a></code> interface must return the <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-1">full path</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-12">entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="method" data-export="" data-lt="getParent(successCallback, errorCallback)|getParent(successCallback)|getParent()" id="dom-entry-getparent">getParent(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following
@@ -1828,9 +1829,9 @@ steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to perform the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-1">resolve a relative path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-13">entry</a>’s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-2">full path</a> and '..'.</p>
+        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-1">resolve a relative path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-13">entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-2">full path</a> and '..'.</p>
        <li data-md="">
-        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-1">evaluate a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-14">entry</a>’s <a data-link-type="dfn" href="#root" id="ref-for-root-1">root</a> and <var>path</var>.</p>
+        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-1">evaluate a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-14">entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-1">root</a> and <var>path</var>.</p>
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
 callback</a> <var>errorCallback</var> (if given) with a
@@ -1857,8 +1858,8 @@ new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for
   <span class="p">}</span>
 <span class="p">}</span></pre>
    </div>
-   <div class="example" id="example-83dca107">
-    <a class="self-link" href="#example-83dca107"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-2">getParent()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
+   <div class="example" id="example-5f2dddf1">
+    <a class="self-link" href="#example-5f2dddf1"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-2">getParent()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getParentAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="nx">entry</span><span class="p">.</span><span class="nx">getParent</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">);</span>
@@ -1889,7 +1890,7 @@ invoked, must run the following steps:</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>Let <var>reader</var> be a new <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-1">directory reader</a> associated with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-5">directory entry</a>’s <a data-link-type="dfn" href="#directory" id="ref-for-directory-12">directory</a>.</p>
+      <p>Let <var>reader</var> be a new <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-1">directory reader</a> associated with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-5">directory entry</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-12">directory</a>.</p>
      <li data-md="">
       <p>Return a newly created <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-2">DirectoryReader</a></code> object associated with <var>reader</var>.</p>
     </ol>
@@ -1902,30 +1903,23 @@ run the following steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-2">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-2">file error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-2">resolve a relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-6">directory
-entry</a>’s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-4">full path</a> and <var>path</var>.</p>
+        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-2">resolve a
+relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-6">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-4">full path</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-2">evaluate a path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-7">directory entry</a>’s <a data-link-type="dfn" href="#root" id="ref-for-root-2">root</a> and <var>path</var>.</p>
+        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-2">evaluate a
+path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-7">directory entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-2">root</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-2">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-2">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file
+error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-2">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-4">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-2">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-4">file
+error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-2">file entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#file-name" id="ref-for-file-name-1">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-3">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-5">full path</a>.</p>
        <li data-md="">
-        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> (if
-given) with a new <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-1">FileEntry</a></code> object associated with <var>entry</var>.</p>
+        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> (if given) with a new <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-1">FileEntry</a></code> object associated with <var>entry</var>.</p>
       </ol>
     </ol>
    </div>
@@ -1937,30 +1931,23 @@ run the following steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-5">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-5">file error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-3">resolve a relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-8">directory
-entry</a>’s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-6">full path</a> and <var>path</var>.</p>
+        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-3">resolve a
+relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-8">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-6">full path</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-3">evaluate a path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-9">directory entry</a>’s <a data-link-type="dfn" href="#root" id="ref-for-root-3">root</a> and <var>path</var>.</p>
+        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-3">evaluate a
+path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-9">directory entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-3">root</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-3">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-3">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file
+error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-4">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-7">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-4">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-7">file error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-10">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-2">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-4">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-7">full path</a>.</p>
+        <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-10">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-2">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-4">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-7">full
+path</a>.</p>
        <li data-md="">
-        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> (if
-given) with a new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-4">DirectoryEntry</a></code> associated with <var>entry</var>.</p>
+        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> (if given) with a new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-4">DirectoryEntry</a></code> associated with <var>entry</var>.</p>
       </ol>
     </ol>
    </div>
@@ -1969,8 +1956,8 @@ given) with a new <code class="idl"><a data-link-type="idl" href="#directoryentr
    <div class="issue" id="issue-3f3685fc"><a class="self-link" href="#issue-3f3685fc"></a> WEB-COMPAT:
   If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-1">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
   "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-4">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? </div>
-   <div class="example" id="example-a5767159">
-    <a class="self-link" href="#example-a5767159"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
+   <div class="example" id="example-adaaa3dc">
+    <a class="self-link" href="#example-adaaa3dc"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
 with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getFileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
@@ -1996,49 +1983,48 @@ steps:</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-2">directory reader</a>’s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-1">reading flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> with an
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-invalidstateerror" id="ref-for-exceptiondef-invalidstateerror-1">InvalidStateError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-8">file error</a>, and
-terminate these steps.</p>
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-2">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-1">reading flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
+task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> with an
+"<code class="idl"><a data-link-type="idl" href="#exceptiondef-invalidstateerror" id="ref-for-exceptiondef-invalidstateerror-1">InvalidStateError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-8">file error</a>, and terminate these steps.</p>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-3">directory reader</a>’s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-1">reader error</a> is not null, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-2">reader error</a>, and
-terminate these steps.</p>
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-3">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-1">reader error</a> is not null, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue
+a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given)
+with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-2">reader error</a>, and terminate these steps.</p>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-4">directory reader</a>’s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-1">done flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue
-a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>successCallback</var> with an empty sequence and terminate
-these steps.</p>
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-4">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-1">done flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
+task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>successCallback</var> with an empty
+sequence and terminate these steps.</p>
      <li data-md="">
-      <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-5">directory reader</a>’s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-2">reading flag</a>.</p>
+      <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-5">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-2">reading flag</a>.</p>
      <li data-md="">
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to perform the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>Clear the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-6">directory reader</a>’s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-3">reading flag</a>.</p>
+        <p>Clear the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-6">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-3">reading flag</a>.</p>
        <li data-md="">
-        <p>Let <var>dir</var> be the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-7">directory reader</a>’s <a data-link-type="dfn" href="#directory" id="ref-for-directory-14">directory</a>.</p>
+        <p>Let <var>dir</var> be the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-7">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-14">directory</a>.</p>
        <li data-md="">
         <p>If <var>dir</var> is null, run these substeps:</p>
         <ol>
          <li data-md="">
-          <p>Let <var>dir</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-4">evaluate a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-16">entry</a>’s <a data-link-type="dfn" href="#root" id="ref-for-root-4">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
+          <p>Let <var>dir</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-4">evaluate
+a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-16">entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-4">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
          <li data-md="">
-          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-8">directory
-reader</a>’s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if
-given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-4">reader error</a>, and terminate these
-steps.</p>
+          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-8">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file
+error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if
+given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-4">reader error</a>, and terminate these steps.</p>
          <li data-md="">
-          <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>’s <a data-link-type="dfn" href="#directory" id="ref-for-directory-15">directory</a> to <var>dir</var>.</p>
+          <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-15">directory</a> to <var>dir</var>.</p>
         </ol>
        <li data-md="">
         <p>Let <var>entries</var> be a non-zero number of entries from the <var>dir</var> that have not yet been produced by this <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-10">directory reader</a>, if any.</p>
        <li data-md="">
-        <p>If the previous step failed (for example, the <a data-link-type="dfn" href="#directory" id="ref-for-directory-16">directory</a> was deleted or permission is denied), then set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-11">directory
-reader</a>’s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-5">reader error</a> to an appropriate <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-10">file
-error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-6">reader error</a>, and terminate these
-steps.</p>
+        <p>If the previous step failed (for example, the <a data-link-type="dfn" href="#directory" id="ref-for-directory-16">directory</a> was
+deleted or permission is denied), then set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-11">directory
+reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-5">reader error</a> to an appropriate <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-10">file error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-6">reader error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>entries</var> is empty, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-12">directory
-reader</a>’s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2">done flag</a>.</p>
+        <p>If <var>entries</var> is empty, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-12">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2">done
+flag</a>.</p>
        <li data-md="">
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with <var>entries</var>.</p>
       </ol>
@@ -2069,8 +2055,8 @@ reader</a>’s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2
 <span class="c1">// Start reading</span>
 <span class="nx">doBatch</span><span class="p">();</span></pre>
    </div>
-   <div class="example" id="example-2798de37">
-    <a class="self-link" href="#example-2798de37"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
+   <div class="example" id="example-9181c2df">
+    <a class="self-link" href="#example-9181c2df"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
@@ -2125,17 +2111,13 @@ steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to perform the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-5">evaluate a path</a> with the <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-4">file entry</a>’s <a data-link-type="dfn" href="#root" id="ref-for-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-9">full path</a>.</p>
+        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-5">evaluate a
+path</a> with the <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-4">file entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-9">full path</a>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-6">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-11">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-6">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-11">file
+error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-5">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-12">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-5">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-12">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> object representing <var>item</var>.</p>
       </ol>
@@ -2154,8 +2136,8 @@ terminate these steps.</p>
   <span class="p">},</span> <span class="nx">error</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
 <span class="p">}</span></pre>
    </div>
-   <div class="example" id="example-52d8dbf1">
-    <a class="self-link" href="#example-52d8dbf1"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-2">file()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
+   <div class="example" id="example-1350fd6d">
+    <a class="self-link" href="#example-1350fd6d"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-2">file()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">fileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="nx">entry</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">);</span>
@@ -2554,7 +2536,7 @@ callback <a href="#callbackdef-filecallback">FileCallback</a> = void (<a data-li
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
    <div class="issue"> EDITORIAL:
-  Should <a data-link-type="dfn" href="#directory">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? <a href="#issue-b07cd280"> ↵ </a></div>
+  Should <a data-link-type="dfn" href="#directory">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? <a href="#issue-e0fa4438"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a>. <a href="#issue-b448beab"> ↵ </a></div>
    <div class="issue"> TODO:
@@ -2563,18 +2545,20 @@ callback <a href="#callbackdef-filecallback">FileCallback</a> = void (<a data-li
 This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a>. <a href="#issue-bb9c97fd"> ↵ </a></div>
    <div class="issue">
      WEB-COMPAT:
-  We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror">FileError</a></code> here necessary for
+  We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor
+  of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror">FileError</a></code> here necessary for
   web-compat? 
     <p>Note that the codes here differ from those in <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>: <code class="idl"><a data-link-type="idl" href="#dom-fileerror-not_found_err">NOT_FOUND_ERR</a></code> = 1 vs. 8, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-security_err">SECURITY_ERR</a></code> = 2 vs. 18, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-abort_err">ABORT_ERR</a></code> = 3 vs. 20, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-invalid_state_err">INVALID_STATE_ERR</a></code> = 7 vs. 11, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-syntax_err">SYNTAX_ERR</a></code> = 8 vs. 12, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-invalid_modification_err">INVALID_MODIFICATION_ERR</a></code> = 9 vs. 13, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-quota_exceeded_err">QUOTA_EXCEEDED_ERR</a></code> = 10 vs. 22, <code class="idl"><a data-link-type="idl" href="#dom-fileerror-type_mismatch_err">TYPE_MISMATCH_ERR</a></code> = 11 vs. <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a> <code>TypeError</code>.</p>
     <p><a href="http://httparchive.org/">HTTP Archive</a> search for <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
   all from either FileReader, use of Chrome’s File System API, or
   PhoneGap/Cordova libraries.</p>
-     <a href="#issue-f48b62b8"> ↵ </a>
+    <p>Chrome is planning to attempt the removal.</p>
+     <a href="#issue-be2cba00"> ↵ </a>
    </div>
-   <div class="issue"> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute is
-  present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose these
-  types in the global namespace as is done for most web APIs? <a href="#issue-50f3aee9"> ↵ </a></div>
+   <div class="issue"> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
+  is present on these in Chrome, hiding the types from the global
+  namespace. Is it web-compatible to remove it, and simply expose
+  these types in the global namespace as is done for most web APIs? <a href="#issue-e6c0a36d"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
   If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
   "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? <a href="#issue-3f3685fc"> ↵ </a></div>
