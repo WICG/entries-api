@@ -522,7 +522,9 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
 </div>
 
 <pre class=idl>
-callback ErrorCallback = void (FileError err);
+callback interface ErrorCallback {
+    void handleEvent(FileError err);
+};
 </pre>
 
 An {{ErrorCallback}} function is used for operations that may return an
@@ -651,7 +653,9 @@ interface DirectoryEntry : Entry {
 
 dictionary Flags {};
 
-callback EntryCallback = void (Entry entry);
+callback interface EntryCallback {
+    void handleEvent(Entry entry);
+};
 </pre>
 
 A {{DirectoryEntry}}'s associated [=entry=] is a [=directory entry=].
@@ -781,7 +785,9 @@ interface DirectoryReader {
     void readEntries(EntriesCallback successCallback,
                      optional ErrorCallback errorCallback);
 };
-callback EntriesCallback = void (sequence&lt;Entry&gt; entries);
+callback interface EntriesCallback {
+    void handleEvent(sequence&lt;Entry&gt; entries);
+};
 </pre>
 
 The <dfn method for="DirectoryEntry">readEntries(|successCallback|,
@@ -925,7 +931,9 @@ interface FileEntry : Entry {
     void file(FileCallback successCallback,
               optional ErrorCallback errorCallback);
 };
-callback FileCallback = void (File file);
+callback interface FileCallback {
+    void handleEvent(File file);
+};
 </pre>
 
 A {{FileEntry}}'s associated [=entry=]
@@ -994,7 +1002,8 @@ href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
 specification authoring tool used to create this document.
 
 And thanks to
-Ali Alabbas
+Ali Alabbas,
+Marijn Kruisselbrink,
 and
-Marijn Kruisselbrink
+smaug----
 for suggestions, reviews, and other feedback.

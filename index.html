@@ -1409,7 +1409,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-06-09">9 June 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-13">13 July 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1794,7 +1794,9 @@ description from the table below.</p>
   PhoneGap/Cordova libraries.</p>
     <p>Chrome is planning to attempt the removal.</p>
    </div>
-<pre class="idl def">callback <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> = void (<a data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-3">FileError</a> <dfn class="idl-code" data-dfn-for="ErrorCallback" data-dfn-type="argument" data-export="" id="dom-errorcallback-err">err<a class="self-link" href="#dom-errorcallback-err"></a></dfn>);
+<pre class="idl def">callback interface <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> {
+    void <dfn class="idl-code" data-dfn-for="ErrorCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(err)" id="dom-errorcallback-handleevent">handleEvent<a class="self-link" href="#dom-errorcallback-handleevent"></a></dfn>(<a data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-3">FileError</a> <dfn class="idl-code" data-dfn-for="ErrorCallback/handleEvent(err)" data-dfn-type="argument" data-export="" id="dom-errorcallback-handleevent-err-err">err<a class="self-link" href="#dom-errorcallback-handleevent-err-err"></a></dfn>);
+};
 </pre>
    <p>An <code class="idl"><a data-link-type="idl" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-1">ErrorCallback</a></code> function is used for operations that may return an
 error asynchronously.</p>
@@ -1882,7 +1884,9 @@ interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-expor
 
 dictionary <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-flags">Flags</dfn> {};
 
-callback <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entrycallback">EntryCallback</dfn> = void (<a data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> <dfn class="idl-code" data-dfn-for="EntryCallback" data-dfn-type="argument" data-export="" id="dom-entrycallback-entry">entry<a class="self-link" href="#dom-entrycallback-entry"></a></dfn>);
+callback interface <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entrycallback">EntryCallback</dfn> {
+    void <dfn class="idl-code" data-dfn-for="EntryCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entry)" id="dom-entrycallback-handleevent">handleEvent<a class="self-link" href="#dom-entrycallback-handleevent"></a></dfn>(<a data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> <dfn class="idl-code" data-dfn-for="EntryCallback/handleEvent(entry)" data-dfn-type="argument" data-export="" id="dom-entrycallback-handleevent-entry-entry">entry<a class="self-link" href="#dom-entrycallback-handleevent-entry-entry"></a></dfn>);
+};
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-3">DirectoryEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-15">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-4">directory entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" id="dom-directoryentry-createreader">createReader()</dfn> method, when
@@ -1976,7 +1980,9 @@ interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-expor
     void <dfn class="idl-code" data-dfn-for="DirectoryReader" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)|readEntries(successCallback)" id="dom-directoryreader-readentries">readEntries<a class="self-link" href="#dom-directoryreader-readentries"></a></dfn>(<a data-link-type="idl-name" href="#callbackdef-entriescallback" id="ref-for-callbackdef-entriescallback-1">EntriesCallback</a> <dfn class="idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback"></a></dfn>,
                      optional <a data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-5">ErrorCallback</a> <dfn class="idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
-callback <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entriescallback">EntriesCallback</dfn> = void (sequence&lt;<a data-link-type="idl-name" href="#entry" id="ref-for-entry-14">Entry</a>> <dfn class="idl-code" data-dfn-for="EntriesCallback" data-dfn-type="argument" data-export="" id="dom-entriescallback-entries">entries<a class="self-link" href="#dom-entriescallback-entries"></a></dfn>);
+callback interface <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entriescallback">EntriesCallback</dfn> {
+    void <dfn class="idl-code" data-dfn-for="EntriesCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entries)" id="dom-entriescallback-handleevent">handleEvent<a class="self-link" href="#dom-entriescallback-handleevent"></a></dfn>(sequence&lt;<a data-link-type="idl-name" href="#entry" id="ref-for-entry-14">Entry</a>> <dfn class="idl-code" data-dfn-for="EntriesCallback/handleEvent(entries)" data-dfn-type="argument" data-export="" id="dom-entriescallback-handleevent-entries-entries">entries<a class="self-link" href="#dom-entriescallback-handleevent-entries-entries"></a></dfn>);
+};
 </pre>
    <p>The <dfn class="idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)" id="dom-directoryentry-readentries">readEntries(<var>successCallback</var>, <var>errorCallback</var>)<a class="self-link" href="#dom-directoryentry-readentries"></a></dfn> method, when invoked, must run the following
 steps:</p>
@@ -2100,7 +2106,9 @@ interface <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-expor
     void <a class="idl-code" data-link-type="method" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-1">file</a>(<a data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback-1">FileCallback</a> <dfn class="idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
               optional <a data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-6">ErrorCallback</a> <dfn class="idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
-callback <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-filecallback">FileCallback</dfn> = void (<a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <dfn class="idl-code" data-dfn-for="FileCallback" data-dfn-type="argument" data-export="" id="dom-filecallback-file">file<a class="self-link" href="#dom-filecallback-file"></a></dfn>);
+callback interface <dfn class="dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-filecallback">FileCallback</dfn> {
+    void <dfn class="idl-code" data-dfn-for="FileCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(file)" id="dom-filecallback-handleevent">handleEvent<a class="self-link" href="#dom-filecallback-handleevent"></a></dfn>(<a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <dfn class="idl-code" data-dfn-for="FileCallback/handleEvent(file)" data-dfn-type="argument" data-export="" id="dom-filecallback-handleevent-file-file">file<a class="self-link" href="#dom-filecallback-handleevent-file-file"></a></dfn>);
+};
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-3">FileEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-17">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-3">file entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileEntry" data-dfn-type="method" data-export="" data-lt="file(successCallback, errorCallback)|file(successCallback)" id="dom-fileentry-file">file(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following
@@ -2149,10 +2157,10 @@ error</a>, and terminate these steps.</p>
    <p>Thanks to Tab Atkins, Jr. for creating and maintaining <a href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
 specification authoring tool used to create this document.</p>
    <p>And thanks to
-Ali Alabbas
+Ali Alabbas,
+Marijn Kruisselbrink,
 and
-Marijn Kruisselbrink
-for suggestions, reviews, and other feedback.</p>
+smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
   </main>
   <div data-fill-with="conformance">
    <h2 class="no-ref no-num heading settled" id="conformance"><span class="content"> Conformance</span><a class="self-link" href="#conformance"></a></h2>
@@ -2344,6 +2352,10 @@ for suggestions, reviews, and other feedback.</p>
    <li><a href="#dom-entry-getparent">getParent()</a><span>, in §6.2</span>
    <li><a href="#dom-entry-getparent">getParent(successCallback)</a><span>, in §6.2</span>
    <li><a href="#dom-entry-getparent">getParent(successCallback, errorCallback)</a><span>, in §6.2</span>
+   <li><a href="#dom-entriescallback-handleevent">handleEvent(entries)</a><span>, in §6.4</span>
+   <li><a href="#dom-entrycallback-handleevent">handleEvent(entry)</a><span>, in §6.3</span>
+   <li><a href="#dom-errorcallback-handleevent">handleEvent(err)</a><span>, in §6.1</span>
+   <li><a href="#dom-filecallback-handleevent">handleEvent(file)</a><span>, in §6.5</span>
    <li><a href="#dom-fileerror-invalid_modification_err">INVALID_MODIFICATION_ERR</a><span>, in §6.1</span>
    <li><a href="#exceptiondef-invalidmodificationerror">InvalidModificationError</a><span>, in §6.1</span>
    <li><a href="#dom-fileerror-invalid_state_err">INVALID_STATE_ERR</a><span>, in §6.1</span>
@@ -2488,7 +2500,9 @@ interface <a href="#fileerror">FileError</a> : <a data-link-type="idl-name" href
     readonly attribute unsigned short <a data-readonly="" data-type="unsigned short" href="#dom-fileerror-code">code</a>;
 };
 
-callback <a href="#callbackdef-errorcallback">ErrorCallback</a> = void (<a data-link-type="idl-name" href="#fileerror">FileError</a> <a href="#dom-errorcallback-err">err</a>);
+callback interface <a href="#callbackdef-errorcallback">ErrorCallback</a> {
+    void <a href="#dom-errorcallback-handleevent">handleEvent</a>(<a data-link-type="idl-name" href="#fileerror">FileError</a> <a href="#dom-errorcallback-handleevent-err-err">err</a>);
+};
 
 [NoInterfaceObject]
 interface <a href="#entry">Entry</a> {
@@ -2516,21 +2530,27 @@ interface <a href="#directoryentry">DirectoryEntry</a> : <a data-link-type="idl-
 
 dictionary <a href="#dictdef-flags">Flags</a> {};
 
-callback <a href="#callbackdef-entrycallback">EntryCallback</a> = void (<a data-link-type="idl-name" href="#entry">Entry</a> <a href="#dom-entrycallback-entry">entry</a>);
+callback interface <a href="#callbackdef-entrycallback">EntryCallback</a> {
+    void <a href="#dom-entrycallback-handleevent">handleEvent</a>(<a data-link-type="idl-name" href="#entry">Entry</a> <a href="#dom-entrycallback-handleevent-entry-entry">entry</a>);
+};
 
 [NoInterfaceObject]
 interface <a href="#directoryreader">DirectoryReader</a> {
     void <a href="#dom-directoryreader-readentries">readEntries</a>(<a data-link-type="idl-name" href="#callbackdef-entriescallback">EntriesCallback</a> <a href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback</a>,
                      optional <a data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback</a>);
 };
-callback <a href="#callbackdef-entriescallback">EntriesCallback</a> = void (sequence&lt;<a data-link-type="idl-name" href="#entry">Entry</a>> <a href="#dom-entriescallback-entries">entries</a>);
+callback interface <a href="#callbackdef-entriescallback">EntriesCallback</a> {
+    void <a href="#dom-entriescallback-handleevent">handleEvent</a>(sequence&lt;<a data-link-type="idl-name" href="#entry">Entry</a>> <a href="#dom-entriescallback-handleevent-entries-entries">entries</a>);
+};
 
 [NoInterfaceObject]
 interface <a href="#fileentry">FileEntry</a> : <a data-link-type="idl-name" href="#entry">Entry</a> {
     void <a class="idl-code" data-link-type="method" href="#dom-fileentry-file">file</a>(<a data-link-type="idl-name" href="#callbackdef-filecallback">FileCallback</a> <a href="#dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback</a>,
               optional <a data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a href="#dom-fileentry-file-successcallback-errorcallback-errorcallback">errorCallback</a>);
 };
-callback <a href="#callbackdef-filecallback">FileCallback</a> = void (<a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <a href="#dom-filecallback-file">file</a>);
+callback interface <a href="#callbackdef-filecallback">FileCallback</a> {
+    void <a href="#dom-filecallback-handleevent">handleEvent</a>(<a data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <a href="#dom-filecallback-handleevent-file-file">file</a>);
+};
 
 </pre>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
