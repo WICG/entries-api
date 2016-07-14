@@ -292,7 +292,7 @@ data store item list=] as a <i>File</i>. If it is accessed via
 
 <pre class=idl>
 partial interface DataTransferItem {
-    Entry webkitGetAsEntry();
+    Entry? webkitGetAsEntry();
 };
 </pre>
 

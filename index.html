@@ -1409,7 +1409,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-13">13 July 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-14">14 July 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1640,7 +1640,7 @@ data store item list</a> as a <i>File</i>. If it is accessed via <code class="id
   metadata and blobs for tracks could be exposed to script as
   directories and files. </div>
 <pre class="idl def">partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a> {
-    <a data-link-type="idl-name" href="#entry" id="ref-for-entry-3">Entry</a> <dfn class="dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export="" data-lt="webkitGetAsEntry()" id="dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</dfn>();
+    <a data-link-type="idl-name" href="#entry" id="ref-for-entry-3">Entry</a>? <dfn class="dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export="" data-lt="webkitGetAsEntry()" id="dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</dfn>();
 };
 </pre>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-datatransferitem-webkitgetasentry" id="ref-for-dom-datatransferitem-webkitgetasentry-1">webkitGetAsEntry()</a></code> method must run the following steps when invoked:</p>
@@ -2479,7 +2479,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
 };
 
 partial interface <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a> {
-    <a data-link-type="idl-name" href="#entry">Entry</a> <a href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</a>();
+    <a data-link-type="idl-name" href="#entry">Entry</a>? <a href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</a>();
 };
 
 [Exposed=(Window,Worker)]
