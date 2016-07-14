@@ -247,7 +247,7 @@ return a [=file=], [=directory=], or <em>failure</em>.
 
 <div class=issue>
   EDITORIAL:
-  This section should be merged into [[HTML]].
+  This section should be merged into [[HTML]] once it is complete.
 </div>
 
 <pre class=idl>
@@ -276,8 +276,8 @@ the IDL attribute does not apply, then it must instead return null.
 <!-- ============================================================ -->
 
 <div class=issue>
-EDITORIAL:
-This section should be merged into [[HTML]].
+  EDITORIAL:
+  This section should be merged into [[HTML]] once it is complete.
 </div>
 
 During a <em>drag-and-drop operation</em>, [=file=] and
