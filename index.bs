@@ -58,6 +58,13 @@ defines similar types in the context of a sandboxed file system,
 including operations for creating and modifying files and directories,
 but which has not been broadly adopted by web browsers.
 
+<div class=note>
+  The APIs described by this document was initially implemented in
+  Google Chrome. Other browsers (at this time: Microsoft Edge and
+  Mozilla Firefox) are starting to support subsets of Chrome's APIs
+  and behavior. The intent of this document is to specify the common
+  subset to ensure that the implementations are interoperable.
+</div>
 
 <!-- ============================================================ -->
 <h2 id=concepts>Concepts</h2>
