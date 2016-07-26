@@ -265,10 +265,48 @@ it must return an array of {{Entry}} objects that represent the
 current [=selected files=] (including directories, if permitted). If
 the IDL attribute does not apply, then it must instead return null.
 
+<div class=example>
+Enumerating entries using {{webkitEntries}}:
+
+<pre class=lang-html>
+  &lt;input id=a type=file multiple&gt;
+</pre>
+
+<pre class=lang-javascript>
+  document.querySelector('#a').addEventListener('change', e => {
+    for (let entry of e.target.webkitEntries)
+      handleEntry(entry);
+  });
+</pre>
+</div>
+
+
 <div class=issue>
   TODO:
-  Define <code>webkitDirectory</code> and <code>webkitRelativePath</code>.
+  Define <code>webkitdirectory</code> and <code>webkitRelativePath</code>.
 </div>
+
+<pre class=idl>
+partial interface File {
+    readonly attribute DOMString webkitRelativePath;
+};
+</pre>
+
+<div class=example>
+Inspecting the {{webkitRelativePath}} property:
+
+<pre class=lang-html>
+  &lt;input id=b type=file webkitdirectory&gt;
+</pre>
+
+<pre class=lang-javascript>
+  document.querySelector('#b').addEventListener('change', e => {
+    for (let entry of e.target.files)
+      console.log(file.name, file.webkitRelativePath);
+  });
+</pre>
+</div>
+
 
 
 <!-- ============================================================ -->
@@ -321,6 +359,10 @@ The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 <div class=example>
 Handling drag and drop of files and directories:
 <pre class=lang-javascript>
+elem.addEventListener('dragover', e => {
+  // Prevent navigation.
+  e.preventDefault();
+});
 elem.addEventListener('drop', e => {
   // Prevent navigation.
   e.preventDefault();
