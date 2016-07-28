@@ -259,14 +259,15 @@ partial interface HTMLInputElement {
 When an <{input}> element's <{input/type}> attribute is in the [=File
 Upload=] state, the rules in this section apply.
 
-The {{webkitEntries}} IDL attribute allows scripts to access the
-element's selected entries. On getting, if the IDL attribute applies,
-it must return an array of {{Entry}} objects that represent the
-current [=selected files=] (including directories, if permitted). If
-the IDL attribute does not apply, then it must instead return null.
+The {{HTMLInputElement/webkitEntries}} IDL attribute allows scripts to
+access the element's selected entries. On getting, if the IDL
+attribute applies, it must return an array of {{Entry}} objects that
+represent the current [=selected files=] (including directories, if
+permitted). If the IDL attribute does not apply, then it must instead
+return null.
 
 <div class=example>
-Enumerating entries using {{webkitEntries}}:
+Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 
 <pre class=lang-html>
   &lt;input id=a type=file multiple&gt;
@@ -280,10 +281,16 @@ Enumerating entries using {{webkitEntries}}:
 </pre>
 </div>
 
+<div class=issue>
+  WEB-COMPAT:
+  In Chrome, {{HTMLInputElement/webkitEntries}} is only populated as
+  the result of a drag-and-drop operation, not when the element is
+  clicked. Can we fix this so it is always populated?
+</div>
 
 <div class=issue>
   TODO:
-  Define <code>webkitdirectory</code> and <code>webkitRelativePath</code>.
+  Define <code>webkitdirectory</code> and {{File/webkitRelativePath}}.
 </div>
 
 <pre class=idl>
@@ -293,7 +300,7 @@ partial interface File {
 </pre>
 
 <div class=example>
-Inspecting the {{webkitRelativePath}} property:
+Inspecting the {{File/webkitRelativePath}} property:
 
 <pre class=lang-html>
   &lt;input id=b type=file webkitdirectory&gt;
@@ -305,6 +312,16 @@ Inspecting the {{webkitRelativePath}} property:
       console.log(file.name, file.webkitRelativePath);
   });
 </pre>
+</div>
+
+<div class=issue>
+  WEB-COMPAT:
+  In Chrome, if <code>webkitdirectory</code> is specified on a
+  {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
+  populated; the {{HTMLInputElement/files}} collection and
+  {{File/webkitRelativePath}} properties must be used instead to
+  reconstruct the directory structure. Can we fix this so it is always
+  populated?
 </div>
 
 
@@ -567,7 +584,10 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   all from either FileReader, use of Chrome's File System API, or
   PhoneGap/Cordova libraries.
 
-  Chrome is planning to attempt the removal.
+  Chrome has reported the `code` property as deprecated for some time
+  and usage is extremely low. Chrome will attempt replacing uses of
+  {{FileError}} with {{DOMException}} in M54 (stable release circa
+  October 2016). Assuming that is successful, this spec will be updated.
 </div>
 
 <pre class=idl>
@@ -599,10 +619,11 @@ interface Entry {
 </pre>
 
 <div class=issue>
-  WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
-  is present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose
-  these types in the global namespace as is done for most web APIs?
+  WEB-COMPAT:
+  The <code>[NoInterfaceObject]</code> extended attribute is present
+  on these in Chrome, hiding the types from the global namespace. Is
+  it web-compatible to remove it, and simply expose these types in the
+  global namespace as is done for most web APIs?
 </div>
 
 An {{Entry}} has an associated [=entry=].

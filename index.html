@@ -34,6 +34,7 @@
  *   - .note       for informative notes             (div, p, span, aside, details)
  *   - .example    for informative examples          (div, p, pre, span)
  *   - .issue      for issues                        (div, p, span)
+ *   - .assertion  for assertions                    (div, p, span)
  *   - .advisement for loud normative statements     (div, p, strong)
  *   - .annoying-warning for spec obsoletion notices (div, aside, details)
  *
@@ -597,7 +598,7 @@
 /*                             Colored Boxes                                  */
 /******************************************************************************/
 
-	.issue, .note, .example, .advisement, blockquote {
+	.issue, .note, .example, .assertion, .advisement, blockquote {
 		padding: .5em;
 		border: .5em;
 		border-left-style: solid;
@@ -612,6 +613,7 @@
 	.note,
 	.example,
 	.advisement,
+	.assertion,
 	blockquote {
 		margin: 1em auto;
 	}
@@ -689,6 +691,14 @@
 	}
 	details.note[open] > summary {
 		border-bottom: 1px silver solid;
+	}
+
+/** Assertion Box *************************************************************/
+	/*  for assertions in algorithms */
+
+	.assertion {
+		border-color: #AAA;
+		background: #EEE;
 	}
 
 /** Advisement Box ************************************************************/
@@ -1243,7 +1253,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
                 counter-increment: figure;
             }
             figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure);
+                content: "Figure " counter(figure) " ";
             }</style>
 <style>/* style-autolinks */
 
@@ -1406,7 +1416,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-26">26 July 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-28">28 July 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1623,13 +1633,14 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a d
 </pre>
    <p>When an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element’s <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/forms.html#attr-input-type">type</a></code> attribute is in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">File
 Upload</a> state, the rules in this section apply.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to access the
-element’s selected entries. On getting, if the IDL attribute applies,
-it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that represent the
-current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a> (including directories, if permitted). If
-the IDL attribute does not apply, then it must instead return null.</p>
-   <div class="example" id="example-c3c0889e">
-    <a class="self-link" href="#example-c3c0889e"></a> Enumerating entries using <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-2">webkitEntries</a></code>: 
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to
+access the element’s selected entries. On getting, if the IDL
+attribute applies, it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that
+represent the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a> (including directories, if
+permitted). If the IDL attribute does not apply, then it must instead
+return null.</p>
+   <div class="example" id="example-2786e72c">
+    <a class="self-link" href="#example-2786e72c"></a> Enumerating entries using <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-2">webkitEntries</a></code>: 
 <pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">a</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">multiple</span><span class="p">></span>
 </pre>
 <pre class="lang-javascript highlight"><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#a'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=></span> <span class="p">{</span>
@@ -1638,14 +1649,18 @@ the IDL attribute does not apply, then it must instead return null.</p>
 <span class="p">});</span>
 </pre>
    </div>
-   <div class="issue" id="issue-90eafced"><a class="self-link" href="#issue-90eafced"></a> TODO:
-  Define <code>webkitdirectory</code> and <code>webkitRelativePath</code>. </div>
+   <div class="issue" id="issue-4dc29de9"><a class="self-link" href="#issue-4dc29de9"></a> WEB-COMPAT:
+  In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-3">webkitEntries</a></code> is only populated as
+  the result of a drag-and-drop operation, not when the element is
+  clicked. Can we fix this so it is always populated? </div>
+   <div class="issue" id="issue-32ab408b"><a class="self-link" href="#issue-32ab408b"></a> TODO:
+  Define <code>webkitdirectory</code> and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-1">webkitRelativePath</a></code>. </div>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-file-webkitrelativepath">webkitRelativePath</dfn>;
 };
 </pre>
-   <div class="example" id="example-97b239a8">
-    <a class="self-link" href="#example-97b239a8"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-1">webkitRelativePath</a></code> property: 
+   <div class="example" id="example-4adfdf4d">
+    <a class="self-link" href="#example-4adfdf4d"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-2">webkitRelativePath</a></code> property: 
 <pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">b</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">webkitdirectory</span><span class="p">></span>
 </pre>
 <pre class="lang-javascript highlight"><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#b'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=></span> <span class="p">{</span>
@@ -1654,6 +1669,11 @@ the IDL attribute does not apply, then it must instead return null.</p>
 <span class="p">});</span>
 </pre>
    </div>
+   <div class="issue" id="issue-4aece011"><a class="self-link" href="#issue-4aece011"></a> WEB-COMPAT:
+  In Chrome, if <code>webkitdirectory</code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
+  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> properties must be used instead to
+  reconstruct the directory structure. Can we fix this so it is always
+  populated? </div>
    <h2 class="heading settled" data-level="5" id="api-data"><span class="secno">5. </span><span class="content">Data Transfer</span><a class="self-link" href="#api-data"></a></h2>
    <div class="issue" id="issue-325fe5120"><a class="self-link" href="#issue-325fe5120"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </div>
@@ -1814,8 +1834,8 @@ description from the table below.</p>
       <td><code class="idl"><a data-link-type="idl" href="#dom-fileerror-path_exists_err" id="ref-for-dom-fileerror-path_exists_err-1">PATH_EXISTS_ERR</a></code> (12)
       <td class="unused">
    </table>
-   <div class="issue" id="issue-be2cba00">
-    <a class="self-link" href="#issue-be2cba00"></a> WEB-COMPAT:
+   <div class="issue" id="issue-36d1634f">
+    <a class="self-link" href="#issue-36d1634f"></a> WEB-COMPAT:
   We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor
   of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-2">FileError</a></code> here necessary for
   web-compat? 
@@ -1823,10 +1843,12 @@ description from the table below.</p>
     <p><a href="http://httparchive.org/">HTTP Archive</a> search for <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
   all from either FileReader, use of Chrome’s File System API, or
   PhoneGap/Cordova libraries.</p>
-    <p>Chrome is planning to attempt the removal.</p>
+    <p>Chrome has reported the `code` property as deprecated for some time
+  and usage is extremely low. Chrome will attempt replacing uses of <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-3">FileError</a></code> with <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> in M54 (stable release circa
+  October 2016). Assuming that is successful, this spec will be updated.</p>
    </div>
 <pre class="idl highlight def"><span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> {
-    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="ErrorCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(err)" id="dom-errorcallback-handleevent">handleEvent<a class="self-link" href="#dom-errorcallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-3">FileError</a> <dfn class="nv idl-code" data-dfn-for="ErrorCallback/handleEvent(err)" data-dfn-type="argument" data-export="" id="dom-errorcallback-handleevent-err-err">err<a class="self-link" href="#dom-errorcallback-handleevent-err-err"></a></dfn>);
+    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="ErrorCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(err)" id="dom-errorcallback-handleevent">handleEvent<a class="self-link" href="#dom-errorcallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-4">FileError</a> <dfn class="nv idl-code" data-dfn-for="ErrorCallback/handleEvent(err)" data-dfn-type="argument" data-export="" id="dom-errorcallback-handleevent-err-err">err<a class="self-link" href="#dom-errorcallback-handleevent-err-err"></a></dfn>);
 };
 </pre>
    <p>An <code class="idl"><a data-link-type="idl" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-1">ErrorCallback</a></code> function is used for operations that may return an
@@ -1843,10 +1865,11 @@ error asynchronously.</p>
                    <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-2">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 </pre>
-   <div class="issue" id="issue-e6c0a36d"><a class="self-link" href="#issue-e6c0a36d"></a> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
-  is present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose
-  these types in the global namespace as is done for most web APIs? </div>
+   <div class="issue" id="issue-15e296d3"><a class="self-link" href="#issue-15e296d3"></a> WEB-COMPAT:
+  The <code>[NoInterfaceObject]</code> extended attribute is present
+  on these in Chrome, hiding the types from the global namespace. Is
+  it web-compatible to remove it, and simply expose these types in the
+  global namespace as is done for most web APIs? </div>
    <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return true
 if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
@@ -2474,6 +2497,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag data store item list</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">file upload</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#dom-datatransferitem-getasfile">getAsFile()</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a>
      <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
@@ -2603,8 +2627,17 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
   Should <a data-link-type="dfn" href="#directory">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? <a href="#issue-e0fa4438"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe512"> ↵ </a></div>
+   <div class="issue"> WEB-COMPAT:
+  In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is only populated as
+  the result of a drag-and-drop operation, not when the element is
+  clicked. Can we fix this so it is always populated? <a href="#issue-4dc29de9"> ↵ </a></div>
    <div class="issue"> TODO:
-  Define <code>webkitdirectory</code> and <code>webkitRelativePath</code>. <a href="#issue-90eafced"> ↵ </a></div>
+  Define <code>webkitdirectory</code> and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code>. <a href="#issue-32ab408b"> ↵ </a></div>
+   <div class="issue"> WEB-COMPAT:
+  In Chrome, if <code>webkitdirectory</code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is not
+  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code> properties must be used instead to
+  reconstruct the directory structure. Can we fix this so it is always
+  populated? <a href="#issue-4aece011"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe5120"> ↵ </a></div>
    <div class="issue">
@@ -2616,13 +2649,16 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <p><a href="http://httparchive.org/">HTTP Archive</a> search for <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
   all from either FileReader, use of Chrome’s File System API, or
   PhoneGap/Cordova libraries.</p>
-    <p>Chrome is planning to attempt the removal.</p>
-     <a href="#issue-be2cba00"> ↵ </a>
+    <p>Chrome has reported the `code` property as deprecated for some time
+  and usage is extremely low. Chrome will attempt replacing uses of <code class="idl"><a data-link-type="idl" href="#fileerror">FileError</a></code> with <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> in M54 (stable release circa
+  October 2016). Assuming that is successful, this spec will be updated.</p>
+     <a href="#issue-36d1634f"> ↵ </a>
    </div>
-   <div class="issue"> WEB-COMPAT: The <code>[NoInterfaceObject]</code> extended attribute
-  is present on these in Chrome, hiding the types from the global
-  namespace. Is it web-compatible to remove it, and simply expose
-  these types in the global namespace as is done for most web APIs? <a href="#issue-e6c0a36d"> ↵ </a></div>
+   <div class="issue"> WEB-COMPAT:
+  The <code>[NoInterfaceObject]</code> extended attribute is present
+  on these in Chrome, hiding the types from the global namespace. Is
+  it web-compatible to remove it, and simply expose these types in the
+  global namespace as is done for most web APIs? <a href="#issue-15e296d3"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
   If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
   "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? <a href="#issue-3f3685fc"> ↵ </a></div>
@@ -2816,13 +2852,13 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="dom-htmlinputelement-webkitentries">
    <b><a href="#dom-htmlinputelement-webkitentries">#dom-htmlinputelement-webkitentries</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-htmlinputelement-webkitentries-1">4. HTML Forms</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-2">(2)</a>
+    <li><a href="#ref-for-dom-htmlinputelement-webkitentries-1">4. HTML Forms</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-2">(2)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-3">(3)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-4">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-file-webkitrelativepath">
    <b><a href="#dom-file-webkitrelativepath">#dom-file-webkitrelativepath</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-file-webkitrelativepath-1">4. HTML Forms</a>
+    <li><a href="#ref-for-dom-file-webkitrelativepath-1">4. HTML Forms</a> <a href="#ref-for-dom-file-webkitrelativepath-2">(2)</a> <a href="#ref-for-dom-file-webkitrelativepath-3">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-datatransferitem-webkitgetasentry">
@@ -2834,7 +2870,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="fileerror">
    <b><a href="#fileerror">#fileerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fileerror-1">6.1. Common Types</a> <a href="#ref-for-fileerror-2">(2)</a> <a href="#ref-for-fileerror-3">(3)</a>
+    <li><a href="#ref-for-fileerror-1">6.1. Common Types</a> <a href="#ref-for-fileerror-2">(2)</a> <a href="#ref-for-fileerror-3">(3)</a> <a href="#ref-for-fileerror-4">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-not_found_err">
