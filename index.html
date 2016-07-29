@@ -1466,19 +1466,20 @@ traversal, and extends <code class="idl"><a data-link-type="idl" href="https://h
       <li><a href="#dir-reader"><span class="secno">2.4</span> <span class="content">Directory Reader</span></a>
      </ol>
     <li><a href="#algorithms"><span class="secno">3</span> <span class="content">Algorithms</span></a>
-    <li><a href="#html-forms"><span class="secno">4</span> <span class="content">HTML Forms</span></a>
-    <li><a href="#api-data"><span class="secno">5</span> <span class="content">Data Transfer</span></a>
+    <li><a href="#file-interface"><span class="secno">4</span> <span class="content">The <code class="idl"><span>File</span></code> Interface</span></a>
+    <li><a href="#html-forms"><span class="secno">5</span> <span class="content">HTML: Forms</span></a>
+    <li><a href="#html-data"><span class="secno">6</span> <span class="content">HTML: Drag and drop</span></a>
     <li>
-     <a href="#api-files-directories"><span class="secno">6</span> <span class="content">Files and Directories</span></a>
+     <a href="#api-files-directories"><span class="secno">7</span> <span class="content">Files and Directories</span></a>
      <ol class="toc">
-      <li><a href="#common-types"><span class="secno">6.1</span> <span class="content">Common Types</span></a>
-      <li><a href="#api-entry"><span class="secno">6.2</span> <span class="content">The <code class="idl"><span>Entry</span></code> Interface</span></a>
-      <li><a href="#api-directoryentry"><span class="secno">6.3</span> <span class="content">The <code class="idl"><span>DirectoryEntry</span></code> Interface</span></a>
-      <li><a href="#api-directoryreader"><span class="secno">6.4</span> <span class="content">The <code class="idl"><span>DirectoryReader</span></code> Interface</span></a>
-      <li><a href="#api-fileentry"><span class="secno">6.5</span> <span class="content">The <code class="idl"><span>FileEntry</span></code> Interface</span></a>
-      <li><a href="#api-domfilesystem"><span class="secno">6.6</span> <span class="content">The <code class="idl"><span>DOMFileSystem</span></code> Interface</span></a>
+      <li><a href="#common-types"><span class="secno">7.1</span> <span class="content">Common Types</span></a>
+      <li><a href="#api-entry"><span class="secno">7.2</span> <span class="content">The <code class="idl"><span>Entry</span></code> Interface</span></a>
+      <li><a href="#api-directoryentry"><span class="secno">7.3</span> <span class="content">The <code class="idl"><span>DirectoryEntry</span></code> Interface</span></a>
+      <li><a href="#api-directoryreader"><span class="secno">7.4</span> <span class="content">The <code class="idl"><span>DirectoryReader</span></code> Interface</span></a>
+      <li><a href="#api-fileentry"><span class="secno">7.5</span> <span class="content">The <code class="idl"><span>FileEntry</span></code> Interface</span></a>
+      <li><a href="#api-domfilesystem"><span class="secno">7.6</span> <span class="content">The <code class="idl"><span>DOMFileSystem</span></code> Interface</span></a>
      </ol>
-    <li><a href="#acknowledgements"><span class="secno">7</span> <span class="content">Acknowledgements</span></a>
+    <li><a href="#acknowledgements"><span class="secno">8</span> <span class="content">Acknowledgements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -1545,7 +1546,7 @@ a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual native file system
   backing the interaction with the API. </div>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="filesystem">filesystem</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
-directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
+directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
    <div class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> by generating a
   UUID for each <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
@@ -1632,15 +1633,49 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a d
       </dl>
     </ol>
    </div>
-   <h2 class="heading settled" data-level="4" id="html-forms"><span class="secno">4. </span><span class="content">HTML Forms</span><a class="self-link" href="#html-forms"></a></h2>
-   <div class="issue" id="issue-325fe512"><a class="self-link" href="#issue-325fe512"></a> EDITORIAL:
-  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </div>
+   <h2 class="heading settled" data-level="4" id="file-interface"><span class="secno">4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> Interface</span><a class="self-link" href="#file-interface"></a></h2>
+   <div class="issue" id="issue-ab7a53dc"><a class="self-link" href="#issue-ab7a53dc"></a> EDITORIAL:
+  This section should be merged into <a data-link-type="biblio" href="#biblio-fileapi">[FileAPI]</a> once it is complete. </div>
+<pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-file-webkitrelativepath">webkitRelativePath</dfn>;
+};
+</pre>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-1">webkitRelativePath</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> interface must
+return the <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-4">relative path</a> of the file, or the empty string if not
+specified.</p>
+   <h2 class="heading settled" data-level="5" id="html-forms"><span class="secno">5. </span><span class="content">HTML: Forms</span><a class="self-link" href="#html-forms"></a></h2>
+   <div class="issue" id="issue-9a11f326"><a class="self-link" href="#issue-9a11f326"></a> EDITORIAL:
+  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete.
+  Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-2">webkitRelativePath</a></code> property. </div>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a> {
+    <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export="" data-type="boolean" id="dom-htmlinputelement-webkitdirectory">webkitdirectory</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-1">Entry</a>> <dfn class="nv dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export="" data-readonly="" data-type="FrozenArray<Entry>" id="dom-htmlinputelement-webkitentries">webkitEntries</dfn>;
 };
 </pre>
    <p>When an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element’s <code><a data-link-type="element-sub" href="https://html.spec.whatwg.org/multipage/forms.html#attr-input-type">type</a></code> attribute is in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">File
 Upload</a> state, the rules in this section apply.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory" id="ref-for-dom-htmlinputelement-webkitdirectory-1">webkitdirectory</a></code> attribute is a boolean
+attribute that indicates whether the user is to be allowed to select a
+directory rather than a file or files. When specified, the behavior on
+the selection of a directory is as if all files with that directory
+as an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-5">relative path</a> from the
+selected directory to the file.</p>
+   <div class="note" role="note"> A user agent may represent any hierarchical data as directories
+  during a selection operation. For example, on a device that does not
+  expose a native file system directly to the user, photo albums could
+  be presented as directories if <code>"image/*"</code> is specified
+  for the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-accept">accept</a></code> attribute. </div>
+   <div class="example" id="example-1359c21a">
+    <a class="self-link" href="#example-1359c21a"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-4">webkitRelativePath</a></code> properties after a
+directory is selected with an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element: 
+<pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">b</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">webkitdirectory</span><span class="p">></span>
+</pre>
+<pre class="lang-javascript highlight"><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#b'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=></span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">entry</span> <span class="k">of</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">webkitRelativePath</span><span class="p">);</span>
+<span class="p">});</span>
+</pre>
+   </div>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to
 access the element’s selected entries. On getting, if the IDL
 attribute applies, it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that
@@ -1661,29 +1696,13 @@ return null.</p>
   In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-3">webkitEntries</a></code> is only populated as
   the result of a drag-and-drop operation, not when the element is
   clicked. Can we fix this so it is always populated? </div>
-   <div class="issue" id="issue-32ab408b"><a class="self-link" href="#issue-32ab408b"></a> TODO:
-  Define <code>webkitdirectory</code> and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-1">webkitRelativePath</a></code>. </div>
-<pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-file-webkitrelativepath">webkitRelativePath</dfn>;
-};
-</pre>
-   <div class="example" id="example-4adfdf4d">
-    <a class="self-link" href="#example-4adfdf4d"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-2">webkitRelativePath</a></code> property: 
-<pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">b</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">webkitdirectory</span><span class="p">></span>
-</pre>
-<pre class="lang-javascript highlight"><span></span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'#b'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'change'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=></span> <span class="p">{</span>
-  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">entry</span> <span class="k">of</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">files</span><span class="p">)</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">webkitRelativePath</span><span class="p">);</span>
-<span class="p">});</span>
-</pre>
-   </div>
-   <div class="issue" id="issue-4aece011"><a class="self-link" href="#issue-4aece011"></a> WEB-COMPAT:
-  In Chrome, if <code>webkitdirectory</code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
-  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> properties must be used instead to
+   <div class="issue" id="issue-a4688e35"><a class="self-link" href="#issue-a4688e35"></a> WEB-COMPAT:
+  In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory" id="ref-for-dom-htmlinputelement-webkitdirectory-2">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
+  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-5">webkitRelativePath</a></code> properties must be used instead to
   reconstruct the directory structure. Can we fix this so it is always
   populated? </div>
-   <h2 class="heading settled" data-level="5" id="api-data"><span class="secno">5. </span><span class="content">Data Transfer</span><a class="self-link" href="#api-data"></a></h2>
-   <div class="issue" id="issue-325fe5120"><a class="self-link" href="#issue-325fe5120"></a> EDITORIAL:
+   <h2 class="heading settled" data-level="6" id="html-data"><span class="secno">6. </span><span class="content">HTML: Drag and drop</span><a class="self-link" href="#html-data"></a></h2>
+   <div class="issue" id="issue-325fe512"><a class="self-link" href="#issue-325fe512"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </div>
    <p>During a <em>drag-and-drop operation</em>, <a data-link-type="dfn" href="#file" id="ref-for-file-6">file</a> and <a data-link-type="dfn" href="#directory" id="ref-for-directory-10">directory</a> items are associated with <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-7">entries</a>. Each <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a> is a member of a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-8">root directory</a> unique to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>.</p>
    <p>Additionally, each <a data-link-type="dfn" href="#directory" id="ref-for-directory-11">directory</a> item is represented in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag
@@ -1734,8 +1753,8 @@ null and abort these steps.</p>
 <span class="p">});</span>
 </pre>
    </div>
-   <h2 class="heading settled" data-level="6" id="api-files-directories"><span class="secno">6. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
-   <h3 class="heading settled" data-level="6.1" id="common-types"><span class="secno">6.1. </span><span class="content">Common Types</span><a class="self-link" href="#common-types"></a></h3>
+   <h2 class="heading settled" data-level="7" id="api-files-directories"><span class="secno">7. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
+   <h3 class="heading settled" data-level="7.1" id="common-types"><span class="secno">7.1. </span><span class="content">Common Types</span><a class="self-link" href="#common-types"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileerror">FileError</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a> {
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="FileError" data-dfn-type="const" data-export="" id="dom-fileerror-not_found_err">NOT_FOUND_ERR</dfn> = 1;
@@ -1861,7 +1880,7 @@ description from the table below.</p>
 </pre>
    <p>An <code class="idl"><a data-link-type="idl" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-1">ErrorCallback</a></code> function is used for operations that may return an
 error asynchronously.</p>
-   <h3 class="heading settled" data-level="6.2" id="api-entry"><span class="secno">6.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-5">Entry</a></code> Interface</span><a class="self-link" href="#api-entry"></a></h3>
+   <h3 class="heading settled" data-level="7.2" id="api-entry"><span class="secno">7.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-5">Entry</a></code> Interface</span><a class="self-link" href="#api-entry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="entry">Entry</dfn> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-entry-isfile">isFile</dfn>;
@@ -1938,7 +1957,7 @@ path</a>.</p>
 <span class="p">}</span>
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.3" id="api-directoryentry"><span class="secno">6.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-2">DirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
+   <h3 class="heading settled" data-level="7.3" id="api-directoryentry"><span class="secno">7.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-2">DirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader" id="ref-for-directoryreader-1">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader" id="ref-for-dom-directoryentry-createreader-1">createReader</a>();
@@ -2045,7 +2064,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
 <span class="p">}</span>
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.4" id="api-directoryreader"><span class="secno">6.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-3">DirectoryReader</a></code> Interface</span><a class="self-link" href="#api-directoryreader"></a></h3>
+   <h3 class="heading settled" data-level="7.4" id="api-directoryreader"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-3">DirectoryReader</a></code> Interface</span><a class="self-link" href="#api-directoryreader"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryreader">DirectoryReader</dfn> {
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="DirectoryReader" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)|readEntries(successCallback)" id="dom-directoryreader-readentries">readEntries<a class="self-link" href="#dom-directoryreader-readentries"></a></dfn>(<a class="n" data-link-type="idl-name" href="#callbackdef-entriescallback" id="ref-for-callbackdef-entriescallback-1">EntriesCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback"></a></dfn>,
@@ -2175,7 +2194,7 @@ flag</a>.</p>
 <span class="p">}</span>
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.5" id="api-fileentry"><span class="secno">6.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
+   <h3 class="heading settled" data-level="7.5" id="api-fileentry"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileentry">FileEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-16">Entry</a> {
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-1">file</a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback-1">FileCallback</a> <dfn class="nv idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
@@ -2230,17 +2249,17 @@ error</a>, and terminate these steps.</p>
 <span class="p">}</span>
 </pre>
    </div>
-   <h3 class="heading settled" data-level="6.6" id="api-domfilesystem"><span class="secno">6.6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-2">DOMFileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
+   <h3 class="heading settled" data-level="7.6" id="api-domfilesystem"><span class="secno">7.6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-2">DOMFileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="domfilesystem">DOMFileSystem</dfn> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-domfilesystem-name">name</dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-domfilesystem-name">name</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry" id="ref-for-directoryentry-5">DirectoryEntry</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DirectoryEntry" id="dom-domfilesystem-root">root</dfn>;
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-3">DOMFileSystem</a></code> has an associated <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-6">filesystem</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-name" id="ref-for-dom-domfilesystem-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-4">DOMFileSystem</a></code> interface must return the <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-3">name</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-7">filesystem</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-root" id="ref-for-dom-domfilesystem-root-1">root</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-5">DOMFileSystem</a></code> interface must return a <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-6">DirectoryEntry</a></code> associated with the <a data-link-type="dfn" href="#filesystem-root" id="ref-for-filesystem-root-1">root</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-8">filesystem</a>.</p>
-   <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
+   <h2 class="heading settled" data-level="8" id="acknowledgements"><span class="secno">8. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>This specification is based heavily on the work of Eric Uhrhane in <a data-link-type="biblio" href="#biblio-file-system-api">[file-system-api]</a>, which introduced the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-17">Entry</a></code> types.</p>
    <p>Thanks to Tab Atkins, Jr. for creating and maintaining <a href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
 specification authoring tool used to create this document.</p>
@@ -2401,65 +2420,65 @@ for suggestions, reviews, and other feedback.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#dom-fileerror-abort_err">ABORT_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-aborterror">AbortError</a><span>, in §6.1</span>
+   <li><a href="#dom-fileerror-abort_err">ABORT_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-aborterror">AbortError</a><span>, in §7.1</span>
    <li><a href="#absolute-path">absolute path</a><span>, in §2.1</span>
-   <li><a href="#dom-fileerror-code">code</a><span>, in §6.1</span>
-   <li><a href="#dom-directoryentry-createreader">createReader()</a><span>, in §6.3</span>
+   <li><a href="#dom-fileerror-code">code</a><span>, in §7.1</span>
+   <li><a href="#dom-directoryentry-createreader">createReader()</a><span>, in §7.3</span>
    <li><a href="#directory">directory</a><span>, in §2.2</span>
    <li><a href="#directory-entry">directory entry</a><span>, in §2.3</span>
-   <li><a href="#directoryentry">DirectoryEntry</a><span>, in §6.3</span>
-   <li><a href="#directoryreader">DirectoryReader</a><span>, in §6.4</span>
+   <li><a href="#directoryentry">DirectoryEntry</a><span>, in §7.3</span>
+   <li><a href="#directoryreader">DirectoryReader</a><span>, in §7.4</span>
    <li><a href="#directory-reader">directory reader</a><span>, in §2.4</span>
-   <li><a href="#domfilesystem">DOMFileSystem</a><span>, in §6.6</span>
+   <li><a href="#domfilesystem">DOMFileSystem</a><span>, in §7.6</span>
    <li><a href="#done-flag">done flag</a><span>, in §2.4</span>
-   <li><a href="#dom-fileerror-encoding_err">ENCODING_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-encodingerror">EncodingError</a><span>, in §6.1</span>
-   <li><a href="#callbackdef-entriescallback">EntriesCallback</a><span>, in §6.4</span>
-   <li><a href="#entry">Entry</a><span>, in §6.2</span>
+   <li><a href="#dom-fileerror-encoding_err">ENCODING_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-encodingerror">EncodingError</a><span>, in §7.1</span>
+   <li><a href="#callbackdef-entriescallback">EntriesCallback</a><span>, in §7.4</span>
+   <li><a href="#entry">Entry</a><span>, in §7.2</span>
    <li><a href="#entry-concept">entry</a><span>, in §2.3</span>
-   <li><a href="#callbackdef-entrycallback">EntryCallback</a><span>, in §6.3</span>
-   <li><a href="#callbackdef-errorcallback">ErrorCallback</a><span>, in §6.1</span>
+   <li><a href="#callbackdef-entrycallback">EntryCallback</a><span>, in §7.3</span>
+   <li><a href="#callbackdef-errorcallback">ErrorCallback</a><span>, in §7.1</span>
    <li><a href="#evaluate-a-path">evaluate a path</a><span>, in §3</span>
    <li><a href="#file">file</a><span>, in §2.2</span>
-   <li><a href="#callbackdef-filecallback">FileCallback</a><span>, in §6.5</span>
+   <li><a href="#callbackdef-filecallback">FileCallback</a><span>, in §7.5</span>
    <li><a href="#file-entry">file entry</a><span>, in §2.3</span>
-   <li><a href="#fileentry">FileEntry</a><span>, in §6.5</span>
-   <li><a href="#file-error">file error</a><span>, in §6.1</span>
-   <li><a href="#fileerror">FileError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileentry-file">file(successCallback)</a><span>, in §6.5</span>
-   <li><a href="#dom-fileentry-file">file(successCallback, errorCallback)</a><span>, in §6.5</span>
+   <li><a href="#fileentry">FileEntry</a><span>, in §7.5</span>
+   <li><a href="#file-error">file error</a><span>, in §7.1</span>
+   <li><a href="#fileerror">FileError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileentry-file">file(successCallback)</a><span>, in §7.5</span>
+   <li><a href="#dom-fileentry-file">file(successCallback, errorCallback)</a><span>, in §7.5</span>
    <li>
     filesystem
     <ul>
      <li><a href="#filesystem">definition of</a><span>, in §2.2</span>
      <li><a href="#entry-filesystem">dfn for entry</a><span>, in §2.3</span>
-     <li><a href="#dom-entry-filesystem">attribute for Entry</a><span>, in §6.2</span>
+     <li><a href="#dom-entry-filesystem">attribute for Entry</a><span>, in §7.2</span>
     </ul>
-   <li><a href="#dictdef-flags">Flags</a><span>, in §6.3</span>
+   <li><a href="#dictdef-flags">Flags</a><span>, in §7.3</span>
    <li><a href="#full-path">full path</a><span>, in §2.3</span>
-   <li><a href="#dom-entry-fullpath">fullPath</a><span>, in §6.2</span>
-   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options, successCallback)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options, successCallback, errorCallback)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getfile">getFile(path)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getfile">getFile(path, options)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getfile">getFile(path, options, successCallback)</a><span>, in §6.3</span>
-   <li><a href="#dom-directoryentry-getfile">getFile(path, options, successCallback, errorCallback)</a><span>, in §6.3</span>
-   <li><a href="#dom-entry-getparent">getParent()</a><span>, in §6.2</span>
-   <li><a href="#dom-entry-getparent">getParent(successCallback)</a><span>, in §6.2</span>
-   <li><a href="#dom-entry-getparent">getParent(successCallback, errorCallback)</a><span>, in §6.2</span>
-   <li><a href="#dom-entriescallback-handleevent">handleEvent(entries)</a><span>, in §6.4</span>
-   <li><a href="#dom-entrycallback-handleevent">handleEvent(entry)</a><span>, in §6.3</span>
-   <li><a href="#dom-errorcallback-handleevent">handleEvent(err)</a><span>, in §6.1</span>
-   <li><a href="#dom-filecallback-handleevent">handleEvent(file)</a><span>, in §6.5</span>
-   <li><a href="#dom-fileerror-invalid_modification_err">INVALID_MODIFICATION_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-invalidmodificationerror">InvalidModificationError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileerror-invalid_state_err">INVALID_STATE_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-invalidstateerror">InvalidStateError</a><span>, in §6.1</span>
-   <li><a href="#dom-entry-isdirectory">isDirectory</a><span>, in §6.2</span>
-   <li><a href="#dom-entry-isfile">isFile</a><span>, in §6.2</span>
+   <li><a href="#dom-entry-fullpath">fullPath</a><span>, in §7.2</span>
+   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options, successCallback)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getdirectory">getDirectory(path, options, successCallback, errorCallback)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getfile">getFile(path)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getfile">getFile(path, options)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getfile">getFile(path, options, successCallback)</a><span>, in §7.3</span>
+   <li><a href="#dom-directoryentry-getfile">getFile(path, options, successCallback, errorCallback)</a><span>, in §7.3</span>
+   <li><a href="#dom-entry-getparent">getParent()</a><span>, in §7.2</span>
+   <li><a href="#dom-entry-getparent">getParent(successCallback)</a><span>, in §7.2</span>
+   <li><a href="#dom-entry-getparent">getParent(successCallback, errorCallback)</a><span>, in §7.2</span>
+   <li><a href="#dom-entriescallback-handleevent">handleEvent(entries)</a><span>, in §7.4</span>
+   <li><a href="#dom-entrycallback-handleevent">handleEvent(entry)</a><span>, in §7.3</span>
+   <li><a href="#dom-errorcallback-handleevent">handleEvent(err)</a><span>, in §7.1</span>
+   <li><a href="#dom-filecallback-handleevent">handleEvent(file)</a><span>, in §7.5</span>
+   <li><a href="#dom-fileerror-invalid_modification_err">INVALID_MODIFICATION_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-invalidmodificationerror">InvalidModificationError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileerror-invalid_state_err">INVALID_STATE_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-invalidstateerror">InvalidStateError</a><span>, in §7.1</span>
+   <li><a href="#dom-entry-isdirectory">isDirectory</a><span>, in §7.2</span>
+   <li><a href="#dom-entry-isfile">isFile</a><span>, in §7.2</span>
    <li>
     name
     <ul>
@@ -2468,28 +2487,28 @@ for suggestions, reviews, and other feedback.</p>
      <li><a href="#directory-name">dfn for directory</a><span>, in §2.2</span>
      <li><a href="#filesystem-name">dfn for filesystem</a><span>, in §2.2</span>
      <li><a href="#entry-name">dfn for entry</a><span>, in §2.3</span>
-     <li><a href="#dom-entry-name">attribute for Entry</a><span>, in §6.2</span>
-     <li><a href="#dom-domfilesystem-name">attribute for DOMFileSystem</a><span>, in §6.6</span>
+     <li><a href="#dom-entry-name">attribute for Entry</a><span>, in §7.2</span>
+     <li><a href="#dom-domfilesystem-name">attribute for DOMFileSystem</a><span>, in §7.6</span>
     </ul>
-   <li><a href="#dom-fileerror-no_modification_allowed_err">NO_MODIFICATION_ALLOWED_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-nomodificationallowederror">NoModificationAllowedError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileerror-not_found_err">NOT_FOUND_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-notfounderror">NotFoundError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileerror-not_readable_err">NOT_READABLE_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-notreadableerror">NotReadableError</a><span>, in §6.1</span>
+   <li><a href="#dom-fileerror-no_modification_allowed_err">NO_MODIFICATION_ALLOWED_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-nomodificationallowederror">NoModificationAllowedError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileerror-not_found_err">NOT_FOUND_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-notfounderror">NotFoundError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileerror-not_readable_err">NOT_READABLE_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-notreadableerror">NotReadableError</a><span>, in §7.1</span>
    <li><a href="#parent">parent</a><span>, in §2.2</span>
    <li><a href="#path">path</a><span>, in §2.1</span>
-   <li><a href="#dom-fileerror-path_exists_err">PATH_EXISTS_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-pathexistserror">PathExistsError</a><span>, in §6.1</span>
+   <li><a href="#dom-fileerror-path_exists_err">PATH_EXISTS_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-pathexistserror">PathExistsError</a><span>, in §7.1</span>
    <li><a href="#path-segment">path segment</a><span>, in §2.1</span>
-   <li><a href="#dom-fileerror-quota_exceeded_err">QUOTA_EXCEEDED_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-quotaexceedederror">QuotaExceededError</a><span>, in §6.1</span>
-   <li><a href="#dom-directoryreader-readentries">readEntries(successCallback)</a><span>, in §6.4</span>
+   <li><a href="#dom-fileerror-quota_exceeded_err">QUOTA_EXCEEDED_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-quotaexceedederror">QuotaExceededError</a><span>, in §7.1</span>
+   <li><a href="#dom-directoryreader-readentries">readEntries(successCallback)</a><span>, in §7.4</span>
    <li>
     readEntries(successCallback, errorCallback)
     <ul>
-     <li><a href="#dom-directoryreader-readentries">method for DirectoryReader</a><span>, in §6.4</span>
-     <li><a href="#dom-directoryentry-readentries">method for DirectoryEntry</a><span>, in §6.4</span>
+     <li><a href="#dom-directoryreader-readentries">method for DirectoryReader</a><span>, in §7.4</span>
+     <li><a href="#dom-directoryentry-readentries">method for DirectoryEntry</a><span>, in §7.4</span>
     </ul>
    <li><a href="#reader-error">reader error</a><span>, in §2.4</span>
    <li><a href="#reading-flag">reading flag</a><span>, in §2.4</span>
@@ -2500,18 +2519,19 @@ for suggestions, reviews, and other feedback.</p>
     <ul>
      <li><a href="#filesystem-root">dfn for filesystem</a><span>, in §2.2</span>
      <li><a href="#entry-root">dfn for entry</a><span>, in §2.3</span>
-     <li><a href="#dom-domfilesystem-root">attribute for DOMFileSystem</a><span>, in §6.6</span>
+     <li><a href="#dom-domfilesystem-root">attribute for DOMFileSystem</a><span>, in §7.6</span>
     </ul>
    <li><a href="#root-directory">root directory</a><span>, in §2.2</span>
-   <li><a href="#dom-fileerror-security_err">SECURITY_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-securityerror">SecurityError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileerror-syntax_err">SYNTAX_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-syntaxerror">SyntaxError</a><span>, in §6.1</span>
-   <li><a href="#dom-fileerror-type_mismatch_err">TYPE_MISMATCH_ERR</a><span>, in §6.1</span>
-   <li><a href="#exceptiondef-typemismatcherror">TypeMismatchError</a><span>, in §6.1</span>
+   <li><a href="#dom-fileerror-security_err">SECURITY_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-securityerror">SecurityError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileerror-syntax_err">SYNTAX_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-syntaxerror">SyntaxError</a><span>, in §7.1</span>
+   <li><a href="#dom-fileerror-type_mismatch_err">TYPE_MISMATCH_ERR</a><span>, in §7.1</span>
+   <li><a href="#exceptiondef-typemismatcherror">TypeMismatchError</a><span>, in §7.1</span>
    <li><a href="#valid-path">valid path</a><span>, in §2.1</span>
-   <li><a href="#dom-htmlinputelement-webkitentries">webkitEntries</a><span>, in §4</span>
-   <li><a href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry()</a><span>, in §5</span>
+   <li><a href="#dom-htmlinputelement-webkitdirectory">webkitdirectory</a><span>, in §5</span>
+   <li><a href="#dom-htmlinputelement-webkitentries">webkitEntries</a><span>, in §5</span>
+   <li><a href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry()</a><span>, in §6</span>
    <li><a href="#dom-file-webkitrelativepath">webkitRelativePath</a><span>, in §4</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2537,6 +2557,7 @@ for suggestions, reviews, and other feedback.</p>
     <ul>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a>
      <li><a href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a>
+     <li><a href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-accept">accept</a>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#the-drag-data-item-kind">drag data item kind</a>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>
      <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag data store item list</a>
@@ -2555,7 +2576,6 @@ for suggestions, reviews, and other feedback.</p>
     <a data-link-type="biblio">[WebIDL-1]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
-     <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#dom-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a>
@@ -2581,14 +2601,17 @@ for suggestions, reviews, and other feedback.</p>
    <dd><a href="https://tc39.github.io/ecma262/">ECMAScript Language Specification</a>. URL: <a href="https://tc39.github.io/ecma262/">https://tc39.github.io/ecma262/</a>
    <dt id="biblio-file-system-api">[FILE-SYSTEM-API]
    <dd>Eric Uhrhane. <a href="http://dev.w3.org/2009/dap/file-system/file-dir-sys.html">File API: Directories and System</a>. 24 April 2014. NOTE. URL: <a href="http://dev.w3.org/2009/dap/file-system/file-dir-sys.html">http://dev.w3.org/2009/dap/file-system/file-dir-sys.html</a>
+   <dt id="biblio-fileapi">[FileAPI]
+   <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. 21 April 2015. WD. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
-<pre class="idl def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#entry">Entry</a>> <a class="nv" data-readonly="" data-type="FrozenArray<Entry>" href="#dom-htmlinputelement-webkitentries">webkitEntries</a>;
+<pre class="idl def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <a class="nv" data-readonly="" data-type="USVString" href="#dom-file-webkitrelativepath">webkitRelativePath</a>;
 };
 
-<span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv" data-readonly="" data-type="DOMString" href="#dom-file-webkitrelativepath">webkitRelativePath</a>;
+<span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a> {
+    <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv" data-type="boolean" href="#dom-htmlinputelement-webkitdirectory">webkitdirectory</a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#entry">Entry</a>> <a class="nv" data-readonly="" data-type="FrozenArray<Entry>" href="#dom-htmlinputelement-webkitentries">webkitEntries</a>;
 };
 
 <span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a> {
@@ -2668,7 +2691,7 @@ for suggestions, reviews, and other feedback.</p>
 
 [<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#domfilesystem">DOMFileSystem</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv" data-readonly="" data-type="DOMString" href="#dom-domfilesystem-name">name</a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <a class="nv" data-readonly="" data-type="USVString" href="#dom-domfilesystem-name">name</a>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry">DirectoryEntry</a> <a class="nv" data-readonly="" data-type="DirectoryEntry" href="#dom-domfilesystem-root">root</a>;
 };
 
@@ -2678,20 +2701,21 @@ for suggestions, reviews, and other feedback.</p>
    <div class="issue"> EDITORIAL:
   Should <a data-link-type="dfn" href="#directory">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? <a href="#issue-e0fa4438"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
-  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe512"> ↵ </a></div>
+  This section should be merged into <a data-link-type="biblio" href="#biblio-fileapi">[FileAPI]</a> once it is complete. <a href="#issue-ab7a53dc"> ↵ </a></div>
+   <div class="issue"> EDITORIAL:
+  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete.
+  Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code> property. <a href="#issue-9a11f326"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
   In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is only populated as
   the result of a drag-and-drop operation, not when the element is
   clicked. Can we fix this so it is always populated? <a href="#issue-4dc29de9"> ↵ </a></div>
-   <div class="issue"> TODO:
-  Define <code>webkitdirectory</code> and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code>. <a href="#issue-32ab408b"> ↵ </a></div>
    <div class="issue"> WEB-COMPAT:
-  In Chrome, if <code>webkitdirectory</code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is not
+  In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is not
   populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code> properties must be used instead to
   reconstruct the directory structure. Can we fix this so it is always
-  populated? <a href="#issue-4aece011"> ↵ </a></div>
+  populated? <a href="#issue-a4688e35"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
-  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe5120"> ↵ </a></div>
+  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe512"> ↵ </a></div>
    <div class="issue">
      WEB-COMPAT:
   We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor
@@ -2735,6 +2759,8 @@ for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-relative-path-1">2.1. Names and Paths</a> <a href="#ref-for-relative-path-2">(2)</a>
     <li><a href="#ref-for-relative-path-3">3. Algorithms</a>
+    <li><a href="#ref-for-relative-path-4">4. The File Interface</a>
+    <li><a href="#ref-for-relative-path-5">5. HTML: Forms</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="absolute-path">
@@ -2755,7 +2781,7 @@ for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="valid-path">
    <b><a href="#valid-path">#valid-path</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-valid-path-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-valid-path-2">(2)</a>
+    <li><a href="#ref-for-valid-path-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-valid-path-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="file">
@@ -2763,14 +2789,14 @@ for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-file-1">2.2. Files and Directories</a> <a href="#ref-for-file-2">(2)</a> <a href="#ref-for-file-3">(3)</a>
     <li><a href="#ref-for-file-4">3. Algorithms</a> <a href="#ref-for-file-5">(2)</a>
-    <li><a href="#ref-for-file-6">5. Data Transfer</a>
-    <li><a href="#ref-for-file-7">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-file-6">6. HTML: Drag and drop</a>
+    <li><a href="#ref-for-file-7">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="file-name">
    <b><a href="#file-name">#file-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-file-name-1">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-file-name-1">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directory">
@@ -2779,17 +2805,17 @@ for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-directory-1">2.2. Files and Directories</a> <a href="#ref-for-directory-2">(2)</a> <a href="#ref-for-directory-3">(3)</a> <a href="#ref-for-directory-4">(4)</a> <a href="#ref-for-directory-5">(5)</a> <a href="#ref-for-directory-6">(6)</a> <a href="#ref-for-directory-7">(7)</a>
     <li><a href="#ref-for-directory-8">2.4. Directory Reader</a>
     <li><a href="#ref-for-directory-9">3. Algorithms</a>
-    <li><a href="#ref-for-directory-10">5. Data Transfer</a> <a href="#ref-for-directory-11">(2)</a>
-    <li><a href="#ref-for-directory-12">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directory-13">(2)</a>
-    <li><a href="#ref-for-directory-14">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-15">(2)</a> <a href="#ref-for-directory-16">(3)</a>
-    <li><a href="#ref-for-directory-17">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-directory-10">6. HTML: Drag and drop</a> <a href="#ref-for-directory-11">(2)</a>
+    <li><a href="#ref-for-directory-12">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-directory-13">(2)</a>
+    <li><a href="#ref-for-directory-14">7.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-15">(2)</a> <a href="#ref-for-directory-16">(3)</a>
+    <li><a href="#ref-for-directory-17">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directory-name">
    <b><a href="#directory-name">#directory-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-directory-name-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-directory-name-2">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-directory-name-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-directory-name-2">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="root-directory">
@@ -2798,7 +2824,7 @@ for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-root-directory-1">2.2. Files and Directories</a> <a href="#ref-for-root-directory-2">(2)</a> <a href="#ref-for-root-directory-3">(3)</a> <a href="#ref-for-root-directory-4">(4)</a>
     <li><a href="#ref-for-root-directory-5">2.3. Entries</a> <a href="#ref-for-root-directory-6">(2)</a>
     <li><a href="#ref-for-root-directory-7">3. Algorithms</a>
-    <li><a href="#ref-for-root-directory-8">5. Data Transfer</a>
+    <li><a href="#ref-for-root-directory-8">6. HTML: Drag and drop</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="parent">
@@ -2813,401 +2839,408 @@ for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-filesystem-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-2">(2)</a> <a href="#ref-for-filesystem-3">(3)</a> <a href="#ref-for-filesystem-4">(4)</a>
     <li><a href="#ref-for-filesystem-5">2.3. Entries</a>
-    <li><a href="#ref-for-filesystem-6">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-filesystem-7">(2)</a> <a href="#ref-for-filesystem-8">(3)</a>
+    <li><a href="#ref-for-filesystem-6">7.6. The DOMFileSystem Interface</a> <a href="#ref-for-filesystem-7">(2)</a> <a href="#ref-for-filesystem-8">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="filesystem-name">
    <b><a href="#filesystem-name">#filesystem-name</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-filesystem-name-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-name-2">(2)</a>
-    <li><a href="#ref-for-filesystem-name-3">6.6. The DOMFileSystem Interface</a>
+    <li><a href="#ref-for-filesystem-name-3">7.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="filesystem-root">
    <b><a href="#filesystem-root">#filesystem-root</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-filesystem-root-1">6.6. The DOMFileSystem Interface</a>
+    <li><a href="#ref-for-filesystem-root-1">7.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entry-concept">
    <b><a href="#entry-concept">#entry-concept</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-entry-concept-1">2.3. Entries</a> <a href="#ref-for-entry-concept-2">(2)</a> <a href="#ref-for-entry-concept-3">(3)</a> <a href="#ref-for-entry-concept-4">(4)</a> <a href="#ref-for-entry-concept-5">(5)</a> <a href="#ref-for-entry-concept-6">(6)</a>
-    <li><a href="#ref-for-entry-concept-7">5. Data Transfer</a> <a href="#ref-for-entry-concept-8">(2)</a> <a href="#ref-for-entry-concept-9">(3)</a>
-    <li><a href="#ref-for-entry-concept-10">6.2. The Entry Interface</a> <a href="#ref-for-entry-concept-11">(2)</a> <a href="#ref-for-entry-concept-12">(3)</a> <a href="#ref-for-entry-concept-13">(4)</a> <a href="#ref-for-entry-concept-14">(5)</a> <a href="#ref-for-entry-concept-15">(6)</a> <a href="#ref-for-entry-concept-16">(7)</a> <a href="#ref-for-entry-concept-17">(8)</a>
-    <li><a href="#ref-for-entry-concept-18">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-entry-concept-19">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-entry-concept-20">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-concept-7">6. HTML: Drag and drop</a> <a href="#ref-for-entry-concept-8">(2)</a> <a href="#ref-for-entry-concept-9">(3)</a>
+    <li><a href="#ref-for-entry-concept-10">7.2. The Entry Interface</a> <a href="#ref-for-entry-concept-11">(2)</a> <a href="#ref-for-entry-concept-12">(3)</a> <a href="#ref-for-entry-concept-13">(4)</a> <a href="#ref-for-entry-concept-14">(5)</a> <a href="#ref-for-entry-concept-15">(6)</a> <a href="#ref-for-entry-concept-16">(7)</a> <a href="#ref-for-entry-concept-17">(8)</a>
+    <li><a href="#ref-for-entry-concept-18">7.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-entry-concept-19">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-concept-20">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="file-entry">
    <b><a href="#file-entry">#file-entry</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-file-entry-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-file-entry-2">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-file-entry-3">6.5. The FileEntry Interface</a> <a href="#ref-for-file-entry-4">(2)</a>
+    <li><a href="#ref-for-file-entry-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-file-entry-2">7.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-file-entry-3">7.5. The FileEntry Interface</a> <a href="#ref-for-file-entry-4">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directory-entry">
    <b><a href="#directory-entry">#directory-entry</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-directory-entry-1">2.4. Directory Reader</a>
-    <li><a href="#ref-for-directory-entry-2">6.2. The Entry Interface</a> <a href="#ref-for-directory-entry-3">(2)</a>
-    <li><a href="#ref-for-directory-entry-4">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directory-entry-5">(2)</a> <a href="#ref-for-directory-entry-6">(3)</a> <a href="#ref-for-directory-entry-7">(4)</a> <a href="#ref-for-directory-entry-8">(5)</a> <a href="#ref-for-directory-entry-9">(6)</a> <a href="#ref-for-directory-entry-10">(7)</a>
+    <li><a href="#ref-for-directory-entry-2">7.2. The Entry Interface</a> <a href="#ref-for-directory-entry-3">(2)</a>
+    <li><a href="#ref-for-directory-entry-4">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-directory-entry-5">(2)</a> <a href="#ref-for-directory-entry-6">(3)</a> <a href="#ref-for-directory-entry-7">(4)</a> <a href="#ref-for-directory-entry-8">(5)</a> <a href="#ref-for-directory-entry-9">(6)</a> <a href="#ref-for-directory-entry-10">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entry-name">
    <b><a href="#entry-name">#entry-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-entry-name-1">6.2. The Entry Interface</a> <a href="#ref-for-entry-name-2">(2)</a>
-    <li><a href="#ref-for-entry-name-3">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-name-4">(2)</a>
+    <li><a href="#ref-for-entry-name-1">7.2. The Entry Interface</a> <a href="#ref-for-entry-name-2">(2)</a>
+    <li><a href="#ref-for-entry-name-3">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-name-4">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="full-path">
    <b><a href="#full-path">#full-path</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-full-path-1">6.2. The Entry Interface</a> <a href="#ref-for-full-path-2">(2)</a> <a href="#ref-for-full-path-3">(3)</a>
-    <li><a href="#ref-for-full-path-4">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-full-path-5">(2)</a> <a href="#ref-for-full-path-6">(3)</a> <a href="#ref-for-full-path-7">(4)</a>
-    <li><a href="#ref-for-full-path-8">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-full-path-9">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-full-path-1">7.2. The Entry Interface</a> <a href="#ref-for-full-path-2">(2)</a> <a href="#ref-for-full-path-3">(3)</a>
+    <li><a href="#ref-for-full-path-4">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-full-path-5">(2)</a> <a href="#ref-for-full-path-6">(3)</a> <a href="#ref-for-full-path-7">(4)</a>
+    <li><a href="#ref-for-full-path-8">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-full-path-9">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entry-root">
    <b><a href="#entry-root">#entry-root</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-entry-root-1">2.3. Entries</a>
-    <li><a href="#ref-for-entry-root-2">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-entry-root-3">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-root-4">(2)</a>
-    <li><a href="#ref-for-entry-root-5">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-entry-root-6">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-root-2">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-entry-root-3">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-root-4">(2)</a>
+    <li><a href="#ref-for-entry-root-5">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-root-6">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entry-filesystem">
    <b><a href="#entry-filesystem">#entry-filesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-entry-filesystem-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-entry-filesystem-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directory-reader">
    <b><a href="#directory-reader">#directory-reader</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-directory-reader-1">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-directory-reader-2">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-reader-3">(2)</a> <a href="#ref-for-directory-reader-4">(3)</a> <a href="#ref-for-directory-reader-5">(4)</a> <a href="#ref-for-directory-reader-6">(5)</a> <a href="#ref-for-directory-reader-7">(6)</a> <a href="#ref-for-directory-reader-8">(7)</a> <a href="#ref-for-directory-reader-9">(8)</a> <a href="#ref-for-directory-reader-10">(9)</a> <a href="#ref-for-directory-reader-11">(10)</a> <a href="#ref-for-directory-reader-12">(11)</a> <a href="#ref-for-directory-reader-13">(12)</a>
+    <li><a href="#ref-for-directory-reader-1">7.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-directory-reader-2">7.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-reader-3">(2)</a> <a href="#ref-for-directory-reader-4">(3)</a> <a href="#ref-for-directory-reader-5">(4)</a> <a href="#ref-for-directory-reader-6">(5)</a> <a href="#ref-for-directory-reader-7">(6)</a> <a href="#ref-for-directory-reader-8">(7)</a> <a href="#ref-for-directory-reader-9">(8)</a> <a href="#ref-for-directory-reader-10">(9)</a> <a href="#ref-for-directory-reader-11">(10)</a> <a href="#ref-for-directory-reader-12">(11)</a> <a href="#ref-for-directory-reader-13">(12)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="reading-flag">
    <b><a href="#reading-flag">#reading-flag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-reading-flag-1">6.4. The DirectoryReader Interface</a> <a href="#ref-for-reading-flag-2">(2)</a> <a href="#ref-for-reading-flag-3">(3)</a>
+    <li><a href="#ref-for-reading-flag-1">7.4. The DirectoryReader Interface</a> <a href="#ref-for-reading-flag-2">(2)</a> <a href="#ref-for-reading-flag-3">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="done-flag">
    <b><a href="#done-flag">#done-flag</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-done-flag-1">6.4. The DirectoryReader Interface</a> <a href="#ref-for-done-flag-2">(2)</a>
+    <li><a href="#ref-for-done-flag-1">7.4. The DirectoryReader Interface</a> <a href="#ref-for-done-flag-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="reader-error">
    <b><a href="#reader-error">#reader-error</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-reader-error-1">6.4. The DirectoryReader Interface</a> <a href="#ref-for-reader-error-2">(2)</a> <a href="#ref-for-reader-error-3">(3)</a> <a href="#ref-for-reader-error-4">(4)</a> <a href="#ref-for-reader-error-5">(5)</a> <a href="#ref-for-reader-error-6">(6)</a>
+    <li><a href="#ref-for-reader-error-1">7.4. The DirectoryReader Interface</a> <a href="#ref-for-reader-error-2">(2)</a> <a href="#ref-for-reader-error-3">(3)</a> <a href="#ref-for-reader-error-4">(4)</a> <a href="#ref-for-reader-error-5">(5)</a> <a href="#ref-for-reader-error-6">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="resolve-a-relative-path">
    <b><a href="#resolve-a-relative-path">#resolve-a-relative-path</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-resolve-a-relative-path-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-resolve-a-relative-path-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-resolve-a-relative-path-3">(2)</a>
+    <li><a href="#ref-for-resolve-a-relative-path-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-resolve-a-relative-path-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-resolve-a-relative-path-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="evaluate-a-path">
    <b><a href="#evaluate-a-path">#evaluate-a-path</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-evaluate-a-path-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-evaluate-a-path-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-evaluate-a-path-3">(2)</a>
-    <li><a href="#ref-for-evaluate-a-path-4">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-evaluate-a-path-5">6.5. The FileEntry Interface</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-htmlinputelement-webkitentries">
-   <b><a href="#dom-htmlinputelement-webkitentries">#dom-htmlinputelement-webkitentries</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-htmlinputelement-webkitentries-1">4. HTML Forms</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-2">(2)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-3">(3)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-4">(4)</a>
+    <li><a href="#ref-for-evaluate-a-path-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-evaluate-a-path-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-evaluate-a-path-3">(2)</a>
+    <li><a href="#ref-for-evaluate-a-path-4">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-evaluate-a-path-5">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-file-webkitrelativepath">
    <b><a href="#dom-file-webkitrelativepath">#dom-file-webkitrelativepath</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-file-webkitrelativepath-1">4. HTML Forms</a> <a href="#ref-for-dom-file-webkitrelativepath-2">(2)</a> <a href="#ref-for-dom-file-webkitrelativepath-3">(3)</a>
+    <li><a href="#ref-for-dom-file-webkitrelativepath-1">4. The File Interface</a>
+    <li><a href="#ref-for-dom-file-webkitrelativepath-2">5. HTML: Forms</a> <a href="#ref-for-dom-file-webkitrelativepath-3">(2)</a> <a href="#ref-for-dom-file-webkitrelativepath-4">(3)</a> <a href="#ref-for-dom-file-webkitrelativepath-5">(4)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-htmlinputelement-webkitdirectory">
+   <b><a href="#dom-htmlinputelement-webkitdirectory">#dom-htmlinputelement-webkitdirectory</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-htmlinputelement-webkitdirectory-1">5. HTML: Forms</a> <a href="#ref-for-dom-htmlinputelement-webkitdirectory-2">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-htmlinputelement-webkitentries">
+   <b><a href="#dom-htmlinputelement-webkitentries">#dom-htmlinputelement-webkitentries</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-htmlinputelement-webkitentries-1">5. HTML: Forms</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-2">(2)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-3">(3)</a> <a href="#ref-for-dom-htmlinputelement-webkitentries-4">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-datatransferitem-webkitgetasentry">
    <b><a href="#dom-datatransferitem-webkitgetasentry">#dom-datatransferitem-webkitgetasentry</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-datatransferitem-webkitgetasentry-1">5. Data Transfer</a>
+    <li><a href="#ref-for-dom-datatransferitem-webkitgetasentry-1">6. HTML: Drag and drop</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fileerror">
    <b><a href="#fileerror">#fileerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fileerror-1">6.1. Common Types</a> <a href="#ref-for-fileerror-2">(2)</a> <a href="#ref-for-fileerror-3">(3)</a> <a href="#ref-for-fileerror-4">(4)</a>
+    <li><a href="#ref-for-fileerror-1">7.1. Common Types</a> <a href="#ref-for-fileerror-2">(2)</a> <a href="#ref-for-fileerror-3">(3)</a> <a href="#ref-for-fileerror-4">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-not_found_err">
    <b><a href="#dom-fileerror-not_found_err">#dom-fileerror-not_found_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-not_found_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-not_found_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-not_found_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-not_found_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-security_err">
    <b><a href="#dom-fileerror-security_err">#dom-fileerror-security_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-security_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-security_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-security_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-security_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-abort_err">
    <b><a href="#dom-fileerror-abort_err">#dom-fileerror-abort_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-abort_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-abort_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-abort_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-abort_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-not_readable_err">
    <b><a href="#dom-fileerror-not_readable_err">#dom-fileerror-not_readable_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-not_readable_err-1">6.1. Common Types</a>
+    <li><a href="#ref-for-dom-fileerror-not_readable_err-1">7.1. Common Types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-encoding_err">
    <b><a href="#dom-fileerror-encoding_err">#dom-fileerror-encoding_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-encoding_err-1">6.1. Common Types</a>
+    <li><a href="#ref-for-dom-fileerror-encoding_err-1">7.1. Common Types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-no_modification_allowed_err">
    <b><a href="#dom-fileerror-no_modification_allowed_err">#dom-fileerror-no_modification_allowed_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-no_modification_allowed_err-1">6.1. Common Types</a>
+    <li><a href="#ref-for-dom-fileerror-no_modification_allowed_err-1">7.1. Common Types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-invalid_state_err">
    <b><a href="#dom-fileerror-invalid_state_err">#dom-fileerror-invalid_state_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-invalid_state_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-invalid_state_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-invalid_state_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-invalid_state_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-syntax_err">
    <b><a href="#dom-fileerror-syntax_err">#dom-fileerror-syntax_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-syntax_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-syntax_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-syntax_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-syntax_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-invalid_modification_err">
    <b><a href="#dom-fileerror-invalid_modification_err">#dom-fileerror-invalid_modification_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-invalid_modification_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-invalid_modification_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-invalid_modification_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-invalid_modification_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-quota_exceeded_err">
    <b><a href="#dom-fileerror-quota_exceeded_err">#dom-fileerror-quota_exceeded_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-quota_exceeded_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-quota_exceeded_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-quota_exceeded_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-quota_exceeded_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-type_mismatch_err">
    <b><a href="#dom-fileerror-type_mismatch_err">#dom-fileerror-type_mismatch_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-type_mismatch_err-1">6.1. Common Types</a> <a href="#ref-for-dom-fileerror-type_mismatch_err-2">(2)</a>
+    <li><a href="#ref-for-dom-fileerror-type_mismatch_err-1">7.1. Common Types</a> <a href="#ref-for-dom-fileerror-type_mismatch_err-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileerror-path_exists_err">
    <b><a href="#dom-fileerror-path_exists_err">#dom-fileerror-path_exists_err</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileerror-path_exists_err-1">6.1. Common Types</a>
+    <li><a href="#ref-for-dom-fileerror-path_exists_err-1">7.1. Common Types</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="file-error">
    <b><a href="#file-error">#file-error</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-file-error-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-file-error-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-file-error-3">(2)</a> <a href="#ref-for-file-error-4">(3)</a> <a href="#ref-for-file-error-5">(4)</a> <a href="#ref-for-file-error-6">(5)</a> <a href="#ref-for-file-error-7">(6)</a>
-    <li><a href="#ref-for-file-error-8">6.4. The DirectoryReader Interface</a> <a href="#ref-for-file-error-9">(2)</a> <a href="#ref-for-file-error-10">(3)</a>
-    <li><a href="#ref-for-file-error-11">6.5. The FileEntry Interface</a> <a href="#ref-for-file-error-12">(2)</a>
+    <li><a href="#ref-for-file-error-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-file-error-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-file-error-3">(2)</a> <a href="#ref-for-file-error-4">(3)</a> <a href="#ref-for-file-error-5">(4)</a> <a href="#ref-for-file-error-6">(5)</a> <a href="#ref-for-file-error-7">(6)</a>
+    <li><a href="#ref-for-file-error-8">7.4. The DirectoryReader Interface</a> <a href="#ref-for-file-error-9">(2)</a> <a href="#ref-for-file-error-10">(3)</a>
+    <li><a href="#ref-for-file-error-11">7.5. The FileEntry Interface</a> <a href="#ref-for-file-error-12">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-notfounderror">
    <b><a href="#exceptiondef-notfounderror">#exceptiondef-notfounderror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-notfounderror-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-notfounderror-3">(2)</a> <a href="#ref-for-exceptiondef-notfounderror-4">(3)</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-5">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-6">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-notfounderror-3">(2)</a> <a href="#ref-for-exceptiondef-notfounderror-4">(3)</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-5">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-6">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-securityerror">
    <b><a href="#exceptiondef-securityerror">#exceptiondef-securityerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-securityerror-1">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-exceptiondef-securityerror-1">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-invalidstateerror">
    <b><a href="#exceptiondef-invalidstateerror">#exceptiondef-invalidstateerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-invalidstateerror-1">6.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-exceptiondef-invalidstateerror-1">7.4. The DirectoryReader Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-typemismatcherror">
    <b><a href="#exceptiondef-typemismatcherror">#exceptiondef-typemismatcherror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-typemismatcherror-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-typemismatcherror-2">(2)</a> <a href="#ref-for-exceptiondef-typemismatcherror-3">(3)</a> <a href="#ref-for-exceptiondef-typemismatcherror-4">(4)</a>
-    <li><a href="#ref-for-exceptiondef-typemismatcherror-5">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-exceptiondef-typemismatcherror-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-typemismatcherror-2">(2)</a> <a href="#ref-for-exceptiondef-typemismatcherror-3">(3)</a> <a href="#ref-for-exceptiondef-typemismatcherror-4">(4)</a>
+    <li><a href="#ref-for-exceptiondef-typemismatcherror-5">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-errorcallback">
    <b><a href="#callbackdef-errorcallback">#callbackdef-errorcallback</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-callbackdef-errorcallback-1">6.1. Common Types</a>
-    <li><a href="#ref-for-callbackdef-errorcallback-2">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-callbackdef-errorcallback-3">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-callbackdef-errorcallback-4">(2)</a>
-    <li><a href="#ref-for-callbackdef-errorcallback-5">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-callbackdef-errorcallback-6">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-callbackdef-errorcallback-1">7.1. Common Types</a>
+    <li><a href="#ref-for-callbackdef-errorcallback-2">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-callbackdef-errorcallback-3">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-callbackdef-errorcallback-4">(2)</a>
+    <li><a href="#ref-for-callbackdef-errorcallback-5">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-callbackdef-errorcallback-6">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="entry">
    <b><a href="#entry">#entry</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-entry-1">4. HTML Forms</a> <a href="#ref-for-entry-2">(2)</a>
-    <li><a href="#ref-for-entry-3">5. Data Transfer</a> <a href="#ref-for-entry-4">(2)</a>
-    <li><a href="#ref-for-entry-5">6.2. The Entry Interface</a> <a href="#ref-for-entry-6">(2)</a> <a href="#ref-for-entry-7">(3)</a> <a href="#ref-for-entry-8">(4)</a> <a href="#ref-for-entry-9">(5)</a> <a href="#ref-for-entry-10">(6)</a> <a href="#ref-for-entry-11">(7)</a> <a href="#ref-for-entry-12">(8)</a>
-    <li><a href="#ref-for-entry-13">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-14">(2)</a>
-    <li><a href="#ref-for-entry-15">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-entry-16">6.5. The FileEntry Interface</a>
-    <li><a href="#ref-for-entry-17">7. Acknowledgements</a>
+    <li><a href="#ref-for-entry-1">5. HTML: Forms</a> <a href="#ref-for-entry-2">(2)</a>
+    <li><a href="#ref-for-entry-3">6. HTML: Drag and drop</a> <a href="#ref-for-entry-4">(2)</a>
+    <li><a href="#ref-for-entry-5">7.2. The Entry Interface</a> <a href="#ref-for-entry-6">(2)</a> <a href="#ref-for-entry-7">(3)</a> <a href="#ref-for-entry-8">(4)</a> <a href="#ref-for-entry-9">(5)</a> <a href="#ref-for-entry-10">(6)</a> <a href="#ref-for-entry-11">(7)</a> <a href="#ref-for-entry-12">(8)</a>
+    <li><a href="#ref-for-entry-13">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-14">(2)</a>
+    <li><a href="#ref-for-entry-15">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-16">7.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-17">8. Acknowledgements</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-isfile">
    <b><a href="#dom-entry-isfile">#dom-entry-isfile</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-isfile-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-dom-entry-isfile-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-isdirectory">
    <b><a href="#dom-entry-isdirectory">#dom-entry-isdirectory</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-isdirectory-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-dom-entry-isdirectory-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-name">
    <b><a href="#dom-entry-name">#dom-entry-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-name-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-dom-entry-name-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-fullpath">
    <b><a href="#dom-entry-fullpath">#dom-entry-fullpath</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-fullpath-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-dom-entry-fullpath-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-filesystem">
    <b><a href="#dom-entry-filesystem">#dom-entry-filesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-filesystem-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-dom-entry-filesystem-1">7.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-getparent">
    <b><a href="#dom-entry-getparent">#dom-entry-getparent</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-entry-getparent-1">6.2. The Entry Interface</a> <a href="#ref-for-dom-entry-getparent-2">(2)</a>
+    <li><a href="#ref-for-dom-entry-getparent-1">7.2. The Entry Interface</a> <a href="#ref-for-dom-entry-getparent-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directoryentry">
    <b><a href="#directoryentry">#directoryentry</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-directoryentry-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-directoryentry-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryentry-3">(2)</a> <a href="#ref-for-directoryentry-4">(3)</a>
-    <li><a href="#ref-for-directoryentry-5">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-directoryentry-6">(2)</a>
+    <li><a href="#ref-for-directoryentry-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-directoryentry-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryentry-3">(2)</a> <a href="#ref-for-directoryentry-4">(3)</a>
+    <li><a href="#ref-for-directoryentry-5">7.6. The DOMFileSystem Interface</a> <a href="#ref-for-directoryentry-6">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-flags">
    <b><a href="#dictdef-flags">#dictdef-flags</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-flags-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-dictdef-flags-2">(2)</a> <a href="#ref-for-dictdef-flags-3">(3)</a>
+    <li><a href="#ref-for-dictdef-flags-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dictdef-flags-2">(2)</a> <a href="#ref-for-dictdef-flags-3">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-entrycallback">
    <b><a href="#callbackdef-entrycallback">#callbackdef-entrycallback</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-callbackdef-entrycallback-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-callbackdef-entrycallback-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-callbackdef-entrycallback-3">(2)</a>
+    <li><a href="#ref-for-callbackdef-entrycallback-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-callbackdef-entrycallback-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-callbackdef-entrycallback-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-directoryentry-createreader">
    <b><a href="#dom-directoryentry-createreader">#dom-directoryentry-createreader</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-directoryentry-createreader-1">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-dom-directoryentry-createreader-1">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-directoryentry-getfile">
    <b><a href="#dom-directoryentry-getfile">#dom-directoryentry-getfile</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-directoryentry-getfile-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-dom-directoryentry-getfile-2">(2)</a>
+    <li><a href="#ref-for-dom-directoryentry-getfile-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dom-directoryentry-getfile-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-directoryentry-getdirectory">
    <b><a href="#dom-directoryentry-getdirectory">#dom-directoryentry-getdirectory</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-directoryentry-getdirectory-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-dom-directoryentry-getdirectory-2">(2)</a>
+    <li><a href="#ref-for-dom-directoryentry-getdirectory-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dom-directoryentry-getdirectory-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directoryreader">
    <b><a href="#directoryreader">#directoryreader</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-directoryreader-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryreader-2">(2)</a>
-    <li><a href="#ref-for-directoryreader-3">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a> <a href="#ref-for-directoryreader-5">(3)</a> <a href="#ref-for-directoryreader-6">(4)</a>
+    <li><a href="#ref-for-directoryreader-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryreader-2">(2)</a>
+    <li><a href="#ref-for-directoryreader-3">7.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a> <a href="#ref-for-directoryreader-5">(3)</a> <a href="#ref-for-directoryreader-6">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-entriescallback">
    <b><a href="#callbackdef-entriescallback">#callbackdef-entriescallback</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-callbackdef-entriescallback-1">6.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-callbackdef-entriescallback-1">7.4. The DirectoryReader Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="fileentry">
    <b><a href="#fileentry">#fileentry</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-fileentry-1">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-fileentry-2">6.5. The FileEntry Interface</a> <a href="#ref-for-fileentry-3">(2)</a>
+    <li><a href="#ref-for-fileentry-1">7.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-fileentry-2">7.5. The FileEntry Interface</a> <a href="#ref-for-fileentry-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-filecallback">
    <b><a href="#callbackdef-filecallback">#callbackdef-filecallback</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-callbackdef-filecallback-1">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-callbackdef-filecallback-1">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-fileentry-file">
    <b><a href="#dom-fileentry-file">#dom-fileentry-file</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-fileentry-file-1">6.5. The FileEntry Interface</a> <a href="#ref-for-dom-fileentry-file-2">(2)</a>
+    <li><a href="#ref-for-dom-fileentry-file-1">7.5. The FileEntry Interface</a> <a href="#ref-for-dom-fileentry-file-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="domfilesystem">
    <b><a href="#domfilesystem">#domfilesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-domfilesystem-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-domfilesystem-2">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-domfilesystem-3">(2)</a> <a href="#ref-for-domfilesystem-4">(3)</a> <a href="#ref-for-domfilesystem-5">(4)</a>
+    <li><a href="#ref-for-domfilesystem-1">7.2. The Entry Interface</a>
+    <li><a href="#ref-for-domfilesystem-2">7.6. The DOMFileSystem Interface</a> <a href="#ref-for-domfilesystem-3">(2)</a> <a href="#ref-for-domfilesystem-4">(3)</a> <a href="#ref-for-domfilesystem-5">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-domfilesystem-name">
    <b><a href="#dom-domfilesystem-name">#dom-domfilesystem-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-domfilesystem-name-1">6.6. The DOMFileSystem Interface</a>
+    <li><a href="#ref-for-dom-domfilesystem-name-1">7.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-domfilesystem-root">
    <b><a href="#dom-domfilesystem-root">#dom-domfilesystem-root</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-domfilesystem-root-1">6.6. The DOMFileSystem Interface</a>
+    <li><a href="#ref-for-dom-domfilesystem-root-1">7.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

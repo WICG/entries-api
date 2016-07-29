@@ -130,7 +130,7 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
 A <dfn>filesystem</dfn> consists of a <dfn for=filesystem>name</dfn>
 and a <dfn for=filesystem>root</dfn> which is an associated [=root
 directory=]. The [=filesystem/name=] of a [=/filesystem=] is a
-{{DOMString}} which is implementation defined but is unique to the
+{{USVString}} which is implementation defined but is unique to the
 [=/filesystem=]. A [=root directory=] is associated with exactly one
 [=/filesystem=].
 
@@ -260,22 +260,79 @@ return a [=file=], [=directory=], or <em>failure</em>.
 </div>
 
 <!-- ============================================================ -->
-<h2 id=html-forms>HTML Forms</h2>
+<h2 id=file-interface>The {{File}} Interface</h2>
+<!-- ============================================================ -->
+
+<div class=issue>
+  EDITORIAL:
+  This section should be merged into [[FileAPI]] once it is complete.
+</div>
+
+<pre class=idl>
+partial interface File {
+    readonly attribute USVString webkitRelativePath;
+};
+</pre>
+
+The {{File/webkitRelativePath}} attribute of the {{File}} interface must
+return the [=relative path=] of the file, or the empty string if not
+specified.
+
+
+<!-- ============================================================ -->
+<h2 id=html-forms>HTML: Forms</h2>
 <!-- ============================================================ -->
 
 <div class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
+  Sections such as the steps to <em>construct the form data set</em>
+  need to be extended to include the {{File/webkitRelativePath}}
+  property.
 </div>
 
 <pre class=idl>
 partial interface HTMLInputElement {
+    attribute boolean webkitdirectory;
     readonly attribute FrozenArray&lt;Entry&gt; webkitEntries;
 };
 </pre>
 
 When an <{input}> element's <{input/type}> attribute is in the [=File
 Upload=] state, the rules in this section apply.
+
+The {{HTMLInputElement/webkitdirectory}} attribute is a boolean
+attribute that indicates whether the user is to be allowed to select a
+directory rather than a file or files. When specified, the behavior on
+the selection of a directory is as if all files with that directory
+as an ancestor were selected. In addition, the {{File/webkitRelativePath}}
+property of each {{File}} is set to a [=relative path=] from the
+selected directory to the file.
+
+<div class=note>
+  A user agent may represent any hierarchical data as directories
+  during a selection operation. For example, on a device that does not
+  expose a native file system directly to the user, photo albums could
+  be presented as directories if <code>"image/*"</code> is specified
+  for the {{HTMLInputElement/accept}} attribute.
+</div>
+
+
+<div class=example>
+Inspecting the {{File/webkitRelativePath}} properties after a
+directory is selected with an <{input}> element:
+
+<pre class=lang-html>
+  &lt;input id=b type=file webkitdirectory&gt;
+</pre>
+
+<pre class=lang-javascript>
+  document.querySelector('#b').addEventListener('change', e => {
+    for (let entry of e.target.files)
+      console.log(file.name, file.webkitRelativePath);
+  });
+</pre>
+</div>
 
 The {{HTMLInputElement/webkitEntries}} IDL attribute allows scripts to
 access the element's selected entries. On getting, if the IDL
@@ -307,34 +364,8 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 </div>
 
 <div class=issue>
-  TODO:
-  Define <code>webkitdirectory</code> and {{File/webkitRelativePath}}.
-</div>
-
-<pre class=idl>
-partial interface File {
-    readonly attribute DOMString webkitRelativePath;
-};
-</pre>
-
-<div class=example>
-Inspecting the {{File/webkitRelativePath}} property:
-
-<pre class=lang-html>
-  &lt;input id=b type=file webkitdirectory&gt;
-</pre>
-
-<pre class=lang-javascript>
-  document.querySelector('#b').addEventListener('change', e => {
-    for (let entry of e.target.files)
-      console.log(file.name, file.webkitRelativePath);
-  });
-</pre>
-</div>
-
-<div class=issue>
   WEB-COMPAT:
-  In Chrome, if <code>webkitdirectory</code> is specified on a
+  In Chrome, if {{HTMLInputElement/webkitdirectory}} is specified on a
   {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
   populated; the {{HTMLInputElement/files}} collection and
   {{File/webkitRelativePath}} properties must be used instead to
@@ -344,8 +375,9 @@ Inspecting the {{File/webkitRelativePath}} property:
 
 
 
+
 <!-- ============================================================ -->
-<h2 id=api-data>Data Transfer</h2>
+<h2 id=html-data>HTML: Drag and drop</h2>
 <!-- ============================================================ -->
 
 <div class=issue>
@@ -1090,7 +1122,7 @@ function fileAsPromise(entry) {
 <pre class=idl>
 [NoInterfaceObject]
 interface DOMFileSystem {
-    readonly attribute DOMString name;
+    readonly attribute USVString name;
     readonly attribute DirectoryEntry root;
 };
 </pre>
