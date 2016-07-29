@@ -1110,5 +1110,5 @@ Ali Alabbas,
 Philip Jägenstedt,
 Marijn Kruisselbrink,
 and
-smaug&#45;&#45;&#45;&#45;
+Olli Pettay
 for suggestions, reviews, and other feedback.
