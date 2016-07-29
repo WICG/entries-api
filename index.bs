@@ -123,8 +123,8 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
 <div class=note>
   In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em>
-  that does not exist as an entity in the actual file system backing
-  the interaction with the API.
+  that does not exist as an entity in the actual native file system
+  backing the interaction with the API.
 </div>
 
 A <dfn>filesystem</dfn> consists of a <dfn for=filesystem>name</dfn>
@@ -133,6 +133,13 @@ directory=]. The [=filesystem/name=] of a [=/filesystem=] is a
 {{DOMString}} which is implementation defined but is unique to the
 [=/filesystem=]. A [=root directory=] is associated with exactly one
 [=/filesystem=].
+
+<div class=note>
+  Implementations may produce a [=filesystem/name=] by generating a
+  UUID for each [=/filesystem=] instance with some fixed prefix and
+  suffix strings applied. Authors using the API should not make
+  assumptions about the structure or content of the names.
+</div>
 
 
 <!-- ============================================================ -->
@@ -150,9 +157,9 @@ directory=].
 
 <div class=note>
   [=Entries=] are defined in terms of [=paths=] relative to a [=root
-  directory=] to account for the fact that a file system backing the
-  interaction with the API may be modified asynchronously during
-  operations such as enumerating the contents of a directory.
+  directory=] to account for the fact that a native file system
+  backing the interaction with the API may be modified asynchronously
+  during operations such as enumerating the contents of a directory.
   Operations exposed on [=entries=] may produce errors in such cases
   where the [=paths=] no longer reference the same entity.
 </div>
@@ -872,6 +879,8 @@ callback interface EntriesCallback {
 };
 </pre>
 
+A {{DirectoryReader}} has an associated [=directory reader=].
+
 The <dfn method for="DirectoryEntry">readEntries(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
 steps:
@@ -1085,6 +1094,8 @@ interface DOMFileSystem {
     readonly attribute DirectoryEntry root;
 };
 </pre>
+
+A {{DOMFileSystem}} has an associated [=/filesystem=].
 
 The {{DOMFileSystem/name}} attribute of the {{DOMFileSystem}}
 interface must return the [=filesystem/name=] of the [=/filesystem=].

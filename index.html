@@ -1542,22 +1542,26 @@ a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</
    <div class="issue" id="issue-e0fa4438"><a class="self-link" href="#issue-e0fa4438"></a> EDITORIAL:
   Should <a data-link-type="dfn" href="#directory" id="ref-for-directory-7">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file" id="ref-for-file-3">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? </div>
    <div class="note" role="note"> In most cases, the files and directories selected by the user will
-  be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual file system backing
-  the interaction with the API. </div>
+  be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual native file system
+  backing the interaction with the API. </div>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="filesystem">filesystem</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
 directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
+   <div class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> by generating a
+  UUID for each <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> instance with some fixed prefix and
+  suffix strings applied. Authors using the API should not make
+  assumptions about the structure or content of the names. </div>
    <h3 class="heading settled" data-level="2.3" id="entries"><span class="secno">2.3. </span><span class="content">Entries</span><a class="self-link" href="#entries"></a></h3>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="entry-concept">entry</dfn> is either a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-entry">file entry</dfn> or a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-entry">directory entry</dfn>.</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-1">entry</a> has an <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-6">name</a>) and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="full-path">full path</dfn> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-2">absolute path</a>).</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-root">root</dfn>, which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root
 directory</a>.</p>
    <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-6">root
-  directory</a> to account for the fact that a file system backing the
-  interaction with the API may be modified asynchronously during
-  operations such as enumerating the contents of a directory.
+  directory</a> to account for the fact that a native file system
+  backing the interaction with the API may be modified asynchronously
+  during operations such as enumerating the contents of a directory.
   Operations exposed on <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-4">entries</a> may produce errors in such cases
   where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </div>
-   <p>The <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-filesystem">filesystem</dfn> of an <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-5">entry</a> is the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> associated with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-6">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-1">root</a>.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-filesystem">filesystem</dfn> of an <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-5">entry</a> is the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-5">filesystem</a> associated with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-6">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-1">root</a>.</p>
    <h3 class="heading settled" data-level="2.4" id="dir-reader"><span class="secno">2.4. </span><span class="content">Directory Reader</span><a class="self-link" href="#dir-reader"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-reader">directory reader</dfn> consists of an associated <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-1">directory
 entry</a>, an associated <a data-link-type="dfn" href="#directory" id="ref-for-directory-8">directory</a> (initially null), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="reading flag" data-noexport="" id="reading-flag">reading
@@ -2051,31 +2055,32 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntriesCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entries)" id="dom-entriescallback-handleevent">handleEvent<a class="self-link" href="#dom-entriescallback-handleevent"></a></dfn>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-15">Entry</a>> <dfn class="nv idl-code" data-dfn-for="EntriesCallback/handleEvent(entries)" data-dfn-type="argument" data-export="" id="dom-entriescallback-handleevent-entries-entries">entries<a class="self-link" href="#dom-entriescallback-handleevent-entries-entries"></a></dfn>);
 };
 </pre>
+   <p>A <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> has an associated <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-2">directory reader</a>.</p>
    <p>The <dfn class="idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)" id="dom-directoryentry-readentries">readEntries(<var>successCallback</var>, <var>errorCallback</var>)<a class="self-link" href="#dom-directoryentry-readentries"></a></dfn> method, when invoked, must run the following
 steps:</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-2">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-1">reading flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-3">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-1">reading flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
 task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> with an
 "<code class="idl"><a data-link-type="idl" href="#exceptiondef-invalidstateerror" id="ref-for-exceptiondef-invalidstateerror-1">InvalidStateError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-8">file error</a>, and terminate these steps.</p>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-3">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-1">reader error</a> is not null, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-4">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-1">reader error</a> is not null, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue
 a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given)
 with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-2">reader error</a>, and terminate these steps.</p>
      <li data-md="">
-      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-4">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-1">done flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
+      <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-5">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-1">done flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
 task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>successCallback</var> with an empty
 sequence and terminate these steps.</p>
      <li data-md="">
-      <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-5">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-2">reading flag</a>.</p>
+      <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-6">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-2">reading flag</a>.</p>
      <li data-md="">
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to perform the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>Clear the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-6">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-3">reading flag</a>.</p>
+        <p>Clear the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-7">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-3">reading flag</a>.</p>
        <li data-md="">
-        <p>Let <var>dir</var> be the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-7">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-14">directory</a>.</p>
+        <p>Let <var>dir</var> be the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-8">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-14">directory</a>.</p>
        <li data-md="">
         <p>If <var>dir</var> is null, run these substeps:</p>
         <ol>
@@ -2083,20 +2088,20 @@ sequence and terminate these steps.</p>
           <p>Let <var>dir</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-4">evaluate
 a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-19">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
          <li data-md="">
-          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-8">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file
+          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file
 error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if
 given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-4">reader error</a>, and terminate these steps.</p>
          <li data-md="">
-          <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-15">directory</a> to <var>dir</var>.</p>
+          <p>Set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-10">directory reader</a>'s <a data-link-type="dfn" href="#directory" id="ref-for-directory-15">directory</a> to <var>dir</var>.</p>
         </ol>
        <li data-md="">
-        <p>Let <var>entries</var> be a non-zero number of entries from the <var>dir</var> that have not yet been produced by this <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-10">directory reader</a>, if any.</p>
+        <p>Let <var>entries</var> be a non-zero number of entries from the <var>dir</var> that have not yet been produced by this <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-11">directory reader</a>, if any.</p>
        <li data-md="">
         <p>If the previous step failed (for example, the <a data-link-type="dfn" href="#directory" id="ref-for-directory-16">directory</a> was
-deleted or permission is denied), then set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-11">directory
+deleted or permission is denied), then set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-12">directory
 reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-5">reader error</a> to an appropriate <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-10">file error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-6">reader error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>entries</var> is empty, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-12">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2">done
+        <p>If <var>entries</var> is empty, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-13">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2">done
 flag</a>.</p>
        <li data-md="">
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with <var>entries</var>.</p>
@@ -2130,7 +2135,7 @@ flag</a>.</p>
 </pre>
    </div>
    <div class="example" id="example-9181c2df">
-    <a class="self-link" href="#example-9181c2df"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-4">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
+    <a class="self-link" href="#example-9181c2df"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-5">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
@@ -2151,7 +2156,7 @@ flag</a>.</p>
 </pre>
    </div>
    <div class="example" id="example-1d8582b3">
-    <a class="self-link" href="#example-1d8582b3"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-5">DirectoryReader</a></code> for use with <a href="https://github.com/zenparsing/es-observable">Observables</a>: 
+    <a class="self-link" href="#example-1d8582b3"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-6">DirectoryReader</a></code> for use with <a href="https://github.com/zenparsing/es-observable">Observables</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsObservable</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nx">Observable</span><span class="p">(</span><span class="nx">observer</span> <span class="o">=></span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">dirEntry</span><span class="p">.</span><span class="nx">createReader</span><span class="p">();</span>
@@ -2232,8 +2237,9 @@ error</a>, and terminate these steps.</p>
     <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry" id="ref-for-directoryentry-5">DirectoryEntry</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DirectoryEntry" id="dom-domfilesystem-root">root</dfn>;
 };
 </pre>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-name" id="ref-for-dom-domfilesystem-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-3">DOMFileSystem</a></code> interface must return the <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-5">filesystem</a>.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-root" id="ref-for-dom-domfilesystem-root-1">root</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-4">DOMFileSystem</a></code> interface must return a <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-6">DirectoryEntry</a></code> associated with the <a data-link-type="dfn" href="#filesystem-root" id="ref-for-filesystem-root-1">root</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-6">filesystem</a>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-3">DOMFileSystem</a></code> has an associated <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-6">filesystem</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-name" id="ref-for-dom-domfilesystem-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-4">DOMFileSystem</a></code> interface must return the <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-3">name</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-7">filesystem</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-root" id="ref-for-dom-domfilesystem-root-1">root</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-5">DOMFileSystem</a></code> interface must return a <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-6">DirectoryEntry</a></code> associated with the <a data-link-type="dfn" href="#filesystem-root" id="ref-for-filesystem-root-1">root</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-8">filesystem</a>.</p>
    <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>This specification is based heavily on the work of Eric Uhrhane in <a data-link-type="biblio" href="#biblio-file-system-api">[file-system-api]</a>, which introduced the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-17">Entry</a></code> types.</p>
    <p>Thanks to Tab Atkins, Jr. for creating and maintaining <a href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
@@ -2805,16 +2811,16 @@ for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="filesystem">
    <b><a href="#filesystem">#filesystem</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-filesystem-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-2">(2)</a> <a href="#ref-for-filesystem-3">(3)</a>
-    <li><a href="#ref-for-filesystem-4">2.3. Entries</a>
-    <li><a href="#ref-for-filesystem-5">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-filesystem-6">(2)</a>
+    <li><a href="#ref-for-filesystem-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-2">(2)</a> <a href="#ref-for-filesystem-3">(3)</a> <a href="#ref-for-filesystem-4">(4)</a>
+    <li><a href="#ref-for-filesystem-5">2.3. Entries</a>
+    <li><a href="#ref-for-filesystem-6">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-filesystem-7">(2)</a> <a href="#ref-for-filesystem-8">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="filesystem-name">
    <b><a href="#filesystem-name">#filesystem-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-filesystem-name-1">2.2. Files and Directories</a>
-    <li><a href="#ref-for-filesystem-name-2">6.6. The DOMFileSystem Interface</a>
+    <li><a href="#ref-for-filesystem-name-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-name-2">(2)</a>
+    <li><a href="#ref-for-filesystem-name-3">6.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="filesystem-root">
@@ -2886,7 +2892,7 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#directory-reader">#directory-reader</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-directory-reader-1">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-directory-reader-2">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-reader-3">(2)</a> <a href="#ref-for-directory-reader-4">(3)</a> <a href="#ref-for-directory-reader-5">(4)</a> <a href="#ref-for-directory-reader-6">(5)</a> <a href="#ref-for-directory-reader-7">(6)</a> <a href="#ref-for-directory-reader-8">(7)</a> <a href="#ref-for-directory-reader-9">(8)</a> <a href="#ref-for-directory-reader-10">(9)</a> <a href="#ref-for-directory-reader-11">(10)</a> <a href="#ref-for-directory-reader-12">(11)</a>
+    <li><a href="#ref-for-directory-reader-2">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directory-reader-3">(2)</a> <a href="#ref-for-directory-reader-4">(3)</a> <a href="#ref-for-directory-reader-5">(4)</a> <a href="#ref-for-directory-reader-6">(5)</a> <a href="#ref-for-directory-reader-7">(6)</a> <a href="#ref-for-directory-reader-8">(7)</a> <a href="#ref-for-directory-reader-9">(8)</a> <a href="#ref-for-directory-reader-10">(9)</a> <a href="#ref-for-directory-reader-11">(10)</a> <a href="#ref-for-directory-reader-12">(11)</a> <a href="#ref-for-directory-reader-13">(12)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="reading-flag">
@@ -3157,7 +3163,7 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#directoryreader">#directoryreader</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-directoryreader-1">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryreader-2">(2)</a>
-    <li><a href="#ref-for-directoryreader-3">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a> <a href="#ref-for-directoryreader-5">(3)</a>
+    <li><a href="#ref-for-directoryreader-3">6.4. The DirectoryReader Interface</a> <a href="#ref-for-directoryreader-4">(2)</a> <a href="#ref-for-directoryreader-5">(3)</a> <a href="#ref-for-directoryreader-6">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-entriescallback">
@@ -3189,7 +3195,7 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#domfilesystem">#domfilesystem</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-domfilesystem-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-domfilesystem-2">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-domfilesystem-3">(2)</a> <a href="#ref-for-domfilesystem-4">(3)</a>
+    <li><a href="#ref-for-domfilesystem-2">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-domfilesystem-3">(2)</a> <a href="#ref-for-domfilesystem-4">(3)</a> <a href="#ref-for-domfilesystem-5">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-domfilesystem-name">
