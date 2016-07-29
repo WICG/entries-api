@@ -1416,7 +1416,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-28">28 July 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-29">29 July 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1476,6 +1476,7 @@ traversal, and extends <code class="idl"><a data-link-type="idl" href="https://h
       <li><a href="#api-directoryentry"><span class="secno">6.3</span> <span class="content">The <code class="idl"><span>DirectoryEntry</span></code> Interface</span></a>
       <li><a href="#api-directoryreader"><span class="secno">6.4</span> <span class="content">The <code class="idl"><span>DirectoryReader</span></code> Interface</span></a>
       <li><a href="#api-fileentry"><span class="secno">6.5</span> <span class="content">The <code class="idl"><span>FileEntry</span></code> Interface</span></a>
+      <li><a href="#api-domfilesystem"><span class="secno">6.6</span> <span class="content">The <code class="idl"><span>DOMFileSystem</span></code> Interface</span></a>
      </ol>
     <li><a href="#acknowledgements"><span class="secno">7</span> <span class="content">Acknowledgements</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1543,17 +1544,20 @@ a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</
    <div class="note" role="note"> In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual file system backing
   the interaction with the API. </div>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="filesystem">filesystem</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
+directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
    <h3 class="heading settled" data-level="2.3" id="entries"><span class="secno">2.3. </span><span class="content">Entries</span><a class="self-link" href="#entries"></a></h3>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="entry-concept">entry</dfn> is either a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-entry">file entry</dfn> or a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-entry">directory entry</dfn>.</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-1">entry</a> has an <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-6">name</a>) and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="full-path">full path</dfn> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-2">absolute path</a>).</p>
-   <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root">root</dfn>, which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
+   <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-root">root</dfn>, which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root
 directory</a>.</p>
-   <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root
+   <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-6">root
   directory</a> to account for the fact that a file system backing the
   interaction with the API may be modified asynchronously during
   operations such as enumerating the contents of a directory.
   Operations exposed on <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-4">entries</a> may produce errors in such cases
   where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </div>
+   <p>The <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-filesystem">filesystem</dfn> of an <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-5">entry</a> is the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> associated with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-6">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-1">root</a>.</p>
    <h3 class="heading settled" data-level="2.4" id="dir-reader"><span class="secno">2.4. </span><span class="content">Directory Reader</span><a class="self-link" href="#dir-reader"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-reader">directory reader</dfn> consists of an associated <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-1">directory
 entry</a>, an associated <a data-link-type="dfn" href="#directory" id="ref-for-directory-8">directory</a> (initially null), a <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="reading flag" data-noexport="" id="reading-flag">reading
@@ -1588,7 +1592,7 @@ which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolu
       <p>Return <var>abspath segments</var> joined by '/' (U+002F SOLIDUS).</p>
     </ol>
    </div>
-   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="evaluate-a-path">evaluate a path</dfn> with <var>directory</var> (an <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root directory</a>)
+   <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="evaluate-a-path">evaluate a path</dfn> with <var>directory</var> (an <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-7">root directory</a>)
 and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-6">absolute path</a>), run the following steps which
 return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a data-link-type="dfn" href="#directory" id="ref-for-directory-9">directory</a>, or <em>failure</em>.</p>
    <div class="algorithm">
@@ -1677,7 +1681,7 @@ return null.</p>
    <h2 class="heading settled" data-level="5" id="api-data"><span class="secno">5. </span><span class="content">Data Transfer</span><a class="self-link" href="#api-data"></a></h2>
    <div class="issue" id="issue-325fe5120"><a class="self-link" href="#issue-325fe5120"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </div>
-   <p>During a <em>drag-and-drop operation</em>, <a data-link-type="dfn" href="#file" id="ref-for-file-6">file</a> and <a data-link-type="dfn" href="#directory" id="ref-for-directory-10">directory</a> items are associated with <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-5">entries</a>. Each <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-6">entry</a> is a member of a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-6">root directory</a> unique to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>.</p>
+   <p>During a <em>drag-and-drop operation</em>, <a data-link-type="dfn" href="#file" id="ref-for-file-6">file</a> and <a data-link-type="dfn" href="#directory" id="ref-for-directory-10">directory</a> items are associated with <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-7">entries</a>. Each <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a> is a member of a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-8">root directory</a> unique to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>.</p>
    <p>Additionally, each <a data-link-type="dfn" href="#directory" id="ref-for-directory-11">directory</a> item is represented in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag
 data store item list</a> as a <i>File</i>. If it is accessed via <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/interaction.html#dom-datatransferitem-getasfile">getAsFile()</a></code> a zero-length <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is returned.</p>
    <div class="note" role="note"> A user agent may represent any hierarchical data as files and
@@ -1700,7 +1704,7 @@ steps.</p>
       <p>If the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#the-drag-data-item-kind">drag data item kind</a> is not <em>File</em>, then return
 null and abort these steps.</p>
      <li data-md="">
-      <p>Return a new <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-4">Entry</a></code> object representing the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-7">entry</a>.</p>
+      <p>Return a new <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-4">Entry</a></code> object representing the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a>.</p>
     </ol>
    </div>
    <div class="example" id="example-35b3062c">
@@ -1860,6 +1864,7 @@ error asynchronously.</p>
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-entry-isdirectory">isDirectory</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-entry-name">name</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-entry-fullpath">fullPath</dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#domfilesystem" id="ref-for-domfilesystem-1">DOMFileSystem</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMFileSystem" id="dom-entry-filesystem">filesystem</dfn>;
 
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-1">getParent</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback" id="ref-for-callbackdef-entrycallback-1">EntryCallback</a> <dfn class="nv idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-successcallback"></a></dfn>,
                    <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-2">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback"></a></dfn>);
@@ -1870,13 +1875,18 @@ error asynchronously.</p>
   on these in Chrome, hiding the types from the global namespace. Is
   it web-compatible to remove it, and simply expose these types in the
   global namespace as is done for most web APIs? </div>
-   <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a>.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return true
-if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isdirectory" id="ref-for-dom-entry-isdirectory-1">isDirectory</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-8">Entry</a></code> interface must return
-true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-2">directory entry</a> and false otherwise.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-name" id="ref-for-dom-entry-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-9">Entry</a></code> interface must return the <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-1">name</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-11">entry</a>.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-fullpath" id="ref-for-dom-entry-fullpath-1">fullPath</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-10">Entry</a></code> interface must return the <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-1">full path</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-12">entry</a>.</p>
+   <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return
+true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-11">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isdirectory" id="ref-for-dom-entry-isdirectory-1">isDirectory</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-8">Entry</a></code> interface must
+return true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-12">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-2">directory entry</a> and false
+otherwise.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-name" id="ref-for-dom-entry-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-9">Entry</a></code> interface must return
+the <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-1">name</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-13">entry</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-fullpath" id="ref-for-dom-entry-fullpath-1">fullPath</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-10">Entry</a></code> interface must
+return the <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-1">full path</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-14">entry</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-filesystem" id="ref-for-dom-entry-filesystem-1">filesystem</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-11">Entry</a></code> interface must
+return the <a data-link-type="dfn" href="#entry-filesystem" id="ref-for-entry-filesystem-1">filesystem</a> of the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-15">entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="method" data-export="" data-lt="getParent(successCallback, errorCallback)|getParent(successCallback)|getParent()" id="dom-entry-getparent">getParent(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following
 steps:</p>
    <div class="algorithm">
@@ -1885,23 +1895,23 @@ steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to perform the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-1">resolve a relative path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-13">entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-2">full path</a> and '..'.</p>
+        <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-1">resolve a
+relative path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-16">entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-2">full path</a> and '..'.</p>
        <li data-md="">
-        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-1">evaluate a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-14">entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-1">root</a> and <var>path</var>.</p>
+        <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-1">evaluate a
+path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-17">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-2">root</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the
-callback</a> <var>errorCallback</var> (if given) with a
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-1">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-1">file error</a>, and
-terminate these steps.</p>
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-1">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-1">file
+error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-3">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-1">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-2">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-3">full path</a>.</p>
+        <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-3">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-1">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-2">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-3">full
+path</a>.</p>
        <li data-md="">
-        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a
-new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-1">DirectoryEntry</a></code> object associated with <var>entry</var>.</p>
+        <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-1">DirectoryEntry</a></code> object associated with <var>entry</var>.</p>
       </ol>
     </ol>
    </div>
-   <div class="note" role="note"> An error is possible if files have been modified on disk since the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-11">Entry</a></code> was created. </div>
+   <div class="note" role="note"> An error is possible if files have been modified on disk since the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-12">Entry</a></code> was created. </div>
    <div class="example" id="example-3243f15a">
     <a class="self-link" href="#example-3243f15a"></a> Handling an entry: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">handleEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
@@ -1926,7 +1936,7 @@ new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for
    </div>
    <h3 class="heading settled" data-level="6.3" id="api-directoryentry"><span class="secno">6.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-2">DirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-12">Entry</a> {
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader" id="ref-for-directoryreader-1">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader" id="ref-for-dom-directoryentry-createreader-1">createReader</a>();
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-1">getFile</a>(<span class="kt">USVString</span> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-path">path<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-path"></a></dfn>,
                  <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-flags" id="ref-for-dictdef-flags-1">Flags</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-options">options<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-options"></a></dfn>,
@@ -1941,10 +1951,10 @@ new <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for
 <span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-flags">Flags</dfn> {};
 
 <span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entrycallback">EntryCallback</dfn> {
-    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntryCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entry)" id="dom-entrycallback-handleevent">handleEvent<a class="self-link" href="#dom-entrycallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> <dfn class="nv idl-code" data-dfn-for="EntryCallback/handleEvent(entry)" data-dfn-type="argument" data-export="" id="dom-entrycallback-handleevent-entry-entry">entry<a class="self-link" href="#dom-entrycallback-handleevent-entry-entry"></a></dfn>);
+    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntryCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entry)" id="dom-entrycallback-handleevent">handleEvent<a class="self-link" href="#dom-entrycallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-14">Entry</a> <dfn class="nv idl-code" data-dfn-for="EntryCallback/handleEvent(entry)" data-dfn-type="argument" data-export="" id="dom-entrycallback-handleevent-entry-entry">entry<a class="self-link" href="#dom-entrycallback-handleevent-entry-entry"></a></dfn>);
 };
 </pre>
-   <p>A <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-3">DirectoryEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-15">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-4">directory entry</a>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-3">DirectoryEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-18">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-4">directory entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" id="dom-directoryentry-createreader">createReader()</dfn> method, when
 invoked, must run the following steps:</p>
    <div class="algorithm">
@@ -1969,7 +1979,7 @@ run the following steps:</p>
 relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-6">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-4">full path</a> and <var>path</var>.</p>
        <li data-md="">
         <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-2">evaluate a
-path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-7">directory entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-2">root</a> and <var>path</var>.</p>
+path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-7">directory entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-3">root</a> and <var>path</var>.</p>
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-2">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file
 error</a>, and terminate these steps.</p>
@@ -1997,7 +2007,7 @@ run the following steps:</p>
 relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-8">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-6">full path</a> and <var>path</var>.</p>
        <li data-md="">
         <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-3">evaluate a
-path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-9">directory entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-3">root</a> and <var>path</var>.</p>
+path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-9">directory entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-4">root</a> and <var>path</var>.</p>
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-3">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file
 error</a>, and terminate these steps.</p>
@@ -2038,7 +2048,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-5">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 <span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entriescallback">EntriesCallback</dfn> {
-    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntriesCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entries)" id="dom-entriescallback-handleevent">handleEvent<a class="self-link" href="#dom-entriescallback-handleevent"></a></dfn>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-14">Entry</a>> <dfn class="nv idl-code" data-dfn-for="EntriesCallback/handleEvent(entries)" data-dfn-type="argument" data-export="" id="dom-entriescallback-handleevent-entries-entries">entries<a class="self-link" href="#dom-entriescallback-handleevent-entries-entries"></a></dfn>);
+    <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntriesCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entries)" id="dom-entriescallback-handleevent">handleEvent<a class="self-link" href="#dom-entriescallback-handleevent"></a></dfn>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-15">Entry</a>> <dfn class="nv idl-code" data-dfn-for="EntriesCallback/handleEvent(entries)" data-dfn-type="argument" data-export="" id="dom-entriescallback-handleevent-entries-entries">entries<a class="self-link" href="#dom-entriescallback-handleevent-entries-entries"></a></dfn>);
 };
 </pre>
    <p>The <dfn class="idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)" id="dom-directoryentry-readentries">readEntries(<var>successCallback</var>, <var>errorCallback</var>)<a class="self-link" href="#dom-directoryentry-readentries"></a></dfn> method, when invoked, must run the following
@@ -2071,7 +2081,7 @@ sequence and terminate these steps.</p>
         <ol>
          <li data-md="">
           <p>Let <var>dir</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-4">evaluate
-a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-16">entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-4">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
+a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-19">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
          <li data-md="">
           <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-8">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file
 error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if
@@ -2162,7 +2172,7 @@ flag</a>.</p>
    </div>
    <h3 class="heading settled" data-level="6.5" id="api-fileentry"><span class="secno">6.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileentry">FileEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-15">Entry</a> {
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileentry">FileEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-16">Entry</a> {
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-1">file</a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback-1">FileCallback</a> <dfn class="nv idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
               <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-6">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
@@ -2170,7 +2180,7 @@ flag</a>.</p>
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="FileCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(file)" id="dom-filecallback-handleevent">handleEvent<a class="self-link" href="#dom-filecallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <dfn class="nv idl-code" data-dfn-for="FileCallback/handleEvent(file)" data-dfn-type="argument" data-export="" id="dom-filecallback-handleevent-file-file">file<a class="self-link" href="#dom-filecallback-handleevent-file-file"></a></dfn>);
 };
 </pre>
-   <p>A <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-3">FileEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-17">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-3">file entry</a>.</p>
+   <p>A <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-3">FileEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-20">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-3">file entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileEntry" data-dfn-type="method" data-export="" data-lt="file(successCallback, errorCallback)|file(successCallback)" id="dom-fileentry-file">file(<var>successCallback</var>, <var>errorCallback</var>)</dfn> method, when invoked, must run the following
 steps:</p>
    <div class="algorithm">
@@ -2180,7 +2190,8 @@ steps:</p>
       <ol>
        <li data-md="">
         <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-5">evaluate a
-path</a> with the <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-4">file entry</a>'s <a data-link-type="dfn" href="#root" id="ref-for-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-9">full path</a>.</p>
+path</a> with the <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-4">file entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-6">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-9">full
+path</a>.</p>
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-6">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-11">file
 error</a>, and terminate these steps.</p>
@@ -2214,8 +2225,17 @@ error</a>, and terminate these steps.</p>
 <span class="p">}</span>
 </pre>
    </div>
+   <h3 class="heading settled" data-level="6.6" id="api-domfilesystem"><span class="secno">6.6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-2">DOMFileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="domfilesystem">DOMFileSystem</dfn> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DOMString" id="dom-domfilesystem-name">name</dfn>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry" id="ref-for-directoryentry-5">DirectoryEntry</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DirectoryEntry" id="dom-domfilesystem-root">root</dfn>;
+};
+</pre>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-name" id="ref-for-dom-domfilesystem-name-1">name</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-3">DOMFileSystem</a></code> interface must return the <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-5">filesystem</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-domfilesystem-root" id="ref-for-dom-domfilesystem-root-1">root</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-4">DOMFileSystem</a></code> interface must return a <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-6">DirectoryEntry</a></code> associated with the <a data-link-type="dfn" href="#filesystem-root" id="ref-for-filesystem-root-1">root</a> of the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-6">filesystem</a>.</p>
    <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
-   <p>This specification is based heavily on the work of Eric Uhrhane in <a data-link-type="biblio" href="#biblio-file-system-api">[file-system-api]</a>, which introduced the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-16">Entry</a></code> types.</p>
+   <p>This specification is based heavily on the work of Eric Uhrhane in <a data-link-type="biblio" href="#biblio-file-system-api">[file-system-api]</a>, which introduced the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-17">Entry</a></code> types.</p>
    <p>Thanks to Tab Atkins, Jr. for creating and maintaining <a href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
 specification authoring tool used to create this document.</p>
    <p>And thanks to
@@ -2383,6 +2403,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <li><a href="#directoryentry">DirectoryEntry</a><span>, in §6.3</span>
    <li><a href="#directoryreader">DirectoryReader</a><span>, in §6.4</span>
    <li><a href="#directory-reader">directory reader</a><span>, in §2.4</span>
+   <li><a href="#domfilesystem">DOMFileSystem</a><span>, in §6.6</span>
    <li><a href="#done-flag">done flag</a><span>, in §2.4</span>
    <li><a href="#dom-fileerror-encoding_err">ENCODING_ERR</a><span>, in §6.1</span>
    <li><a href="#exceptiondef-encodingerror">EncodingError</a><span>, in §6.1</span>
@@ -2400,6 +2421,13 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <li><a href="#fileerror">FileError</a><span>, in §6.1</span>
    <li><a href="#dom-fileentry-file">file(successCallback)</a><span>, in §6.5</span>
    <li><a href="#dom-fileentry-file">file(successCallback, errorCallback)</a><span>, in §6.5</span>
+   <li>
+    filesystem
+    <ul>
+     <li><a href="#filesystem">definition of</a><span>, in §2.2</span>
+     <li><a href="#entry-filesystem">dfn for entry</a><span>, in §2.3</span>
+     <li><a href="#dom-entry-filesystem">attribute for Entry</a><span>, in §6.2</span>
+    </ul>
    <li><a href="#dictdef-flags">Flags</a><span>, in §6.3</span>
    <li><a href="#full-path">full path</a><span>, in §2.3</span>
    <li><a href="#dom-entry-fullpath">fullPath</a><span>, in §6.2</span>
@@ -2430,8 +2458,10 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
      <li><a href="#name">definition of</a><span>, in §2.1</span>
      <li><a href="#file-name">dfn for file</a><span>, in §2.2</span>
      <li><a href="#directory-name">dfn for directory</a><span>, in §2.2</span>
+     <li><a href="#filesystem-name">dfn for filesystem</a><span>, in §2.2</span>
      <li><a href="#entry-name">dfn for entry</a><span>, in §2.3</span>
      <li><a href="#dom-entry-name">attribute for Entry</a><span>, in §6.2</span>
+     <li><a href="#dom-domfilesystem-name">attribute for DOMFileSystem</a><span>, in §6.6</span>
     </ul>
    <li><a href="#dom-fileerror-no_modification_allowed_err">NO_MODIFICATION_ALLOWED_ERR</a><span>, in §6.1</span>
    <li><a href="#exceptiondef-nomodificationallowederror">NoModificationAllowedError</a><span>, in §6.1</span>
@@ -2457,7 +2487,13 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <li><a href="#reading-flag">reading flag</a><span>, in §2.4</span>
    <li><a href="#relative-path">relative path</a><span>, in §2.1</span>
    <li><a href="#resolve-a-relative-path">resolve a relative path</a><span>, in §3</span>
-   <li><a href="#root">root</a><span>, in §2.3</span>
+   <li>
+    root
+    <ul>
+     <li><a href="#filesystem-root">dfn for filesystem</a><span>, in §2.2</span>
+     <li><a href="#entry-root">dfn for entry</a><span>, in §2.3</span>
+     <li><a href="#dom-domfilesystem-root">attribute for DOMFileSystem</a><span>, in §6.6</span>
+    </ul>
    <li><a href="#root-directory">root directory</a><span>, in §2.2</span>
    <li><a href="#dom-fileerror-security_err">SECURITY_ERR</a><span>, in §6.1</span>
    <li><a href="#exceptiondef-securityerror">SecurityError</a><span>, in §6.1</span>
@@ -2511,6 +2547,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <a data-link-type="biblio">[WebIDL-1]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-DOMString">DOMString</a>
      <li><a href="https://heycam.github.io/webidl/#dom-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a>
@@ -2578,6 +2615,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv" data-readonly="" data-type="boolean" href="#dom-entry-isdirectory">isDirectory</a>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <a class="nv" data-readonly="" data-type="USVString" href="#dom-entry-name">name</a>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <a class="nv" data-readonly="" data-type="USVString" href="#dom-entry-fullpath">fullPath</a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#domfilesystem">DOMFileSystem</a> <a class="nv" data-readonly="" data-type="DOMFileSystem" href="#dom-entry-filesystem">filesystem</a>;
 
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-entry-getparent">getParent</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback">EntryCallback</a> <a class="nv" href="#dom-entry-getparent-successcallback-errorcallback-successcallback">successCallback</a>,
                    <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback</a>);
@@ -2618,6 +2656,12 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
 };
 <span class="kt">callback</span> <span class="kt">interface</span> <a class="nv" href="#callbackdef-filecallback">FileCallback</a> {
     <span class="kt">void</span> <a class="nv" href="#dom-filecallback-handleevent">handleEvent</a>(<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <a class="nv" href="#dom-filecallback-handleevent-file-file">file</a>);
+};
+
+[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<span class="kt">interface</span> <a class="nv" href="#domfilesystem">DOMFileSystem</a> {
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">DOMString</span> <a class="nv" data-readonly="" data-type="DOMString" href="#dom-domfilesystem-name">name</a>;
+    <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry">DirectoryEntry</a> <a class="nv" data-readonly="" data-type="DirectoryEntry" href="#dom-domfilesystem-root">root</a>;
 };
 
 </pre>
@@ -2743,10 +2787,10 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="root-directory">
    <b><a href="#root-directory">#root-directory</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-root-directory-1">2.2. Files and Directories</a> <a href="#ref-for-root-directory-2">(2)</a>
-    <li><a href="#ref-for-root-directory-3">2.3. Entries</a> <a href="#ref-for-root-directory-4">(2)</a>
-    <li><a href="#ref-for-root-directory-5">3. Algorithms</a>
-    <li><a href="#ref-for-root-directory-6">5. Data Transfer</a>
+    <li><a href="#ref-for-root-directory-1">2.2. Files and Directories</a> <a href="#ref-for-root-directory-2">(2)</a> <a href="#ref-for-root-directory-3">(3)</a> <a href="#ref-for-root-directory-4">(4)</a>
+    <li><a href="#ref-for-root-directory-5">2.3. Entries</a> <a href="#ref-for-root-directory-6">(2)</a>
+    <li><a href="#ref-for-root-directory-7">3. Algorithms</a>
+    <li><a href="#ref-for-root-directory-8">5. Data Transfer</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="parent">
@@ -2756,15 +2800,36 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-parent-2">3. Algorithms</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="filesystem">
+   <b><a href="#filesystem">#filesystem</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-filesystem-1">2.2. Files and Directories</a> <a href="#ref-for-filesystem-2">(2)</a> <a href="#ref-for-filesystem-3">(3)</a>
+    <li><a href="#ref-for-filesystem-4">2.3. Entries</a>
+    <li><a href="#ref-for-filesystem-5">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-filesystem-6">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="filesystem-name">
+   <b><a href="#filesystem-name">#filesystem-name</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-filesystem-name-1">2.2. Files and Directories</a>
+    <li><a href="#ref-for-filesystem-name-2">6.6. The DOMFileSystem Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="filesystem-root">
+   <b><a href="#filesystem-root">#filesystem-root</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-filesystem-root-1">6.6. The DOMFileSystem Interface</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="entry-concept">
    <b><a href="#entry-concept">#entry-concept</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-entry-concept-1">2.3. Entries</a> <a href="#ref-for-entry-concept-2">(2)</a> <a href="#ref-for-entry-concept-3">(3)</a> <a href="#ref-for-entry-concept-4">(4)</a>
-    <li><a href="#ref-for-entry-concept-5">5. Data Transfer</a> <a href="#ref-for-entry-concept-6">(2)</a> <a href="#ref-for-entry-concept-7">(3)</a>
-    <li><a href="#ref-for-entry-concept-8">6.2. The Entry Interface</a> <a href="#ref-for-entry-concept-9">(2)</a> <a href="#ref-for-entry-concept-10">(3)</a> <a href="#ref-for-entry-concept-11">(4)</a> <a href="#ref-for-entry-concept-12">(5)</a> <a href="#ref-for-entry-concept-13">(6)</a> <a href="#ref-for-entry-concept-14">(7)</a>
-    <li><a href="#ref-for-entry-concept-15">6.3. The DirectoryEntry Interface</a>
-    <li><a href="#ref-for-entry-concept-16">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-entry-concept-17">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-concept-1">2.3. Entries</a> <a href="#ref-for-entry-concept-2">(2)</a> <a href="#ref-for-entry-concept-3">(3)</a> <a href="#ref-for-entry-concept-4">(4)</a> <a href="#ref-for-entry-concept-5">(5)</a> <a href="#ref-for-entry-concept-6">(6)</a>
+    <li><a href="#ref-for-entry-concept-7">5. Data Transfer</a> <a href="#ref-for-entry-concept-8">(2)</a> <a href="#ref-for-entry-concept-9">(3)</a>
+    <li><a href="#ref-for-entry-concept-10">6.2. The Entry Interface</a> <a href="#ref-for-entry-concept-11">(2)</a> <a href="#ref-for-entry-concept-12">(3)</a> <a href="#ref-for-entry-concept-13">(4)</a> <a href="#ref-for-entry-concept-14">(5)</a> <a href="#ref-for-entry-concept-15">(6)</a> <a href="#ref-for-entry-concept-16">(7)</a> <a href="#ref-for-entry-concept-17">(8)</a>
+    <li><a href="#ref-for-entry-concept-18">6.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-entry-concept-19">6.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-concept-20">6.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="file-entry">
@@ -2799,13 +2864,20 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-full-path-9">6.5. The FileEntry Interface</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="root">
-   <b><a href="#root">#root</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="entry-root">
+   <b><a href="#entry-root">#entry-root</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-root-1">6.2. The Entry Interface</a>
-    <li><a href="#ref-for-root-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-root-3">(2)</a>
-    <li><a href="#ref-for-root-4">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-root-5">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-root-1">2.3. Entries</a>
+    <li><a href="#ref-for-entry-root-2">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-entry-root-3">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-root-4">(2)</a>
+    <li><a href="#ref-for-entry-root-5">6.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-root-6">6.5. The FileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="entry-filesystem">
+   <b><a href="#entry-filesystem">#entry-filesystem</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-entry-filesystem-1">6.2. The Entry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="directory-reader">
@@ -2997,11 +3069,11 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-entry-1">4. HTML Forms</a> <a href="#ref-for-entry-2">(2)</a>
     <li><a href="#ref-for-entry-3">5. Data Transfer</a> <a href="#ref-for-entry-4">(2)</a>
-    <li><a href="#ref-for-entry-5">6.2. The Entry Interface</a> <a href="#ref-for-entry-6">(2)</a> <a href="#ref-for-entry-7">(3)</a> <a href="#ref-for-entry-8">(4)</a> <a href="#ref-for-entry-9">(5)</a> <a href="#ref-for-entry-10">(6)</a> <a href="#ref-for-entry-11">(7)</a>
-    <li><a href="#ref-for-entry-12">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-13">(2)</a>
-    <li><a href="#ref-for-entry-14">6.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-entry-15">6.5. The FileEntry Interface</a>
-    <li><a href="#ref-for-entry-16">7. Acknowledgements</a>
+    <li><a href="#ref-for-entry-5">6.2. The Entry Interface</a> <a href="#ref-for-entry-6">(2)</a> <a href="#ref-for-entry-7">(3)</a> <a href="#ref-for-entry-8">(4)</a> <a href="#ref-for-entry-9">(5)</a> <a href="#ref-for-entry-10">(6)</a> <a href="#ref-for-entry-11">(7)</a> <a href="#ref-for-entry-12">(8)</a>
+    <li><a href="#ref-for-entry-13">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-entry-14">(2)</a>
+    <li><a href="#ref-for-entry-15">6.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-entry-16">6.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-entry-17">7. Acknowledgements</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-entry-isfile">
@@ -3028,6 +3100,12 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-dom-entry-fullpath-1">6.2. The Entry Interface</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="dom-entry-filesystem">
+   <b><a href="#dom-entry-filesystem">#dom-entry-filesystem</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-entry-filesystem-1">6.2. The Entry Interface</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="dom-entry-getparent">
    <b><a href="#dom-entry-getparent">#dom-entry-getparent</a></b><b>Referenced in:</b>
    <ul>
@@ -3039,6 +3117,7 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-directoryentry-1">6.2. The Entry Interface</a>
     <li><a href="#ref-for-directoryentry-2">6.3. The DirectoryEntry Interface</a> <a href="#ref-for-directoryentry-3">(2)</a> <a href="#ref-for-directoryentry-4">(3)</a>
+    <li><a href="#ref-for-directoryentry-5">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-directoryentry-6">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-flags">
@@ -3102,6 +3181,25 @@ smaug--—<wbr>for suggestions, reviews, and other feedback.</p>
    <b><a href="#dom-fileentry-file">#dom-fileentry-file</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-fileentry-file-1">6.5. The FileEntry Interface</a> <a href="#ref-for-dom-fileentry-file-2">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="domfilesystem">
+   <b><a href="#domfilesystem">#domfilesystem</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-domfilesystem-1">6.2. The Entry Interface</a>
+    <li><a href="#ref-for-domfilesystem-2">6.6. The DOMFileSystem Interface</a> <a href="#ref-for-domfilesystem-3">(2)</a> <a href="#ref-for-domfilesystem-4">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-domfilesystem-name">
+   <b><a href="#dom-domfilesystem-name">#dom-domfilesystem-name</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-domfilesystem-name-1">6.6. The DOMFileSystem Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-domfilesystem-root">
+   <b><a href="#dom-domfilesystem-root">#dom-domfilesystem-root</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-domfilesystem-root-1">6.6. The DOMFileSystem Interface</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

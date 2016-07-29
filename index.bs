@@ -127,6 +127,14 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
   the interaction with the API.
 </div>
 
+A <dfn>filesystem</dfn> consists of a <dfn for=filesystem>name</dfn>
+and a <dfn for=filesystem>root</dfn> which is an associated [=root
+directory=]. The [=filesystem/name=] of a [=/filesystem=] is a
+{{DOMString}} which is implementation defined but is unique to the
+[=/filesystem=]. A [=root directory=] is associated with exactly one
+[=/filesystem=].
+
+
 <!-- ============================================================ -->
 <h3 id=entries>Entries</h3>
 <!-- ============================================================ -->
@@ -137,7 +145,7 @@ or a <dfn>directory entry</dfn>.
 An [=entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
 <dfn>full path</dfn> (an [=absolute path=]).
 
-An [=entry=] also has a <dfn>root</dfn>, which is an associated [=root
+An [=entry=] also has a <dfn for=entry>root</dfn>, which is an associated [=root
 directory=].
 
 <div class=note>
@@ -148,6 +156,9 @@ directory=].
   Operations exposed on [=entries=] may produce errors in such cases
   where the [=paths=] no longer reference the same entity.
 </div>
+
+The <dfn for=entry>filesystem</dfn> of an [=entry=] is the
+[=/filesystem=] associated with the [=entry=]'s [=entry/root=].
 
 <!-- ============================================================ -->
 <h3 id=dir-reader>Directory Reader</h3>
@@ -612,6 +623,7 @@ interface Entry {
     readonly attribute boolean isDirectory;
     readonly attribute USVString name;
     readonly attribute USVString fullPath;
+    readonly attribute DOMFileSystem filesystem;
 
     void getParent(optional EntryCallback successCallback,
                    optional ErrorCallback errorCallback);
@@ -628,17 +640,21 @@ interface Entry {
 
 An {{Entry}} has an associated [=entry=].
 
-The {{isFile}} attribute of the {{Entry}} interface must return true
-if the [=entry=] is a [=file entry=] and false otherwise.
+The {{Entry/isFile}} attribute of the {{Entry}} interface must return
+true if the [=entry=] is a [=file entry=] and false otherwise.
 
-The {{isDirectory}} attribute of the {{Entry}} interface must return
-true if the [=entry=] is a [=directory entry=] and false otherwise.
+The {{Entry/isDirectory}} attribute of the {{Entry}} interface must
+return true if the [=entry=] is a [=directory entry=] and false
+otherwise.
 
-The {{name}} attribute of the {{Entry}} interface must return the
-[=entry/name=] of the [=entry=].
+The {{Entry/name}} attribute of the {{Entry}} interface must return
+the [=entry/name=] of the [=entry=].
 
-The {{fullPath}} attribute of the {{Entry}} interface must return the
-[=full path=] of the [=entry=].
+The {{Entry/fullPath}} attribute of the {{Entry}} interface must
+return the [=full path=] of the [=entry=].
+
+The {{Entry/filesystem}} attribute of the {{Entry}} interface must
+return the [=entry/filesystem=] of the [=entry=].
 
 The <dfn method for=Entry>getParent(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
@@ -648,26 +664,22 @@ steps:
 
 1. [=Queue a task=] to perform the following substeps:
 
-    1. Let |path| be the result of running the steps to
-        [=resolve a relative path=] with the [=entry=]'s
-        [=full path=] and '..'.
+    1. Let |path| be the result of running the steps to [=resolve a
+        relative path=] with the [=entry=]'s [=full path=] and '..'.
 
-    2. Let |item| be the result of running the steps to
-        [=evaluate a path=] with the [=entry=]'s [=root=] and
-        |path|.
+    2. Let |item| be the result of running the steps to [=evaluate a
+        path=] with the [=entry=]'s [=entry/root=] and |path|.
 
-    3. If |item| is <em>failure</em>, [=invoke the
-        callback=] |errorCallback| (if given) with a
-        "{{NotFoundError}}" [=file error=], and
-        terminate these steps.
+    3. If |item| is <em>failure</em>, [=invoke the callback=]
+        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
+        error=], and terminate these steps.
 
-    4. Let |entry| be a new [=directory entry=] with
-        |item|'s [=directory/name=] as [=entry/name=]
-        and |path| as [=full path=].
+    4. Let |entry| be a new [=directory entry=] with |item|'s
+        [=directory/name=] as [=entry/name=] and |path| as [=full
+        path=].
 
-    5. [=Invoke the callback=] |successCallback| with a
-        new {{DirectoryEntry}} object associated with
-        |entry|.
+    5. [=Invoke the callback=] |successCallback| with a new
+        {{DirectoryEntry}} object associated with |entry|.
 
 </div>
 
@@ -761,7 +773,7 @@ run the following steps:
         and |path|.
 
     3. Let |item| be the result of running the steps to [=evaluate a
-        path=] with the [=directory entry=]'s [=root=] and |path|.
+        path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     4. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
@@ -796,7 +808,7 @@ run the following steps:
         and |path|.
 
     3. Let |item| be the result of running the steps to [=evaluate a
-        path=] with the [=directory entry=]'s [=root=] and |path|.
+        path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     4. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
@@ -889,7 +901,7 @@ steps:
     3. If |dir| is null, run these substeps:
 
         1. Let |dir| be the result of running the steps to [=evaluate
-            a path=] with the [=entry=]'s [=root=] and [=full path=].
+            a path=] with the [=entry=]'s [=entry/root=] and [=full path=].
 
         2. If |dir| is failure, set the [=directory reader=]'s
             [=reader error=] to a new "{{NotFoundError}}" [=file
@@ -1006,8 +1018,7 @@ callback interface FileCallback {
 };
 </pre>
 
-A {{FileEntry}}'s associated [=entry=]
-is a [=file entry=].
+A {{FileEntry}}'s associated [=entry=] is a [=file entry=].
 
 The <dfn method for="FileEntry">file(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
@@ -1018,7 +1029,8 @@ steps:
 1. [=Queue a task=] to perform the following substeps:
 
     1. Let |item| be the result of running the steps to [=evaluate a
-        path=] with the [=file entry=]'s [=root=] and [=full path=].
+        path=] with the [=file entry=]'s [=entry/root=] and [=full
+        path=].
 
     2. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
@@ -1062,7 +1074,29 @@ function fileAsPromise(entry) {
 </div>
 
 
+<!-- ============================================================ -->
+<h3 id=api-domfilesystem>The {{DOMFileSystem}} Interface</h3>
+<!-- ============================================================ -->
+
+<pre class=idl>
+[NoInterfaceObject]
+interface DOMFileSystem {
+    readonly attribute DOMString name;
+    readonly attribute DirectoryEntry root;
+};
+</pre>
+
+The {{DOMFileSystem/name}} attribute of the {{DOMFileSystem}}
+interface must return the [=filesystem/name=] of the [=/filesystem=].
+
+The {{DOMFileSystem/root}} attribute of the {{DOMFileSystem}}
+interface must return a {{DirectoryEntry}} associated with the
+[=filesystem/root=] of the [=/filesystem=].
+
+
+<!-- ============================================================ -->
 <h2 id=acknowledgements>Acknowledgements</h2>
+<!-- ============================================================ -->
 
 This specification is based heavily on the work of Eric Uhrhane in
 [[file-system-api]], which introduced the {{Entry}} types.
