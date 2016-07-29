@@ -1107,7 +1107,8 @@ specification authoring tool used to create this document.
 
 And thanks to
 Ali Alabbas,
+Philip Jägenstedt,
 Marijn Kruisselbrink,
 and
-smaug----
+smaug&#45;&#45;&#45;&#45;
 for suggestions, reviews, and other feedback.
