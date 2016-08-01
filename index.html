@@ -1692,15 +1692,15 @@ return null.</p>
 <span class="p">});</span>
 </pre>
    </aside>
-   <aside class="issue" id="issue-4dc29de9"><a class="self-link" href="#issue-4dc29de9"></a> WEB-COMPAT:
+   <aside class="issue" id="issue-5c0be6ce"><a class="self-link" href="#issue-5c0be6ce"></a> INTEROP:
   In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-3">webkitEntries</a></code> is only populated as
   the result of a drag-and-drop operation, not when the element is
-  clicked. Can we fix this so it is always populated? </aside>
-   <aside class="issue" id="issue-a4688e35"><a class="self-link" href="#issue-a4688e35"></a> WEB-COMPAT:
+  clicked. Should we fix this so it is always populated? </aside>
+   <aside class="issue" id="issue-d16b592f"><a class="self-link" href="#issue-d16b592f"></a> INTEROP:
   In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory" id="ref-for-dom-htmlinputelement-webkitdirectory-2">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
   populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-5">webkitRelativePath</a></code> properties must be used instead to
-  reconstruct the directory structure. Can we fix this so it is always
-  populated? </aside>
+  reconstruct the directory structure. Should we fix this so it is
+  always populated? </aside>
    <h2 class="heading settled" data-level="6" id="html-data"><span class="secno">6. </span><span class="content">HTML: Drag and drop</span><a class="self-link" href="#html-data"></a></h2>
    <aside class="issue" id="issue-325fe512"><a class="self-link" href="#issue-325fe512"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </aside>
@@ -1711,7 +1711,7 @@ data store item list</a> as a <i>File</i>. If it is accessed via <code class="id
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
-  directories and files. </aside>
+  directories and files when dragged from a media player application. </aside>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a> {
     <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-3">Entry</a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export="" data-lt="webkitGetAsEntry()" id="dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</dfn>();
 };
@@ -1798,7 +1798,7 @@ description from the table below.</p>
       within a Web application, or that too many calls are being made
       on file resources. 
       <td><code class="idl"><a data-link-type="idl" href="#dom-fileerror-security_err" id="ref-for-dom-fileerror-security_err-1">SECURITY_ERR</a></code> (2)
-      <td class="unused">
+      <td class="used">
      <tr>
       <td>"<dfn class="idl-code" data-dfn-type="exception" data-export="" id="exceptiondef-aborterror"><code>AbortError</code><a class="self-link" href="#exceptiondef-aborterror"></a></dfn>"
       <td class="long"> An ongoing operation was aborted, typically with a call to
@@ -1962,21 +1962,29 @@ path</a>.</p>
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader" id="ref-for-directoryreader-1">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader" id="ref-for-dom-directoryentry-createreader-1">createReader</a>();
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-1">getFile</a>(<span class="kt">USVString</span> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-path">path<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-path"></a></dfn>,
-                 <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-flags" id="ref-for-dictdef-flags-1">Flags</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-options">options<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-options"></a></dfn>,
+                 <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-filesystemflags" id="ref-for-dictdef-filesystemflags-1">FileSystemFlags</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-options">options<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-options"></a></dfn>,
                  <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback" id="ref-for-callbackdef-entrycallback-2">EntryCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-successcallback"></a></dfn>,
                  <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-3">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-errorcallback"></a></dfn>);
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-1">getDirectory</a>(<span class="kt">USVString</span> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getDirectory(path, options, successCallback, errorCallback), DirectoryEntry/getDirectory(path, options, successCallback), DirectoryEntry/getDirectory(path, options), DirectoryEntry/getDirectory(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-path">path<a class="self-link" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-path"></a></dfn>,
-                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-flags" id="ref-for-dictdef-flags-2">Flags</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getDirectory(path, options, successCallback, errorCallback), DirectoryEntry/getDirectory(path, options, successCallback), DirectoryEntry/getDirectory(path, options), DirectoryEntry/getDirectory(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options">options<a class="self-link" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options"></a></dfn>,
+                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-filesystemflags" id="ref-for-dictdef-filesystemflags-2">FileSystemFlags</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getDirectory(path, options, successCallback, errorCallback), DirectoryEntry/getDirectory(path, options, successCallback), DirectoryEntry/getDirectory(path, options), DirectoryEntry/getDirectory(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options">options<a class="self-link" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options"></a></dfn>,
                       <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback" id="ref-for-callbackdef-entrycallback-3">EntryCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getDirectory(path, options, successCallback, errorCallback), DirectoryEntry/getDirectory(path, options, successCallback), DirectoryEntry/getDirectory(path, options), DirectoryEntry/getDirectory(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-successcallback"></a></dfn>,
                       <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-4">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getDirectory(path, options, successCallback, errorCallback), DirectoryEntry/getDirectory(path, options, successCallback), DirectoryEntry/getDirectory(path, options), DirectoryEntry/getDirectory(path)" data-dfn-type="argument" data-export="" id="dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 
-<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-flags">Flags</dfn> {};
+<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-filesystemflags">FileSystemFlags</dfn> {
+    <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-default="false" data-dfn-for="FileSystemFlags" data-dfn-type="dict-member" data-export="" data-type="boolean " id="dom-filesystemflags-create">create</dfn> = <span class="kt">false</span>;
+    <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-default="false" data-dfn-for="FileSystemFlags" data-dfn-type="dict-member" data-export="" data-type="boolean " id="dom-filesystemflags-exclusive">exclusive</dfn> = <span class="kt">false</span>;
+};
 
 <span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-entrycallback">EntryCallback</dfn> {
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="EntryCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(entry)" id="dom-entrycallback-handleevent">handleEvent<a class="self-link" href="#dom-entrycallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-14">Entry</a> <dfn class="nv idl-code" data-dfn-for="EntryCallback/handleEvent(entry)" data-dfn-type="argument" data-export="" id="dom-entrycallback-handleevent-entry-entry">entry<a class="self-link" href="#dom-entrycallback-handleevent-entry-entry"></a></dfn>);
 };
 </pre>
+   <aside class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-1">create</a></code> member of <code class="idl"><a data-link-type="idl" href="#dictdef-filesystemflags" id="ref-for-dictdef-filesystemflags-3">FileSystemFlags</a></code> and
+  the associated behavior are included for compatibility with existing
+  implementations, even though there is no useful behavior when the
+  flag is specified. Similarly, the <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-exclusive" id="ref-for-dom-filesystemflags-exclusive-1">exclusive</a></code> member is not explicitly referenced, but the binding behavior is
+  observable from script if an object with a getter is passed. </aside>
    <p>A <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-3">DirectoryEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-18">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-4">directory entry</a>.</p>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="DirectoryEntry" data-dfn-type="method" data-export="" id="dom-directoryentry-createreader">createReader()</dfn> method, when
 invoked, must run the following steps:</p>
@@ -1998,16 +2006,19 @@ run the following steps:</p>
        <li data-md="">
         <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-2">file error</a>, and terminate these steps.</p>
        <li data-md="">
+        <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-2">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
+"<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-1">SecurityError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file error</a>, and terminate these steps.</p>
+       <li data-md="">
         <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-2">resolve a
 relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-6">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-4">full path</a> and <var>path</var>.</p>
        <li data-md="">
         <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-2">evaluate a
 path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-7">directory entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-3">root</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-2">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-2">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-4">file
 error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-2">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-4">file
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-2">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-5">file
 error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-2">file entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#file-name" id="ref-for-file-name-1">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-3">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-5">full path</a>.</p>
@@ -2024,7 +2035,10 @@ run the following steps:</p>
       <p><a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">Queue a task</a> to run the following substeps:</p>
       <ol>
        <li data-md="">
-        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-5">file error</a>, and terminate these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file error</a>, and terminate these steps.</p>
+       <li data-md="">
+        <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-3">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
+"<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-2">SecurityError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-7">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>path</var> be the result of running the steps to <a data-link-type="dfn" href="#resolve-a-relative-path" id="ref-for-resolve-a-relative-path-3">resolve a
 relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-8">directory entry</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-6">full path</a> and <var>path</var>.</p>
@@ -2032,10 +2046,10 @@ relative path</a> with the <a data-link-type="dfn" href="#directory-entry" id="r
         <p>Let <var>item</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-3">evaluate a
 path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-9">directory entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-4">root</a> and <var>path</var>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-3">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-3">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-8">file
 error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-4">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-7">file error</a>, and terminate these steps.</p>
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-4">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-10">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-2">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-4">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-7">full
 path</a>.</p>
@@ -2044,11 +2058,6 @@ path</a>.</p>
       </ol>
     </ol>
    </div>
-   <aside class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dictdef-flags" id="ref-for-dictdef-flags-3">Flags</a></code> dictionary has no defined members and is present for
-  compatibility with existing implementations. </aside>
-   <aside class="issue" id="issue-3f3685fc"><a class="self-link" href="#issue-3f3685fc"></a> WEB-COMPAT:
-  If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-1">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
-  "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-4">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? </aside>
    <aside class="example" id="example-adaaa3dc">
     <a class="self-link" href="#example-adaaa3dc"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
 with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
@@ -2082,7 +2091,7 @@ steps:</p>
      <li data-md="">
       <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-3">directory reader</a>'s <a data-link-type="dfn" href="#reading-flag" id="ref-for-reading-flag-1">reading flag</a> is set, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a
 task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> with an
-"<code class="idl"><a data-link-type="idl" href="#exceptiondef-invalidstateerror" id="ref-for-exceptiondef-invalidstateerror-1">InvalidStateError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-8">file error</a>, and terminate these steps.</p>
+"<code class="idl"><a data-link-type="idl" href="#exceptiondef-invalidstateerror" id="ref-for-exceptiondef-invalidstateerror-1">InvalidStateError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-10">file error</a>, and terminate these steps.</p>
      <li data-md="">
       <p>If the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-4">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-1">reader error</a> is not null, <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue
 a task</a> to <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given)
@@ -2107,7 +2116,7 @@ sequence and terminate these steps.</p>
           <p>Let <var>dir</var> be the result of running the steps to <a data-link-type="dfn" href="#evaluate-a-path" id="ref-for-evaluate-a-path-4">evaluate
 a path</a> with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-19">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-5">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-8">full path</a>.</p>
          <li data-md="">
-          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-9">file
+          <p>If <var>dir</var> is failure, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-9">directory reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-3">reader error</a> to a new "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-4">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-11">file
 error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if
 given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-4">reader error</a>, and terminate these steps.</p>
          <li data-md="">
@@ -2118,7 +2127,7 @@ given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-erro
        <li data-md="">
         <p>If the previous step failed (for example, the <a data-link-type="dfn" href="#directory" id="ref-for-directory-16">directory</a> was
 deleted or permission is denied), then set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-12">directory
-reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-5">reader error</a> to an appropriate <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-10">file error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-6">reader error</a>, and terminate these steps.</p>
+reader</a>'s <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-5">reader error</a> to an appropriate <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-12">file error</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with <a data-link-type="dfn" href="#reader-error" id="ref-for-reader-error-6">reader error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>If <var>entries</var> is empty, set the <a data-link-type="dfn" href="#directory-reader" id="ref-for-directory-reader-13">directory reader</a>'s <a data-link-type="dfn" href="#done-flag" id="ref-for-done-flag-2">done
 flag</a>.</p>
@@ -2217,10 +2226,10 @@ steps:</p>
 path</a> with the <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-4">file entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-6">root</a> and <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-9">full
 path</a>.</p>
        <li data-md="">
-        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-6">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-11">file
+        <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-5">NotFoundError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-13">file
 error</a>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-5">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-12">file error</a>, and terminate these steps.</p>
+        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-5">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-14">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> object representing <var>item</var>.</p>
       </ol>
@@ -2424,6 +2433,7 @@ for suggestions, reviews, and other feedback.</p>
    <li><a href="#exceptiondef-aborterror">AbortError</a><span>, in §7.1</span>
    <li><a href="#absolute-path">absolute path</a><span>, in §2.1</span>
    <li><a href="#dom-fileerror-code">code</a><span>, in §7.1</span>
+   <li><a href="#dom-filesystemflags-create">create</a><span>, in §7.3</span>
    <li><a href="#dom-directoryentry-createreader">createReader()</a><span>, in §7.3</span>
    <li><a href="#directory">directory</a><span>, in §2.2</span>
    <li><a href="#directory-entry">directory entry</a><span>, in §2.3</span>
@@ -2440,6 +2450,7 @@ for suggestions, reviews, and other feedback.</p>
    <li><a href="#callbackdef-entrycallback">EntryCallback</a><span>, in §7.3</span>
    <li><a href="#callbackdef-errorcallback">ErrorCallback</a><span>, in §7.1</span>
    <li><a href="#evaluate-a-path">evaluate a path</a><span>, in §3</span>
+   <li><a href="#dom-filesystemflags-exclusive">exclusive</a><span>, in §7.3</span>
    <li><a href="#file">file</a><span>, in §2.2</span>
    <li><a href="#callbackdef-filecallback">FileCallback</a><span>, in §7.5</span>
    <li><a href="#file-entry">file entry</a><span>, in §2.3</span>
@@ -2455,7 +2466,7 @@ for suggestions, reviews, and other feedback.</p>
      <li><a href="#entry-filesystem">dfn for entry</a><span>, in §2.3</span>
      <li><a href="#dom-entry-filesystem">attribute for Entry</a><span>, in §7.2</span>
     </ul>
-   <li><a href="#dictdef-flags">Flags</a><span>, in §7.3</span>
+   <li><a href="#dictdef-filesystemflags">FileSystemFlags</a><span>, in §7.3</span>
    <li><a href="#full-path">full path</a><span>, in §2.3</span>
    <li><a href="#dom-entry-fullpath">fullPath</a><span>, in §7.2</span>
    <li><a href="#dom-directoryentry-getdirectory">getDirectory(path)</a><span>, in §7.3</span>
@@ -2656,16 +2667,19 @@ for suggestions, reviews, and other feedback.</p>
 <span class="kt">interface</span> <a class="nv" href="#directoryentry">DirectoryEntry</a> : <a class="n" data-link-type="idl-name" href="#entry">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader">createReader</a>();
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getfile">getFile</a>(<span class="kt">USVString</span> <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-path">path</a>,
-                 <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-flags">Flags</a> <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-options">options</a>,
+                 <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-filesystemflags">FileSystemFlags</a> <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-options">options</a>,
                  <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback">EntryCallback</a> <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-successcallback">successCallback</a>,
                  <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-errorcallback">errorCallback</a>);
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getdirectory">getDirectory</a>(<span class="kt">USVString</span> <a class="nv" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-path">path</a>,
-                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-flags">Flags</a> <a class="nv" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options">options</a>,
+                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-filesystemflags">FileSystemFlags</a> <a class="nv" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-options">options</a>,
                       <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-entrycallback">EntryCallback</a> <a class="nv" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-successcallback">successCallback</a>,
                       <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-directoryentry-getdirectory-path-options-successcallback-errorcallback-errorcallback">errorCallback</a>);
 };
 
-<span class="kt">dictionary</span> <a class="nv" href="#dictdef-flags">Flags</a> {};
+<span class="kt">dictionary</span> <a class="nv" href="#dictdef-filesystemflags">FileSystemFlags</a> {
+    <span class="kt">boolean</span> <a class="nv" data-default="false" data-type="boolean " href="#dom-filesystemflags-create">create</a> = <span class="kt">false</span>;
+    <span class="kt">boolean</span> <a class="nv" data-default="false" data-type="boolean " href="#dom-filesystemflags-exclusive">exclusive</a> = <span class="kt">false</span>;
+};
 
 <span class="kt">callback</span> <span class="kt">interface</span> <a class="nv" href="#callbackdef-entrycallback">EntryCallback</a> {
     <span class="kt">void</span> <a class="nv" href="#dom-entrycallback-handleevent">handleEvent</a>(<a class="n" data-link-type="idl-name" href="#entry">Entry</a> <a class="nv" href="#dom-entrycallback-handleevent-entry-entry">entry</a>);
@@ -2705,15 +2719,15 @@ for suggestions, reviews, and other feedback.</p>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete.
   Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code> property. <a href="#issue-9a11f326"> ↵ </a></div>
-   <div class="issue"> WEB-COMPAT:
+   <div class="issue"> INTEROP:
   In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is only populated as
   the result of a drag-and-drop operation, not when the element is
-  clicked. Can we fix this so it is always populated? <a href="#issue-4dc29de9"> ↵ </a></div>
-   <div class="issue"> WEB-COMPAT:
+  clicked. Should we fix this so it is always populated? <a href="#issue-5c0be6ce"> ↵ </a></div>
+   <div class="issue"> INTEROP:
   In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries">webkitEntries</a></code> is not
   populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath">webkitRelativePath</a></code> properties must be used instead to
-  reconstruct the directory structure. Can we fix this so it is always
-  populated? <a href="#issue-a4688e35"> ↵ </a></div>
+  reconstruct the directory structure. Should we fix this so it is
+  always populated? <a href="#issue-d16b592f"> ↵ </a></div>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe512"> ↵ </a></div>
    <div class="issue">
@@ -2735,9 +2749,6 @@ for suggestions, reviews, and other feedback.</p>
   on these in Chrome, hiding the types from the global namespace. Is
   it web-compatible to remove it, and simply expose these types in the
   global namespace as is done for most web APIs? <a href="#issue-15e296d3"> ↵ </a></div>
-   <div class="issue"> WEB-COMPAT:
-  If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
-  "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? <a href="#issue-3f3685fc"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="name">
    <b><a href="#name">#name</a></b><b>Referenced in:</b>
@@ -3062,24 +3073,24 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#file-error">#file-error</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-file-error-1">7.2. The Entry Interface</a>
-    <li><a href="#ref-for-file-error-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-file-error-3">(2)</a> <a href="#ref-for-file-error-4">(3)</a> <a href="#ref-for-file-error-5">(4)</a> <a href="#ref-for-file-error-6">(5)</a> <a href="#ref-for-file-error-7">(6)</a>
-    <li><a href="#ref-for-file-error-8">7.4. The DirectoryReader Interface</a> <a href="#ref-for-file-error-9">(2)</a> <a href="#ref-for-file-error-10">(3)</a>
-    <li><a href="#ref-for-file-error-11">7.5. The FileEntry Interface</a> <a href="#ref-for-file-error-12">(2)</a>
+    <li><a href="#ref-for-file-error-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-file-error-3">(2)</a> <a href="#ref-for-file-error-4">(3)</a> <a href="#ref-for-file-error-5">(4)</a> <a href="#ref-for-file-error-6">(5)</a> <a href="#ref-for-file-error-7">(6)</a> <a href="#ref-for-file-error-8">(7)</a> <a href="#ref-for-file-error-9">(8)</a>
+    <li><a href="#ref-for-file-error-10">7.4. The DirectoryReader Interface</a> <a href="#ref-for-file-error-11">(2)</a> <a href="#ref-for-file-error-12">(3)</a>
+    <li><a href="#ref-for-file-error-13">7.5. The FileEntry Interface</a> <a href="#ref-for-file-error-14">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-notfounderror">
    <b><a href="#exceptiondef-notfounderror">#exceptiondef-notfounderror</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-exceptiondef-notfounderror-1">7.2. The Entry Interface</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-notfounderror-3">(2)</a> <a href="#ref-for-exceptiondef-notfounderror-4">(3)</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-5">7.4. The DirectoryReader Interface</a>
-    <li><a href="#ref-for-exceptiondef-notfounderror-6">7.5. The FileEntry Interface</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-2">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-notfounderror-3">(2)</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-4">7.4. The DirectoryReader Interface</a>
+    <li><a href="#ref-for-exceptiondef-notfounderror-5">7.5. The FileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-securityerror">
    <b><a href="#exceptiondef-securityerror">#exceptiondef-securityerror</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-exceptiondef-securityerror-1">7.3. The DirectoryEntry Interface</a>
+    <li><a href="#ref-for-exceptiondef-securityerror-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-securityerror-2">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exceptiondef-invalidstateerror">
@@ -3161,10 +3172,22 @@ for suggestions, reviews, and other feedback.</p>
     <li><a href="#ref-for-directoryentry-5">7.6. The DOMFileSystem Interface</a> <a href="#ref-for-directoryentry-6">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dictdef-flags">
-   <b><a href="#dictdef-flags">#dictdef-flags</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dictdef-filesystemflags">
+   <b><a href="#dictdef-filesystemflags">#dictdef-filesystemflags</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-flags-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dictdef-flags-2">(2)</a> <a href="#ref-for-dictdef-flags-3">(3)</a>
+    <li><a href="#ref-for-dictdef-filesystemflags-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dictdef-filesystemflags-2">(2)</a> <a href="#ref-for-dictdef-filesystemflags-3">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-filesystemflags-create">
+   <b><a href="#dom-filesystemflags-create">#dom-filesystemflags-create</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-filesystemflags-create-1">7.3. The DirectoryEntry Interface</a> <a href="#ref-for-dom-filesystemflags-create-2">(2)</a> <a href="#ref-for-dom-filesystemflags-create-3">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-filesystemflags-exclusive">
+   <b><a href="#dom-filesystemflags-exclusive">#dom-filesystemflags-exclusive</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-filesystemflags-exclusive-1">7.3. The DirectoryEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-entrycallback">

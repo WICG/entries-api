@@ -357,22 +357,21 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 </aside>
 
 <aside class=issue>
-  WEB-COMPAT:
+  INTEROP:
   In Chrome, {{HTMLInputElement/webkitEntries}} is only populated as
   the result of a drag-and-drop operation, not when the element is
-  clicked. Can we fix this so it is always populated?
+  clicked. Should we fix this so it is always populated?
 </aside>
 
 <aside class=issue>
-  WEB-COMPAT:
+  INTEROP:
   In Chrome, if {{HTMLInputElement/webkitdirectory}} is specified on a
   {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
   populated; the {{HTMLInputElement/files}} collection and
   {{File/webkitRelativePath}} properties must be used instead to
-  reconstruct the directory structure. Can we fix this so it is always
-  populated?
+  reconstruct the directory structure. Should we fix this so it is
+  always populated?
 </aside>
-
 
 
 
@@ -399,7 +398,7 @@ data store item list=] as a <i>File</i>. If it is accessed via
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
-  directories and files.
+  directories and files when dragged from a media player application.
 </aside>
 
 <pre class=idl>
@@ -518,7 +517,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       on file resources.
     </td>
     <td>{{SECURITY_ERR}} (2)</td>
-    <td class=unused></td>
+    <td class=used></td>
   </tr>
   <tr>
     <td>"<dfn exception><code>AbortError</code></dfn>"</td>
@@ -763,21 +762,33 @@ function getParentAsPromise(entry) {
 interface DirectoryEntry : Entry {
     DirectoryReader createReader();
     void getFile(USVString path,
-                 optional Flags options,
+                 optional FileSystemFlags options,
                  optional EntryCallback successCallback,
                  optional ErrorCallback errorCallback);
     void getDirectory(USVString path,
-                      optional Flags options,
+                      optional FileSystemFlags options,
                       optional EntryCallback successCallback,
                       optional ErrorCallback errorCallback);
 };
 
-dictionary Flags {};
+dictionary FileSystemFlags {
+    boolean create = false;
+    boolean exclusive = false;
+};
 
 callback interface EntryCallback {
     void handleEvent(Entry entry);
 };
 </pre>
+
+<aside class=note>
+  The {{FileSystemFlags/create}} member of {{FileSystemFlags}} and
+  the associated behavior are included for compatibility with existing
+  implementations, even though there is no useful behavior when the
+  flag is specified. Similarly, the {{FileSystemFlags/exclusive}}
+  member is not explicitly referenced, but the binding behavior is
+  observable from script if an object with a getter is passed.
+</aside>
 
 A {{DirectoryEntry}}'s associated [=entry=] is a [=directory entry=].
 
@@ -807,25 +818,29 @@ run the following steps:
         |errorCallback| (if given) with a "{{TypeMismatchError}}"
         [=file error=], and terminate these steps.
 
-    2. Let |path| be the result of running the steps to [=resolve a
+    2. If |options|'s {{FileSystemFlags/create}} member is true,
+        [=invoke the callback=] |errorCallback| (if given) with a
+        "{{SecurityError}}" [=file error=], and terminate these steps.
+
+    3. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
         and |path|.
 
-    3. Let |item| be the result of running the steps to [=evaluate a
+    4. Let |item| be the result of running the steps to [=evaluate a
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
-    4. If |item| is <em>failure</em>, [=invoke the callback=]
+    5. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
         error=], and terminate these steps.
 
-    5. If |item| is not a [=file=], [=invoke the callback=]
+    6. If |item| is not a [=file=], [=invoke the callback=]
         |errorCallback| (if given) with a "{{TypeMismatchError}}" [=file
         error=], and terminate these steps.
 
-    6. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
+    7. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
 
-    7. [=Invoke the callback=] |successCallback| (if given) with a new
+    8. [=Invoke the callback=] |successCallback| (if given) with a new
         {{FileEntry}} object associated with |entry|.
 
 </div>
@@ -842,41 +857,33 @@ run the following steps:
         |errorCallback| (if given) with a "{{TypeMismatchError}}"
         [=file error=], and terminate these steps.
 
-    2. Let |path| be the result of running the steps to [=resolve a
+    2. If |options|'s {{FileSystemFlags/create}} member is true,
+        [=invoke the callback=] |errorCallback| (if given) with a
+        "{{SecurityError}}" [=file error=], and terminate these steps.
+
+    3. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
         and |path|.
 
-    3. Let |item| be the result of running the steps to [=evaluate a
+    4. Let |item| be the result of running the steps to [=evaluate a
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
-    4. If |item| is <em>failure</em>, [=invoke the callback=]
+    5. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
         error=], and terminate these steps.
 
-    5. If |item| is not a [=directory=], [=invoke the callback=]
+    6. If |item| is not a [=directory=], [=invoke the callback=]
         |errorCallback| (if given) with a "{{TypeMismatchError}}"
         [=file error=], and terminate these steps.
 
-    6. Let |entry| be a new [=directory entry=] with |item|'s
+    7. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    7. [=Invoke the callback=] |successCallback| (if given) with a new
+    8. [=Invoke the callback=] |successCallback| (if given) with a new
         {{DirectoryEntry}} associated with |entry|.
 
 </div>
-
-<aside class=note>
-  The {{Flags}} dictionary has no defined members and is present for
-  compatibility with existing implementations.
-</aside>
-
-<aside class=issue>
-  WEB-COMPAT:
-  If the file is not present, Chrome gives "{{SecurityError}}" if
-  <code>{create:true}</code> is passed as |options|, and
-  "{{NotFoundError}}" otherwise. Is this necessary for web-compat?
-</aside>
 
 <aside class=example>
 Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
