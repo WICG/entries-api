@@ -1416,7 +1416,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-07-29">29 July 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-08-01">1 August 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1507,11 +1507,11 @@ or equivalent user actions.</p>
 defines similar types in the context of a sandboxed file system,
 including operations for creating and modifying files and directories,
 but which has not been broadly adopted by web browsers.</p>
-   <div class="note" role="note"> The APIs described by this document was initially implemented in
+   <aside class="note" role="note"> The APIs described by this document was initially implemented in
   Google Chrome. Other browsers (at this time: Microsoft Edge and
   Mozilla Firefox) are starting to support subsets of Chrome’s APIs
   and behavior. The intent of this document is to specify the common
-  subset to ensure that the implementations are interoperable. </div>
+  subset to ensure that the implementations are interoperable. </aside>
    <h2 class="heading settled" data-level="2" id="concepts"><span class="secno">2. </span><span class="content">Concepts</span><a class="self-link" href="#concepts"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="names-paths"><span class="secno">2.1. </span><span class="content">Names and Paths</span><a class="self-link" href="#names-paths"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="name">name</dfn> is a string which:</p>
@@ -1540,28 +1540,28 @@ a distinct non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-4">na
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="root-directory">root directory</dfn> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-3">directory</a> that is not a member of
 a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-1">root directory</a>'s <a data-link-type="dfn" href="#name" id="ref-for-name-5">name</a> is empty.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="parent">parent</dfn> of a <a data-link-type="dfn" href="#file" id="ref-for-file-2">file</a> or <a data-link-type="dfn" href="#directory" id="ref-for-directory-5">directory</a> is the <a data-link-type="dfn" href="#directory" id="ref-for-directory-6">directory</a> it is a member of. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-2">root directory</a> has no <a data-link-type="dfn" href="#parent" id="ref-for-parent-1">parent</a>.</p>
-   <div class="issue" id="issue-e0fa4438"><a class="self-link" href="#issue-e0fa4438"></a> EDITORIAL:
-  Should <a data-link-type="dfn" href="#directory" id="ref-for-directory-7">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file" id="ref-for-file-3">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? </div>
-   <div class="note" role="note"> In most cases, the files and directories selected by the user will
+   <aside class="issue" id="issue-e0fa4438"><a class="self-link" href="#issue-e0fa4438"></a> EDITORIAL:
+  Should <a data-link-type="dfn" href="#directory" id="ref-for-directory-7">directory</a> be defined as a special type of <a data-link-type="dfn" href="#file" id="ref-for-file-3">file</a> so that minimal changes are necessary in <a data-link-type="biblio" href="#biblio-html">[HTML]</a>? </aside>
+   <aside class="note" role="note"> In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual native file system
-  backing the interaction with the API. </div>
+  backing the interaction with the API. </aside>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="filesystem">filesystem</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
 directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
-   <div class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> by generating a
+   <aside class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> by generating a
   UUID for each <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
-  assumptions about the structure or content of the names. </div>
+  assumptions about the structure or content of the names. </aside>
    <h3 class="heading settled" data-level="2.3" id="entries"><span class="secno">2.3. </span><span class="content">Entries</span><a class="self-link" href="#entries"></a></h3>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="entry-concept">entry</dfn> is either a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-entry">file entry</dfn> or a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-entry">directory entry</dfn>.</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-1">entry</a> has an <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-6">name</a>) and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="full-path">full path</dfn> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-2">absolute path</a>).</p>
    <p>An <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-2">entry</a> also has a <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-root">root</dfn>, which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-5">root
 directory</a>.</p>
-   <div class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-6">root
+   <aside class="note" role="note"> <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-3">Entries</a> are defined in terms of <a data-link-type="dfn" href="#path" id="ref-for-path-2">paths</a> relative to a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-6">root
   directory</a> to account for the fact that a native file system
   backing the interaction with the API may be modified asynchronously
   during operations such as enumerating the contents of a directory.
   Operations exposed on <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-4">entries</a> may produce errors in such cases
-  where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </div>
+  where the <a data-link-type="dfn" href="#path" id="ref-for-path-3">paths</a> no longer reference the same entity. </aside>
    <p>The <dfn class="dfn-paneled" data-dfn-for="entry" data-dfn-type="dfn" data-noexport="" id="entry-filesystem">filesystem</dfn> of an <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-5">entry</a> is the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-5">filesystem</a> associated with the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-6">entry</a>'s <a data-link-type="dfn" href="#entry-root" id="ref-for-entry-root-1">root</a>.</p>
    <h3 class="heading settled" data-level="2.4" id="dir-reader"><span class="secno">2.4. </span><span class="content">Directory Reader</span><a class="self-link" href="#dir-reader"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory-reader">directory reader</dfn> consists of an associated <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-1">directory
@@ -1578,7 +1578,7 @@ which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolu
       <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-5">absolute path</a>, return <var>relpath</var>.</p>
      <li data-md="">
       <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
-      <div class="note" role="note">The first string will be empty.</div>
+      <aside class="note" role="note">The first string will be empty.</aside>
      <li data-md="">
       <p>Let <var>relpath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>relpath</var> on '/' (U+002F SOLIDUS).</p>
      <li data-md="">
@@ -1607,8 +1607,8 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a d
 '/' (U+002F SOLIDUS).</p>
      <li data-md="">
       <p>Remove the first entry from <var>segments</var>.</p>
-      <div class="note" role="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-7">absolute path</a>,
-  this first entry will always be empty.</div>
+      <aside class="note" role="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-7">absolute path</a>,
+  this first entry will always be empty.</aside>
      <li data-md="">
       <p>For each <var>segment</var> in <var>segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
@@ -1634,8 +1634,8 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a d
     </ol>
    </div>
    <h2 class="heading settled" data-level="4" id="file-interface"><span class="secno">4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> Interface</span><a class="self-link" href="#file-interface"></a></h2>
-   <div class="issue" id="issue-ab7a53dc"><a class="self-link" href="#issue-ab7a53dc"></a> EDITORIAL:
-  This section should be merged into <a data-link-type="biblio" href="#biblio-fileapi">[FileAPI]</a> once it is complete. </div>
+   <aside class="issue" id="issue-ab7a53dc"><a class="self-link" href="#issue-ab7a53dc"></a> EDITORIAL:
+  This section should be merged into <a data-link-type="biblio" href="#biblio-fileapi">[FileAPI]</a> once it is complete. </aside>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-file-webkitrelativepath">webkitRelativePath</dfn>;
 };
@@ -1644,9 +1644,9 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file-4">file</a>, <a d
 return the <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-4">relative path</a> of the file, or the empty string if not
 specified.</p>
    <h2 class="heading settled" data-level="5" id="html-forms"><span class="secno">5. </span><span class="content">HTML: Forms</span><a class="self-link" href="#html-forms"></a></h2>
-   <div class="issue" id="issue-9a11f326"><a class="self-link" href="#issue-9a11f326"></a> EDITORIAL:
+   <aside class="issue" id="issue-9a11f326"><a class="self-link" href="#issue-9a11f326"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete.
-  Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-2">webkitRelativePath</a></code> property. </div>
+  Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-2">webkitRelativePath</a></code> property. </aside>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a> {
     <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export="" data-type="boolean" id="dom-htmlinputelement-webkitdirectory">webkitdirectory</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-1">Entry</a>> <dfn class="nv dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export="" data-readonly="" data-type="FrozenArray<Entry>" id="dom-htmlinputelement-webkitentries">webkitEntries</dfn>;
@@ -1660,12 +1660,12 @@ directory rather than a file or files. When specified, the behavior on
 the selection of a directory is as if all files with that directory
 as an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-5">relative path</a> from the
 selected directory to the file.</p>
-   <div class="note" role="note"> A user agent may represent any hierarchical data as directories
+   <aside class="note" role="note"> A user agent may represent any hierarchical data as directories
   during a selection operation. For example, on a device that does not
   expose a native file system directly to the user, photo albums could
   be presented as directories if <code>"image/*"</code> is specified
-  for the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-accept">accept</a></code> attribute. </div>
-   <div class="example" id="example-1359c21a">
+  for the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-accept">accept</a></code> attribute. </aside>
+   <aside class="example" id="example-1359c21a">
     <a class="self-link" href="#example-1359c21a"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-4">webkitRelativePath</a></code> properties after a
 directory is selected with an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element: 
 <pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">b</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">webkitdirectory</span><span class="p">></span>
@@ -1675,14 +1675,14 @@ directory is selected with an <code><a data-link-type="element" href="https://ht
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">file</span><span class="p">.</span><span class="nx">webkitRelativePath</span><span class="p">);</span>
 <span class="p">});</span>
 </pre>
-   </div>
+   </aside>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-1">webkitEntries</a></code> IDL attribute allows scripts to
 access the element’s selected entries. On getting, if the IDL
 attribute applies, it must return an array of <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-2">Entry</a></code> objects that
 represent the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a> (including directories, if
 permitted). If the IDL attribute does not apply, then it must instead
 return null.</p>
-   <div class="example" id="example-2786e72c">
+   <aside class="example" id="example-2786e72c">
     <a class="self-link" href="#example-2786e72c"></a> Enumerating entries using <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-2">webkitEntries</a></code>: 
 <pre class="lang-html highlight"><span></span><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">a</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">multiple</span><span class="p">></span>
 </pre>
@@ -1691,27 +1691,27 @@ return null.</p>
     <span class="nx">handleEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">);</span>
 <span class="p">});</span>
 </pre>
-   </div>
-   <div class="issue" id="issue-4dc29de9"><a class="self-link" href="#issue-4dc29de9"></a> WEB-COMPAT:
+   </aside>
+   <aside class="issue" id="issue-4dc29de9"><a class="self-link" href="#issue-4dc29de9"></a> WEB-COMPAT:
   In Chrome, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-3">webkitEntries</a></code> is only populated as
   the result of a drag-and-drop operation, not when the element is
-  clicked. Can we fix this so it is always populated? </div>
-   <div class="issue" id="issue-a4688e35"><a class="self-link" href="#issue-a4688e35"></a> WEB-COMPAT:
+  clicked. Can we fix this so it is always populated? </aside>
+   <aside class="issue" id="issue-a4688e35"><a class="self-link" href="#issue-a4688e35"></a> WEB-COMPAT:
   In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory" id="ref-for-dom-htmlinputelement-webkitdirectory-2">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
   populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-5">webkitRelativePath</a></code> properties must be used instead to
   reconstruct the directory structure. Can we fix this so it is always
-  populated? </div>
+  populated? </aside>
    <h2 class="heading settled" data-level="6" id="html-data"><span class="secno">6. </span><span class="content">HTML: Drag and drop</span><a class="self-link" href="#html-data"></a></h2>
-   <div class="issue" id="issue-325fe512"><a class="self-link" href="#issue-325fe512"></a> EDITORIAL:
-  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </div>
+   <aside class="issue" id="issue-325fe512"><a class="self-link" href="#issue-325fe512"></a> EDITORIAL:
+  This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. </aside>
    <p>During a <em>drag-and-drop operation</em>, <a data-link-type="dfn" href="#file" id="ref-for-file-6">file</a> and <a data-link-type="dfn" href="#directory" id="ref-for-directory-10">directory</a> items are associated with <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-7">entries</a>. Each <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-8">entry</a> is a member of a <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-8">root directory</a> unique to the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>.</p>
    <p>Additionally, each <a data-link-type="dfn" href="#directory" id="ref-for-directory-11">directory</a> item is represented in the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag
 data store item list</a> as a <i>File</i>. If it is accessed via <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/interaction.html#dom-datatransferitem-getasfile">getAsFile()</a></code> a zero-length <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is returned.</p>
-   <div class="note" role="note"> A user agent may represent any hierarchical data as files and
+   <aside class="note" role="note"> A user agent may represent any hierarchical data as files and
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
-  directories and files. </div>
+  directories and files. </aside>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">interface</span> <a class="nv idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/interaction.html#datatransferitem">DataTransferItem</a> {
     <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-3">Entry</a>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export="" data-lt="webkitGetAsEntry()" id="dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</dfn>();
 };
@@ -1730,7 +1730,7 @@ null and abort these steps.</p>
       <p>Return a new <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-4">Entry</a></code> object representing the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-9">entry</a>.</p>
     </ol>
    </div>
-   <div class="example" id="example-35b3062c">
+   <aside class="example" id="example-35b3062c">
     <a class="self-link" href="#example-35b3062c"></a> Handling drag and drop of files and directories: 
 <pre class="lang-javascript highlight"><span></span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'dragover'</span><span class="p">,</span> <span class="nx">e</span> <span class="o">=></span> <span class="p">{</span>
   <span class="c1">// Prevent navigation.</span>
@@ -1752,7 +1752,7 @@ null and abort these steps.</p>
   <span class="p">}</span>
 <span class="p">});</span>
 </pre>
-   </div>
+   </aside>
    <h2 class="heading settled" data-level="7" id="api-files-directories"><span class="secno">7. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="common-types"><span class="secno">7.1. </span><span class="content">Common Types</span><a class="self-link" href="#common-types"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
@@ -1776,9 +1776,9 @@ null and abort these steps.</p>
    <p>When a <var>name</var> <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-error">file error</dfn> is to be created, create
 a new <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-1">FileError</a></code> object with the given <var>name</var>, with the <em>code</em> from the table below and a <em>message</em> such as the
 description from the table below.</p>
-   <div class="note" role="note"> User agents are encouraged to give more specific and meaningful
+   <aside class="note" role="note"> User agents are encouraged to give more specific and meaningful
   error messages to allow developers to debug their code, while
-  ensuring security and privacy is maintained. </div>
+  ensuring security and privacy is maintained. </aside>
    <table class="deets">
     <tbody>
      <tr>
@@ -1861,7 +1861,7 @@ description from the table below.</p>
       <td><code class="idl"><a data-link-type="idl" href="#dom-fileerror-path_exists_err" id="ref-for-dom-fileerror-path_exists_err-1">PATH_EXISTS_ERR</a></code> (12)
       <td class="unused">
    </table>
-   <div class="issue" id="issue-36d1634f">
+   <aside class="issue" id="issue-36d1634f">
     <a class="self-link" href="#issue-36d1634f"></a> WEB-COMPAT:
   We would like to eliminate <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#domerror">DOMError</a></code> from the platform in favor
   of <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code>. Is using <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-2">FileError</a></code> here necessary for
@@ -1873,7 +1873,7 @@ description from the table below.</p>
     <p>Chrome has reported the `code` property as deprecated for some time
   and usage is extremely low. Chrome will attempt replacing uses of <code class="idl"><a data-link-type="idl" href="#fileerror" id="ref-for-fileerror-3">FileError</a></code> with <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> in M54 (stable release circa
   October 2016). Assuming that is successful, this spec will be updated.</p>
-   </div>
+   </aside>
 <pre class="idl highlight def"><span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> {
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="ErrorCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(err)" id="dom-errorcallback-handleevent">handleEvent<a class="self-link" href="#dom-errorcallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="#fileerror" id="ref-for-fileerror-4">FileError</a> <dfn class="nv idl-code" data-dfn-for="ErrorCallback/handleEvent(err)" data-dfn-type="argument" data-export="" id="dom-errorcallback-handleevent-err-err">err<a class="self-link" href="#dom-errorcallback-handleevent-err-err"></a></dfn>);
 };
@@ -1893,11 +1893,11 @@ error asynchronously.</p>
                    <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-2">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="Entry/getParent(successCallback, errorCallback), Entry/getParent(successCallback), Entry/getParent()" data-dfn-type="argument" data-export="" id="dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback"></a></dfn>);
 };
 </pre>
-   <div class="issue" id="issue-15e296d3"><a class="self-link" href="#issue-15e296d3"></a> WEB-COMPAT:
+   <aside class="issue" id="issue-15e296d3"><a class="self-link" href="#issue-15e296d3"></a> WEB-COMPAT:
   The <code>[NoInterfaceObject]</code> extended attribute is present
   on these in Chrome, hiding the types from the global namespace. Is
   it web-compatible to remove it, and simply expose these types in the
-  global namespace as is done for most web APIs? </div>
+  global namespace as is done for most web APIs? </aside>
    <p>An <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-6">Entry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-10">entry</a>.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-entry-isfile" id="ref-for-dom-entry-isfile-1">isFile</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-7">Entry</a></code> interface must return
 true if the <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept-11">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-1">file entry</a> and false otherwise.</p>
@@ -1934,8 +1934,8 @@ path</a>.</p>
       </ol>
     </ol>
    </div>
-   <div class="note" role="note"> An error is possible if files have been modified on disk since the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-12">Entry</a></code> was created. </div>
-   <div class="example" id="example-3243f15a">
+   <aside class="note" role="note"> An error is possible if files have been modified on disk since the <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-12">Entry</a></code> was created. </aside>
+   <aside class="example" id="example-3243f15a">
     <a class="self-link" href="#example-3243f15a"></a> Handling an entry: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">handleEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'name: '</span> <span class="o">+</span> <span class="nx">entry</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
@@ -1947,8 +1947,8 @@ path</a>.</p>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre>
-   </div>
-   <div class="example" id="example-5f2dddf1">
+   </aside>
+   <aside class="example" id="example-5f2dddf1">
     <a class="self-link" href="#example-5f2dddf1"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-entry-getparent" id="ref-for-dom-entry-getparent-2">getParent()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getParentAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
@@ -1956,7 +1956,7 @@ path</a>.</p>
   <span class="p">});</span>
 <span class="p">}</span>
 </pre>
-   </div>
+   </aside>
    <h3 class="heading settled" data-level="7.3" id="api-directoryentry"><span class="secno">7.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-2">DirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> {
@@ -2044,12 +2044,12 @@ path</a>.</p>
       </ol>
     </ol>
    </div>
-   <div class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dictdef-flags" id="ref-for-dictdef-flags-3">Flags</a></code> dictionary has no defined members and is present for
-  compatibility with existing implementations. </div>
-   <div class="issue" id="issue-3f3685fc"><a class="self-link" href="#issue-3f3685fc"></a> WEB-COMPAT:
+   <aside class="note" role="note"> The <code class="idl"><a data-link-type="idl" href="#dictdef-flags" id="ref-for-dictdef-flags-3">Flags</a></code> dictionary has no defined members and is present for
+  compatibility with existing implementations. </aside>
+   <aside class="issue" id="issue-3f3685fc"><a class="self-link" href="#issue-3f3685fc"></a> WEB-COMPAT:
   If the file is not present, Chrome gives "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-1">SecurityError</a></code>" if <code>{create:true}</code> is passed as <var>options</var>, and
-  "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-4">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? </div>
-   <div class="example" id="example-adaaa3dc">
+  "<code class="idl"><a data-link-type="idl" href="#exceptiondef-notfounderror" id="ref-for-exceptiondef-notfounderror-4">NotFoundError</a></code>" otherwise. Is this necessary for web-compat? </aside>
+   <aside class="example" id="example-adaaa3dc">
     <a class="self-link" href="#example-adaaa3dc"></a> Helper functions to adapt <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-2">getFile()</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-directoryentry-getdirectory" id="ref-for-dom-directoryentry-getdirectory-2">getDirectory()</a></code> for use
 with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getFileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="p">{</span>
@@ -2063,7 +2063,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
   <span class="p">});</span>
 <span class="p">}</span>
 </pre>
-   </div>
+   </aside>
    <h3 class="heading settled" data-level="7.4" id="api-directoryreader"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-3">DirectoryReader</a></code> Interface</span><a class="self-link" href="#api-directoryreader"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryreader">DirectoryReader</dfn> {
@@ -2127,7 +2127,7 @@ flag</a>.</p>
       </ol>
     </ol>
    </div>
-   <div class="example" id="example-ff51a073">
+   <aside class="example" id="example-ff51a073">
     <a class="self-link" href="#example-ff51a073"></a> Enumerating a directory: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">let</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">dirEntry</span><span class="p">.</span><span class="nx">createReader</span><span class="p">();</span>
 <span class="kd">let</span> <span class="nx">doBatch</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -2152,8 +2152,8 @@ flag</a>.</p>
 <span class="c1">// Start reading</span>
 <span class="nx">doBatch</span><span class="p">();</span>
 </pre>
-   </div>
-   <div class="example" id="example-9181c2df">
+   </aside>
+   <aside class="example" id="example-9181c2df">
     <a class="self-link" href="#example-9181c2df"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-5">DirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
@@ -2173,8 +2173,8 @@ flag</a>.</p>
   <span class="p">});</span>
 <span class="p">}</span>
 </pre>
-   </div>
-   <div class="example" id="example-1d8582b3">
+   </aside>
+   <aside class="example" id="example-1d8582b3">
     <a class="self-link" href="#example-1d8582b3"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-6">DirectoryReader</a></code> for use with <a href="https://github.com/zenparsing/es-observable">Observables</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">getEntriesAsObservable</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nx">Observable</span><span class="p">(</span><span class="nx">observer</span> <span class="o">=></span> <span class="p">{</span>
@@ -2193,7 +2193,7 @@ flag</a>.</p>
   <span class="p">});</span>
 <span class="p">}</span>
 </pre>
-   </div>
+   </aside>
    <h3 class="heading settled" data-level="7.5" id="api-fileentry"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileentry">FileEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-16">Entry</a> {
@@ -2226,7 +2226,7 @@ error</a>, and terminate these steps.</p>
       </ol>
     </ol>
    </div>
-   <div class="example" id="example-119380e0">
+   <aside class="example" id="example-119380e0">
     <a class="self-link" href="#example-119380e0"></a> Read the contents of a dropped file using <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-filereader">FileReader</a></code>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">readFileEntry</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">entry</span><span class="p">.</span><span class="nx">file</span><span class="p">(</span><span class="nx">file</span> <span class="o">=></span> <span class="p">{</span>
@@ -2239,8 +2239,8 @@ error</a>, and terminate these steps.</p>
   <span class="p">},</span> <span class="nx">error</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
 <span class="p">}</span>
 </pre>
-   </div>
-   <div class="example" id="example-1350fd6d">
+   </aside>
+   <aside class="example" id="example-1350fd6d">
     <a class="self-link" href="#example-1350fd6d"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-2">file()</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
 <pre class="lang-javascript highlight"><span></span><span class="kd">function</span> <span class="nx">fileAsPromise</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=></span> <span class="p">{</span>
@@ -2248,7 +2248,7 @@ error</a>, and terminate these steps.</p>
   <span class="p">});</span>
 <span class="p">}</span>
 </pre>
-   </div>
+   </aside>
    <h3 class="heading settled" data-level="7.6" id="api-domfilesystem"><span class="secno">7.6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-2">DOMFileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
 <pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="domfilesystem">DOMFileSystem</dfn> {

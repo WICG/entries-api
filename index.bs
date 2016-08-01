@@ -58,13 +58,13 @@ defines similar types in the context of a sandboxed file system,
 including operations for creating and modifying files and directories,
 but which has not been broadly adopted by web browsers.
 
-<div class=note>
+<aside class=note>
   The APIs described by this document was initially implemented in
   Google Chrome. Other browsers (at this time: Microsoft Edge and
   Mozilla Firefox) are starting to support subsets of Chrome's APIs
   and behavior. The intent of this document is to specify the common
   subset to ensure that the implementations are interoperable.
-</div>
+</aside>
 
 <!-- ============================================================ -->
 <h2 id=concepts>Concepts</h2>
@@ -114,18 +114,18 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
 [=directory=] it is a member of. A [=root directory=] has no
 [=parent=].
 
-<div class=issue>
+<aside class=issue>
   EDITORIAL:
   Should [=directory=] be defined as a special type of [=file=]
   so that minimal changes are necessary in [[HTML]]?
-</div>
+</aside>
 
-<div class=note>
+<aside class=note>
   In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em>
   that does not exist as an entity in the actual native file system
   backing the interaction with the API.
-</div>
+</aside>
 
 A <dfn>filesystem</dfn> consists of a <dfn for=filesystem>name</dfn>
 and a <dfn for=filesystem>root</dfn> which is an associated [=root
@@ -134,12 +134,12 @@ directory=]. The [=filesystem/name=] of a [=/filesystem=] is a
 [=/filesystem=]. A [=root directory=] is associated with exactly one
 [=/filesystem=].
 
-<div class=note>
+<aside class=note>
   Implementations may produce a [=filesystem/name=] by generating a
   UUID for each [=/filesystem=] instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
   assumptions about the structure or content of the names.
-</div>
+</aside>
 
 
 <!-- ============================================================ -->
@@ -155,14 +155,14 @@ An [=entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
 An [=entry=] also has a <dfn for=entry>root</dfn>, which is an associated [=root
 directory=].
 
-<div class=note>
+<aside class=note>
   [=Entries=] are defined in terms of [=paths=] relative to a [=root
   directory=] to account for the fact that a native file system
   backing the interaction with the API may be modified asynchronously
   during operations such as enumerating the contents of a directory.
   Operations exposed on [=entries=] may produce errors in such cases
   where the [=paths=] no longer reference the same entity.
-</div>
+</aside>
 
 The <dfn for=entry>filesystem</dfn> of an [=entry=] is the
 [=/filesystem=] associated with the [=entry=]'s [=entry/root=].
@@ -192,7 +192,7 @@ which return an [=absolute path=]:
 2. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
-    <div class=note>The first string will be empty.</div>
+    <aside class=note>The first string will be empty.</aside>
 
 3. Let |relpath segments| be the result of [=strictly splitting=]
     |relpath| on '/' (U+002F SOLIDUS).
@@ -228,8 +228,8 @@ return a [=file=], [=directory=], or <em>failure</em>.
 
 2. Remove the first entry from |segments|.
 
-    <div class=note>Since |path| was an [=absolute path=],
-      this first entry will always be empty.</div>
+    <aside class=note>Since |path| was an [=absolute path=],
+      this first entry will always be empty.</aside>
 
 3. For each |segment| in |segments|, switch on |segment|:
 
@@ -263,10 +263,10 @@ return a [=file=], [=directory=], or <em>failure</em>.
 <h2 id=file-interface>The {{File}} Interface</h2>
 <!-- ============================================================ -->
 
-<div class=issue>
+<aside class=issue>
   EDITORIAL:
   This section should be merged into [[FileAPI]] once it is complete.
-</div>
+</aside>
 
 <pre class=idl>
 partial interface File {
@@ -283,13 +283,13 @@ specified.
 <h2 id=html-forms>HTML: Forms</h2>
 <!-- ============================================================ -->
 
-<div class=issue>
+<aside class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
   Sections such as the steps to <em>construct the form data set</em>
   need to be extended to include the {{File/webkitRelativePath}}
   property.
-</div>
+</aside>
 
 <pre class=idl>
 partial interface HTMLInputElement {
@@ -309,16 +309,16 @@ as an ancestor were selected. In addition, the {{File/webkitRelativePath}}
 property of each {{File}} is set to a [=relative path=] from the
 selected directory to the file.
 
-<div class=note>
+<aside class=note>
   A user agent may represent any hierarchical data as directories
   during a selection operation. For example, on a device that does not
   expose a native file system directly to the user, photo albums could
   be presented as directories if <code>"image/*"</code> is specified
   for the {{HTMLInputElement/accept}} attribute.
-</div>
+</aside>
 
 
-<div class=example>
+<aside class=example>
 Inspecting the {{File/webkitRelativePath}} properties after a
 directory is selected with an <{input}> element:
 
@@ -332,7 +332,7 @@ directory is selected with an <{input}> element:
       console.log(file.name, file.webkitRelativePath);
   });
 </pre>
-</div>
+</aside>
 
 The {{HTMLInputElement/webkitEntries}} IDL attribute allows scripts to
 access the element's selected entries. On getting, if the IDL
@@ -341,7 +341,7 @@ represent the current [=selected files=] (including directories, if
 permitted). If the IDL attribute does not apply, then it must instead
 return null.
 
-<div class=example>
+<aside class=example>
 Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 
 <pre class=lang-html>
@@ -354,16 +354,16 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
       handleEntry(entry);
   });
 </pre>
-</div>
+</aside>
 
-<div class=issue>
+<aside class=issue>
   WEB-COMPAT:
   In Chrome, {{HTMLInputElement/webkitEntries}} is only populated as
   the result of a drag-and-drop operation, not when the element is
   clicked. Can we fix this so it is always populated?
-</div>
+</aside>
 
-<div class=issue>
+<aside class=issue>
   WEB-COMPAT:
   In Chrome, if {{HTMLInputElement/webkitdirectory}} is specified on a
   {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
@@ -371,7 +371,7 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
   {{File/webkitRelativePath}} properties must be used instead to
   reconstruct the directory structure. Can we fix this so it is always
   populated?
-</div>
+</aside>
 
 
 
@@ -380,10 +380,10 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 <h2 id=html-data>HTML: Drag and drop</h2>
 <!-- ============================================================ -->
 
-<div class=issue>
+<aside class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
-</div>
+</aside>
 
 During a <em>drag-and-drop operation</em>, [=file=] and
 [=directory=] items are associated with [=entries=]. Each
@@ -394,13 +394,13 @@ Additionally, each [=directory=] item is represented in the [=drag
 data store item list=] as a <i>File</i>. If it is accessed via
 {{getAsFile()}} a zero-length {{File}} is returned.
 
-<div class=note>
+<aside class=note>
   A user agent may represent any hierarchical data as files and
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
   directories and files.
-</div>
+</aside>
 
 <pre class=idl>
 partial interface DataTransferItem {
@@ -423,7 +423,7 @@ The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 
 </div>
 
-<div class=example>
+<aside class=example>
 Handling drag and drop of files and directories:
 <pre class=lang-javascript>
 elem.addEventListener('dragover', e => {
@@ -446,7 +446,7 @@ elem.addEventListener('drop', e => {
   }
 });
 </pre>
-</div>
+</aside>
 
 
 <!-- ============================================================ -->
@@ -480,11 +480,11 @@ a new {{FileError}} object with the given |name|, with the
 <em>code</em> from the table below and a <em>message</em> such as the
 description from the table below.
 
-<div class=note>
+<aside class=note>
   User agents are encouraged to give more specific and meaningful
   error messages to allow developers to debug their code, while
   ensuring security and privacy is maintained.
-</div>
+</aside>
 
 <style>
 table.deets { border-collapse: collapse; }
@@ -613,7 +613,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   </tr>
 </table>
 
-<div class=issue>
+<aside class=issue>
   WEB-COMPAT:
   We would like to eliminate {{DOMError}} from the platform in favor
   of {{DOMException}}. Is using {{FileError}} here necessary for
@@ -638,7 +638,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   and usage is extremely low. Chrome will attempt replacing uses of
   {{FileError}} with {{DOMException}} in M54 (stable release circa
   October 2016). Assuming that is successful, this spec will be updated.
-</div>
+</aside>
 
 <pre class=idl>
 callback interface ErrorCallback {
@@ -669,13 +669,13 @@ interface Entry {
 };
 </pre>
 
-<div class=issue>
+<aside class=issue>
   WEB-COMPAT:
   The <code>[NoInterfaceObject]</code> extended attribute is present
   on these in Chrome, hiding the types from the global namespace. Is
   it web-compatible to remove it, and simply expose these types in the
   global namespace as is done for most web APIs?
-</div>
+</aside>
 
 An {{Entry}} has an associated [=entry=].
 
@@ -722,12 +722,12 @@ steps:
 
 </div>
 
-<div class=note>
+<aside class=note>
   An error is possible if files have been modified on disk since the
   {{Entry}} was created.
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Handling an entry:
 <pre class=lang-javascript>
 function handleEntry(entry) {
@@ -740,9 +740,9 @@ function handleEntry(entry) {
   }
 }
 </pre>
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Helper function to adapt {{getParent()}} for use with [=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
@@ -752,7 +752,7 @@ function getParentAsPromise(entry) {
   });
 }
 </pre>
-</div>
+</aside>
 
 <!-- ============================================================ -->
 <h3 id=api-directoryentry>The {{DirectoryEntry}} Interface</h3>
@@ -866,19 +866,19 @@ run the following steps:
 
 </div>
 
-<div class=note>
+<aside class=note>
   The {{Flags}} dictionary has no defined members and is present for
   compatibility with existing implementations.
-</div>
+</aside>
 
-<div class=issue>
+<aside class=issue>
   WEB-COMPAT:
   If the file is not present, Chrome gives "{{SecurityError}}" if
   <code>{create:true}</code> is passed as |options|, and
   "{{NotFoundError}}" otherwise. Is this necessary for web-compat?
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
 with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
@@ -893,7 +893,7 @@ function getDirectoryAsPromise(entry, path) {
   });
 }
 </pre>
-</div>
+</aside>
 
 
 <!-- ============================================================ -->
@@ -969,7 +969,7 @@ steps:
 </div>
 
 
-<div class=example>
+<aside class=example>
 Enumerating a directory:
 <pre class=lang-javascript>
 let reader = dirEntry.createReader();
@@ -995,9 +995,9 @@ let doBatch = function() {
 // Start reading
 doBatch();
 </pre>
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Helper function to adapt {{DirectoryReader}} for use with
 [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
@@ -1019,9 +1019,9 @@ function getEntriesAsPromise(entry) {
   });
 }
 </pre>
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Helper function to adapt {{DirectoryReader}} for use with
 <a href="https://github.com/zenparsing/es-observable">Observables</a>:
 <pre class=lang-javascript>
@@ -1042,7 +1042,7 @@ function getEntriesAsObservable(entry) {
   });
 }
 </pre>
-</div>
+</aside>
 
 <!-- ============================================================ -->
 <h3 id=api-fileentry>The {{FileEntry}} Interface</h3>
@@ -1086,7 +1086,7 @@ steps:
 
 </div>
 
-<div class=example>
+<aside class=example>
 Read the contents of a dropped file using {{FileReader}}:
 <pre class=lang-javascript>
 function readFileEntry(entry) {
@@ -1100,9 +1100,9 @@ function readFileEntry(entry) {
   }, error => console.warn(error));
 }
 </pre>
-</div>
+</aside>
 
-<div class=example>
+<aside class=example>
 Helper function to adapt {{file()}} for use with [=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
@@ -1112,7 +1112,7 @@ function fileAsPromise(entry) {
   });
 }
 </pre>
-</div>
+</aside>
 
 
 <!-- ============================================================ -->
