@@ -2,7 +2,7 @@
 
 ## What is this?
 
-This specification attempts to document the `Entry`, `FileEntry` and
+This specification attempts to document the `FileEntry` and
 `DirectoryEntry` types and related entry points that allow scripts
 access to the contents of directories made available to web pages by
 drag-and-drop operations in Google Chrome and other web browsers that
