@@ -81,14 +81,15 @@ A <dfn>name</dfn> is a string which:
     * is not '.' (U+002E FULL STOP)
     * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
 
-A <dfn>path segment</dfn> is a non-empty [=/name=], '.' (U+002E FULL
-STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).
+A <dfn>path segment</dfn> is a [=/name=], '.' (U+002E FULL STOP) or
+'..' (U+002E FULL STOP, U+002E FULL STOP).
 
 A <dfn>relative path</dfn> is a string consisting of one or more
-[=path segments=] joined by '/' (U+002F SOLIDUS).
+[=path segments=] joined by '/' (U+002F SOLIDUS) that does not start
+with '/' (U+002F SOLIDUS).
 
 An <dfn>absolute path</dfn> is a string consisting of '/' (U+002F
-SOLIDUS), optionally followed by a [=relative path=].
+SOLIDUS) followed by a [=relative path=].
 
 A <dfn>path</dfn> is either a [=relative path=] or an [=absolute
 path=].
@@ -187,21 +188,22 @@ the following steps which return an [=absolute path=]:
 
 <div class=algorithm>
 
-1. If |relpath| is the empty string, return |abspath|.
+1. If |relpath| is an [=absolute path=], return |relpath|.
 
-2. If |relpath| is an [=absolute path=], return |relpath|.
-
-3. Let |abspath segments| be the result of [=strictly splitting=]
+2. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
     <aside class=note>The first string will be empty.</aside>
 
-4. Let |relpath segments| be the result of [=strictly splitting=]
+3. Let |relpath segments| be the result of [=strictly splitting=]
     |relpath| on '/' (U+002F SOLIDUS).
 
-5. For each |segment| in |relpath segments|, switch on |segment|:
+4. For each |segment| in |relpath segments|, switch on |segment|:
 
     <dl class=switch>
+
+      <dt>empty string
+      <dd>Continue.
 
       <dt>'.' (U+002E FULL STOP)
       <dd>Continue.
@@ -215,7 +217,7 @@ the following steps which return an [=absolute path=]:
 
    </dl>
 
-6. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
+5. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
 
 </div>
 
@@ -818,10 +820,9 @@ run the following steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |path| is not the empty string and |path| is not a [=valid
-        path=], [=invoke the callback=] |errorCallback| (if given)
-        with a "{{TypeMismatchError}}" [=file error=], and terminate
-        these steps.
+    2. If |path| is not a [=valid path=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
@@ -860,10 +861,9 @@ run the following steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |path| is not the empty string and |path| is not a [=valid
-        path=], [=invoke the callback=] |errorCallback| (if given)
-        with a "{{TypeMismatchError}}" [=file error=], and terminate
-        these steps.
+    2. If |path| is not a [=valid path=], [=invoke the callback=]
+        |errorCallback| (if given) with a "{{TypeMismatchError}}"
+        [=file error=], and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a

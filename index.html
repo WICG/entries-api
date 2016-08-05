@@ -1525,11 +1525,12 @@ but which has not been broadly adopted by web browsers.</p>
     <li data-md="">
      <p>is not '..' (U+002E FULL STOP, U+002E FULL STOP)</p>
    </ul>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path-segment">path segment</dfn> is a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-1">name</a>, '.' (U+002E FULL
-STOP) or '..' (U+002E FULL STOP, U+002E FULL STOP).</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="relative-path">relative path</dfn> is a string consisting of one or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment-1">path segments</a> joined by '/' (U+002F SOLIDUS).</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path-segment">path segment</dfn> is a <a data-link-type="dfn" href="#name" id="ref-for-name-1">name</a>, '.' (U+002E FULL STOP) or
+'..' (U+002E FULL STOP, U+002E FULL STOP).</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="relative-path">relative path</dfn> is a string consisting of one or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment-1">path segments</a> joined by '/' (U+002F SOLIDUS) that does not start
+with '/' (U+002F SOLIDUS).</p>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="absolute-path">absolute path</dfn> is a string consisting of '/' (U+002F
-SOLIDUS), optionally followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
+SOLIDUS) followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute
 path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
@@ -1575,8 +1576,6 @@ the following steps which return an <a data-link-type="dfn" href="#absolute-path
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>If <var>relpath</var> is the empty string, return <var>abspath</var>.</p>
-     <li data-md="">
       <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-5">absolute path</a>, return <var>relpath</var>.</p>
      <li data-md="">
       <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string">strictly splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
@@ -1586,6 +1585,8 @@ the following steps which return an <a data-link-type="dfn" href="#absolute-path
      <li data-md="">
       <p>For each <var>segment</var> in <var>relpath segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
+       <dt>empty string 
+       <dd>Continue. 
        <dt>'.' (U+002E FULL STOP) 
        <dd>Continue. 
        <dt>'..' (U+002E FULL STOP, U+002E FULL STOP) 
@@ -1594,7 +1595,7 @@ the following steps which return an <a data-link-type="dfn" href="#absolute-path
        <dd>Append <var>segment</var> to <var>abspath segments</var>. 
       </dl>
     </ol>
-    <ol start="6">
+    <ol start="5">
      <li data-md="">
       <p>Return <var>abspath segments</var> joined by '/' (U+002F SOLIDUS).</p>
     </ol>
@@ -2008,10 +2009,7 @@ run the following steps:</p>
        <li data-md="">
         <p>If <var>path</var> is undefined or null let <var>path</var> be the empty string.</p>
        <li data-md="">
-        <p>If <var>path</var> is not the empty string and <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid
-path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given)
-with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-2">file error</a>, and terminate
-these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-2">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-2">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
 "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-1">SecurityError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-3">file error</a>, and terminate these steps.</p>
@@ -2044,10 +2042,7 @@ run the following steps:</p>
        <li data-md="">
         <p>If <var>path</var> is undefined or null let <var>path</var> be the empty string.</p>
        <li data-md="">
-        <p>If <var>path</var> is not the empty string and <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid
-path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given)
-with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file error</a>, and terminate
-these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a "<code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-6">file error</a>, and terminate these steps.</p>
        <li data-md="">
         <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-3">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
 "<code class="idl"><a data-link-type="idl" href="#exceptiondef-securityerror" id="ref-for-exceptiondef-securityerror-2">SecurityError</a></code>" <a data-link-type="dfn" href="#file-error" id="ref-for-file-error-7">file error</a>, and terminate these steps.</p>
