@@ -182,22 +182,24 @@ unset), and a <dfn>reader error</dfn> (initially null).
 <!-- ============================================================ -->
 
 To <dfn>resolve a relative path</dfn> with |abspath| (an [=absolute
-path=]) and |relpath| (a [=relative path=]), run the following steps
-which return an [=absolute path=]:
+path=]) and |relpath| (a [=relative path=] or the empty string), run
+the following steps which return an [=absolute path=]:
 
 <div class=algorithm>
 
-1. If |relpath| is an [=absolute path=], return |relpath|.
+1. If |relpath| is the empty string, return |abspath|.
 
-2. Let |abspath segments| be the result of [=strictly splitting=]
+2. If |relpath| is an [=absolute path=], return |relpath|.
+
+3. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
     <aside class=note>The first string will be empty.</aside>
 
-3. Let |relpath segments| be the result of [=strictly splitting=]
+4. Let |relpath segments| be the result of [=strictly splitting=]
     |relpath| on '/' (U+002F SOLIDUS).
 
-4. For each |segment| in |relpath segments|, switch on |segment|:
+5. For each |segment| in |relpath segments|, switch on |segment|:
 
     <dl class=switch>
 
@@ -213,7 +215,7 @@ which return an [=absolute path=]:
 
    </dl>
 
-5. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
+6. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
 
 </div>
 
@@ -761,11 +763,11 @@ function getParentAsPromise(entry) {
 [NoInterfaceObject]
 interface DirectoryEntry : Entry {
     DirectoryReader createReader();
-    void getFile(USVString path,
+    void getFile(optional USVString? path,
                  optional FileSystemFlags options,
                  optional EntryCallback successCallback,
                  optional ErrorCallback errorCallback);
-    void getDirectory(USVString path,
+    void getDirectory(optional USVString? path,
                       optional FileSystemFlags options,
                       optional EntryCallback successCallback,
                       optional ErrorCallback errorCallback);
@@ -814,33 +816,36 @@ run the following steps:
 
 1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+    1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |options|'s {{FileSystemFlags/create}} member is true,
+    2. If |path| is not the empty string and |path| is not a [=valid
+        path=], [=invoke the callback=] |errorCallback| (if given)
+        with a "{{TypeMismatchError}}" [=file error=], and terminate
+        these steps.
+
+    3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
         "{{SecurityError}}" [=file error=], and terminate these steps.
 
-    3. Let |path| be the result of running the steps to [=resolve a
+    4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
         and |path|.
 
-    4. Let |item| be the result of running the steps to [=evaluate a
+    5. Let |item| be the result of running the steps to [=evaluate a
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
-    5. If |item| is <em>failure</em>, [=invoke the callback=]
+    6. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
         error=], and terminate these steps.
 
-    6. If |item| is not a [=file=], [=invoke the callback=]
+    7. If |item| is not a [=file=], [=invoke the callback=]
         |errorCallback| (if given) with a "{{TypeMismatchError}}" [=file
         error=], and terminate these steps.
 
-    7. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
+    8. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
 
-    8. [=Invoke the callback=] |successCallback| (if given) with a new
+    9. [=Invoke the callback=] |successCallback| (if given) with a new
         {{FileEntry}} object associated with |entry|.
 
 </div>
@@ -853,34 +858,37 @@ run the following steps:
 
 1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+    1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |options|'s {{FileSystemFlags/create}} member is true,
+    2. If |path| is not the empty string and |path| is not a [=valid
+        path=], [=invoke the callback=] |errorCallback| (if given)
+        with a "{{TypeMismatchError}}" [=file error=], and terminate
+        these steps.
+
+    3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
         "{{SecurityError}}" [=file error=], and terminate these steps.
 
-    3. Let |path| be the result of running the steps to [=resolve a
+    4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
         and |path|.
 
-    4. Let |item| be the result of running the steps to [=evaluate a
+    5. Let |item| be the result of running the steps to [=evaluate a
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
-    5. If |item| is <em>failure</em>, [=invoke the callback=]
+    6. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a "{{NotFoundError}}" [=file
         error=], and terminate these steps.
 
-    6. If |item| is not a [=directory=], [=invoke the callback=]
+    7. If |item| is not a [=directory=], [=invoke the callback=]
         |errorCallback| (if given) with a "{{TypeMismatchError}}"
         [=file error=], and terminate these steps.
 
-    7. Let |entry| be a new [=directory entry=] with |item|'s
+    8. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    8. [=Invoke the callback=] |successCallback| (if given) with a new
+    9. [=Invoke the callback=] |successCallback| (if given) with a new
         {{DirectoryEntry}} associated with |entry|.
 
 </div>
