@@ -20,74 +20,54 @@
 <script>
 setup({explicit_timeout: true});
 
-let elem = document.getElementById('drop');
+const tests = [];
+const elem = document.getElementById('drop');
 elem.addEventListener('dragover', e => {
   e.preventDefault();
 });
 elem.addEventListener('drop', e => {
   e.preventDefault();
-  run_tests(e.dataTransfer.items[0].webkitGetAsEntry());
+  const entry = e.dataTransfer.items[0].webkitGetAsEntry();
+  window.entry = entry;
   elem.parentElement.removeChild(elem);
+
+  tests.forEach(f => f(entry));
 });
 
-let tests = [];
+
+// Registers a test to be run when an entry is dropped. Calls |func|
+// with (test, entry); |func| and must call `test.done()` when complete.
 function entry_test(func, description) {
-  let test = async_test(description);
+  const test = async_test(description);
   tests.push(test.step_func(arg => func(test, arg)));
 }
 function run_tests(arg) {
-  tests.forEach(f => f(arg));
 }
 
-// ----------------------------------------
-// DirectoryEntry
-// ----------------------------------------
+// Registers a test to be run when an entry is dropped. Digs the named
+// |file| out of the dropped entry and calls |func| with
+// (test, file_entry); |func| must call `test.done()` when complete.
+function file_entry_test(name, func, description) {
+  return entry_test((t, entry) => {
+    entry.getFile(
+      name, {},
+      t.step_func(entry => func(t, entry)),
+      t.unreached_func('getFile should not fail'));
+  }, description);
+}
 
-entry_test((t, entry) => {
-  assert_class_string(entry, 'DirectoryEntry', 'interface name is DirectoryEntry');
-
-  assert_idl_attribute(entry, 'isFile', 'has isFile attribute');
-  assert_false(entry.isFile, 'isFile is false');
-
-  assert_idl_attribute(entry, 'isDirectory', 'has isDirectory attribute');
-  assert_true(entry.isDirectory, 'isDirectory is true');
-
-  assert_idl_attribute(entry, 'name', 'has name attribute');
-  assert_equals(entry.name, 'upload', 'expected directory was uploaded');
-
-  assert_idl_attribute(entry, 'fullPath', 'has fullPath attribute');
-  assert_equals(entry.fullPath, '/upload', 'directory is child of root directory');
-
-  assert_idl_attribute(entry, 'filesystem', 'has filesystem attribute');
-  assert_class_string(entry.filesystem, 'DOMFileSystem',
-                      'filesystem returns a DOMFileSystem');
-
-  assert_equals(typeof entry.createReader, 'function',
-                'DirectoryEntry has a createReader() function');
-
-  assert_equals(typeof entry.getParent, 'function',
-                'DirectoryEntry has a getParent() function');
-
-  assert_equals(typeof entry.getFile, 'function',
-                'DirectoryEntry has a getFile() function');
-
-  assert_equals(typeof entry.getDirectory, 'function',
-                'DirectoryEntry has a getDirectory() function');
-
-  let reader = entry.createReader();
-  assert_class_string(reader, 'DirectoryReader',
-                      'createReader() returns a DirectoryReader');
-
-  t.done();
-}, 'DirectoryEntry basic IDL');
 
 // ----------------------------------------
 // Paths
 // ----------------------------------------
 
-const INVALID_PATHS = ['\x00', 'a\x00b'];
+const INVALID_PATHS = [
+  '\x00', 'a-\x00-b',
+  '\x0B', 'a-\x0B-b',
+];
 const EMPTY_PATHS = ['', null, undefined];
 const NOT_FOUND_PATHS = ['nope', '/upload/nope', './nope', 'subdir/../nope'];
+
 const DIR_PATHS = [
   'subdir',
   '/upload/subdir',
@@ -111,7 +91,105 @@ const FILE_PATHS = [
 ];
 
 // ----------------------------------------
-// getFile()
+// Entry
+// TODO: Move to separate file
+// ----------------------------------------
+
+entry_test((t, entry) => {
+  assert_false('Entry' in self, 'Entry has [NoInterfaceObject]');
+
+  assert_idl_attribute(entry, 'isFile', 'Entry has isFile attribute');
+  assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
+
+  assert_idl_attribute(entry, 'isDirectory', 'Entry has isDirectory attribute');
+  assert_equals(typeof entry.isDirectory, 'boolean', 'isFile is boolean');
+
+  assert_idl_attribute(entry, 'name', 'Entry has name attribute');
+  assert_equals(typeof entry.name, 'string', 'name is a string');
+
+  assert_idl_attribute(entry, 'fullPath', 'Entry has fullPath attribute');
+  assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
+
+  assert_idl_attribute(entry, 'filesystem', 'Entry has filesystem attribute');
+  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
+
+  assert_idl_attribute(entry, 'getParent', 'Entry has filesystem attribute');
+  assert_equals(typeof entry.getParent, 'function', 'Entry has a getParent() method');
+
+  t.done();
+}, 'Entry - IDL');
+
+entry_test((t, entry) => {
+  assert_equals(entry.getParent(), void 0, 'getParent() arguments are optional');
+
+  entry.getParent(t.step_func(parent => {
+    assert_class_string(parent, 'DirectoryEntry', 'parent should be a directory');
+
+    assert_equals(parent.fullPath, '/', 'parent should be root');
+    assert_equals(parent.name, '', 'root name is empty string');
+
+    t.done();
+  }), t.unreached_func('getParent() should not fail'));
+}, 'Entry - getParent()');
+
+// TODO: Manual test for getParent() where containing directory is removed before getParent() is called.
+
+
+// ----------------------------------------
+// DirectoryEntry
+// ----------------------------------------
+
+entry_test((t, entry) => {
+  // Entry ----------
+
+  assert_idl_attribute(entry, 'isFile', 'DirectoryEntry has isFile attribute');
+  assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
+
+  assert_idl_attribute(entry, 'isDirectory', 'DirectoryEntry has isDirectory attribute');
+  assert_equals(typeof entry.isDirectory, 'boolean', 'isDirectory is boolean');
+
+  assert_idl_attribute(entry, 'name', 'DirectoryEntry has name attribute');
+  assert_equals(typeof entry.name, 'string', 'name is a string');
+
+  assert_idl_attribute(entry, 'fullPath', 'DirectoryEntry has fullPath attribute');
+  assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
+
+  assert_idl_attribute(entry, 'filesystem', 'DirectoryEntry has filesystem attribute');
+  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
+
+  assert_idl_attribute(entry, 'getParent', 'DirectoryEntry has getParent');
+  assert_equals(typeof entry.getParent, 'function', 'getParent() is a method');
+
+  // DirectoryEntry  ----------
+
+  assert_false('DirectoryEntry' in self, 'Entry has [NoInterfaceObject]');
+  assert_class_string(entry, 'DirectoryEntry', 'interface name is DirectoryEntry');
+
+  assert_idl_attribute(entry, 'getFile', 'DirectoryEntry has getFile');
+  assert_equals(typeof entry.getFile, 'function',
+                'getFile() is a method');
+
+  assert_idl_attribute(entry, 'getDirectory', 'DirectoryEntry has getDirectory');
+  assert_equals(typeof entry.getDirectory, 'function',
+                'getDirectory() is a method');
+
+  assert_idl_attribute(entry, 'createReader', 'DirectoryEntry has createReader');
+  assert_equals(typeof entry.createReader, 'function',
+                'createReader() is a method');
+
+  t.done();
+}, 'DirectoryEntry - IDL');
+
+entry_test((t, entry) => {
+  assert_false(entry.isFile, 'isFile is false');
+  assert_true(entry.isDirectory, 'isDirectory is true');
+  assert_equals(entry.name, 'upload', 'expected directory was uploaded');
+  assert_equals(entry.fullPath, '/upload', 'directory is child of root directory');
+  t.done();
+}, 'DirectoryEntry - attributes');
+
+// ----------------------------------------
+// DirectoryEntry - getFile()
 // ----------------------------------------
 
 INVALID_PATHS.forEach(path => {
@@ -214,8 +292,9 @@ entry_test((t, entry) => {
   }), t.unreached_func('getFile should not fail'));
 }, 'DirectoryEntry.getFile() - object identity');
 
+
 // ----------------------------------------
-// getDirectory()
+// DirectoryEntry - getDirectory()
 // ----------------------------------------
 
 INVALID_PATHS.forEach(path => {
@@ -312,19 +391,33 @@ DIR_PATHS.forEach(path => {
   }, 'DirectoryEntry.getDirectory() - directory: ' + path);
 });
 
+
 // ----------------------------------------
 // DirectoryReader
 // TODO: Move to separate file
 // ----------------------------------------
 
 entry_test((t, entry) => {
+  const reader = entry.createReader();
+
+  assert_false('DirectoryReader' in self, 'DirectoryReader has [NoInterfaceObject]');
+  assert_class_string(reader, 'DirectoryReader', 'interface name is DirectoryReader');
+
+  assert_idl_attribute(reader, 'readEntries', 'DirectoryReader has readEntries');
+  assert_equals(typeof reader.readEntries, 'function', 'readEntries() is a method');
+
+  t.done();
+}, 'DirectoryReader - IDL');
+
+
+entry_test((t, entry) => {
   entry.getDirectory('subdir', {}, t.step_func(dir => {
-    let reader = dir.createReader();
+    const reader = dir.createReader();
     assert_class_string(reader, 'DirectoryReader');
     assert_equals(typeof reader.readEntries, 'function');
 
-    let found_names = [];
-    let do_chunk = t.step_func(() =>
+    const found_names = [];
+    const do_chunk = t.step_func(() =>
       reader.readEntries(t.step_func(entries => {
 
         if (entries.length > 0) {
@@ -344,7 +437,7 @@ entry_test((t, entry) => {
 }, 'DirectoryReader - basic enumeration');
 
 entry_test((t, entry) => {
-  let reader = entry.createReader();
+  const reader = entry.createReader();
   reader.readEntries(() => {}, t.unreached_func('readEntries should succeed'));
   reader.readEntries(
     t.unreached_func('readEntries() should fail if already reading'),
@@ -355,15 +448,14 @@ entry_test((t, entry) => {
 }, 'DirectoryReader - reading flag');
 
 entry_test((t, entry) => {
-  let reader = entry.createReader();
+  const reader = entry.createReader();
 
-  let do_chunk = t.step_func(() =>
+  const do_chunk = t.step_func(() =>
     reader.readEntries(t.step_func(entries => {
       if (entries.length > 0) {
         do_chunk();
         return;
       }
-
       reader.readEntries(t.step_func(entries => {
         assert_equals(
           entries.length, 0,
@@ -373,78 +465,161 @@ entry_test((t, entry) => {
     })));
 
   do_chunk();
-
 }, 'DirectoryReader - done flag');
 
 // TODO: Manual tests where directory contents are changed during the test.
 
-// ----------------------------------------
-// Entry
-// TODO: Move to separate file
-// ----------------------------------------
-
-entry_test((t, entry) => {
-  assert_idl_attribute(entry, 'isFile', 'has isFile attribute');
-  assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
-
-  assert_idl_attribute(entry, 'isDirectory', 'has isDirectory attribute');
-  assert_equals(typeof entry.isDirectory, 'boolean', 'isFile is boolean');
-
-  assert_idl_attribute(entry, 'name', 'has name attribute');
-  assert_equals(typeof entry.name, 'string', 'name is a string');
-
-  assert_idl_attribute(entry, 'fullPath', 'has fullPath attribute');
-  assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
-
-  assert_idl_attribute(entry, 'filesystem', 'has filesystem attribute');
-  assert_class_string(entry.filesystem, 'DOMFileSystem',
-                      'filesystem returns a DOMFileSystem');
-
-  assert_equals(entry.getParent(), void 0, 'getParent() arguments are optional');
-  entry.getParent(t.step_func(parent => {
-    assert_class_string(parent, 'DirectoryEntry', 'parent should be a directory');
-
-    assert_equals(parent.fullPath, '/', 'parent should be root');
-    assert_equals(parent.name, '', 'root name is empty string');
-
-    t.done();
-  }), t.unreached_func('getParent() should not fail'));
-});
-
-// TODO: Manual test where file is replaced with directory before file() called
 
 // ----------------------------------------
 // FileEntry
 // TODO: Move to separate file
 // ----------------------------------------
 
-entry_test((t, entry) => {
-  entry.getFile('file.txt', {}, t.step_func(entry => {
-    assert_class_string(entry, 'FileEntry', 'interface name is FileEntry');
-    assert_true(entry.isFile);
-    assert_false(entry.isDirectory);
-    assert_equals(entry.name, 'file.txt');
+file_entry_test('file.txt', (t, entry) => {
+  // Entry ----------
 
-    assert_equals(typeof entry.file, 'function', 'FileEntry has a file() method');
-    assert_throws(TypeError(), () => entry.file(), 'file() has a required argument');
-    entry.file(t.step_func(file => {
+  assert_idl_attribute(entry, 'isFile', 'Entry has isFile attribute');
+  assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
 
-      assert_class_string(file, 'File', 'file() should yield a File');
-      assert_equals(entry.name, file.name, 'entry and file names should match');
-      t.done();
+  assert_idl_attribute(entry, 'isDirectory', 'Entry has isDirectory attribute');
+  assert_equals(typeof entry.isDirectory, 'boolean', 'isFile is boolean');
 
-    }), t.unreached_func('file() should not fail'));
+  assert_idl_attribute(entry, 'name', 'Entry has name attribute');
+  assert_equals(typeof entry.name, 'string', 'name is a string');
 
-  }), t.unreached_func('getFile should not fail'));
-});
+  assert_idl_attribute(entry, 'fullPath', 'Entry has fullPath attribute');
+  assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
+
+  assert_idl_attribute(entry, 'filesystem', 'Entry has filesystem attribute');
+  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
+
+  assert_idl_attribute(entry, 'getParent', 'Entry has filesystem attribute');
+  assert_equals(typeof entry.getParent, 'function', 'Entry has a getParent() method');
+
+  // FileEntry ----------
+
+  assert_false('FileEntry' in self, 'FileEntry has [NoInterfaceObject]');
+  assert_class_string(entry, 'FileEntry', 'interface name is FileEntry');
+
+  assert_equals(typeof entry.file, 'function', 'FileEntry has a file() method');
+  t.done();
+}, 'FileEntry - IDL');
+
+file_entry_test('file.txt', (t, entry) => {
+  assert_true(entry.isFile);
+  assert_false(entry.isDirectory);
+  assert_equals(entry.name, 'file.txt');
+  assert_equals(entry.fullPath, '/upload/file.txt');
+  t.done();
+}, 'FileEntry - attributes');
+
+file_entry_test('file.txt', (t, entry) => {
+  assert_throws(TypeError(), () => entry.file(), 'file() has a required argument');
+  entry.file(t.step_func(file => {
+
+    assert_class_string(file, 'File', 'file() should yield a File');
+    assert_equals(entry.name, file.name, 'entry and file names should match');
+    t.done();
+
+  }), t.unreached_func('file() should not fail'));
+}, 'FileEntry - file()');
 
 // TODO: Manual test where file is replaced with directory before file() called
 
 // ----------------------------------------
 // DOMFileSystem
-// TODO: implement
-// TODO: Include tests that name is consistent
+// TODO: Move to separate file
 // ----------------------------------------
 
+entry_test((t, entry) => {
+  const fs = entry.filesystem;
+
+  assert_false('DOMFileSystem' in self, 'DOMFileSystem has [NoInterfaceObject]');
+  assert_class_string(fs, 'DOMFileSystem', 'interface name is DOMFileSystem');
+
+  assert_idl_attribute(fs, 'name', 'has name attribute');
+  assert_equals(typeof fs.name, 'string', 'name is a string');
+
+  assert_idl_attribute(fs, 'root', 'has root attribute');
+  assert_class_string(fs.root, 'DirectoryEntry', 'DOMFileSystem root is a DirectoryEntry');
+
+  assert_equals(fs.root.name, '', 'root name is empty string');
+
+  assert_equals(fs.root.fullPath, '/', 'root path is /');
+
+  t.done();
+
+}, 'DOMFileSystem - API');
+
+entry_test((t, entry) => {
+  const fs = entry.filesystem;
+
+  entry.getParent(t.step_func(parent => {
+    const pfs = parent.filesystem;
+    assert_not_equals(fs, pfs.filesystem, 'DOMFileSystem objects do not have object identity');
+    assert_equals(fs.name, pfs.name, 'DOMFileSystem names match');
+
+    t.done();
+  }), t.unreached_func('getParent() should not fail'));
+
+}, 'DOMFileSystem - name consistency and object identity');
+
+
+// ----------------------------------------
+// Errors
+// TODO: Move to separate file
+// ----------------------------------------
+
+entry_test((t, entry) => {
+  entry.getFile(
+    NOT_FOUND_PATHS[0],
+    {},
+    t.unreached_func('getFile should fail'),
+    t.step_func(error => {
+      assert_equals(typeof error.name, 'string', 'Error has name property');
+      assert_equals(typeof error.message, 'string', 'Error has message property');
+      assert_equals(error.name, 'NotFoundError', 'error is NotFoundError');
+      t.done();
+    }));
+}, 'Errors - NotFoundError');
+
+entry_test((t, entry) => {
+  entry.getFile(
+    DIR_PATHS[0],
+    {},
+    t.unreached_func('getFile should fail'),
+    t.step_func(error => {
+      assert_equals(typeof error.name, 'string', 'Error has name property');
+      assert_equals(typeof error.message, 'string', 'Error has message property');
+      assert_equals(error.name, 'TypeMismatchError', 'error is TypeMismatchError');
+      t.done();
+    }));
+}, 'Errors - TypeMismatchError');
+
+entry_test((t, entry) => {
+  entry.getFile(
+    FILE_PATHS[0],
+    {create: true},
+    t.unreached_func('getFile should fail'),
+    t.step_func(error => {
+      assert_equals(typeof error.name, 'string', 'Error has name property');
+      assert_equals(typeof error.message, 'string', 'Error has message property');
+      assert_equals(error.name, 'SecurityError', 'error is SecurityError');
+      t.done();
+    }));
+}, 'Errors - SecurityError');
+
+entry_test((t, entry) => {
+  const reader = entry.createReader();
+  reader.readEntries(() => {}, t.unreached_func('readEntries should succeed'));
+  reader.readEntries(
+    t.unreached_func('readEntries() should fail if already reading'),
+    t.step_func(error => {
+      assert_equals(typeof error.name, 'string', 'Error has name property');
+      assert_equals(typeof error.message, 'string', 'Error has message property');
+      assert_equals(error.name, 'InvalidStateError', 'error is InvalidStateError');
+      t.done();
+    }));
+}, 'Errors - InvalidStateError');
 
 </script>
