@@ -457,7 +457,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: inherit;
+		font-size: normal;
 	}
 	dfn var {
 		font-style: normal;
@@ -1162,7 +1162,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed 1.0.0" name="generator">
-  <link href="folder-icon.png" rel="icon">
+  <link href="logo-folder.png" rel="icon">
 <style>
 table.deets { border-collapse: collapse; }
 table.deets th { border-bottom: 2px solid silver; vertical-align: top; }
@@ -1416,7 +1416,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-08-08">8 August 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-09-29">29 September 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1535,7 +1535,7 @@ with '/' (U+002F SOLIDUS).</p>
 SOLIDUS) followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute
 path</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
    <h3 class="heading settled" data-level="2.2" id="files-dirs"><span class="secno">2.2. </span><span class="content">Files and Directories</span><a class="self-link" href="#files-dirs"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file">file</dfn> consists of binary data and a <dfn class="dfn-paneled" data-dfn-for="file" data-dfn-type="dfn" data-noexport="" id="file-name">name</dfn> (a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-2">name</a>).</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory">directory</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="directory" data-dfn-type="dfn" data-noexport="" id="directory-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-3">name</a>) and an ordered list of members. Each member is either a <a data-link-type="dfn" href="#file" id="ref-for-file-1">file</a> or a <a data-link-type="dfn" href="#directory" id="ref-for-directory-1">directory</a>. Each member of a <a data-link-type="dfn" href="#directory" id="ref-for-directory-2">directory</a> must have
@@ -1549,7 +1549,7 @@ a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual native file system
   backing the interaction with the API. </aside>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="filesystem">filesystem</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="filesystem" data-dfn-type="dfn" data-noexport="" id="filesystem-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
-directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
+directory</a>. The <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-1">name</a> of a <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-1">filesystem</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-2">filesystem</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-3">filesystem</a>.</p>
    <aside class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#filesystem-name" id="ref-for-filesystem-name-2">name</a> by generating a
   UUID for each <a data-link-type="dfn" href="#filesystem" id="ref-for-filesystem-4">filesystem</a> instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
@@ -1760,7 +1760,7 @@ null and abort these steps.</p>
    </aside>
    <h2 class="heading settled" data-level="7" id="api-files-directories"><span class="secno">7. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="common-types"><span class="secno">7.1. </span><span class="content">Common Types</span><a class="self-link" href="#common-types"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileerror">FileError</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a> {
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="FileError" data-dfn-type="const" data-export="" id="dom-fileerror-not_found_err">NOT_FOUND_ERR</dfn> = 1;
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="FileError" data-dfn-type="const" data-export="" id="dom-fileerror-security_err">SECURITY_ERR</dfn> = 2;
@@ -1886,7 +1886,7 @@ description from the table below.</p>
    <p>An <code class="idl"><a data-link-type="idl" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-1">ErrorCallback</a></code> function is used for operations that may return an
 error asynchronously.</p>
    <h3 class="heading settled" data-level="7.2" id="api-entry"><span class="secno">7.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#entry" id="ref-for-entry-5">Entry</a></code> Interface</span><a class="self-link" href="#api-entry"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="entry">Entry</dfn> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-entry-isfile">isFile</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="Entry" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean" id="dom-entry-isdirectory">isDirectory</dfn>;
@@ -1963,7 +1963,7 @@ path</a>.</p>
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.3" id="api-directoryentry"><span class="secno">7.3. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryentry" id="ref-for-directoryentry-2">DirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryentry">DirectoryEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-13">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader" id="ref-for-directoryreader-1">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader" id="ref-for-dom-directoryentry-createreader-1">createReader</a>();
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getfile" id="ref-for-dom-directoryentry-getfile-1">getFile</a>(<span class="kt">optional</span> <span class="kt">USVString</span>? <dfn class="nv idl-code" data-dfn-for="DirectoryEntry/getFile(path, options, successCallback, errorCallback), DirectoryEntry/getFile(path, options, successCallback), DirectoryEntry/getFile(path, options), DirectoryEntry/getFile(path), DirectoryEntry/getFile()" data-dfn-type="argument" data-export="" id="dom-directoryentry-getfile-path-options-successcallback-errorcallback-path">path<a class="self-link" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-path"></a></dfn>,
@@ -2083,7 +2083,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.4" id="api-directoryreader"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#directoryreader" id="ref-for-directoryreader-3">DirectoryReader</a></code> Interface</span><a class="self-link" href="#api-directoryreader"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="directoryreader">DirectoryReader</dfn> {
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="DirectoryReader" data-dfn-type="method" data-export="" data-lt="readEntries(successCallback, errorCallback)|readEntries(successCallback)" id="dom-directoryreader-readentries">readEntries<a class="self-link" href="#dom-directoryreader-readentries"></a></dfn>(<a class="n" data-link-type="idl-name" href="#callbackdef-entriescallback" id="ref-for-callbackdef-entriescallback-1">EntriesCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback"></a></dfn>,
                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-5">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="DirectoryReader/readEntries(successCallback, errorCallback), DirectoryReader/readEntries(successCallback)" data-dfn-type="argument" data-export="" id="dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback"></a></dfn>);
@@ -2213,7 +2213,7 @@ flag</a>.</p>
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.5" id="api-fileentry"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#fileentry" id="ref-for-fileentry-2">FileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileentry">FileEntry</dfn> : <a class="n" data-link-type="idl-name" href="#entry" id="ref-for-entry-16">Entry</a> {
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-fileentry-file" id="ref-for-dom-fileentry-file-1">file</a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback-1">FileCallback</a> <dfn class="nv idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
               <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback-6">ErrorCallback</a> <dfn class="nv idl-code" data-dfn-for="FileEntry/file(successCallback, errorCallback), FileEntry/file(successCallback)" data-dfn-type="argument" data-export="" id="dom-fileentry-file-successcallback-errorcallback-errorcallback">errorCallback<a class="self-link" href="#dom-fileentry-file-successcallback-errorcallback-errorcallback"></a></dfn>);
@@ -2268,7 +2268,7 @@ error</a>, and terminate these steps.</p>
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.6" id="api-domfilesystem"><span class="secno">7.6. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#domfilesystem" id="ref-for-domfilesystem-2">DOMFileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="domfilesystem">DOMFileSystem</dfn> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="USVString" id="dom-domfilesystem-name">name</dfn>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry" id="ref-for-directoryentry-5">DirectoryEntry</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="DOMFileSystem" data-dfn-type="attribute" data-export="" data-readonly="" data-type="DirectoryEntry" id="dom-domfilesystem-root">root</dfn>;
@@ -2598,7 +2598,9 @@ for suggestions, reviews, and other feedback.</p>
     <a data-link-type="biblio">[WebIDL-1]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
-     <li><a href="https://heycam.github.io/webidl/#dom-USVString">USVString</a>
+     <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
+     <li><a href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a>
     </ul>
@@ -2638,7 +2640,7 @@ for suggestions, reviews, and other feedback.</p>
     <a class="n" data-link-type="idl-name" href="#entry">Entry</a>? <a class="nv" href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</a>();
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <a class="nv" href="#fileerror">FileError</a> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a> {
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv" href="#dom-fileerror-not_found_err">NOT_FOUND_ERR</a> = 1;
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv" href="#dom-fileerror-security_err">SECURITY_ERR</a> = 2;
@@ -2660,7 +2662,7 @@ for suggestions, reviews, and other feedback.</p>
     <span class="kt">void</span> <a class="nv" href="#dom-errorcallback-handleevent">handleEvent</a>(<a class="n" data-link-type="idl-name" href="#fileerror">FileError</a> <a class="nv" href="#dom-errorcallback-handleevent-err-err">err</a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#entry">Entry</a> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv" data-readonly="" data-type="boolean" href="#dom-entry-isfile">isFile</a>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span> <a class="nv" data-readonly="" data-type="boolean" href="#dom-entry-isdirectory">isDirectory</a>;
@@ -2672,7 +2674,7 @@ for suggestions, reviews, and other feedback.</p>
                    <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-entry-getparent-successcallback-errorcallback-errorcallback">errorCallback</a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#directoryentry">DirectoryEntry</a> : <a class="n" data-link-type="idl-name" href="#entry">Entry</a> {
     <a class="n" data-link-type="idl-name" href="#directoryreader">DirectoryReader</a> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-createreader">createReader</a>();
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-directoryentry-getfile">getFile</a>(<span class="kt">optional</span> <span class="kt">USVString</span>? <a class="nv" href="#dom-directoryentry-getfile-path-options-successcallback-errorcallback-path">path</a>,
@@ -2694,7 +2696,7 @@ for suggestions, reviews, and other feedback.</p>
     <span class="kt">void</span> <a class="nv" href="#dom-entrycallback-handleevent">handleEvent</a>(<a class="n" data-link-type="idl-name" href="#entry">Entry</a> <a class="nv" href="#dom-entrycallback-handleevent-entry-entry">entry</a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#directoryreader">DirectoryReader</a> {
     <span class="kt">void</span> <a class="nv" href="#dom-directoryreader-readentries">readEntries</a>(<a class="n" data-link-type="idl-name" href="#callbackdef-entriescallback">EntriesCallback</a> <a class="nv" href="#dom-directoryreader-readentries-successcallback-errorcallback-successcallback">successCallback</a>,
                      <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-directoryreader-readentries-successcallback-errorcallback-errorcallback">errorCallback</a>);
@@ -2703,7 +2705,7 @@ for suggestions, reviews, and other feedback.</p>
     <span class="kt">void</span> <a class="nv" href="#dom-entriescallback-handleevent">handleEvent</a>(<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#entry">Entry</a>> <a class="nv" href="#dom-entriescallback-handleevent-entries-entries">entries</a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#fileentry">FileEntry</a> : <a class="n" data-link-type="idl-name" href="#entry">Entry</a> {
     <span class="kt">void</span> <a class="nv idl-code" data-link-type="method" href="#dom-fileentry-file">file</a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback">FileCallback</a> <a class="nv" href="#dom-fileentry-file-successcallback-errorcallback-successcallback">successCallback</a>,
               <span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#callbackdef-errorcallback">ErrorCallback</a> <a class="nv" href="#dom-fileentry-file-successcallback-errorcallback-errorcallback">errorCallback</a>);
@@ -2712,7 +2714,7 @@ for suggestions, reviews, and other feedback.</p>
     <span class="kt">void</span> <a class="nv" href="#dom-filecallback-handleevent">handleEvent</a>(<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-file">File</a> <a class="nv" href="#dom-filecallback-handleevent-file-file">file</a>);
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">NoInterfaceObject</a>]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#NoInterfaceObject">NoInterfaceObject</a>]
 <span class="kt">interface</span> <a class="nv" href="#domfilesystem">DOMFileSystem</a> {
     <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">USVString</span> <a class="nv" data-readonly="" data-type="USVString" href="#dom-domfilesystem-name">name</a>;
     <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#directoryentry">DirectoryEntry</a> <a class="nv" data-readonly="" data-type="DirectoryEntry" href="#dom-domfilesystem-root">root</a>;
