@@ -1,4 +1,4 @@
-<link rel="icon" href="folder-icon.png">
+<link rel="icon" href="logo-folder.png">
 <pre class=metadata>
 Title: File and Directory Entries API
 Shortname: EntriesAPI

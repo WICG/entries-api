@@ -457,7 +457,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: inherit;
+		font-size: normal;
 	}
 	dfn var {
 		font-style: normal;
@@ -1162,7 +1162,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed 1.0.0" name="generator">
-  <link href="folder-icon.png" rel="icon">
+  <link href="logo-folder.png" rel="icon">
 <style>
 table.deets { border-collapse: collapse; }
 table.deets th { border-bottom: 2px solid silver; vertical-align: top; }
@@ -1416,7 +1416,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-08-24">24 August 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-10-04">4 October 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1535,7 +1535,7 @@ with '/' (U+002F SOLIDUS).</p>
 SOLIDUS) followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-1">relative path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-2">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path-1">absolute
 path</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path-1">path</a>.</p>
    <h3 class="heading settled" data-level="2.2" id="files-dirs"><span class="secno">2.2. </span><span class="content">Files and Directories</span><a class="self-link" href="#files-dirs"></a></h3>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file">file</dfn> consists of binary data and a <dfn class="dfn-paneled" data-dfn-for="file" data-dfn-type="dfn" data-noexport="" id="file-name">name</dfn> (a non-empty <a data-link-type="dfn" href="#name" id="ref-for-name-2">name</a>).</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="directory">directory</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="directory" data-dfn-type="dfn" data-noexport="" id="directory-name">name</dfn> (a <a data-link-type="dfn" href="#name" id="ref-for-name-3">name</a>) and an ordered list of members. Each member is either a <a data-link-type="dfn" href="#file" id="ref-for-file-1">file</a> or a <a data-link-type="dfn" href="#directory" id="ref-for-directory-1">directory</a>. Each member of a <a data-link-type="dfn" href="#directory" id="ref-for-directory-2">directory</a> must have
@@ -1549,7 +1549,7 @@ a <a data-link-type="dfn" href="#directory" id="ref-for-directory-4">directory</
   be presented by the API as if contained by a <em>virtual root</em> that does not exist as an entity in the actual native file system
   backing the interaction with the API. </aside>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="file-system">file system</dfn> consists of a <dfn class="dfn-paneled" data-dfn-for="file system" data-dfn-type="dfn" data-noexport="" id="file-system-name">name</dfn> and a <dfn class="dfn-paneled" data-dfn-for="file system" data-dfn-type="dfn" data-noexport="" id="file-system-root">root</dfn> which is an associated <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-3">root
-directory</a>. The <a data-link-type="dfn" href="#file-system-name" id="ref-for-file-system-name-1">name</a> of a <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-1">file system</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dom-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-2">file system</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-3">file system</a>.</p>
+directory</a>. The <a data-link-type="dfn" href="#file-system-name" id="ref-for-file-system-name-1">name</a> of a <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-1">file system</a> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString">USVString</a></code> which is implementation defined but is unique to the <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-2">file system</a>. A <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory-4">root directory</a> is associated with exactly one <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-3">file system</a>.</p>
    <aside class="note" role="note"> Implementations may produce a <a data-link-type="dfn" href="#file-system-name" id="ref-for-file-system-name-2">name</a> by generating a
   UUID for each <a data-link-type="dfn" href="#file-system" id="ref-for-file-system-4">file system</a> instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
@@ -1759,7 +1759,7 @@ null and abort these steps.</p>
    </aside>
    <h2 class="heading settled" data-level="7" id="api-files-directories"><span class="secno">7. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
    <h3 class="heading settled" data-level="7.1" id="common-types"><span class="secno">7.1. </span><span class="content">Common Types</span><a class="self-link" href="#common-types"></a></h3>
-<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
+<pre class="idl highlight def">[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="fileerror">FileError</dfn> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a> {
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="FileError" data-dfn-type="const" data-export="" id="dom-fileerror-not_found_err">NOT_FOUND_ERR</dfn> = 1;
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="FileError" data-dfn-type="const" data-export="" id="dom-fileerror-security_err">SECURITY_ERR</dfn> = 2;
@@ -2585,7 +2585,8 @@ for suggestions, reviews, and other feedback.</p>
     <a data-link-type="biblio">[WebIDL-1]</a> defines the following terms:
     <ul>
      <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
-     <li><a href="https://heycam.github.io/webidl/#dom-USVString">USVString</a>
+     <li><a href="https://heycam.github.io/webidl/#Exposed">Exposed</a>
+     <li><a href="https://heycam.github.io/webidl/#idl-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-simple-exception">simple exception</a>
     </ul>
@@ -2600,7 +2601,7 @@ for suggestions, reviews, and other feedback.</p>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl-1">[WebIDL-1]
-   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 8 March 2016. CR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Cameron McCormack; Boris Zbarsky. <a href="https://heycam.github.io/webidl/">WebIDL Level 1</a>. 15 September 2016. PR. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
    <dt id="biblio-whatwg-dom">[WHATWG-DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/">DOM Standard</a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
   </dl>
@@ -2625,7 +2626,7 @@ for suggestions, reviews, and other feedback.</p>
     <a class="n" data-link-type="idl-name" href="#filesystementry">FileSystemEntry</a>? <a class="nv" href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry</a>();
 };
 
-[<a class="nv idl-code" data-link-type="extended-attribute">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
+[<a class="nv idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed">Exposed</a>=(<span class="n">Window</span>,<span class="n">Worker</span>)]
 <span class="kt">interface</span> <a class="nv" href="#fileerror">FileError</a> : <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#domerror">DOMError</a> {
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv" href="#dom-fileerror-not_found_err">NOT_FOUND_ERR</a> = 1;
     <span class="kt">const</span> <span class="kt">unsigned</span> <span class="kt">short</span> <a class="nv" href="#dom-fileerror-security_err">SECURITY_ERR</a> = 2;
