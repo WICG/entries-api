@@ -459,196 +459,23 @@ elem.addEventListener('drop', e => {
 <h2 id=api-files-directories>Files and Directories</h2>
 <!-- ============================================================ -->
 
-<h3 id=common-types>Common Types</h3>
-
-<pre class=idl>
-[Exposed=(Window,Worker)]
-interface FileError : DOMError {
-    const unsigned short NOT_FOUND_ERR = 1;
-    const unsigned short SECURITY_ERR = 2;
-    const unsigned short ABORT_ERR = 3;
-    const unsigned short NOT_READABLE_ERR = 4;
-    const unsigned short ENCODING_ERR = 5;
-    const unsigned short NO_MODIFICATION_ALLOWED_ERR = 6;
-    const unsigned short INVALID_STATE_ERR = 7;
-    const unsigned short SYNTAX_ERR = 8;
-    const unsigned short INVALID_MODIFICATION_ERR = 9;
-    const unsigned short QUOTA_EXCEEDED_ERR = 10;
-    const unsigned short TYPE_MISMATCH_ERR = 11;
-    const unsigned short PATH_EXISTS_ERR = 12;
-
-    readonly attribute unsigned short code;
-};
-</pre>
-
-When a |name| <dfn>file error</dfn> is to be created, create
-a new {{FileError}} object with the given |name|, with the
-<em>code</em> from the table below and a <em>message</em> such as the
-description from the table below.
-
-<aside class=note>
-  User agents are encouraged to give more specific and meaningful
-  error messages to allow developers to debug their code, while
-  ensuring security and privacy is maintained.
-</aside>
-
-<style>
-table.deets { border-collapse: collapse; }
-table.deets th { border-bottom: 2px solid silver; vertical-align: top; }
-table.deets td { border-bottom: 1px solid silver; vertical-align: top; }
-table.deets .used:after { color: #080; content: "\2713"; font-size: 200%; }
-table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
-</style>
-
-<table class=deets>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Code and value</th>
-    <th>Used?</th>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>NotFoundError</code></dfn>"</td>
-    <td class=long>
-      A requested file or directory could not be found at the time an
-      operation was processed.
-    </td>
-    <td>{{FileError/NOT_FOUND_ERR}} (1)</td>
-    <td class=used></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>SecurityError</code></dfn>"</td>
-    <td class=long>
-      It was determined that certain files are unsafe for access
-      within a Web application, or that too many calls are being made
-      on file resources.
-    </td>
-    <td>{{FileError/SECURITY_ERR}} (2)</td>
-    <td class=used></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>AbortError</code></dfn>"</td>
-    <td class=long>
-      An ongoing operation was aborted, typically with a call to
-      abort().
-    </td>
-    <td>{{FileError/ABORT_ERR}} (3)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>NotReadableError</code></dfn>"</td>
-    <td class=long>
-      The requested file could not be read, typically due to
-      permission problems that have occurred after a reference to a
-      file was acquired.
-    </td>
-    <td>{{FileError/NOT_READABLE_ERR}} (4)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>EncodingError</code></dfn>"</td>
-    <td class=long>
-      A URI supplied to the API was malformed, or the resulting Data
-      URL has exceeded the URL length limitations for Data URLs.
-    </td>
-    <td>{{FileError/ENCODING_ERR}} (5)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>NoModificationAllowedError</code></dfn>"</td>
-    <td class=long>
-      An attempt was made to write to a file or directory which could
-      not be modified due to the state of the underlying filesystem.
-    </td>
-    <td>{{FileError/NO_MODIFICATION_ALLOWED_ERR}} (6)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>InvalidStateError</code></dfn>"</td>
-    <td class=long>
-      An operation that depends on state cached in an interface object
-      was made but the state had changed since it was read from disk.
-    </td>
-    <td>{{FileError/INVALID_STATE_ERR}} (7)</td>
-    <td class=used></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>SyntaxError</code></dfn>"</td>
-    <td class=long>
-      An invalid or unsupported argument was given, like an invalid
-      line ending specifier.
-    </td>
-    <td>{{FileError/SYNTAX_ERR}} (8)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>InvalidModificationError</code></dfn>"</td>
-    <td class=long>
-      An operation that depends on state cached in an interface object
-      was made but the state had changed since it was read from disk.
-    </td>
-    <td>{{FileError/INVALID_MODIFICATION_ERR}} (9)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>QuotaExceededError</code></dfn>"</td>
-    <td class=long>
-      The operation failed because it would cause the application to
-      exceed its storage quota.
-    </td>
-    <td>{{FileError/QUOTA_EXCEEDED_ERR}} (10)</td>
-    <td class=unused></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>TypeMismatchError</code></dfn>"</td>
-    <td class=long>
-      The path supplied exists, but was not an entry of requested
-      type.
-    </td>
-    <td>{{FileError/TYPE_MISMATCH_ERR}} (11)</td>
-    <td class=used></td>
-  </tr>
-  <tr>
-    <td>"<dfn exception><code>PathExistsError</code></dfn>"</td>
-    <td class=long>
-      An attempt was made to create a file or directory where an
-      element already exists.
-    </td>
-    <td>{{FileError/PATH_EXISTS_ERR}} (12)</td>
-    <td class=unused></td>
-  </tr>
-</table>
+A <dfn exception>TypeMismatchError</dfn> is a {{DOMException}} with
+that [=exception/error name=] and a [=exception/message=] such as
+<em>"The path supplied exists, but was not an entry of requested
+type."</em>
 
 <aside class=issue>
-  WEB-COMPAT:
-  We would like to eliminate {{DOMError}} from the platform in favor
-  of {{DOMException}}. Is using {{FileError}} here necessary for
-  web-compat?
-
-  Note that the codes here differ from those in {{DOMException}}:
-  {{FileError/NOT_FOUND_ERR}} = 1 vs. 8,
-  {{FileError/SECURITY_ERR}} = 2 vs. 18,
-  {{FileError/ABORT_ERR}} = 3 vs. 20,
-  {{FileError/INVALID_STATE_ERR}} = 7 vs. 11,
-  {{FileError/SYNTAX_ERR}} = 8 vs. 12,
-  {{FileError/INVALID_MODIFICATION_ERR}} = 9 vs. 13,
-  {{FileError/QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
-  {{FileError/TYPE_MISMATCH_ERR}} = 11 vs. [=simple exception=] <code>TypeError</code>.
-
-  <a href="http://httparchive.org/">HTTP Archive</a> search for
-  <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
-  all from either FileReader, use of Chrome's File System API, or
-  PhoneGap/Cordova libraries.
-
-  Chrome has reported the `code` property as deprecated for some time
-  and usage is extremely low. Chrome will attempt replacing uses of
-  {{FileError}} with {{DOMException}} in M54 (stable release circa
-  October 2016). Assuming that is successful, this spec will be updated.
+  WEB COMPAT:
+  The legacy {{TypeMismatchError}} has been replaced in most
+  specifications by <b>TypeError</b>, but the name differs. Is it
+  compatible to switch here as well? If not, should we restore
+  {{TypeMismatchError}} to [[WebIDL]] with appropriate caveats?
 </aside>
+
 
 <pre class=idl>
 callback interface ErrorCallback {
-    void handleEvent(FileError err);
+    void handleEvent(DOMException err);
 };
 </pre>
 
@@ -709,8 +536,8 @@ steps:
         path=] with the [=entry=]'s [=entry/root=] and |path|.
 
     3. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
-        error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{NotFoundError}}, and terminate these steps.
 
     4. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
@@ -818,12 +645,13 @@ invoked, must run the following steps:
     1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{TypeMismatchError}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        "{{SecurityError}}" [=file error=], and terminate these steps.
+        newly [=exception/created=] {{SecurityError}}, and terminate
+        these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
@@ -833,12 +661,12 @@ invoked, must run the following steps:
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
-        error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{NotFoundError}}, and terminate these steps.
 
     7. If |item| is not a [=file=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}" [=file
-        error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{TypeMismatchError}}, and terminate these steps.
 
     8. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
@@ -859,12 +687,13 @@ invoked, must run the following steps:
     1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{TypeMismatchError}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        "{{SecurityError}}" [=file error=], and terminate these steps.
+        newly [=exception/created=] {{SecurityError}}, and terminate
+        these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
@@ -874,12 +703,12 @@ invoked, must run the following steps:
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
-        error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{NotFoundError}}, and terminate these steps.
 
     7. If |item| is not a [=directory=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{TypeMismatchError}}, and terminate these steps.
 
     8. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
@@ -933,8 +762,9 @@ steps:
 <div class=algorithm>
 
 1. If the [=directory reader=]'s [=reading flag=] is set, [=queue a
-    task=] to [=invoke the callback=] |errorCallback| with an
-    "{{InvalidStateError}}" [=file error=], and terminate these steps.
+    task=] to [=invoke the callback=] |errorCallback| with a newly
+    [=exception/created=] {{InvalidStateError}}, and terminate these
+    steps.
 
 2. If the [=directory reader=]'s [=reader error=] is not null, [=queue
     a task=] to [=invoke the callback=] |errorCallback| (if given)
@@ -958,9 +788,10 @@ steps:
             a path=] with the [=entry=]'s [=entry/root=] and [=full path=].
 
         2. If |dir| is failure, set the [=directory reader=]'s
-            [=reader error=] to a new "{{NotFoundError}}" [=file
-            error=], [=invoke the callback=] |errorCallback| (if
-            given) with [=reader error=], and terminate these steps.
+            [=reader error=] to a newly [=exception/created=]
+            {{NotFoundError}}, [=invoke the callback=] |errorCallback|
+            (if given) with [=reader error=], and terminate these
+            steps.
 
         3. Set the [=directory reader=]'s [=directory=] to |dir|.
 
@@ -970,7 +801,7 @@ steps:
 
     5. If the previous step failed (for example, the [=directory=] was
         deleted or permission is denied), then set the [=directory
-        reader=]'s [=reader error=] to an appropriate [=file error=],
+        reader=]'s [=reader error=] to an appropriate {{DOMException}},
         [=invoke the callback=] |errorCallback| (if given) with
         [=reader error=], and terminate these steps.
 
@@ -1086,12 +917,12 @@ steps:
         path=].
 
     2. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a "{{NotFoundError}}" [=file
-        error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{NotFoundError}}, and terminate these steps.
 
     3. If |item| is a [=directory=], [=invoke the callback=]
-        |errorCallback| (if given) with a "{{TypeMismatchError}}"
-        [=file error=], and terminate these steps.
+        |errorCallback| (if given) with a newly [=exception/created=]
+        {{TypeMismatchError}}, and terminate these steps.
 
     4. [=Invoke the callback=] |successCallback| with a new {{File}}
         object representing |item|.
