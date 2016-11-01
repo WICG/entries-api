@@ -12,6 +12,7 @@ ED: https://wicg.github.io/entries-api/
 Level: 1
 Editor: Joshua Bell, jsbell@google.com
 Group: wicg
+Assume Explicit For: yes
 </pre>
 <pre class="anchors">
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
@@ -396,7 +397,7 @@ During a <em>drag-and-drop operation</em>, [=file=] and
 
 Additionally, each [=directory=] item is represented in the [=drag
 data store item list=] as a <i>File</i>. If it is accessed via
-{{getAsFile()}} a zero-length {{File}} is returned.
+{{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
 <aside class=note>
   A user agent may represent any hierarchical data as files and
@@ -412,8 +413,8 @@ partial interface DataTransferItem {
 };
 </pre>
 
-The {{webkitGetAsEntry()}} method must run the following steps when
-invoked:
+The {{DataTransferItem/webkitGetAsEntry()}} method must run the
+following steps when invoked:
 
 <div class=algorithm>
 
@@ -512,7 +513,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       A requested file or directory could not be found at the time an
       operation was processed.
     </td>
-    <td>{{NOT_FOUND_ERR}} (1)</td>
+    <td>{{FileError/NOT_FOUND_ERR}} (1)</td>
     <td class=used></td>
   </tr>
   <tr>
@@ -522,7 +523,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       within a Web application, or that too many calls are being made
       on file resources.
     </td>
-    <td>{{SECURITY_ERR}} (2)</td>
+    <td>{{FileError/SECURITY_ERR}} (2)</td>
     <td class=used></td>
   </tr>
   <tr>
@@ -531,7 +532,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An ongoing operation was aborted, typically with a call to
       abort().
     </td>
-    <td>{{ABORT_ERR}} (3)</td>
+    <td>{{FileError/ABORT_ERR}} (3)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -541,7 +542,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       permission problems that have occurred after a reference to a
       file was acquired.
     </td>
-    <td>{{NOT_READABLE_ERR}} (4)</td>
+    <td>{{FileError/NOT_READABLE_ERR}} (4)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -550,7 +551,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       A URI supplied to the API was malformed, or the resulting Data
       URL has exceeded the URL length limitations for Data URLs.
     </td>
-    <td>{{ENCODING_ERR}} (5)</td>
+    <td>{{FileError/ENCODING_ERR}} (5)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -559,7 +560,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An attempt was made to write to a file or directory which could
       not be modified due to the state of the underlying filesystem.
     </td>
-    <td>{{NO_MODIFICATION_ALLOWED_ERR}} (6)</td>
+    <td>{{FileError/NO_MODIFICATION_ALLOWED_ERR}} (6)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -568,7 +569,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An operation that depends on state cached in an interface object
       was made but the state had changed since it was read from disk.
     </td>
-    <td>{{INVALID_STATE_ERR}} (7)</td>
+    <td>{{FileError/INVALID_STATE_ERR}} (7)</td>
     <td class=used></td>
   </tr>
   <tr>
@@ -577,7 +578,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An invalid or unsupported argument was given, like an invalid
       line ending specifier.
     </td>
-    <td>{{SYNTAX_ERR}} (8)</td>
+    <td>{{FileError/SYNTAX_ERR}} (8)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -586,7 +587,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An operation that depends on state cached in an interface object
       was made but the state had changed since it was read from disk.
     </td>
-    <td>{{INVALID_MODIFICATION_ERR}} (9)</td>
+    <td>{{FileError/INVALID_MODIFICATION_ERR}} (9)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -595,7 +596,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       The operation failed because it would cause the application to
       exceed its storage quota.
     </td>
-    <td>{{QUOTA_EXCEEDED_ERR}} (10)</td>
+    <td>{{FileError/QUOTA_EXCEEDED_ERR}} (10)</td>
     <td class=unused></td>
   </tr>
   <tr>
@@ -604,7 +605,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       The path supplied exists, but was not an entry of requested
       type.
     </td>
-    <td>{{TYPE_MISMATCH_ERR}} (11)</td>
+    <td>{{FileError/TYPE_MISMATCH_ERR}} (11)</td>
     <td class=used></td>
   </tr>
   <tr>
@@ -613,7 +614,7 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
       An attempt was made to create a file or directory where an
       element already exists.
     </td>
-    <td>{{PATH_EXISTS_ERR}} (12)</td>
+    <td>{{FileError/PATH_EXISTS_ERR}} (12)</td>
     <td class=unused></td>
   </tr>
 </table>
@@ -625,14 +626,14 @@ table.deets .unused:after { color: #800; content: "\2717"; font-size: 200%; }
   web-compat?
 
   Note that the codes here differ from those in {{DOMException}}:
-  {{NOT_FOUND_ERR}} = 1 vs. 8,
-  {{SECURITY_ERR}} = 2 vs. 18,
-  {{ABORT_ERR}} = 3 vs. 20,
-  {{INVALID_STATE_ERR}} = 7 vs. 11,
-  {{SYNTAX_ERR}} = 8 vs. 12,
-  {{INVALID_MODIFICATION_ERR}} = 9 vs. 13,
-  {{QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
-  {{TYPE_MISMATCH_ERR}} = 11 vs. [=simple exception=] <code>TypeError</code>.
+  {{FileError/NOT_FOUND_ERR}} = 1 vs. 8,
+  {{FileError/SECURITY_ERR}} = 2 vs. 18,
+  {{FileError/ABORT_ERR}} = 3 vs. 20,
+  {{FileError/INVALID_STATE_ERR}} = 7 vs. 11,
+  {{FileError/SYNTAX_ERR}} = 8 vs. 12,
+  {{FileError/INVALID_MODIFICATION_ERR}} = 9 vs. 13,
+  {{FileError/QUOTA_EXCEEDED_ERR}} = 10 vs. 22,
+  {{FileError/TYPE_MISMATCH_ERR}} = 11 vs. [=simple exception=] <code>TypeError</code>.
 
   <a href="http://httparchive.org/">HTTP Archive</a> search for
   <code>FileError\.[A-Z_]+_ERR</code> shows only a small number of hits,
@@ -741,7 +742,8 @@ function handleEntry(entry) {
 </aside>
 
 <aside class=example>
-Helper function to adapt {{getParent()}} for use with [=Promises=]
+Helper function to adapt {{FileSystemEntry/getParent()}} for use with
+[=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
 function getParentAsPromise(entry) {
@@ -889,7 +891,8 @@ invoked, must run the following steps:
 </div>
 
 <aside class=example>
-Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
+Helper functions to adapt {{FileSystemDirectoryEntry/getFile()}} and
+{{FileSystemDirectoryEntry/getDirectory()}} for use
 with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function getFileAsPromise(entry, path) {
@@ -1112,8 +1115,8 @@ function readFileEntry(entry) {
 </aside>
 
 <aside class=example>
-Helper function to adapt {{file()}} for use with [=Promises=]
-[[ECMA-262]]:
+Helper function to adapt {{FileSystemFileEntry/file()}} for use
+with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function fileAsPromise(entry) {
   return new Promise((resolve, reject) => {
