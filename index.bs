@@ -1,4 +1,4 @@
-<link rel="icon" href="folder-icon.png">
+<link rel="icon" href="logo-folder.png">
 <pre class=metadata>
 Title: File and Directory Entries API
 Shortname: EntriesAPI
@@ -12,6 +12,7 @@ ED: https://wicg.github.io/entries-api/
 Level: 1
 Editor: Joshua Bell, jsbell@google.com
 Group: wicg
+Assume Explicit For: yes
 </pre>
 <pre class="anchors">
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
@@ -129,16 +130,16 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
   backing the interaction with the API.
 </aside>
 
-A <dfn>filesystem</dfn> consists of a <dfn for=filesystem>name</dfn>
-and a <dfn for=filesystem>root</dfn> which is an associated [=root
-directory=]. The [=filesystem/name=] of a [=/filesystem=] is a
+A <dfn>file system</dfn> consists of a <dfn for="file system">name</dfn>
+and a <dfn for="file system">root</dfn> which is an associated [=root
+directory=]. The [=file system/name=] of a [=/file system=] is a
 {{USVString}} which is implementation defined but is unique to the
-[=/filesystem=]. A [=root directory=] is associated with exactly one
-[=/filesystem=].
+[=/file system=]. A [=root directory=] is associated with exactly one
+[=/file system=].
 
 <aside class=note>
-  Implementations may produce a [=filesystem/name=] by generating a
-  UUID for each [=/filesystem=] instance with some fixed prefix and
+  Implementations may produce a [=file system/name=] by generating a
+  UUID for each [=/file system=] instance with some fixed prefix and
   suffix strings applied. Authors using the API should not make
   assumptions about the structure or content of the names.
 </aside>
@@ -154,8 +155,8 @@ or a <dfn>directory entry</dfn>.
 An [=entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
 <dfn>full path</dfn> (an [=absolute path=]).
 
-An [=entry=] also has a <dfn for=entry>root</dfn>, which is an associated [=root
-directory=].
+An [=entry=] also has a <dfn for=entry>root</dfn>, which is an
+associated [=root directory=].
 
 <aside class=note>
   [=Entries=] are defined in terms of [=paths=] relative to a [=root
@@ -166,8 +167,8 @@ directory=].
   where the [=paths=] no longer reference the same entity.
 </aside>
 
-The <dfn for=entry>filesystem</dfn> of an [=entry=] is the
-[=/filesystem=] associated with the [=entry=]'s [=entry/root=].
+The <dfn for=entry>file system</dfn> of an [=entry=] is the
+[=/file system=] associated with the [=entry=]'s [=entry/root=].
 
 <!-- ============================================================ -->
 <h3 id=dir-reader>Directory Reader</h3>
@@ -279,9 +280,9 @@ partial interface File {
 };
 </pre>
 
-The {{File/webkitRelativePath}} attribute of the {{File}} interface must
-return the [=relative path=] of the file, or the empty string if not
-specified.
+The {{File/webkitRelativePath}} attribute of the {{File}} interface
+must return the [=relative path=] of the file, or the empty string if
+not specified.
 
 
 <!-- ============================================================ -->
@@ -299,7 +300,7 @@ specified.
 <pre class=idl>
 partial interface HTMLInputElement {
     attribute boolean webkitdirectory;
-    readonly attribute FrozenArray&lt;Entry&gt; webkitEntries;
+    readonly attribute FrozenArray&lt;FileSystemEntry&gt; webkitEntries;
 };
 </pre>
 
@@ -309,10 +310,10 @@ Upload=] state, the rules in this section apply.
 The {{HTMLInputElement/webkitdirectory}} attribute is a boolean
 attribute that indicates whether the user is to be allowed to select a
 directory rather than a file or files. When specified, the behavior on
-the selection of a directory is as if all files with that directory
-as an ancestor were selected. In addition, the {{File/webkitRelativePath}}
-property of each {{File}} is set to a [=relative path=] from the
-selected directory to the file.
+the selection of a directory is as if all files with that directory as
+an ancestor were selected. In addition, the
+{{File/webkitRelativePath}} property of each {{File}} is set to a
+[=relative path=] from the selected directory to the file.
 
 <aside class=note>
   A user agent may represent any hierarchical data as directories
@@ -341,10 +342,10 @@ directory is selected with an <{input}> element:
 
 The {{HTMLInputElement/webkitEntries}} IDL attribute allows scripts to
 access the element's selected entries. On getting, if the IDL
-attribute applies, it must return an array of {{Entry}} objects that
-represent the current [=selected files=] (including directories, if
-permitted). If the IDL attribute does not apply, then it must instead
-return null.
+attribute applies, it must return an array of {{FileSystemEntry}}
+objects that represent the current [=selected files=] (including
+directories, if permitted). If the IDL attribute does not apply, then
+it must instead return null.
 
 <aside class=example>
 Enumerating entries using {{HTMLInputElement/webkitEntries}}:
@@ -396,7 +397,7 @@ During a <em>drag-and-drop operation</em>, [=file=] and
 
 Additionally, each [=directory=] item is represented in the [=drag
 data store item list=] as a <i>File</i>. If it is accessed via
-{{getAsFile()}} a zero-length {{File}} is returned.
+{{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
 <aside class=note>
   A user agent may represent any hierarchical data as files and
@@ -408,11 +409,12 @@ data store item list=] as a <i>File</i>. If it is accessed via
 
 <pre class=idl>
 partial interface DataTransferItem {
-    Entry? webkitGetAsEntry();
+    FileSystemEntry? webkitGetAsEntry();
 };
 </pre>
 
-The {{webkitGetAsEntry()}} method must run the following steps when invoked:
+The {{DataTransferItem/webkitGetAsEntry()}} method must run the
+following steps when invoked:
 
 <div class=algorithm>
 
@@ -423,7 +425,7 @@ The {{webkitGetAsEntry()}} method must run the following steps when invoked:
 2. If the [=drag data item kind=] is not <em>File</em>, then return
     null and abort these steps.
 
-3. Return a new {{Entry}} object representing the [=entry=].
+3. Return a new {{FileSystemEntry}} object representing the [=entry=].
 
 </div>
 
@@ -457,9 +459,10 @@ elem.addEventListener('drop', e => {
 <h2 id=api-files-directories>Files and Directories</h2>
 <!-- ============================================================ -->
 
-A <dfn exception>TypeMismatchError</dfn> is a {{DOMException}} with that
-[=error name=] and a [=message=] such as <em>"The path supplied exists,
-but was not an entry of requested type."</em>
+A <dfn exception>TypeMismatchError</dfn> is a {{DOMException}} with
+that [=exception/error name=] and a [=exception/message=] such as
+<em>"The path supplied exists, but was not an entry of requested
+type."</em>
 
 <aside class=issue>
   WEB COMPAT:
@@ -482,50 +485,43 @@ error asynchronously.
 
 
 <!-- ============================================================ -->
-<h3 id=api-entry>The {{Entry}} Interface</h3>
+<h3 id=api-entry>The {{FileSystemEntry}} Interface</h3>
 <!-- ============================================================ -->
 
 <pre class=idl>
-[NoInterfaceObject]
-interface Entry {
+interface FileSystemEntry {
     readonly attribute boolean isFile;
     readonly attribute boolean isDirectory;
     readonly attribute USVString name;
     readonly attribute USVString fullPath;
-    readonly attribute DOMFileSystem filesystem;
+    readonly attribute FileSystem filesystem;
 
-    void getParent(optional EntryCallback successCallback,
+    void getParent(optional FileSystemEntryCallback successCallback,
                    optional ErrorCallback errorCallback);
 };
 </pre>
 
-<aside class=issue>
-  WEB-COMPAT:
-  The <code>[NoInterfaceObject]</code> extended attribute is present
-  on these in Chrome, hiding the types from the global namespace. Is
-  it web-compatible to remove it, and simply expose these types in the
-  global namespace as is done for most web APIs?
-</aside>
+An {{FileSystemEntry}} has an associated [=entry=].
 
-An {{Entry}} has an associated [=entry=].
+The {{FileSystemEntry/isFile}} attribute of the {{FileSystemEntry}}
+interface must return true if the [=entry=] is a [=file entry=] and
+false otherwise.
 
-The {{Entry/isFile}} attribute of the {{Entry}} interface must return
-true if the [=entry=] is a [=file entry=] and false otherwise.
+The {{FileSystemEntry/isDirectory}} attribute of the
+{{FileSystemEntry}} interface must return true if the [=entry=] is a
+[=directory entry=] and false otherwise.
 
-The {{Entry/isDirectory}} attribute of the {{Entry}} interface must
-return true if the [=entry=] is a [=directory entry=] and false
-otherwise.
+The {{FileSystemEntry/name}} attribute of the {{FileSystemEntry}}
+interface must return the [=entry/name=] of the [=entry=].
 
-The {{Entry/name}} attribute of the {{Entry}} interface must return
-the [=entry/name=] of the [=entry=].
+The {{FileSystemEntry/fullPath}} attribute of the {{FileSystemEntry}}
+interface must return the [=full path=] of the [=entry=].
 
-The {{Entry/fullPath}} attribute of the {{Entry}} interface must
-return the [=full path=] of the [=entry=].
+The {{FileSystemEntry/filesystem}} attribute of the
+{{FileSystemEntry}} interface must return the [=entry/file system=] of
+the [=entry=].
 
-The {{Entry/filesystem}} attribute of the {{Entry}} interface must
-return the [=entry/filesystem=] of the [=entry=].
-
-The <dfn method for=Entry>getParent(|successCallback|,
+The <dfn method for=FileSystemEntry>getParent(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
 steps:
 
@@ -540,7 +536,7 @@ steps:
         path=] with the [=entry=]'s [=entry/root=] and |path|.
 
     3. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{NotFoundError}}, and terminate these steps.
 
     4. Let |entry| be a new [=directory entry=] with |item|'s
@@ -548,13 +544,13 @@ steps:
         path=].
 
     5. [=Invoke the callback=] |successCallback| with a new
-        {{DirectoryEntry}} object associated with |entry|.
+        {{FileSystemDirectoryEntry}} object associated with |entry|.
 
 </div>
 
 <aside class=note>
   An error is possible if files have been modified on disk since the
-  {{Entry}} was created.
+  {{FileSystemEntry}} was created.
 </aside>
 
 <aside class=example>
@@ -573,7 +569,8 @@ function handleEntry(entry) {
 </aside>
 
 <aside class=example>
-Helper function to adapt {{getParent()}} for use with [=Promises=]
+Helper function to adapt {{FileSystemEntry/getParent()}} for use with
+[=Promises=]
 [[ECMA-262]]:
 <pre class=lang-javascript>
 function getParentAsPromise(entry) {
@@ -585,20 +582,19 @@ function getParentAsPromise(entry) {
 </aside>
 
 <!-- ============================================================ -->
-<h3 id=api-directoryentry>The {{DirectoryEntry}} Interface</h3>
+<h3 id=api-directoryentry>The {{FileSystemDirectoryEntry}} Interface</h3>
 <!-- ============================================================ -->
 
 <pre class=idl>
-[NoInterfaceObject]
-interface DirectoryEntry : Entry {
-    DirectoryReader createReader();
+interface FileSystemDirectoryEntry : FileSystemEntry {
+    FileSystemDirectoryReader createReader();
     void getFile(optional USVString? path,
                  optional FileSystemFlags options,
-                 optional EntryCallback successCallback,
+                 optional FileSystemEntryCallback successCallback,
                  optional ErrorCallback errorCallback);
     void getDirectory(optional USVString? path,
                       optional FileSystemFlags options,
-                      optional EntryCallback successCallback,
+                      optional FileSystemEntryCallback successCallback,
                       optional ErrorCallback errorCallback);
 };
 
@@ -607,8 +603,8 @@ dictionary FileSystemFlags {
     boolean exclusive = false;
 };
 
-callback interface EntryCallback {
-    void handleEvent(Entry entry);
+callback interface FileSystemEntryCallback {
+    void handleEvent(FileSystemEntry entry);
 };
 </pre>
 
@@ -621,25 +617,26 @@ callback interface EntryCallback {
   observable from script if an object with a getter is passed.
 </aside>
 
-A {{DirectoryEntry}}'s associated [=entry=] is a [=directory entry=].
+A {{FileSystemDirectoryEntry}}'s associated [=entry=] is a [=directory
+entry=].
 
-The <dfn method for=DirectoryEntry>createReader()</dfn> method, when
-invoked, must run the following steps:
+The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn>
+method, when invoked, must run the following steps:
 
 <div class=algorithm>
 
 1. Let |reader| be a new [=directory reader=] associated with the
     [=directory entry=]'s [=directory=].
 
-2. Return a newly created {{DirectoryReader}} object associated with
-    |reader|.
+2. Return a newly created {{FileSystemDirectoryReader}} object
+    associated with |reader|.
 
 </div>
 
 
-The <dfn method for=DirectoryEntry>getFile(|path|, |options|,
-|successCallback|, |errorCallback|)</dfn> method, when invoked, must
-run the following steps:
+The <dfn method for=FileSystemDirectoryEntry>getFile(|path|,
+|options|, |successCallback|, |errorCallback|)</dfn> method, when
+invoked, must run the following steps:
 
 <div class=algorithm>
 
@@ -648,12 +645,13 @@ run the following steps:
     1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{TypeMismatchError}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        newly [=created=] {{SecurityError}}, and terminate these steps.
+        newly [=exception/created=] {{SecurityError}}, and terminate
+        these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
@@ -663,24 +661,24 @@ run the following steps:
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{NotFoundError}}, and terminate these steps.
 
     7. If |item| is not a [=file=], [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{TypeMismatchError}}, and terminate these steps.
 
     8. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
 
     9. [=Invoke the callback=] |successCallback| (if given) with a new
-        {{FileEntry}} object associated with |entry|.
+        {{FileSystemFileEntry}} object associated with |entry|.
 
 </div>
 
-The <dfn method for=DirectoryEntry>getDirectory(|path|, |options|,
-|successCallback|, |errorCallback|)</dfn> method, when invoked, must
-run the following steps:
+The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|,
+|options|, |successCallback|, |errorCallback|)</dfn> method, when
+invoked, must run the following steps:
 
 <div class=algorithm>
 
@@ -689,12 +687,13 @@ run the following steps:
     1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{TypeMismatchError}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        newly [=created=] {{SecurityError}}, and terminate these steps.
+        newly [=exception/created=] {{SecurityError}}, and terminate
+        these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
         relative path=] with the [=directory entry=]'s [=full path=]
@@ -704,11 +703,11 @@ run the following steps:
         path=] with the [=directory entry=]'s [=entry/root=] and |path|.
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{NotFoundError}}, and terminate these steps.
 
     7. If |item| is not a [=directory=], [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{TypeMismatchError}}, and terminate these steps.
 
     8. Let |entry| be a new [=directory entry=] with |item|'s
@@ -716,12 +715,13 @@ run the following steps:
         path=].
 
     9. [=Invoke the callback=] |successCallback| (if given) with a new
-        {{DirectoryEntry}} associated with |entry|.
+        {{FileSystemDirectoryEntry}} associated with |entry|.
 
 </div>
 
 <aside class=example>
-Helper functions to adapt {{getFile()}} and {{getDirectory()}} for use
+Helper functions to adapt {{FileSystemDirectoryEntry/getFile()}} and
+{{FileSystemDirectoryEntry/getDirectory()}} for use
 with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function getFileAsPromise(entry, path) {
@@ -739,23 +739,23 @@ function getDirectoryAsPromise(entry, path) {
 
 
 <!-- ============================================================ -->
-<h3 id=api-directoryreader>The {{DirectoryReader}} Interface</h3>
+<h3 id=api-directoryreader>The {{FileSystemDirectoryReader}} Interface</h3>
 <!-- ============================================================ -->
 
 <pre class=idl>
-[NoInterfaceObject]
-interface DirectoryReader {
-    void readEntries(EntriesCallback successCallback,
+interface FileSystemDirectoryReader {
+    void readEntries(FileSystemEntriesCallback successCallback,
                      optional ErrorCallback errorCallback);
 };
-callback interface EntriesCallback {
-    void handleEvent(sequence&lt;Entry&gt; entries);
+callback interface FileSystemEntriesCallback {
+    void handleEvent(sequence&lt;FileSystemEntry&gt; entries);
 };
 </pre>
 
-A {{DirectoryReader}} has an associated [=directory reader=].
+A {{FileSystemDirectoryReader}} has an associated [=directory reader=].
 
-The <dfn method for="DirectoryEntry">readEntries(|successCallback|,
+The <dfn method
+for=FileSystemDirectoryEntry>readEntries(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
 steps:
 
@@ -763,7 +763,8 @@ steps:
 
 1. If the [=directory reader=]'s [=reading flag=] is set, [=queue a
     task=] to [=invoke the callback=] |errorCallback| with a newly
-    [=created=] {{InvalidStateError}}, and terminate these steps.
+    [=exception/created=] {{InvalidStateError}}, and terminate these
+    steps.
 
 2. If the [=directory reader=]'s [=reader error=] is not null, [=queue
     a task=] to [=invoke the callback=] |errorCallback| (if given)
@@ -787,9 +788,10 @@ steps:
             a path=] with the [=entry=]'s [=entry/root=] and [=full path=].
 
         2. If |dir| is failure, set the [=directory reader=]'s
-            [=reader error=] to a newly [=created=] {{NotFoundError}},
-            [=invoke the callback=] |errorCallback| (if given) with
-            [=reader error=], and terminate these steps.
+            [=reader error=] to a newly [=exception/created=]
+            {{NotFoundError}}, [=invoke the callback=] |errorCallback|
+            (if given) with [=reader error=], and terminate these
+            steps.
 
         3. Set the [=directory reader=]'s [=directory=] to |dir|.
 
@@ -840,7 +842,7 @@ doBatch();
 </aside>
 
 <aside class=example>
-Helper function to adapt {{DirectoryReader}} for use with
+Helper function to adapt {{FileSystemDirectoryReader}} for use with
 [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function getEntriesAsPromise(entry) {
@@ -864,7 +866,7 @@ function getEntriesAsPromise(entry) {
 </aside>
 
 <aside class=example>
-Helper function to adapt {{DirectoryReader}} for use with
+Helper function to adapt {{FileSystemDirectoryReader}} for use with
 <a href="https://github.com/zenparsing/es-observable">Observables</a>:
 <pre class=lang-javascript>
 function getEntriesAsObservable(entry) {
@@ -887,12 +889,11 @@ function getEntriesAsObservable(entry) {
 </aside>
 
 <!-- ============================================================ -->
-<h3 id=api-fileentry>The {{FileEntry}} Interface</h3>
+<h3 id=api-fileentry>The {{FileSystemFileEntry}} Interface</h3>
 <!-- ============================================================ -->
 
 <pre class=idl>
-[NoInterfaceObject]
-interface FileEntry : Entry {
+interface FileSystemFileEntry : FileSystemEntry {
     void file(FileCallback successCallback,
               optional ErrorCallback errorCallback);
 };
@@ -901,9 +902,9 @@ callback interface FileCallback {
 };
 </pre>
 
-A {{FileEntry}}'s associated [=entry=] is a [=file entry=].
+A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
 
-The <dfn method for="FileEntry">file(|successCallback|,
+The <dfn method for=FileSystemFileEntry>file(|successCallback|,
 |errorCallback|)</dfn> method, when invoked, must run the following
 steps:
 
@@ -916,11 +917,11 @@ steps:
         path=].
 
     2. If |item| is <em>failure</em>, [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{NotFoundError}}, and terminate these steps.
 
     3. If |item| is a [=directory=], [=invoke the callback=]
-        |errorCallback| (if given) with a newly [=created=]
+        |errorCallback| (if given) with a newly [=exception/created=]
         {{TypeMismatchError}}, and terminate these steps.
 
     4. [=Invoke the callback=] |successCallback| with a new {{File}}
@@ -945,8 +946,8 @@ function readFileEntry(entry) {
 </aside>
 
 <aside class=example>
-Helper function to adapt {{file()}} for use with [=Promises=]
-[[ECMA-262]]:
+Helper function to adapt {{FileSystemFileEntry/file()}} for use
+with [=Promises=] [[ECMA-262]]:
 <pre class=lang-javascript>
 function fileAsPromise(entry) {
   return new Promise((resolve, reject) => {
@@ -958,25 +959,24 @@ function fileAsPromise(entry) {
 
 
 <!-- ============================================================ -->
-<h3 id=api-domfilesystem>The {{DOMFileSystem}} Interface</h3>
+<h3 id=api-domfilesystem>The {{FileSystem}} Interface</h3>
 <!-- ============================================================ -->
 
 <pre class=idl>
-[NoInterfaceObject]
-interface DOMFileSystem {
+interface FileSystem {
     readonly attribute USVString name;
-    readonly attribute DirectoryEntry root;
+    readonly attribute FileSystemDirectoryEntry root;
 };
 </pre>
 
-A {{DOMFileSystem}} has an associated [=/filesystem=].
+A {{FileSystem}} has an associated [=/file system=].
 
-The {{DOMFileSystem/name}} attribute of the {{DOMFileSystem}}
-interface must return the [=filesystem/name=] of the [=/filesystem=].
+The {{FileSystem/name}} attribute of the {{FileSystem}}
+interface must return the [=file system/name=] of the [=/file system=].
 
-The {{DOMFileSystem/root}} attribute of the {{DOMFileSystem}}
-interface must return a {{DirectoryEntry}} associated with the
-[=filesystem/root=] of the [=/filesystem=].
+The {{FileSystem/root}} attribute of the {{FileSystem}} interface must
+return a {{FileSystemDirectoryEntry}} associated with the
+[=file system/root=] of the [=/file system=].
 
 
 <!-- ============================================================ -->
@@ -984,7 +984,7 @@ interface must return a {{DirectoryEntry}} associated with the
 <!-- ============================================================ -->
 
 This specification is based heavily on the work of Eric Uhrhane in
-[[file-system-api]], which introduced the {{Entry}} types.
+[[file-system-api]], which introduced the {{FileSystemEntry}} types.
 
 Thanks to Tab Atkins, Jr. for creating and maintaining <a
 href="https://github.com/tabatkins/bikeshed">Bikeshed</a>, the
