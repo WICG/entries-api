@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Entries API: FileSystem manual test</title>
+<link rel=help href="https://wicg.github.io/entries-api/#api-domfilesystem">
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/resources/idlharness.js"></script>
+
+<h1>Entries API: FileSystem manual test</h1>
+
+<div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
+<script src="support.js"></script>
+
+<script>
+entry_test((t, entry) => {
+  const fs = entry.filesystem;
+
+  assert_false('DOMFileSystem' in self, 'DOMFileSystem has [NoInterfaceObject]');
+  assert_class_string(fs, 'DOMFileSystem', 'interface name is DOMFileSystem');
+
+  assert_idl_attribute(fs, 'name', 'has name attribute');
+  assert_equals(typeof fs.name, 'string', 'name is a string');
+
+  assert_idl_attribute(fs, 'root', 'has root attribute');
+  assert_class_string(fs.root, 'DirectoryEntry', 'DOMFileSystem root is a DirectoryEntry');
+
+  assert_equals(fs.root.name, '', 'root name is empty string');
+
+  assert_equals(fs.root.fullPath, '/', 'root path is /');
+
+  t.done();
+
+}, 'DOMFileSystem - API');
+
+entry_test((t, entry) => {
+  const fs = entry.filesystem;
+
+  entry.getParent(t.step_func(parent => {
+    const pfs = parent.filesystem;
+    assert_not_equals(fs, pfs.filesystem, 'DOMFileSystem objects do not have object identity');
+    assert_equals(fs.name, pfs.name, 'DOMFileSystem names match');
+
+    t.done();
+  }), t.unreached_func('getParent() should not fail'));
+
+}, 'DOMFileSystem - name consistency and object identity');
+</script>

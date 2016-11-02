@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Entries API: FileEntry manual test</title>
+<link rel=help href="https://wicg.github.io/entries-api/#api-entry">
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/resources/idlharness.js"></script>
+
+<h1>Entries API: FileEntry manual test</h1>
+
+<div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
+<script src="support.js"></script>
+
+<script>
+file_entry_test('file.txt', (t, entry) => {
+  // Entry ----------
+
+  assert_idl_attribute(entry, 'isFile', 'Entry has isFile attribute');
+  assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
+
+  assert_idl_attribute(entry, 'isDirectory', 'Entry has isDirectory attribute');
+  assert_equals(typeof entry.isDirectory, 'boolean', 'isFile is boolean');
+
+  assert_idl_attribute(entry, 'name', 'Entry has name attribute');
+  assert_equals(typeof entry.name, 'string', 'name is a string');
+
+  assert_idl_attribute(entry, 'fullPath', 'Entry has fullPath attribute');
+  assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
+
+  assert_idl_attribute(entry, 'filesystem', 'Entry has filesystem attribute');
+  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
+
+  assert_idl_attribute(entry, 'getParent', 'Entry has filesystem attribute');
+  assert_equals(typeof entry.getParent, 'function', 'Entry has a getParent() method');
+
+  // FileEntry ----------
+
+  assert_false('FileEntry' in self, 'FileEntry has [NoInterfaceObject]');
+  assert_class_string(entry, 'FileEntry', 'interface name is FileEntry');
+
+  assert_equals(typeof entry.file, 'function', 'FileEntry has a file() method');
+  t.done();
+}, 'FileEntry - IDL');
+
+file_entry_test('file.txt', (t, entry) => {
+  assert_true(entry.isFile);
+  assert_false(entry.isDirectory);
+  assert_equals(entry.name, 'file.txt');
+  assert_equals(entry.fullPath, '/upload/file.txt');
+  t.done();
+}, 'FileEntry - attributes');
+
+file_entry_test('file.txt', (t, entry) => {
+  assert_throws(TypeError(), () => entry.file(), 'file() has a required argument');
+  entry.file(t.step_func(file => {
+
+    assert_class_string(file, 'File', 'file() should yield a File');
+    assert_equals(entry.name, file.name, 'entry and file names should match');
+    t.done();
+
+  }), t.unreached_func('file() should not fail'));
+}, 'FileEntry - file()');
+
+// TODO: Manual test where file is replaced with directory before file() called
+</script>

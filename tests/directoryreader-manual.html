@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<meta charset=utf-8>
+<title>Entries API: DirectoryReader manual test</title>
+<link rel=help href="https://wicg.github.io/entries-api/#api-directoryreader">
+<script src="/resources/testharness.js"></script>
+<script src="/resources/testharnessreport.js"></script>
+<script src="/resources/idlharness.js"></script>
+
+<h1>Entries API: DirectoryReader manual test</h1>
+
+<div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
+<script src="support.js"></script>
+
+<script>
+entry_test((t, entry) => {
+  const reader = entry.createReader();
+
+  assert_false('DirectoryReader' in self, 'DirectoryReader has [NoInterfaceObject]');
+  assert_class_string(reader, 'DirectoryReader', 'interface name is DirectoryReader');
+
+  assert_idl_attribute(reader, 'readEntries', 'DirectoryReader has readEntries');
+  assert_equals(typeof reader.readEntries, 'function', 'readEntries() is a method');
+
+  t.done();
+}, 'DirectoryReader - IDL');
+
+
+entry_test((t, entry) => {
+  entry.getDirectory('subdir', {}, t.step_func(dir => {
+    const reader = dir.createReader();
+    assert_class_string(reader, 'DirectoryReader');
+    assert_equals(typeof reader.readEntries, 'function');
+
+    const found_names = [];
+    const do_chunk = t.step_func(() =>
+      reader.readEntries(t.step_func(entries => {
+
+        if (entries.length > 0) {
+          entries.forEach(t.step_func(entry => found_names.push(entry.name)));
+          do_chunk();
+          return;
+        }
+
+        found_names.sort();
+        assert_array_equals(found_names, ['1.txt', '2.txt', '3.txt'],
+                            'directory contents should match');
+        t.done();
+      })));
+
+    do_chunk();
+  }), t.unreached_func('getDirectory should not fail'));
+}, 'DirectoryReader - basic enumeration');
+
+entry_test((t, entry) => {
+  const reader = entry.createReader();
+  reader.readEntries(() => {}, t.unreached_func('readEntries should succeed'));
+  reader.readEntries(
+    t.unreached_func('readEntries() should fail if already reading'),
+    t.step_func(error => {
+      assert_equals(error.name, 'InvalidStateError', 'invalid state if already reading');
+      t.done();
+    }));
+}, 'DirectoryReader - reading flag');
+
+entry_test((t, entry) => {
+  const reader = entry.createReader();
+
+  const do_chunk = t.step_func(() =>
+    reader.readEntries(t.step_func(entries => {
+      if (entries.length > 0) {
+        do_chunk();
+        return;
+      }
+      reader.readEntries(t.step_func(entries => {
+        assert_equals(
+          entries.length, 0,
+          'calling readEntries() when done should yield and empty sequence');
+        t.done();
+      }));
+    })));
+
+  do_chunk();
+}, 'DirectoryReader - done flag');
+
+// TODO: Manual tests where directory contents are changed during the test.
+</script>
