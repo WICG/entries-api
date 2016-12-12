@@ -530,7 +530,7 @@ steps:
 
     3. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{NotFoundError}}, and terminate these steps.
+        "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
     4. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
@@ -639,11 +639,11 @@ invoked, must run the following steps:
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{TypeMismatchError}}, and terminate these steps.
+        "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        newly [=exception/created=] {{SecurityError}}, and terminate
+        newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and terminate
         these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
@@ -655,11 +655,11 @@ invoked, must run the following steps:
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{NotFoundError}}, and terminate these steps.
+        "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
     7. If |item| is not a [=file=], [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{TypeMismatchError}}, and terminate these steps.
+        "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
     8. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
@@ -681,11 +681,11 @@ invoked, must run the following steps:
 
     2. If |path| is not a [=valid path=], [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{TypeMismatchError}}, and terminate these steps.
+        "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
     3. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke the callback=] |errorCallback| (if given) with a
-        newly [=exception/created=] {{SecurityError}}, and terminate
+        newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and terminate
         these steps.
 
     4. Let |path| be the result of running the steps to [=resolve a
@@ -697,11 +697,11 @@ invoked, must run the following steps:
 
     6. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{NotFoundError}}, and terminate these steps.
+        "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
     7. If |item| is not a [=directory=], [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{TypeMismatchError}}, and terminate these steps.
+        "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
     8. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
@@ -756,7 +756,7 @@ steps:
 
 1. If the [=directory reader=]'s [=reading flag=] is set, [=queue a
     task=] to [=invoke the callback=] |errorCallback| with a newly
-    [=exception/created=] {{InvalidStateError}}, and terminate these
+    [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and terminate these
     steps.
 
 2. If the [=directory reader=]'s [=reader error=] is not null, [=queue
@@ -782,7 +782,7 @@ steps:
 
         2. If |dir| is failure, set the [=directory reader=]'s
             [=reader error=] to a newly [=exception/created=]
-            {{NotFoundError}}, [=invoke the callback=] |errorCallback|
+            "{{NotFoundError}}" {{DOMException}}, [=invoke the callback=] |errorCallback|
             (if given) with [=reader error=], and terminate these
             steps.
 
@@ -911,11 +911,11 @@ steps:
 
     2. If |item| is <em>failure</em>, [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{NotFoundError}}, and terminate these steps.
+        "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
     3. If |item| is a [=directory=], [=invoke the callback=]
         |errorCallback| (if given) with a newly [=exception/created=]
-        {{TypeMismatchError}}, and terminate these steps.
+        "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
     4. [=Invoke the callback=] |successCallback| with a new {{File}}
         object representing |item|.
