@@ -968,6 +968,8 @@ Possible extra rowspan handling
 		/* Reverse color scheme */
 		color: black;
 		border-color: #3980B5;
+		border-bottom-width: 3px !important;
+		margin-bottom: 0px !important;
 	}
 	.toc a:visited {
 		border-color: #054572;
@@ -1174,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed 1.0.0" name="generator">
+  <meta content="Bikeshed version 0feafaae1a97b66d9da46b325858f9805ac01fb2" name="generator">
   <link href="logo-folder.png" rel="icon">
 <style>/* style-md-lists */
 
@@ -1422,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-11-01">1 November 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-12-12">12 December 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1763,13 +1765,10 @@ elem<span class="p">.</span>addEventListener<span class="p">(</span><span class=
 </pre>
    </aside>
    <h2 class="heading settled" data-level="7" id="api-files-directories"><span class="secno">7. </span><span class="content">Files and Directories</span><a class="self-link" href="#api-files-directories"></a></h2>
-   <p>A <dfn class="dfn-paneled idl-code" data-dfn-type="exception" data-export="" id="exceptiondef-typemismatcherror">TypeMismatchError</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> with
-that <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-exception-error-name">error name</a> and a <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-exception-message">message</a> such as <em>"The path supplied exists, but was not an entry of requested
-type."</em></p>
-   <aside class="issue" id="issue-bfc3b40a"><a class="self-link" href="#issue-bfc3b40a"></a> WEB COMPAT:
-  The legacy <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-1">TypeMismatchError</a></code> has been replaced in most
+   <aside class="issue" id="issue-b5326de5"><a class="self-link" href="#issue-b5326de5"></a> WEB COMPAT:
+  The legacy <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code> has been replaced in most
   specifications by <b>TypeError</b>, but the name differs. Is it
-  compatible to switch here as well? If not, should we restore <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-2">TypeMismatchError</a></code> to <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> with appropriate caveats? </aside>
+  compatible to switch here as well? </aside>
 <pre class="idl highlight def"><span class="kt">callback</span> <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="callback" data-export="" id="callbackdef-errorcallback">ErrorCallback</dfn> {
     <span class="kt">void</span> <dfn class="nv idl-code" data-dfn-for="ErrorCallback" data-dfn-type="method" data-export="" data-lt="handleEvent(err)" id="dom-errorcallback-handleevent">handleEvent<a class="self-link" href="#dom-errorcallback-handleevent"></a></dfn>(<a class="n" data-link-type="idl-name" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a> <dfn class="nv idl-code" data-dfn-for="ErrorCallback/handleEvent(err)" data-dfn-type="argument" data-export="" id="dom-errorcallback-handleevent-err-err">err<a class="self-link" href="#dom-errorcallback-handleevent-err-err"></a></dfn>);
 };
@@ -1891,7 +1890,7 @@ invoked, must run the following steps:</p>
        <li data-md="">
         <p>If <var>path</var> is undefined or null let <var>path</var> be the empty string.</p>
        <li data-md="">
-        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-3">TypeMismatchError</a></code>, and terminate these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-1">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code>, and terminate these steps.</p>
        <li data-md="">
         <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-2">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
 newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code>, and terminate
@@ -1905,7 +1904,7 @@ path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-di
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-4">TypeMismatchError</a></code>, and terminate these steps.</p>
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#file" id="ref-for-file-7">file</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry-2">file entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#file-name" id="ref-for-file-name-1">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-3">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-5">full path</a>.</p>
        <li data-md="">
@@ -1923,7 +1922,7 @@ invoked, must run the following steps:</p>
        <li data-md="">
         <p>If <var>path</var> is undefined or null let <var>path</var> be the empty string.</p>
        <li data-md="">
-        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-5">TypeMismatchError</a></code>, and terminate these steps.</p>
+        <p>If <var>path</var> is not a <a data-link-type="dfn" href="#valid-path" id="ref-for-valid-path-2">valid path</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code>, and terminate these steps.</p>
        <li data-md="">
         <p>If <var>options</var>’s <code class="idl"><a data-link-type="idl" href="#dom-filesystemflags-create" id="ref-for-dom-filesystemflags-create-3">create</a></code> member is true, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a
 newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#securityerror">SecurityError</a></code>, and terminate
@@ -1937,7 +1936,7 @@ path</a> with the <a data-link-type="dfn" href="#directory-entry" id="ref-for-di
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-6">TypeMismatchError</a></code>, and terminate these steps.</p>
+        <p>If <var>item</var> is not a <a data-link-type="dfn" href="#directory" id="ref-for-directory-13">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code>, and terminate these steps.</p>
        <li data-md="">
         <p>Let <var>entry</var> be a new <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry-10">directory entry</a> with <var>item</var>’s <a data-link-type="dfn" href="#directory-name" id="ref-for-directory-name-2">name</a> as <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name-4">name</a> and <var>path</var> as <a data-link-type="dfn" href="#full-path" id="ref-for-full-path-7">full
 path</a>.</p>
@@ -2113,7 +2112,7 @@ path</a>.</p>
        <li data-md="">
         <p>If <var>item</var> is <em>failure</em>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a></code>, and terminate these steps.</p>
        <li data-md="">
-        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror" id="ref-for-exceptiondef-typemismatcherror-7">TypeMismatchError</a></code>, and terminate these steps.</p>
+        <p>If <var>item</var> is a <a data-link-type="dfn" href="#directory" id="ref-for-directory-17">directory</a>, <a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a> <var>errorCallback</var> (if given) with a newly <a data-link-type="dfn" href="https://heycam.github.io/webidl/#dfn-create-exception">created</a> <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code>, and terminate these steps.</p>
        <li data-md="">
         <p><a data-link-type="dfn" href="https://heycam.github.io/webidl/#es-invoking-callback-functions">Invoke the callback</a> <var>successCallback</var> with a new <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> object representing <var>item</var>.</p>
       </ol>
@@ -2399,7 +2398,6 @@ for suggestions, reviews, and other feedback.</p>
      <li><a href="#dom-filesystem-root">attribute for FileSystem</a><span>, in §7.5</span>
     </ul>
    <li><a href="#root-directory">root directory</a><span>, in §2.2</span>
-   <li><a href="#exceptiondef-typemismatcherror">TypeMismatchError</a><span>, in §7</span>
    <li><a href="#valid-path">valid path</a><span>, in §2.1</span>
    <li><a href="#dom-htmlinputelement-webkitdirectory">webkitdirectory</a><span>, in §5</span>
    <li><a href="#dom-htmlinputelement-webkitentries">webkitEntries</a><span>, in §5</span>
@@ -2446,11 +2444,10 @@ for suggestions, reviews, and other feedback.</p>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
      <li><a href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a>
      <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
+     <li><a href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-USVString">USVString</a>
      <li><a href="https://heycam.github.io/webidl/#dfn-create-exception">created</a>
-     <li><a href="https://heycam.github.io/webidl/#dfn-exception-error-name">error name</a>
      <li><a href="https://heycam.github.io/webidl/#es-invoking-callback-functions">invoke the callback</a>
-     <li><a href="https://heycam.github.io/webidl/#dfn-exception-message">message</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2459,7 +2456,7 @@ for suggestions, reviews, and other feedback.</p>
    <dt id="biblio-fileapi">[FileAPI]
    <dd>Arun Ranganathan; Jonas Sicking. <a href="https://w3c.github.io/FileAPI/">File API</a>. URL: <a href="https://w3c.github.io/FileAPI/">https://w3c.github.io/FileAPI/</a>
    <dt id="biblio-html">[HTML]
-   <dd>Ian Hickson. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WebIDL]
@@ -2565,9 +2562,9 @@ for suggestions, reviews, and other feedback.</p>
    <div class="issue"> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete. <a href="#issue-325fe512"> ↵ </a></div>
    <div class="issue"> WEB COMPAT:
-  The legacy <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror">TypeMismatchError</a></code> has been replaced in most
+  The legacy <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a></code> has been replaced in most
   specifications by <b>TypeError</b>, but the name differs. Is it
-  compatible to switch here as well? If not, should we restore <code class="idl"><a data-link-type="idl" href="#exceptiondef-typemismatcherror">TypeMismatchError</a></code> to <a data-link-type="biblio" href="#biblio-webidl">[WebIDL]</a> with appropriate caveats? <a href="#issue-bfc3b40a"> ↵ </a></div>
+  compatible to switch here as well? <a href="#issue-b5326de5"> ↵ </a></div>
   </div>
   <aside class="dfn-panel" data-for="name">
    <b><a href="#name">#name</a></b><b>Referenced in:</b>
@@ -2808,14 +2805,6 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#dom-datatransferitem-webkitgetasentry">#dom-datatransferitem-webkitgetasentry</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-datatransferitem-webkitgetasentry-1">6. HTML: Drag and drop</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="exceptiondef-typemismatcherror">
-   <b><a href="#exceptiondef-typemismatcherror">#exceptiondef-typemismatcherror</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-exceptiondef-typemismatcherror-1">7. Files and Directories</a> <a href="#ref-for-exceptiondef-typemismatcherror-2">(2)</a>
-    <li><a href="#ref-for-exceptiondef-typemismatcherror-3">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-exceptiondef-typemismatcherror-4">(2)</a> <a href="#ref-for-exceptiondef-typemismatcherror-5">(3)</a> <a href="#ref-for-exceptiondef-typemismatcherror-6">(4)</a>
-    <li><a href="#ref-for-exceptiondef-typemismatcherror-7">7.4. The FileSystemFileEntry Interface</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="callbackdef-errorcallback">

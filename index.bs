@@ -459,19 +459,12 @@ elem.addEventListener('drop', e => {
 <h2 id=api-files-directories>Files and Directories</h2>
 <!-- ============================================================ -->
 
-A <dfn exception>TypeMismatchError</dfn> is a {{DOMException}} with
-that [=exception/error name=] and a [=exception/message=] such as
-<em>"The path supplied exists, but was not an entry of requested
-type."</em>
-
 <aside class=issue>
   WEB COMPAT:
   The legacy {{TypeMismatchError}} has been replaced in most
   specifications by <b>TypeError</b>, but the name differs. Is it
-  compatible to switch here as well? If not, should we restore
-  {{TypeMismatchError}} to [[WebIDL]] with appropriate caveats?
+  compatible to switch here as well?
 </aside>
-
 
 <pre class=idl>
 callback interface ErrorCallback {
