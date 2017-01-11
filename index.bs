@@ -313,7 +313,34 @@ directory rather than a file or files. When specified, the behavior on
 the selection of a directory is as if all files with that directory as
 an ancestor were selected. In addition, the
 {{File/webkitRelativePath}} property of each {{File}} is set to a
-[=relative path=] from the selected directory to the file.
+[=relative path=] from the shortest common ancestor directory of all
+selected files to that file, including that ancestor in the path.
+(Therefore this may be a subdirectory of the selected directory
+rather than the directory itself.)
+
+<aside class=example>
+  Given the following directory structure:
+
+  <pre>
+    documents/
+      to_upload/
+        a/
+          b/
+            c/
+              d/
+                1.txt
+                2.txt
+              3.txt
+  </pre>
+
+  If the <code>to_upload</code> directory was selected, then
+  {{HTMLInputElement/files}} would include:
+
+  * An entry with {{File/name}} == "<code>1.txt</code>" and {{File/webkitRelativePath}} ==  "<code>c/d/1.txt</code>"
+  * An entry with {{File/name}} == "<code>2.txt</code>" and {{File/webkitRelativePath}} == "<code>c/d/2.txt</code>"
+  * An entry with {{File/name}} == "<code>3.txt</code>" and {{File/webkitRelativePath}} == "<code>c/3.txt</code>"
+
+</aside>
 
 <aside class=note>
   A user agent may represent any hierarchical data as directories

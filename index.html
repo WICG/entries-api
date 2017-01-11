@@ -1176,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 0feafaae1a97b66d9da46b325858f9805ac01fb2" name="generator">
+  <meta content="Bikeshed version 176d39d5a285c04f57d2f0e078fa69273028eb45" name="generator">
   <link href="logo-folder.png" rel="icon">
 <style>/* style-md-lists */
 
@@ -1424,7 +1424,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-12-12">12 December 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-11">11 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1670,14 +1670,39 @@ Upload</a> state, the rules in this section apply.</p>
 attribute that indicates whether the user is to be allowed to select a
 directory rather than a file or files. When specified, the behavior on
 the selection of a directory is as if all files with that directory as
-an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-5">relative path</a> from the selected directory to the file.</p>
+an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-3">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path-5">relative path</a> from the shortest common ancestor directory of all
+selected files to that file, including that ancestor in the path.
+(Therefore this may be a subdirectory of the selected directory
+rather than the directory itself.)</p>
+   <aside class="example" id="example-9541e7c2">
+    <a class="self-link" href="#example-9541e7c2"></a> Given the following directory structure: 
+<pre>documents/
+  to_upload/
+    a/
+      b/
+        c/
+          d/
+            1.txt
+            2.txt
+          3.txt
+</pre>
+    <p>If the <code>to_upload</code> directory was selected, then <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> would include:</p>
+    <ul>
+     <li data-md="">
+      <p>An entry with <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-name">name</a></code> == "<code>1.txt</code>" and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-4">webkitRelativePath</a></code> ==  "<code>c/d/1.txt</code>"</p>
+     <li data-md="">
+      <p>An entry with <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-name">name</a></code> == "<code>2.txt</code>" and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-5">webkitRelativePath</a></code> == "<code>c/d/2.txt</code>"</p>
+     <li data-md="">
+      <p>An entry with <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-name">name</a></code> == "<code>3.txt</code>" and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-6">webkitRelativePath</a></code> == "<code>c/3.txt</code>"</p>
+    </ul>
+   </aside>
    <aside class="note"> A user agent may represent any hierarchical data as directories
   during a selection operation. For example, on a device that does not
   expose a native file system directly to the user, photo albums could
   be presented as directories if <code>"image/*"</code> is specified
   for the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-accept">accept</a></code> attribute. </aside>
    <aside class="example" id="example-1359c21a">
-    <a class="self-link" href="#example-1359c21a"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-4">webkitRelativePath</a></code> properties after a
+    <a class="self-link" href="#example-1359c21a"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-7">webkitRelativePath</a></code> properties after a
 directory is selected with an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/forms.html#the-input-element">input</a></code> element: 
 <pre class="lang-html highlight"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">b</span> <span class="na">type</span><span class="o">=</span><span class="s">file</span> <span class="na">webkitdirectory</span><span class="p">></span>
 </pre>
@@ -1708,7 +1733,7 @@ it must instead return null.</p>
   clicked. Should we fix this so it is always populated? </aside>
    <aside class="issue" id="issue-d16b592f"><a class="self-link" href="#issue-d16b592f"></a> INTEROP:
   In Chrome, if <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitdirectory" id="ref-for-dom-htmlinputelement-webkitdirectory-2">webkitdirectory</a></code> is specified on a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement">HTMLInputElement</a></code>, <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries-4">webkitEntries</a></code> is not
-  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-5">webkitRelativePath</a></code> properties must be used instead to
+  populated; the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/forms.html#dom-input-files">files</a></code> collection and <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath-8">webkitRelativePath</a></code> properties must be used instead to
   reconstruct the directory structure. Should we fix this so it is
   always populated? </aside>
    <h2 class="heading settled" data-level="6" id="html-data"><span class="secno">6. </span><span class="content">HTML: Drag and drop</span><a class="self-link" href="#html-data"></a></h2>
@@ -2416,6 +2441,7 @@ for suggestions, reviews, and other feedback.</p>
     <ul>
      <li><a href="https://w3c.github.io/FileAPI/#dfn-file">File</a>
      <li><a href="https://w3c.github.io/FileAPI/#dfn-filereader">FileReader</a>
+     <li><a href="https://w3c.github.io/FileAPI/#dfn-name">name</a>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
@@ -2786,7 +2812,7 @@ for suggestions, reviews, and other feedback.</p>
    <b><a href="#dom-file-webkitrelativepath">#dom-file-webkitrelativepath</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-file-webkitrelativepath-1">4. The File Interface</a>
-    <li><a href="#ref-for-dom-file-webkitrelativepath-2">5. HTML: Forms</a> <a href="#ref-for-dom-file-webkitrelativepath-3">(2)</a> <a href="#ref-for-dom-file-webkitrelativepath-4">(3)</a> <a href="#ref-for-dom-file-webkitrelativepath-5">(4)</a>
+    <li><a href="#ref-for-dom-file-webkitrelativepath-2">5. HTML: Forms</a> <a href="#ref-for-dom-file-webkitrelativepath-3">(2)</a> <a href="#ref-for-dom-file-webkitrelativepath-4">(3)</a> <a href="#ref-for-dom-file-webkitrelativepath-5">(4)</a> <a href="#ref-for-dom-file-webkitrelativepath-6">(5)</a> <a href="#ref-for-dom-file-webkitrelativepath-7">(6)</a> <a href="#ref-for-dom-file-webkitrelativepath-8">(7)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-htmlinputelement-webkitdirectory">
