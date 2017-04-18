@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Entries API: DirectoryReader manual test</title>
+<title>Entries API: FileSystemDirectoryReader manual test</title>
 <link rel=help href="https://wicg.github.io/entries-api/#api-directoryreader">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
 
-<h1>Entries API: DirectoryReader manual test</h1>
+<h1>Entries API: FileSystemDirectoryReader manual test</h1>
 
 <div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
 <script src="support.js"></script>
@@ -14,11 +14,11 @@
 entry_test((t, entry) => {
   const reader = entry.createReader();
 
-  assert_idl_attribute(reader, 'readEntries', 'DirectoryReader has readEntries');
+  assert_idl_attribute(reader, 'readEntries', 'FileSystemDirectoryReader has readEntries');
   assert_equals(typeof reader.readEntries, 'function', 'readEntries() is a method');
 
   t.done();
-}, 'DirectoryReader - interface');
+}, 'FileSystemDirectoryReader - interface');
 
 
 entry_test((t, entry) => {
@@ -44,7 +44,7 @@ entry_test((t, entry) => {
 
     do_chunk();
   }), t.unreached_func('getDirectory should not fail'));
-}, 'DirectoryReader - basic enumeration');
+}, 'FileSystemDirectoryReader - basic enumeration');
 
 entry_test((t, entry) => {
   const reader = entry.createReader();
@@ -55,7 +55,7 @@ entry_test((t, entry) => {
       assert_equals(error.name, 'InvalidStateError', 'invalid state if already reading');
       t.done();
     }));
-}, 'DirectoryReader - reading flag');
+}, 'FileSystemDirectoryReader - reading flag');
 
 entry_test((t, entry) => {
   const reader = entry.createReader();
@@ -75,7 +75,7 @@ entry_test((t, entry) => {
     })));
 
   do_chunk();
-}, 'DirectoryReader - done flag');
+}, 'FileSystemDirectoryReader - done flag');
 
 // TODO: Manual tests where directory contents are changed during the test.
 </script>

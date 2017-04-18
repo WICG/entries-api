@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Entries API: DirectoryEntry.getFile() manual test</title>
+<title>Entries API: FileSystemDirectoryEntry.getFile() manual test</title>
 <link rel=help href="https://wicg.github.io/entries-api/#dom-filesystemdirectoryentry-getfile">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
 
-<h1>Entries API: DirectoryEntry.getFile() manual test</h1>
+<h1>Entries API: FileSystemDirectoryEntry.getFile() manual test</h1>
 
 <div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
 <script src="support.js"></script>
@@ -22,7 +22,7 @@ INVALID_PATHS.forEach(path => {
                       'getFile() should fail if given invalid path');
         t.done();
       }));
-  }, 'DirectoryEntry.getFile() - invalid path: ' + JSON.stringify(path));
+  }, 'FileSystemDirectoryEntry.getFile() - invalid path: ' + JSON.stringify(path));
 });
 
 EMPTY_PATHS.forEach(path => {
@@ -37,7 +37,7 @@ EMPTY_PATHS.forEach(path => {
                       'path resolves to the directory itself');
         t.done();
       }));
-  }, 'DirectoryEntry.getFile() - empty path: ' + JSON.stringify(path) || 'undefined');
+  }, 'FileSystemDirectoryEntry.getFile() - empty path: ' + JSON.stringify(path) || 'undefined');
 });
 
 FILE_PATHS.forEach(path => {
@@ -52,7 +52,7 @@ FILE_PATHS.forEach(path => {
                       'create option is set');
         t.done();
       }));
-  }, 'DirectoryEntry.getFile() - {create:true}: ' + path);
+  }, 'FileSystemDirectoryEntry.getFile() - {create:true}: ' + path);
 });
 
 NOT_FOUND_PATHS.forEach(path => {
@@ -66,7 +66,7 @@ NOT_FOUND_PATHS.forEach(path => {
                       'getFile() should fail with not found');
         t.done();
       }));
-  }, 'DirectoryEntry.getFile() - not found: ' + path);
+  }, 'FileSystemDirectoryEntry.getFile() - not found: ' + path);
 });
 
 DIR_PATHS.forEach(path => {
@@ -80,7 +80,7 @@ DIR_PATHS.forEach(path => {
                       'getFile() should fail if type is directory');
         t.done();
       }));
-  }, 'DirectoryEntry.getFile() - directory: ' + path);
+  }, 'FileSystemDirectoryEntry.getFile() - directory: ' + path);
 });
 
 FILE_PATHS.forEach(path => {
@@ -96,7 +96,7 @@ FILE_PATHS.forEach(path => {
       }),
       t.unreached_func('getFile should not fail')
     );
-  }, 'DirectoryEntry.getFile() - file: ' + path);
+  }, 'FileSystemDirectoryEntry.getFile() - file: ' + path);
 });
 
 entry_test((t, entry) => {
@@ -108,5 +108,5 @@ entry_test((t, entry) => {
       t.done();
     }), t.unreached_func('getFile should not fail'));
   }), t.unreached_func('getFile should not fail'));
-}, 'DirectoryEntry.getFile() - object identity');
+}, 'FileSystemDirectoryEntry.getFile() - object identity');
 </script>

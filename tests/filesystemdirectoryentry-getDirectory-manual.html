@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Entries API: DirectoryEntry.getDirectory() manual test</title>
+<title>Entries API: FileSystemDirectoryEntry.getDirectory() manual test</title>
 <link rel=help href="https://wicg.github.io/entries-api/#dom-filesystemdirectoryentry-getdirectory">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
 
-<h1>Entries API: DirectoryEntry.getDirectory() manual test</h1>
+<h1>Entries API: FileSystemDirectoryEntry.getDirectory() manual test</h1>
 
 <div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
 <script src="support.js"></script>
@@ -22,7 +22,7 @@ INVALID_PATHS.forEach(path => {
                       'getDirectory() should fail if given invalid path');
         t.done();
       }));
-  }, 'DirectoryEntry.getDirectory() - invalid path: ' + JSON.stringify(path));
+  }, 'FileSystemDirectoryEntry.getDirectory() - invalid path: ' + JSON.stringify(path));
 });
 
 EMPTY_PATHS.forEach(path => {
@@ -33,7 +33,7 @@ EMPTY_PATHS.forEach(path => {
       t.step_func(dir => {
         console.log('got dir');
         assert_true(dir.isDirectory,
-                    'empty path should yield DirectoryEntry');
+                    'empty path should yield FileSystemDirectoryEntry');
         assert_equals(dir.name, entry.name,
                       'empty path should yield same directory');
         assert_equals(dir.fullPath, entry.fullPath,
@@ -42,7 +42,7 @@ EMPTY_PATHS.forEach(path => {
       }),
       t.unreached_func('getDirectory should not fail')
     );
-  }, 'DirectoryEntry.getDirectory() - empty path: '
+  }, 'FileSystemDirectoryEntry.getDirectory() - empty path: '
    + JSON.stringify(path) || 'undefined');
 });
 
@@ -58,7 +58,7 @@ DIR_PATHS.forEach(path => {
                       'create option is set');
         t.done();
       }));
-  }, 'DirectoryEntry.getDirectory() - {create:true}: ' + path);
+  }, 'FileSystemDirectoryEntry.getDirectory() - {create:true}: ' + path);
 });
 
 NOT_FOUND_PATHS.forEach(path => {
@@ -72,7 +72,7 @@ NOT_FOUND_PATHS.forEach(path => {
                       'getDirectory() should fail with not found');
         t.done();
       }));
-  }, 'DirectoryEntry.getDirectory() - not found: ' + path);
+  }, 'FileSystemDirectoryEntry.getDirectory() - not found: ' + path);
 });
 
 FILE_PATHS.forEach(path => {
@@ -86,7 +86,7 @@ FILE_PATHS.forEach(path => {
                       'getDirectory() should fail if type is file');
         t.done();
       }));
-  }, 'DirectoryEntry.getDirectory() - directory: ' + path);
+  }, 'FileSystemDirectoryEntry.getDirectory() - directory: ' + path);
 });
 
 DIR_PATHS.forEach(path => {
@@ -102,6 +102,6 @@ DIR_PATHS.forEach(path => {
       }),
       t.unreached_func('getDirectory should not fail')
     );
-  }, 'DirectoryEntry.getDirectory() - directory: ' + path);
+  }, 'FileSystemDirectoryEntry.getDirectory() - directory: ' + path);
 });
 </script>

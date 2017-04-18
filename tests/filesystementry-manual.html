@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <meta charset=utf-8>
-<title>Entries API: Entry manual test</title>
+<title>Entries API: FileSystemEntry manual test</title>
 <link rel=help href="https://wicg.github.io/entries-api/#api-entry">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
 
-<h1>Entries API: Entry manual test</h1>
+<h1>Entries API: FileSystemEntry manual test</h1>
 
 <div id=drop style="height: 50px; border: 1px dotted red;">Drop the <b>support/upload</b> directory here.</div>
 <script src="support.js"></script>
 
 <script>
 entry_test((t, entry) => {
-  assert_idl_attribute(entry, 'isFile', 'Entry has isFile attribute');
+  assert_idl_attribute(entry, 'isFile', 'FileSystemEntry has isFile attribute');
   assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
 
-  assert_idl_attribute(entry, 'isDirectory', 'Entry has isDirectory attribute');
+  assert_idl_attribute(entry, 'isDirectory', 'FileSystemEntry has isDirectory attribute');
   assert_equals(typeof entry.isDirectory, 'boolean', 'isFile is boolean');
 
-  assert_idl_attribute(entry, 'name', 'Entry has name attribute');
+  assert_idl_attribute(entry, 'name', 'FileSystemEntry has name attribute');
   assert_equals(typeof entry.name, 'string', 'name is a string');
 
-  assert_idl_attribute(entry, 'fullPath', 'Entry has fullPath attribute');
+  assert_idl_attribute(entry, 'fullPath', 'FileSystemEntry has fullPath attribute');
   assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
 
-  assert_idl_attribute(entry, 'filesystem', 'Entry has filesystem attribute');
+  assert_idl_attribute(entry, 'filesystem', 'FileSystemEntry has filesystem attribute');
 
-  assert_idl_attribute(entry, 'getParent', 'Entry has filesystem attribute');
-  assert_equals(typeof entry.getParent, 'function', 'Entry has a getParent() method');
+  assert_idl_attribute(entry, 'getParent', 'FileSystemEntry has filesystem attribute');
+  assert_equals(typeof entry.getParent, 'function', 'FileSystemEntry has a getParent() method');
 
   t.done();
-}, 'Entry - interface');
+}, 'FileSystemEntry - interface');
 
 entry_test((t, entry) => {
   assert_equals(entry.getParent(), void 0, 'getParent() arguments are optional');
@@ -43,7 +43,7 @@ entry_test((t, entry) => {
 
     t.done();
   }), t.unreached_func('getParent() should not fail'));
-}, 'Entry - getParent()');
+}, 'FileSystemEntry - getParent()');
 
 // TODO: Manual test for getParent() where containing directory is removed before getParent() is called.
 </script>
