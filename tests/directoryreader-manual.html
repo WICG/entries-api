@@ -4,7 +4,6 @@
 <link rel=help href="https://wicg.github.io/entries-api/#api-directoryreader">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/resources/idlharness.js"></script>
 
 <h1>Entries API: DirectoryReader manual test</h1>
 
@@ -15,20 +14,16 @@
 entry_test((t, entry) => {
   const reader = entry.createReader();
 
-  assert_false('DirectoryReader' in self, 'DirectoryReader has [NoInterfaceObject]');
-  assert_class_string(reader, 'DirectoryReader', 'interface name is DirectoryReader');
-
   assert_idl_attribute(reader, 'readEntries', 'DirectoryReader has readEntries');
   assert_equals(typeof reader.readEntries, 'function', 'readEntries() is a method');
 
   t.done();
-}, 'DirectoryReader - IDL');
+}, 'DirectoryReader - interface');
 
 
 entry_test((t, entry) => {
   entry.getDirectory('subdir', {}, t.step_func(dir => {
     const reader = dir.createReader();
-    assert_class_string(reader, 'DirectoryReader');
     assert_equals(typeof reader.readEntries, 'function');
 
     const found_names = [];

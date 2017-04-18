@@ -4,7 +4,6 @@
 <link rel=help href="https://wicg.github.io/entries-api/#dom-filesystemdirectoryentry-getfile">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/resources/idlharness.js"></script>
 
 <h1>Entries API: DirectoryEntry.getFile() manual test</h1>
 
@@ -90,7 +89,6 @@ FILE_PATHS.forEach(path => {
       path,
       {},
       t.step_func(e => {
-        assert_class_string(e, 'FileEntry', 'path should match');
         assert_true(e.isFile);
         assert_false(e.isDirectory);
         assert_equals(e.name, 'file.txt');

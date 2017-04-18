@@ -4,7 +4,6 @@
 <link rel=help href="https://wicg.github.io/entries-api/#api-directoryentry">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/resources/idlharness.js"></script>
 
 <h1>Entries API: DirectoryEntry manual test</h1>
 
@@ -28,15 +27,11 @@ entry_test((t, entry) => {
   assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
 
   assert_idl_attribute(entry, 'filesystem', 'DirectoryEntry has filesystem attribute');
-  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
 
   assert_idl_attribute(entry, 'getParent', 'DirectoryEntry has getParent');
   assert_equals(typeof entry.getParent, 'function', 'getParent() is a method');
 
   // DirectoryEntry  ----------
-
-  assert_false('DirectoryEntry' in self, 'Entry has [NoInterfaceObject]');
-  assert_class_string(entry, 'DirectoryEntry', 'interface name is DirectoryEntry');
 
   assert_idl_attribute(entry, 'getFile', 'DirectoryEntry has getFile');
   assert_equals(typeof entry.getFile, 'function',
@@ -51,7 +46,7 @@ entry_test((t, entry) => {
                 'createReader() is a method');
 
   t.done();
-}, 'DirectoryEntry - IDL');
+}, 'DirectoryEntry - interface');
 
 entry_test((t, entry) => {
   assert_false(entry.isFile, 'isFile is false');

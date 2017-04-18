@@ -4,7 +4,6 @@
 <link rel=help href="https://wicg.github.io/entries-api/#api-entry">
 <script src="/resources/testharness.js"></script>
 <script src="/resources/testharnessreport.js"></script>
-<script src="/resources/idlharness.js"></script>
 
 <h1>Entries API: Entry manual test</h1>
 
@@ -13,8 +12,6 @@
 
 <script>
 entry_test((t, entry) => {
-  assert_false('Entry' in self, 'Entry has [NoInterfaceObject]');
-
   assert_idl_attribute(entry, 'isFile', 'Entry has isFile attribute');
   assert_equals(typeof entry.isFile, 'boolean', 'isFile is boolean');
 
@@ -28,19 +25,18 @@ entry_test((t, entry) => {
   assert_equals(typeof entry.fullPath, 'string', 'fullPath is a string');
 
   assert_idl_attribute(entry, 'filesystem', 'Entry has filesystem attribute');
-  assert_class_string(entry.filesystem, 'DOMFileSystem', 'filesystem is a DOMFileSystem');
 
   assert_idl_attribute(entry, 'getParent', 'Entry has filesystem attribute');
   assert_equals(typeof entry.getParent, 'function', 'Entry has a getParent() method');
 
   t.done();
-}, 'Entry - IDL');
+}, 'Entry - interface');
 
 entry_test((t, entry) => {
   assert_equals(entry.getParent(), void 0, 'getParent() arguments are optional');
 
   entry.getParent(t.step_func(parent => {
-    assert_class_string(parent, 'DirectoryEntry', 'parent should be a directory');
+    assert_true(parent.isDirectory, 'parent should be a directory');
 
     assert_equals(parent.fullPath, '/', 'parent should be root');
     assert_equals(parent.name, '', 'root name is empty string');
