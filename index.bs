@@ -79,6 +79,7 @@ A <dfn>name</dfn> is a string which:
 
     * does not contain '/' (U+002F SOLIDUS)
     * does not contain NUL (U+0000)
+    * does not contain '\' (U+005C REVERSE SOLIDUS)
     * is not '.' (U+002E FULL STOP)
     * is not '..' (U+002E FULL STOP, U+002E FULL STOP)
 

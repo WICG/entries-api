@@ -53,7 +53,8 @@ function file_entry_test(name, func, description) {
 // ----------------------------------------
 
 const INVALID_PATHS = [
-  '\x00', 'a-\x00-b'
+  '\x00', 'a-\x00-b',
+  '\\', 'a-\\-b'
 ];
 const EMPTY_PATHS = ['', null, undefined];
 const NOT_FOUND_PATHS = [
