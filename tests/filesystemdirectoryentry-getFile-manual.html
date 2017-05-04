@@ -65,7 +65,7 @@ NOT_FOUND_PATHS.forEach(path => {
   }, 'FileSystemDirectoryEntry.getFile() - not found: ' + path);
 });
 
-DIR_PATHS.forEach(path => {
+DIR_PATHS.concat(['/', '.']).forEach(path => {
   entry_test((t, entry) => {
     entry.getFile(
       path,

@@ -100,4 +100,23 @@ DIR_PATHS.forEach(path => {
     );
   }, 'FileSystemDirectoryEntry.getDirectory() - directory: ' + path);
 });
+
+[
+  {path: '.', name: 'upload'},
+  {path: '/', name: ''}
+].forEach(test_case => {
+  entry_test((t, entry) => {
+    entry.getDirectory(
+      test_case.path,
+      {},
+      t.step_func(e => {
+        assert_false(e.isFile);
+        assert_true(e.isDirectory);
+        assert_equals(e.name, test_case.name);
+        t.done();
+      }),
+      t.unreached_func('getDirectory should not fail')
+    );
+  }, 'FileSystemDirectoryEntry.getDirectory() - directory: ' + test_case.path);
+});
 </script>
