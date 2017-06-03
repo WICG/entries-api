@@ -1176,7 +1176,7 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 5bd73bb15eb04ad9f7d1a57f012e9ee6eca5a765" name="generator">
+  <meta content="Bikeshed version edf04655cdbbf30dd4c7dbad313044553232b75a" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
   <link href="logo-folder.png" rel="icon">
 <style>/* style-md-lists */
@@ -1425,7 +1425,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-05-04">4 May 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-06-03">3 June 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2073,9 +2073,9 @@ flag</a>.</p>
 </span>doBatch<span class="p">(</span><span class="p">)</span><span class="p">;</span>
 </pre>
    </aside>
-   <aside class="example" id="example-27a1feb6">
-    <a class="self-link" href="#example-27a1feb6"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryreader" id="ref-for-filesystemdirectoryreader-5">FileSystemDirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
-<pre class="lang-javascript highlight"><span class="kd">function</span> getEntriesAsPromise<span class="p">(</span>entry<span class="p">)</span> <span class="p">{</span>
+   <aside class="example" id="example-2950d1de">
+    <a class="self-link" href="#example-2950d1de"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryreader" id="ref-for-filesystemdirectoryreader-5">FileSystemDirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-objects">Promises</a> <a data-link-type="biblio" href="#biblio-ecma-262">[ECMA-262]</a>: 
+<pre class="lang-javascript highlight"><span class="kd">function</span> getEntriesAsPromise<span class="p">(</span>dirEntry<span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> Promise<span class="p">(</span><span class="p">(</span>resolve<span class="p">,</span> reject<span class="p">)</span> <span class="p">=></span> <span class="p">{</span>
     <span class="kd">let</span> result <span class="o">=</span> <span class="p">[</span><span class="p">]</span><span class="p">;</span>
     <span class="kd">let</span> reader <span class="o">=</span> dirEntry<span class="p">.</span>createReader<span class="p">(</span><span class="p">)</span><span class="p">;</span>
