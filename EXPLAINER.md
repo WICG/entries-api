@@ -74,8 +74,7 @@ implementors and web developers and may produce a more usable API.
 ```js
 elem.addEventListener('drop', e => {
   e.preventDefault();
-  for (let i = 0; i < e.dataTransfer.items.length; ++i) {
-    let item = e.dataTransfer.items[i];
+  for (let item of e.dataTransfer.items) {
     if (item.kind === 'file') {
       let entry = item.webkitGetAsEntry();
       handleEntry(entry);
