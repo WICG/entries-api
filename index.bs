@@ -468,9 +468,7 @@ elem.addEventListener('drop', e => {
   e.preventDefault();
 
   // Process all of the items.
-  for (let i = 0; i < e.dataTransfer.items.length; ++i) {
-    let item = e.dataTransfer.items[i];
-
+  for (let item of e.dataTransfer.items) {
     // kind will be 'file' for file/directory entries.
     if (item.kind === 'file') {
       let entry = item.webkitGetAsEntry();
