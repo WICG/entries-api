@@ -14,6 +14,7 @@ Editor: Joshua Bell, jsbell@google.com
 Group: wicg
 Assume Explicit For: yes
 Test Suite: https://github.com/w3c/web-platform-tests/tree/master/entries-api
+Complain About: accidental-2119 yes
 </pre>
 <pre class="anchors">
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
@@ -139,9 +140,9 @@ directory=]. The [=file system/name=] of a [=/file system=] is a
 [=/file system=].
 
 <aside class=note>
-  Implementations may produce a [=file system/name=] by generating a
+  Implementations could produce a [=file system/name=] by generating a
   UUID for each [=/file system=] instance with some fixed prefix and
-  suffix strings applied. Authors using the API should not make
+  suffix strings applied. Authors using the API are adviised not to make
   assumptions about the structure or content of the names.
 </aside>
 
@@ -162,9 +163,9 @@ associated [=root directory=].
 <aside class=note>
   [=Entries=] are defined in terms of [=paths=] relative to a [=root
   directory=] to account for the fact that a native file system
-  backing the interaction with the API may be modified asynchronously
+  backing the interaction with the API could be modified asynchronously
   during operations such as enumerating the contents of a directory.
-  Operations exposed on [=entries=] may produce errors in such cases
+  Operations exposed on [=entries=] will produce errors in such cases
   where the [=paths=] no longer reference the same entity.
 </aside>
 
@@ -344,7 +345,7 @@ rather than the directory itself.)
 </aside>
 
 <aside class=note>
-  A user agent may represent any hierarchical data as directories
+  A user agent could represent any hierarchical data as directories
   during a selection operation. For example, on a device that does not
   expose a native file system directly to the user, photo albums could
   be presented as directories if <code>"image/*"</code> is specified
@@ -428,7 +429,7 @@ data store item list=] as a <i>File</i>. If it is accessed via
 {{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
 <aside class=note>
-  A user agent may represent any hierarchical data as files and
+  A user agent could represent any hierarchical data as files and
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
