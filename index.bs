@@ -13,6 +13,7 @@ Level: 1
 Editor: Joshua Bell, jsbell@google.com
 Group: wicg
 Assume Explicit For: yes
+Test Suite: https://github.com/w3c/web-platform-tests/tree/master/entries-api
 </pre>
 <pre class="anchors">
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
