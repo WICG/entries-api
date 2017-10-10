@@ -1425,7 +1425,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-10-05">5 October 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-10-10">10 October 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1583,19 +1583,19 @@ flag</dfn> (initially unset), a <dfn class="dfn-paneled" data-dfn-type="dfn" dat
 unset), and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reader-error">reader error</dfn> (initially null).</p>
    <h2 class="heading settled" data-level="3" id="algorithms"><span class="secno">3. </span><span class="content">Algorithms</span><a class="self-link" href="#algorithms"></a></h2>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="resolve-a-relative-path">resolve a relative path</dfn> with <var>abspath</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path②">absolute
-path</a>) and <var>relpath</var> (a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path②">relative path</a> or the empty string), run
-the following steps which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path③">absolute path</a>:</p>
+path</a>) and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path③">absolute path</a>, a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path②">relative path</a>, or the empty string), run
+the following steps which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path④">absolute path</a>:</p>
    <div class="algorithm">
     <ol>
      <li data-md="">
-      <p>If <var>relpath</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path④">absolute path</a>, return <var>relpath</var>.</p>
+      <p>If <var>path</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑤">absolute path</a>, return <var>path</var>.</p>
      <li data-md="">
       <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string" id="ref-for-strictly-split-a-string">strictly splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
       <aside class="note">The first string will be empty.</aside>
      <li data-md="">
-      <p>Let <var>relpath segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string" id="ref-for-strictly-split-a-string①">strictly splitting</a> <var>relpath</var> on '/' (U+002F SOLIDUS).</p>
+      <p>Let <var>path segments</var> be the result of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/infrastructure.html#strictly-split-a-string" id="ref-for-strictly-split-a-string①">strictly splitting</a> <var>path</var> on '/' (U+002F SOLIDUS).</p>
      <li data-md="">
-      <p>For each <var>segment</var> in <var>relpath segments</var>, switch on <var>segment</var>:</p>
+      <p>For each <var>segment</var> in <var>path segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
        <dt>empty string 
        <dd>Continue. 
@@ -1613,7 +1613,7 @@ the following steps which return an <a data-link-type="dfn" href="#absolute-path
     </ol>
    </div>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="evaluate-a-path">evaluate a path</dfn> with <var>directory</var> (an <a data-link-type="dfn" href="#root-directory" id="ref-for-root-directory⑥">root directory</a>)
-and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑤">absolute path</a>), run the following steps which
+and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑥">absolute path</a>), run the following steps which
 return a <a data-link-type="dfn" href="#file" id="ref-for-file③">file</a>, <a data-link-type="dfn" href="#directory" id="ref-for-directory⑧">directory</a>, or <em>failure</em>.</p>
    <div class="algorithm">
     <ol>
@@ -1622,11 +1622,13 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file③">file</a>, <a 
 '/' (U+002F SOLIDUS).</p>
      <li data-md="">
       <p>Remove the first entry from <var>segments</var>.</p>
-      <aside class="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑥">absolute path</a>,
+      <aside class="note">Since <var>path</var> was an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑦">absolute path</a>,
   this first entry will always be empty.</aside>
      <li data-md="">
       <p>For each <var>segment</var> in <var>segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
+       <dt>empty string 
+       <dd>Continue. 
        <dt>'.' (U+002E FULL STOP) 
        <dd>Continue. 
        <dt>'..' (U+002E FULL STOP, U+002E FULL STOP) 
@@ -2623,7 +2625,7 @@ for suggestions, reviews, and other feedback.</p>
    <ul>
     <li><a href="#ref-for-absolute-path">2.1. Names and Paths</a>
     <li><a href="#ref-for-absolute-path①">2.3. Entries</a>
-    <li><a href="#ref-for-absolute-path②">3. Algorithms</a> <a href="#ref-for-absolute-path③">(2)</a> <a href="#ref-for-absolute-path④">(3)</a> <a href="#ref-for-absolute-path⑤">(4)</a> <a href="#ref-for-absolute-path⑥">(5)</a>
+    <li><a href="#ref-for-absolute-path②">3. Algorithms</a> <a href="#ref-for-absolute-path③">(2)</a> <a href="#ref-for-absolute-path④">(3)</a> <a href="#ref-for-absolute-path⑤">(4)</a> <a href="#ref-for-absolute-path⑥">(5)</a> <a href="#ref-for-absolute-path⑦">(6)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="path">

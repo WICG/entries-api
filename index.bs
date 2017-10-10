@@ -187,22 +187,22 @@ unset), and a <dfn>reader error</dfn> (initially null).
 <!-- ============================================================ -->
 
 To <dfn>resolve a relative path</dfn> with |abspath| (an [=absolute
-path=]) and |relpath| (a [=relative path=] or the empty string), run
+path=]) and |path| (an [=absolute path=], a [=relative path=], or the empty string), run
 the following steps which return an [=absolute path=]:
 
 <div class=algorithm>
 
-1. If |relpath| is an [=absolute path=], return |relpath|.
+1. If |path| is an [=absolute path=], return |path|.
 
 2. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
     <aside class=note>The first string will be empty.</aside>
 
-3. Let |relpath segments| be the result of [=strictly splitting=]
-    |relpath| on '/' (U+002F SOLIDUS).
+3. Let |path segments| be the result of [=strictly splitting=]
+    |path| on '/' (U+002F SOLIDUS).
 
-4. For each |segment| in |relpath segments|, switch on |segment|:
+4. For each |segment| in |path segments|, switch on |segment|:
 
     <dl class=switch>
 
@@ -242,6 +242,9 @@ return a [=file=], [=directory=], or <em>failure</em>.
 3. For each |segment| in |segments|, switch on |segment|:
 
     <dl class=switch>
+
+      <dt>empty string
+      <dd>Continue.
 
       <dt>'.' (U+002E FULL STOP)
       <dd>Continue.
