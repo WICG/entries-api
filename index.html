@@ -1542,8 +1542,9 @@ but which has not been broadly adopted by web browsers.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="relative-path">relative path</dfn> is a string consisting of one or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment">path segments</a> joined by '/' (U+002F SOLIDUS) that does not start
 with '/' (U+002F SOLIDUS).</p>
    <p>An <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="absolute-path">absolute path</dfn> is a string consisting of '/' (U+002F
-SOLIDUS) followed by a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path">relative path</a>.</p>
-   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path①">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path">absolute
+SOLIDUS) followed by zero or more <a data-link-type="dfn" href="#path-segment" id="ref-for-path-segment①">path segments</a> joined by '/'
+(U+002F SOLIDUS).</p>
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="path">path</dfn> is either a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path">relative path</a> or an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path">absolute
 path</a>.</p>
    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="valid-path">valid path</dfn> is a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString">USVString</a></code> which is a <a data-link-type="dfn" href="#path" id="ref-for-path">path</a>.</p>
    <h3 class="heading settled" data-level="2.2" id="files-dirs"><span class="secno">2.2. </span><span class="content">Files and Directories</span><a class="self-link" href="#files-dirs"></a></h3>
@@ -1583,7 +1584,7 @@ flag</dfn> (initially unset), a <dfn class="dfn-paneled" data-dfn-type="dfn" dat
 unset), and a <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="reader-error">reader error</dfn> (initially null).</p>
    <h2 class="heading settled" data-level="3" id="algorithms"><span class="secno">3. </span><span class="content">Algorithms</span><a class="self-link" href="#algorithms"></a></h2>
    <p>To <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="resolve-a-relative-path">resolve a relative path</dfn> with <var>abspath</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path②">absolute
-path</a>) and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path③">absolute path</a>, a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path②">relative path</a>, or the empty string), run
+path</a>) and <var>path</var> (an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path③">absolute path</a>, a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path①">relative path</a>, or the empty string), run
 the following steps which return an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path④">absolute path</a>:</p>
    <div class="algorithm">
     <ol>
@@ -1658,7 +1659,7 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file③">file</a>, <a 
 };
 </pre>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath">webkitRelativePath</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file" id="ref-for-dfn-file②">File</a></code> interface
-must return the <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path③">relative path</a> of the file, or the empty string if
+must return the <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path②">relative path</a> of the file, or the empty string if
 not specified.</p>
    <h2 class="heading settled" data-level="5" id="html-forms"><span class="secno">5. </span><span class="content">HTML: Forms</span><a class="self-link" href="#html-forms"></a></h2>
    <aside class="issue" id="issue-16c4234f"><a class="self-link" href="#issue-16c4234f"></a> EDITORIAL:
@@ -1675,7 +1676,7 @@ Upload</a> state, the rules in this section apply.</p>
 attribute that indicates whether the user is to be allowed to select a
 directory rather than a file or files. When specified, the behavior on
 the selection of a directory is as if all files with that directory as
-an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath②">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file" id="ref-for-dfn-file③">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path④">relative path</a> from the shortest common ancestor directory of all
+an ancestor were selected. In addition, the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath②">webkitRelativePath</a></code> property of each <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-file" id="ref-for-dfn-file③">File</a></code> is set to a <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path③">relative path</a> from the shortest common ancestor directory of all
 selected files to that file, including that ancestor in the path.
 (Therefore this may be a subdirectory of the selected directory
 rather than the directory itself.)</p>
@@ -2608,16 +2609,16 @@ for suggestions, reviews, and other feedback.</p>
   <aside class="dfn-panel" data-for="path-segment">
    <b><a href="#path-segment">#path-segment</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-path-segment">2.1. Names and Paths</a>
+    <li><a href="#ref-for-path-segment">2.1. Names and Paths</a> <a href="#ref-for-path-segment①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="relative-path">
    <b><a href="#relative-path">#relative-path</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relative-path">2.1. Names and Paths</a> <a href="#ref-for-relative-path①">(2)</a>
-    <li><a href="#ref-for-relative-path②">3. Algorithms</a>
-    <li><a href="#ref-for-relative-path③">4. The File Interface</a>
-    <li><a href="#ref-for-relative-path④">5. HTML: Forms</a>
+    <li><a href="#ref-for-relative-path">2.1. Names and Paths</a>
+    <li><a href="#ref-for-relative-path①">3. Algorithms</a>
+    <li><a href="#ref-for-relative-path②">4. The File Interface</a>
+    <li><a href="#ref-for-relative-path③">5. HTML: Forms</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="absolute-path">

@@ -93,7 +93,8 @@ A <dfn>relative path</dfn> is a string consisting of one or more
 with '/' (U+002F SOLIDUS).
 
 An <dfn>absolute path</dfn> is a string consisting of '/' (U+002F
-SOLIDUS) followed by a [=relative path=].
+SOLIDUS) followed by zero or more [=path segments=] joined by '/'
+(U+002F SOLIDUS).
 
 A <dfn>path</dfn> is either a [=relative path=] or an [=absolute
 path=].
