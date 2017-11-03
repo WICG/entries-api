@@ -1,3 +1,5 @@
+<img src="https://cdn.rawgit.com/WICG/entries-api/gh-pages/logo-folder.svg" height="100" align=right>
+
 # Files and Directory Entries API
 
 ## What is this?
