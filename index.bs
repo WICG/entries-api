@@ -498,9 +498,7 @@ elem.addEventListener('drop', e => {
 </aside>
 
 <pre class=idl>
-callback interface ErrorCallback {
-    void handleEvent(DOMException err);
-};
+callback ErrorCallback = void (DOMException err);
 </pre>
 
 An {{ErrorCallback}} function is used for operations that may return an
@@ -627,9 +625,7 @@ dictionary FileSystemFlags {
     boolean exclusive = false;
 };
 
-callback interface FileSystemEntryCallback {
-    void handleEvent(FileSystemEntry entry);
-};
+callback FileSystemEntryCallback = void (FileSystemEntry entry);
 </pre>
 
 <aside class=note>
@@ -771,9 +767,7 @@ interface FileSystemDirectoryReader {
     void readEntries(FileSystemEntriesCallback successCallback,
                      optional ErrorCallback errorCallback);
 };
-callback interface FileSystemEntriesCallback {
-    void handleEvent(sequence&lt;FileSystemEntry&gt; entries);
-};
+callback FileSystemEntriesCallback = void (sequence&lt;FileSystemEntry&gt; entries);
 </pre>
 
 A {{FileSystemDirectoryReader}} has an associated [=directory reader=].
@@ -921,9 +915,7 @@ interface FileSystemFileEntry : FileSystemEntry {
     void file(FileCallback successCallback,
               optional ErrorCallback errorCallback);
 };
-callback interface FileCallback {
-    void handleEvent(File file);
-};
+callback FileCallback = void (File file);
 </pre>
 
 A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
