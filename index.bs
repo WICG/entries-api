@@ -1,4 +1,3 @@
-<link rel="icon" href="logo-folder.png">
 <pre class=metadata>
 Title: File and Directory Entries API
 Shortname: EntriesAPI
@@ -13,6 +12,7 @@ Repository: WICG/entries-api
 Level: 1
 Editor: Joshua Bell, Google Inc. https://google.com, jsbell@google.com
 Group: wicg
+Favicon: logo-folder.png
 Assume Explicit For: yes
 Markup Shorthands: markdown yes, css no
 Test Suite: https://github.com/web-platform-tests/wpt/tree/master/entries-api

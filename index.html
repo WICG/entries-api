@@ -992,57 +992,93 @@ Possible extra rowspan handling
 	.toc > li li          { font-weight: normal; }
 	.toc > li li li       { font-size:   95%;    }
 	.toc > li li li li    { font-size:   90%;    }
+	.toc > li li li li .secno { font-size: 85%; }
 	.toc > li li li li li { font-size:   85%;    }
+	.toc > li li li li li .secno { font-size: 100%; }
 
-	.toc > li             { margin: 1.5rem 0;    }
-	.toc > li li          { margin: 0.3rem 0;    }
-	.toc > li li li       { margin-left: 2rem;   }
+	/* @supports not (display:grid) { */
+		.toc > li             { margin: 1.5rem 0;    }
+		.toc > li li          { margin: 0.3rem 0;    }
+		.toc > li li li       { margin-left: 2rem;   }
 
-	/* Section numbers in a column of their own */
-	.toc .secno {
-		float: left;
-		width: 4rem;
-		white-space: nowrap;
-	}
-	.toc > li li li li .secno {
-		font-size: 85%;
-	}
-	.toc > li li li li li .secno {
-		font-size: 100%;
-	}
+		/* Section numbers in a column of their own */
+		.toc .secno {
+			float: left;
+			width: 4rem;
+			white-space: nowrap;
+		}
 
-	:not(li) > .toc              { margin-left:  5rem; }
-	.toc .secno                  { margin-left: -5rem; }
-	.toc > li li li .secno       { margin-left: -7rem; }
-	.toc > li li li li .secno    { margin-left: -9rem; }
-	.toc > li li li li li .secno { margin-left: -11rem; }
+		.toc li {
+			clear: both;
+		}
 
-	/* Tighten up indentation in narrow ToCs */
-	@media (max-width: 30em) {
-		:not(li) > .toc              { margin-left:  4rem; }
-		.toc .secno                  { margin-left: -4rem; }
-		.toc > li li li              { margin-left:  1rem; }
-		.toc > li li li .secno       { margin-left: -5rem; }
-		.toc > li li li li .secno    { margin-left: -6rem; }
-		.toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	@media screen and (min-width: 78em) {
-		body:not(.toc-inline) :not(li) > .toc              { margin-left:  4rem; }
-		body:not(.toc-inline) .toc .secno                  { margin-left: -4rem; }
-		body:not(.toc-inline) .toc > li li li              { margin-left:  1rem; }
-		body:not(.toc-inline) .toc > li li li .secno       { margin-left: -5rem; }
-		body:not(.toc-inline) .toc > li li li li .secno    { margin-left: -6rem; }
-		body:not(.toc-inline) .toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	body.toc-sidebar #toc :not(li) > .toc              { margin-left:  4rem; }
-	body.toc-sidebar #toc .toc .secno                  { margin-left: -4rem; }
-	body.toc-sidebar #toc .toc > li li li              { margin-left:  1rem; }
-	body.toc-sidebar #toc .toc > li li li .secno       { margin-left: -5rem; }
-	body.toc-sidebar #toc .toc > li li li li .secno    { margin-left: -6rem; }
-	body.toc-sidebar #toc .toc > li li li li li .secno { margin-left: -7rem; }
+		:not(li) > .toc              { margin-left:  5rem; }
+		.toc .secno                  { margin-left: -5rem; }
+		.toc > li li li .secno       { margin-left: -7rem; }
+		.toc > li li li li .secno    { margin-left: -9rem; }
+		.toc > li li li li li .secno { margin-left: -11rem; }
 
-	.toc li {
-		clear: both;
+		/* Tighten up indentation in narrow ToCs */
+		@media (max-width: 30em) {
+			:not(li) > .toc              { margin-left:  4rem; }
+			.toc .secno                  { margin-left: -4rem; }
+			.toc > li li li              { margin-left:  1rem; }
+			.toc > li li li .secno       { margin-left: -5rem; }
+			.toc > li li li li .secno    { margin-left: -6rem; }
+			.toc > li li li li li .secno { margin-left: -7rem; }
+		}
+	/* } */
+
+	@supports (display:grid) {
+		/* Use #toc over .toc to override non-@supports rules. */
+		#toc {
+			display: grid;
+			align-content: start;
+			grid-template-columns: auto 1fr;
+			grid-column-gap: 1rem;
+			column-gap: 1rem;
+			grid-row-gap: .6rem;
+			row-gap: .6rem;
+		}
+		#toc h2 {
+			grid-column: 1 / -1;
+			margin-bottom: 0;
+		}
+		#toc ol,
+		#toc li,
+		#toc a {
+			display: contents;
+			/* Switch <a> to subgrid when supported */
+		}
+		#toc span {
+			margin: 0;
+		}
+		#toc > .toc > li > a > span {
+			/* The spans of the top-level list,
+			   comprising the first items of each top-level section. */
+			margin-top: 1.1rem;
+		}
+		#toc#toc .secno { /* Ugh, need more specificity to override base.css */
+			grid-column: 1;
+			width: auto;
+			margin-left: 0;
+		}
+		#toc .content {
+			grid-column: 2;
+			width: auto;
+			margin-right: 1rem;
+		}
+		#toc .content:hover {
+			background: rgba(75%, 75%, 75%, .25);
+			border-bottom: 3px solid #054572;
+			margin-bottom: -3px;
+		}
+		#toc li li li .content {
+			margin-left: 1rem;
+		}
+		#toc li li li li .content {
+			margin-left: 2rem;
+		}
 	}
 
 
@@ -1176,10 +1212,10 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 150b038a54cb926cf8e3d36fd8b108c226cb94b8" name="generator">
+  <meta content="Bikeshed version f168e9e768df676e3c9c49525fc1d754533d7501" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
-  <meta content="db14721e9f81d3949c78f9cedafcb0d15046282a" name="document-revision">
   <link href="logo-folder.png" rel="icon">
+  <meta content="eb38fd42e11f9109f8c9588b9fb925cbb1ef10f2" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1329,41 +1365,41 @@ pre .property::before, pre .property::after {
 }</style>
 <style>/* style-dfn-panel */
 
-        .dfn-panel {
-            position: absolute;
-            z-index: 35;
-            height: auto;
-            width: -webkit-fit-content;
-            width: fit-content;
-            max-width: 300px;
-            max-height: 500px;
-            overflow: auto;
-            padding: 0.5em 0.75em;
-            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-            background: #DDDDDD;
-            color: black;
-            border: outset 0.2em;
-        }
-        .dfn-panel:not(.on) { display: none; }
-        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-        .dfn-panel > b { display: block; }
-        .dfn-panel a { color: black; }
-        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-        .dfn-panel > b + b { margin-top: 0.25em; }
-        .dfn-panel ul { padding: 0; }
-        .dfn-panel li { list-style: inside; }
-        .dfn-panel.activated {
-            display: inline-block;
-            position: fixed;
-            left: .5em;
-            bottom: 2em;
-            margin: 0 auto;
-            max-width: calc(100vw - 1.5em - .4em - .5em);
-            max-height: 30vh;
-        }
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    height: auto;
+    width: -webkit-fit-content;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: #DDDDDD;
+    color: black;
+    border: outset 0.2em;
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: black; }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
 
-        .dfn-paneled { cursor: pointer; }
-        </style>
+.dfn-paneled { cursor: pointer; }
+</style>
 <style>/* style-syntax-highlighting */
 pre.idl.highlight { color: #708090; }
 .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -1426,7 +1462,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-07-02">2 July 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-07-10">10 July 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2430,58 +2466,275 @@ for suggestions, reviews, and other feedback.</p>
    <li><a href="#dom-datatransferitem-webkitgetasentry">webkitGetAsEntry()</a><span>, in §6</span>
    <li><a href="#dom-file-webkitrelativepath">webkitRelativePath</a><span>, in §4</span>
   </ul>
+  <aside class="dfn-panel" data-for="term-for-sec-asynciterator-interface">
+   <a href="https://tc39.github.io/ecma262/#sec-asynciterator-interface">https://tc39.github.io/ecma262/#sec-asynciterator-interface</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sec-asynciterator-interface">7.3. The FileSystemDirectoryReader Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-sec-promise-objects">
+   <a href="https://tc39.github.io/ecma262/#sec-promise-objects">https://tc39.github.io/ecma262/#sec-promise-objects</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sec-promise-objects">7.1. The FileSystemEntry Interface</a>
+    <li><a href="#ref-for-sec-promise-objects①">7.2. The FileSystemDirectoryEntry Interface</a>
+    <li><a href="#ref-for-sec-promise-objects②">7.3. The FileSystemDirectoryReader Interface</a>
+    <li><a href="#ref-for-sec-promise-objects③">7.4. The FileSystemFileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-file">
+   <a href="https://w3c.github.io/FileAPI/#dfn-file">https://w3c.github.io/FileAPI/#dfn-file</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-file">4. The File Interface</a> <a href="#ref-for-dfn-file①">(2)</a> <a href="#ref-for-dfn-file②">(3)</a>
+    <li><a href="#ref-for-dfn-file③">5. HTML: Forms</a>
+    <li><a href="#ref-for-dfn-file④">6. HTML: Drag and drop</a>
+    <li><a href="#ref-for-dfn-file⑤">7.4. The FileSystemFileEntry Interface</a> <a href="#ref-for-dfn-file⑥">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-filereader">
+   <a href="https://w3c.github.io/FileAPI/#dfn-filereader">https://w3c.github.io/FileAPI/#dfn-filereader</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-filereader">7.4. The FileSystemFileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-name">
+   <a href="https://w3c.github.io/FileAPI/#dfn-name">https://w3c.github.io/FileAPI/#dfn-name</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-name">5. HTML: Forms</a> <a href="#ref-for-dfn-name①">(2)</a> <a href="#ref-for-dfn-name②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-datatransferitem">
+   <a href="https://html.spec.whatwg.org/multipage/dnd.html#datatransferitem">https://html.spec.whatwg.org/multipage/dnd.html#datatransferitem</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-datatransferitem①">6. HTML: Drag and drop</a> <a href="#ref-for-datatransferitem②">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-htmlinputelement">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#htmlinputelement">https://html.spec.whatwg.org/multipage/input.html#htmlinputelement</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-htmlinputelement①">5. HTML: Forms</a> <a href="#ref-for-htmlinputelement②">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-input-accept">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-accept">https://html.spec.whatwg.org/multipage/input.html#dom-input-accept</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-input-accept">5. HTML: Forms</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-the-drag-data-item-kind">
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#the-drag-data-item-kind">https://html.spec.whatwg.org/multipage/interaction.html#the-drag-data-item-kind</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-the-drag-data-item-kind">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-drag-data-store">
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-drag-data-store">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-drag-data-store-item-list">
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-drag-data-store-item-list">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-file-upload-state-(type=file)">
+   <a href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-file-upload-state-(type=file)">5. HTML: Forms</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-input-files">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-files">https://html.spec.whatwg.org/multipage/input.html#dom-input-files</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-input-files">5. HTML: Forms</a> <a href="#ref-for-dom-input-files①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dom-datatransferitem-getasfile">
+   <a href="https://html.spec.whatwg.org/multipage/dnd.html#dom-datatransferitem-getasfile">https://html.spec.whatwg.org/multipage/dnd.html#dom-datatransferitem-getasfile</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-datatransferitem-getasfile">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-the-input-element">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#the-input-element">https://html.spec.whatwg.org/multipage/input.html#the-input-element</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-the-input-element">5. HTML: Forms</a> <a href="#ref-for-the-input-element①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-queue-a-task">
+   <a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-queue-a-task">7.1. The FileSystemEntry Interface</a>
+    <li><a href="#ref-for-queue-a-task①">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-queue-a-task②">(2)</a>
+    <li><a href="#ref-for-queue-a-task③">7.3. The FileSystemDirectoryReader Interface</a> <a href="#ref-for-queue-a-task④">(2)</a> <a href="#ref-for-queue-a-task⑤">(3)</a> <a href="#ref-for-queue-a-task⑥">(4)</a>
+    <li><a href="#ref-for-queue-a-task⑦">7.4. The FileSystemFileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-dnd-ro">
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-ro">https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-ro</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-dnd-ro">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-dnd-rw">
+   <a href="https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-rw">https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-rw</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-dnd-rw">6. HTML: Drag and drop</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-input-type-file-selected">
+   <a href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-input-type-file-selected">5. HTML: Forms</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-attr-input-type">
+   <a href="https://html.spec.whatwg.org/multipage/input.html#attr-input-type">https://html.spec.whatwg.org/multipage/input.html#attr-input-type</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-attr-input-type">5. HTML: Forms</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-strictly-split">
+   <a href="https://infra.spec.whatwg.org/#strictly-split">https://infra.spec.whatwg.org/#strictly-split</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-strictly-split">3. Algorithms</a> <a href="#ref-for-strictly-split①">(2)</a> <a href="#ref-for-strictly-split②">(3)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-DOMException">
+   <a href="https://heycam.github.io/webidl/#idl-DOMException">https://heycam.github.io/webidl/#idl-DOMException</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-DOMException">7. Files and Directories</a>
+    <li><a href="#ref-for-idl-DOMException①">7.1. The FileSystemEntry Interface</a>
+    <li><a href="#ref-for-idl-DOMException②">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-idl-DOMException③">(2)</a> <a href="#ref-for-idl-DOMException④">(3)</a> <a href="#ref-for-idl-DOMException⑤">(4)</a> <a href="#ref-for-idl-DOMException⑥">(5)</a> <a href="#ref-for-idl-DOMException⑦">(6)</a> <a href="#ref-for-idl-DOMException⑧">(7)</a> <a href="#ref-for-idl-DOMException⑨">(8)</a>
+    <li><a href="#ref-for-idl-DOMException①⓪">7.3. The FileSystemDirectoryReader Interface</a> <a href="#ref-for-idl-DOMException①①">(2)</a> <a href="#ref-for-idl-DOMException①②">(3)</a>
+    <li><a href="#ref-for-idl-DOMException①③">7.4. The FileSystemFileEntry Interface</a> <a href="#ref-for-idl-DOMException①④">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-invalidstateerror">
+   <a href="https://heycam.github.io/webidl/#invalidstateerror">https://heycam.github.io/webidl/#invalidstateerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-invalidstateerror">7.3. The FileSystemDirectoryReader Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-notfounderror">
+   <a href="https://heycam.github.io/webidl/#notfounderror">https://heycam.github.io/webidl/#notfounderror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-notfounderror">7.1. The FileSystemEntry Interface</a>
+    <li><a href="#ref-for-notfounderror①">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-notfounderror②">(2)</a>
+    <li><a href="#ref-for-notfounderror③">7.3. The FileSystemDirectoryReader Interface</a>
+    <li><a href="#ref-for-notfounderror④">7.4. The FileSystemFileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-securityerror">
+   <a href="https://heycam.github.io/webidl/#securityerror">https://heycam.github.io/webidl/#securityerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-securityerror">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-securityerror①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-exceptiondef-typeerror">
+   <a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">https://heycam.github.io/webidl/#exceptiondef-typeerror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-exceptiondef-typeerror">7. Files and Directories</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-typemismatcherror">
+   <a href="https://heycam.github.io/webidl/#typemismatcherror">https://heycam.github.io/webidl/#typemismatcherror</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-typemismatcherror">7. Files and Directories</a>
+    <li><a href="#ref-for-typemismatcherror①">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-typemismatcherror②">(2)</a> <a href="#ref-for-typemismatcherror③">(3)</a> <a href="#ref-for-typemismatcherror④">(4)</a>
+    <li><a href="#ref-for-typemismatcherror⑤">7.4. The FileSystemFileEntry Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-USVString">
+   <a href="https://heycam.github.io/webidl/#idl-USVString">https://heycam.github.io/webidl/#idl-USVString</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-USVString">2.1. Names and Paths</a>
+    <li><a href="#ref-for-idl-USVString①">2.2. Files and Directories</a>
+    <li><a href="#ref-for-idl-USVString②">4. The File Interface</a>
+    <li><a href="#ref-for-idl-USVString③">7.1. The FileSystemEntry Interface</a> <a href="#ref-for-idl-USVString④">(2)</a>
+    <li><a href="#ref-for-idl-USVString⑤">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-idl-USVString⑥">(2)</a>
+    <li><a href="#ref-for-idl-USVString⑦">7.5. The FileSystem Interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-boolean">
+   <a href="https://heycam.github.io/webidl/#idl-boolean">https://heycam.github.io/webidl/#idl-boolean</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-boolean">5. HTML: Forms</a>
+    <li><a href="#ref-for-idl-boolean①">7.1. The FileSystemEntry Interface</a> <a href="#ref-for-idl-boolean②">(2)</a>
+    <li><a href="#ref-for-idl-boolean③">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-idl-boolean④">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-dfn-create-exception">
+   <a href="https://heycam.github.io/webidl/#dfn-create-exception">https://heycam.github.io/webidl/#dfn-create-exception</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dfn-create-exception">7.1. The FileSystemEntry Interface</a>
+    <li><a href="#ref-for-dfn-create-exception①">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-dfn-create-exception②">(2)</a> <a href="#ref-for-dfn-create-exception③">(3)</a> <a href="#ref-for-dfn-create-exception④">(4)</a> <a href="#ref-for-dfn-create-exception⑤">(5)</a> <a href="#ref-for-dfn-create-exception⑥">(6)</a> <a href="#ref-for-dfn-create-exception⑦">(7)</a> <a href="#ref-for-dfn-create-exception⑧">(8)</a>
+    <li><a href="#ref-for-dfn-create-exception⑨">7.3. The FileSystemDirectoryReader Interface</a> <a href="#ref-for-dfn-create-exception①⓪">(2)</a>
+    <li><a href="#ref-for-dfn-create-exception①①">7.4. The FileSystemFileEntry Interface</a> <a href="#ref-for-dfn-create-exception①②">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-invoke-a-callback-function">
+   <a href="https://heycam.github.io/webidl/#invoke-a-callback-function">https://heycam.github.io/webidl/#invoke-a-callback-function</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-invoke-a-callback-function">7.1. The FileSystemEntry Interface</a> <a href="#ref-for-invoke-a-callback-function①">(2)</a>
+    <li><a href="#ref-for-invoke-a-callback-function②">7.2. The FileSystemDirectoryEntry Interface</a> <a href="#ref-for-invoke-a-callback-function③">(2)</a> <a href="#ref-for-invoke-a-callback-function④">(3)</a> <a href="#ref-for-invoke-a-callback-function⑤">(4)</a> <a href="#ref-for-invoke-a-callback-function⑥">(5)</a> <a href="#ref-for-invoke-a-callback-function⑦">(6)</a> <a href="#ref-for-invoke-a-callback-function⑧">(7)</a> <a href="#ref-for-invoke-a-callback-function⑨">(8)</a> <a href="#ref-for-invoke-a-callback-function①⓪">(9)</a> <a href="#ref-for-invoke-a-callback-function①①">(10)</a>
+    <li><a href="#ref-for-invoke-a-callback-function①②">7.3. The FileSystemDirectoryReader Interface</a> <a href="#ref-for-invoke-a-callback-function①③">(2)</a> <a href="#ref-for-invoke-a-callback-function①④">(3)</a> <a href="#ref-for-invoke-a-callback-function①⑤">(4)</a> <a href="#ref-for-invoke-a-callback-function①⑥">(5)</a> <a href="#ref-for-invoke-a-callback-function①⑦">(6)</a>
+    <li><a href="#ref-for-invoke-a-callback-function①⑧">7.4. The FileSystemFileEntry Interface</a> <a href="#ref-for-invoke-a-callback-function①⑨">(2)</a> <a href="#ref-for-invoke-a-callback-function②⓪">(3)</a>
+   </ul>
+  </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[ecma262]</a> defines the following terms:
     <ul>
-     <li><a href="https://tc39.github.io/ecma262/#sec-asynciterator-interface">asynciterator</a>
-     <li><a href="https://tc39.github.io/ecma262/#sec-promise-objects">promise</a>
+     <li><span class="dfn-paneled" id="term-for-sec-asynciterator-interface" style="color:initial">asynciterator</span>
+     <li><span class="dfn-paneled" id="term-for-sec-promise-objects" style="color:initial">promise</span>
     </ul>
    <li>
     <a data-link-type="biblio">[FileAPI]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/FileAPI/#dfn-file">File</a>
-     <li><a href="https://w3c.github.io/FileAPI/#dfn-filereader">FileReader</a>
-     <li><a href="https://w3c.github.io/FileAPI/#dfn-name">name</a>
+     <li><span class="dfn-paneled" id="term-for-dfn-file" style="color:initial">File</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-filereader" style="color:initial">FileReader</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-name" style="color:initial">name</span>
     </ul>
    <li>
     <a data-link-type="biblio">[HTML]</a> defines the following terms:
     <ul>
-     <li><a href="https://html.spec.whatwg.org/multipage/dnd.html#datatransferitem">DataTransferItem</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/input.html#htmlinputelement">HTMLInputElement</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-accept">accept</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#the-drag-data-item-kind">drag data item kind</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store">drag data store</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#drag-data-store-item-list">drag data store item list</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/forms.html#file-upload-state-(type=file)">file upload</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/input.html#dom-input-files">files</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/dnd.html#dom-datatransferitem-getasfile">getAsFile()</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/input.html#the-input-element">input</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/webappapis.html#queue-a-task">queue a task</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-ro">read-only mode</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/interaction.html#concept-dnd-rw">read/write mode</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected">selected files</a>
-     <li><a href="https://html.spec.whatwg.org/multipage/input.html#attr-input-type">type</a>
+     <li><span class="dfn-paneled" id="term-for-datatransferitem" style="color:initial">DataTransferItem</span>
+     <li><span class="dfn-paneled" id="term-for-htmlinputelement" style="color:initial">HTMLInputElement</span>
+     <li><span class="dfn-paneled" id="term-for-dom-input-accept" style="color:initial">accept</span>
+     <li><span class="dfn-paneled" id="term-for-the-drag-data-item-kind" style="color:initial">drag data item kind</span>
+     <li><span class="dfn-paneled" id="term-for-drag-data-store" style="color:initial">drag data store</span>
+     <li><span class="dfn-paneled" id="term-for-drag-data-store-item-list" style="color:initial">drag data store item list</span>
+     <li><span class="dfn-paneled" id="term-for-file-upload-state-(type=file)" style="color:initial">file upload</span>
+     <li><span class="dfn-paneled" id="term-for-dom-input-files" style="color:initial">files</span>
+     <li><span class="dfn-paneled" id="term-for-dom-datatransferitem-getasfile" style="color:initial">getAsFile()</span>
+     <li><span class="dfn-paneled" id="term-for-the-input-element" style="color:initial">input</span>
+     <li><span class="dfn-paneled" id="term-for-queue-a-task" style="color:initial">queue a task</span>
+     <li><span class="dfn-paneled" id="term-for-concept-dnd-ro" style="color:initial">read-only mode</span>
+     <li><span class="dfn-paneled" id="term-for-concept-dnd-rw" style="color:initial">read/write mode</span>
+     <li><span class="dfn-paneled" id="term-for-concept-input-type-file-selected" style="color:initial">selected files</span>
+     <li><span class="dfn-paneled" id="term-for-attr-input-type" style="color:initial">type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
-     <li><a href="https://infra.spec.whatwg.org/#strictly-split">strictly split</a>
+     <li><span class="dfn-paneled" id="term-for-strictly-split" style="color:initial">strictly split</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
-     <li><a href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a>
-     <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
-     <li><a href="https://heycam.github.io/webidl/#notfounderror">NotFoundError</a>
-     <li><a href="https://heycam.github.io/webidl/#securityerror">SecurityError</a>
-     <li><a href="https://heycam.github.io/webidl/#exceptiondef-typeerror">TypeError</a>
-     <li><a href="https://heycam.github.io/webidl/#typemismatcherror">TypeMismatchError</a>
-     <li><a href="https://heycam.github.io/webidl/#idl-USVString">USVString</a>
-     <li><a href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>
-     <li><a href="https://heycam.github.io/webidl/#dfn-create-exception">created</a>
-     <li><a href="https://heycam.github.io/webidl/#invoke-a-callback-function">invoke</a>
+     <li><span class="dfn-paneled" id="term-for-idl-DOMException" style="color:initial">DOMException</span>
+     <li><span class="dfn-paneled" id="term-for-invalidstateerror" style="color:initial">InvalidStateError</span>
+     <li><span class="dfn-paneled" id="term-for-notfounderror" style="color:initial">NotFoundError</span>
+     <li><span class="dfn-paneled" id="term-for-securityerror" style="color:initial">SecurityError</span>
+     <li><span class="dfn-paneled" id="term-for-exceptiondef-typeerror" style="color:initial">TypeError</span>
+     <li><span class="dfn-paneled" id="term-for-typemismatcherror" style="color:initial">TypeMismatchError</span>
+     <li><span class="dfn-paneled" id="term-for-idl-USVString" style="color:initial">USVString</span>
+     <li><span class="dfn-paneled" id="term-for-idl-boolean" style="color:initial">boolean</span>
+     <li><span class="dfn-paneled" id="term-for-dfn-create-exception" style="color:initial">created</span>
+     <li><span class="dfn-paneled" id="term-for-invoke-a-callback-function" style="color:initial">invoke</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2997,57 +3250,57 @@ for suggestions, reviews, and other feedback.</p>
   </aside>
 <script>/* script-dfn-panel */
 
-        document.body.addEventListener("click", function(e) {
-            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-            // Find the dfn element or panel, if any, that was clicked on.
-            var el = e.target;
-            var target;
-            var hitALink = false;
-            while(el.parentElement) {
-                if(el.tagName == "A") {
-                    // Clicking on a link in a <dfn> shouldn't summon the panel
-                    hitALink = true;
-                }
-                if(el.classList.contains("dfn-paneled")) {
-                    target = "dfn";
-                    break;
-                }
-                if(el.classList.contains("dfn-panel")) {
-                    target = "dfn-panel";
-                    break;
-                }
-                el = el.parentElement;
-            }
-            if(target != "dfn-panel") {
-                // Turn off any currently "on" or "activated" panels.
-                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-                    el.classList.remove("on");
-                    el.classList.remove("activated");
-                });
-            }
-            if(target == "dfn" && !hitALink) {
-                // open the panel
-                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-                if(dfnPanel) {
-                    dfnPanel.classList.add("on");
-                    var rect = el.getBoundingClientRect();
-                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-                    dfnPanel.style.top = window.scrollY + rect.top + "px";
-                    var panelRect = dfnPanel.getBoundingClientRect();
-                    var panelWidth = panelRect.right - panelRect.left;
-                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                        // Reposition, because the panel is overflowing
-                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
-                    }
-                } else {
-                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
-                }
-            } else if(target == "dfn-panel") {
-                // Switch it to "activated" state, which pins it.
-                el.classList.add("activated");
-                el.style.left = null;
-                el.style.top = null;
-            }
-
+document.body.addEventListener("click", function(e) {
+    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+    // Find the dfn element or panel, if any, that was clicked on.
+    var el = e.target;
+    var target;
+    var hitALink = false;
+    while(el.parentElement) {
+        if(el.tagName == "A") {
+            // Clicking on a link in a <dfn> shouldn't summon the panel
+            hitALink = true;
+        }
+        if(el.classList.contains("dfn-paneled")) {
+            target = "dfn";
+            break;
+        }
+        if(el.classList.contains("dfn-panel")) {
+            target = "dfn-panel";
+            break;
+        }
+        el = el.parentElement;
+    }
+    if(target != "dfn-panel") {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+            el.classList.remove("on");
+            el.classList.remove("activated");
         });
-        </script>
+    }
+    if(target == "dfn" && !hitALink) {
+        // open the panel
+        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+        if(dfnPanel) {
+            dfnPanel.classList.add("on");
+            var rect = el.getBoundingClientRect();
+            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+            dfnPanel.style.top = window.scrollY + rect.top + "px";
+            var panelRect = dfnPanel.getBoundingClientRect();
+            var panelWidth = panelRect.right - panelRect.left;
+            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                // Reposition, because the panel is overflowing
+                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+            }
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+        }
+    } else if(target == "dfn-panel") {
+        // Switch it to "activated" state, which pins it.
+        el.classList.add("activated");
+        el.style.left = null;
+        el.style.top = null;
+    }
+
+});
+</script>
