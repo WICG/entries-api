@@ -19,7 +19,7 @@ Test Suite: https://github.com/web-platform-tests/wpt/tree/master/entries-api
 Complain About: accidental-2119 yes
 </pre>
 
-<pre class="anchors">
+<pre class=anchors>
 spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
     urlPrefix: forms.html
         type: dfn
@@ -274,11 +274,11 @@ return a [=file=], [=directory=], or <em>failure</em>.
   This section should be merged into [[FileAPI]] once it is complete.
 </aside>
 
-<pre class=idl>
+<xmp class=idl>
 partial interface File {
     readonly attribute USVString webkitRelativePath;
 };
-</pre>
+</xmp>
 
 The {{File/webkitRelativePath}} attribute of the {{File}} interface
 must return the [=relative path=] of the file, or the empty string if
@@ -297,12 +297,12 @@ not specified.
   property.
 </aside>
 
-<pre class=idl>
+<xmp class=idl>
 partial interface HTMLInputElement {
     attribute boolean webkitdirectory;
-    readonly attribute FrozenArray&lt;FileSystemEntry&gt; webkitEntries;
+    readonly attribute FrozenArray<FileSystemEntry> webkitEntries;
 };
-</pre>
+</xmp>
 
 When an <{input}> element's <{input/type}> attribute is in the [=File
 Upload=] state, the rules in this section apply.
@@ -321,7 +321,7 @@ rather than the directory itself.)
 <aside class=example>
   Given the following directory structure:
 
-  <pre>
+  <xmp>
     documents/
       to_upload/
         a/
@@ -331,7 +331,7 @@ rather than the directory itself.)
                 1.txt
                 2.txt
               3.txt
-  </pre>
+  </xmp>
 
   If the `to_upload` directory was selected, then
   {{HTMLInputElement/files}} would include:
@@ -434,11 +434,11 @@ data store item list=] as a <i>File</i>. If it is accessed via
   directories and files when dragged from a media player application.
 </aside>
 
-<pre class=idl>
+<xmp class=idl>
 partial interface DataTransferItem {
     FileSystemEntry? webkitGetAsEntry();
 };
-</pre>
+</xmp>
 
 The {{DataTransferItem/webkitGetAsEntry()}} method must run the
 following steps when invoked:
@@ -491,9 +491,9 @@ elem.addEventListener('drop', e => {
   compatible to switch here as well?
 </aside>
 
-<pre class=idl>
+<xmp class=idl>
 callback ErrorCallback = void (DOMException err);
-</pre>
+</xmp>
 
 An {{ErrorCallback}} function is used for operations that may return an
 error asynchronously.
@@ -504,7 +504,7 @@ error asynchronously.
 ## The {{FileSystemEntry}} Interface ## {#api-entry}
 <!-- ============================================================ -->
 
-<pre class=idl>
+<xmp class=idl>
 interface FileSystemEntry {
     readonly attribute boolean isFile;
     readonly attribute boolean isDirectory;
@@ -515,7 +515,7 @@ interface FileSystemEntry {
     void getParent(optional FileSystemEntryCallback successCallback,
                    optional ErrorCallback errorCallback);
 };
-</pre>
+</xmp>
 
 An {{FileSystemEntry}} has an associated [=entry=].
 
@@ -601,7 +601,7 @@ function getParentAsPromise(entry) {
 ## The {{FileSystemDirectoryEntry}} Interface ## {#api-directoryentry}
 <!-- ============================================================ -->
 
-<pre class=idl>
+<xmp class=idl>
 interface FileSystemDirectoryEntry : FileSystemEntry {
     FileSystemDirectoryReader createReader();
     void getFile(optional USVString? path,
@@ -620,7 +620,7 @@ dictionary FileSystemFlags {
 };
 
 callback FileSystemEntryCallback = void (FileSystemEntry entry);
-</pre>
+</xmp>
 
 <aside class=note>
   The {{FileSystemFlags/create}} member of {{FileSystemFlags}} and
@@ -756,13 +756,13 @@ function getDirectoryAsPromise(entry, path) {
 ## The {{FileSystemDirectoryReader}} Interface ## {#api-directoryreader}
 <!-- ============================================================ -->
 
-<pre class=idl>
+<xmp class=idl>
 interface FileSystemDirectoryReader {
     void readEntries(FileSystemEntriesCallback successCallback,
                      optional ErrorCallback errorCallback);
 };
-callback FileSystemEntriesCallback = void (sequence&lt;FileSystemEntry&gt; entries);
-</pre>
+callback FileSystemEntriesCallback = void (sequence<FileSystemEntry> entries);
+</xmp>
 
 A {{FileSystemDirectoryReader}} has an associated [=directory reader=].
 
@@ -914,13 +914,13 @@ async function show(entry) {
 ## The {{FileSystemFileEntry}} Interface ## {#api-fileentry}
 <!-- ============================================================ -->
 
-<pre class=idl>
+<xmp class=idl>
 interface FileSystemFileEntry : FileSystemEntry {
     void file(FileCallback successCallback,
               optional ErrorCallback errorCallback);
 };
 callback FileCallback = void (File file);
-</pre>
+</xmp>
 
 A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
 
@@ -982,12 +982,12 @@ function fileAsPromise(entry) {
 ## The {{FileSystem}} Interface ## {#api-domfilesystem}
 <!-- ============================================================ -->
 
-<pre class=idl>
+<xmp class=idl>
 interface FileSystem {
     readonly attribute USVString name;
     readonly attribute FileSystemDirectoryEntry root;
 };
-</pre>
+</xmp>
 
 A {{FileSystem}} has an associated [=/file system=].
 
