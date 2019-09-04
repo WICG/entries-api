@@ -601,11 +601,11 @@ function getParentAsPromise(entry) {
 <xmp class=idl>
 interface FileSystemDirectoryEntry : FileSystemEntry {
     FileSystemDirectoryReader createReader();
-    void getFile(optional USVString? path = null,
+    void getFile(optional USVString? path,
                  optional FileSystemFlags options = {},
                  optional FileSystemEntryCallback successCallback,
                  optional ErrorCallback errorCallback);
-    void getDirectory(optional USVString? path = null,
+    void getDirectory(optional USVString? path,
                       optional FileSystemFlags options = {},
                       optional FileSystemEntryCallback successCallback,
                       optional ErrorCallback errorCallback);
@@ -653,7 +653,7 @@ invoked, must run the following steps:
 
 1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is null let |path| be the empty string.
+    1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
@@ -695,7 +695,7 @@ invoked, must run the following steps:
 
 1. [=Queue a task=] to run the following substeps:
 
-    1. If |path| is null let |path| be the empty string.
+    1. If |path| is undefined or null let |path| be the empty string.
 
     2. If |path| is not a [=valid path=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
