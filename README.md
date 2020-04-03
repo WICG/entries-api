@@ -1,4 +1,4 @@
-<img src="https://cdn.rawgit.com/WICG/entries-api/gh-pages/logo-folder.svg" height="100" align=right>
+<img src="https://wicg.github.io/entries-api/logo-folder.svg" height="100" align=right>
 
 # Files and Directory Entries API
 
