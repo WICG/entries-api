@@ -12,7 +12,7 @@ have implemented the API for compatibility.
 
 For more context, please read the [Explainer](EXPLAINER.md).
 
-[![Build Status](https://travis-ci.org/WICG/entries-api.svg?branch=gh-pages)](https://travis-ci.org/WICG/entries-api)
+[![Build Status](https://travis-ci.org/WICG/entries-api.svg?branch=master)](https://travis-ci.org/WICG/entries-api)
 
 ## Draft Specification
 
