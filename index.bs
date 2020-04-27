@@ -1,6 +1,6 @@
 <pre class=metadata>
 Title: File and Directory Entries API
-Shortname: EntriesAPI
+Shortname: Entries-API
 Abstract: This specification documents web browser support for file
     and directory upload by drag-and-drop operations. It introduces
     types representing directories with methods for asynchronous
