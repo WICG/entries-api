@@ -904,7 +904,7 @@ callback FileCallback = void (File file);
 
 A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
 
-<div class=algorithm>
+<div algorithm>
 
 The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)</dfn> method steps are:
 
