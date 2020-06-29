@@ -1222,10 +1222,10 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 76bae64b, updated Wed Jun 3 14:38:35 2020 -0700" name="generator">
+  <meta content="Bikeshed version 04c91f0f, updated Mon Jun 29 08:51:04 2020 +0200" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
-  <link href="logo-folder.png" rel="icon">
-  <meta content="c875e06aeb06a37a76efda3624b30dd291956c65" name="document-revision">
+  <link href="logo-folder.svg" rel="icon">
+  <meta content="4f90f9a667733ddfb46bd530aee975abfd9e1acb" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1408,7 +1408,14 @@ figcaption:not(.no-marker)::before {
             .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
             .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
             .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
-            .name-slug-mismatch { color: red }
+            /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
+            .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
+            .h-entry p + .mdn-anno { margin-top: 0; }
+            h2 + .mdn-anno.after { margin: -48px 0 0 0; }
+            h3 + .mdn-anno.after { margin: -46px 0 0 0; }
+            h4 + .mdn-anno.after { margin: -42px 0 0 0; }
+            h5 + .mdn-anno.after { margin: -40px 0 0 0; }
+            h6 + .mdn-anno.after { margin: -40px 0 0 0; }
             </style>
 <style>/* style-selflinks */
 
@@ -1529,7 +1536,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-06-03">3 June 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-06-29">29 June 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1763,11 +1770,55 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file③">file</a>, <a 
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath"><c- g>webkitRelativePath</c-></a>;
 };
 </pre>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/File/webkitRelativePath" title="The File.webkitRelativePath is a read-only property that contains a USVString which specifies the file&apos;s path relative to the directory selected by the user in an <input> element with its webkitdirectory attribute set.">File/webkitRelativePath</a></p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>49+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>13+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>49+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="File" data-dfn-type="attribute" data-export id="dom-file-webkitrelativepath"><code>webkitRelativePath</code></dfn> getter steps are to return the file’s <a data-link-type="dfn" href="#relative-path" id="ref-for-relative-path②">relative path</a>, or the empty string if not specified.</p>
    <h2 class="heading settled" data-level="5" id="html-forms"><span class="secno">5. </span><span class="content">HTML: Forms</span><a class="self-link" href="#html-forms"></a></h2>
    <aside class="issue" id="issue-21f071e0"><a class="self-link" href="#issue-21f071e0"></a> EDITORIAL:
   This section should be merged into <a data-link-type="biblio" href="#biblio-html">[HTML]</a> once it is complete.
   Sections such as the steps to <em>construct the form data set</em> need to be extended to include the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath①">webkitRelativePath</a></code> property. </aside>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitdirectory" title="The HTMLInputElement.webkitdirectory is a property that reflects the webkitdirectory HTML attribute and indicates that the <input> element should let the user select directories instead of files. When a directory is selected, the directory and its entire hierarchy of contents are included in the set of selected items. The selected file system entries can be obtained using the webkitEntries property.">HTMLInputElement/webkitdirectory</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>13+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/webkitEntries" title="The read-only webkitEntries property of the HTMLInputElement interface contains an array of file system entries (as objects based on FileSystemEntry) representing files and/or directories selected by the user using an <input> element of type file, but only if that selection was made using drag-and-drop: selecting a file in the dialog will leave the property empty (bug ">HTMLInputElement/webkitEntries</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
 <pre class="idl highlight def"><c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://html.spec.whatwg.org/multipage/input.html#htmlinputelement" id="ref-for-htmlinputelement①"><c- g>HTMLInputElement</c-></a> {
     <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export data-type="boolean" id="dom-htmlinputelement-webkitdirectory"><code><c- g>webkitdirectory</c-></code></dfn>;
     <c- b>readonly</c-> <c- b>attribute</c-> <c- b>FrozenArray</c->&lt;<a class="n" data-link-type="idl-name" href="#filesystementry" id="ref-for-filesystementry"><c- n>FileSystemEntry</c-></a>> <dfn class="dfn-paneled idl-code" data-dfn-for="HTMLInputElement" data-dfn-type="attribute" data-export data-readonly data-type="FrozenArray<FileSystemEntry>" id="dom-htmlinputelement-webkitentries"><code><c- g>webkitEntries</c-></code></dfn>;
@@ -1858,6 +1909,35 @@ data store item list</a> as a <i>File</i>. If it is accessed via <code class="id
 };
 </pre>
    <div class="algorithm" data-algorithm="webkitGetAsEntry()" data-algorithm-for="DataTransferItem">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry" title="If the item described by the DataTransferItem is a file, webkitGetAsEntry() returns a FileSystemFileEntry or FileSystemDirectoryEntry representing it. If the item isn&apos;t a file, null is returned.">DataTransferItem/webkitGetAsEntry</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge yes"><span>Edge (Legacy)</span><span>14+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem" title="The DataTransferItem object represents one drag data item. During a drag operation, each drag event has a dataTransfer property which contains a list of drag data items. Each item in the list is a DataTransferItem object.">DataTransferItem</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>5.1+</span></span><span class="chrome yes"><span>Chrome</span><span>11+</span></span>
+       <hr>
+       <span class="opera yes"><span>Opera</span><span>12+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>5+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>4+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export id="dom-datatransferitem-webkitgetasentry"><code>webkitGetAsEntry()</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -1915,12 +1995,107 @@ error asynchronously.</p>
 };
 </pre>
    <p>An <code class="idl"><a data-link-type="idl" href="#filesystementry" id="ref-for-filesystementry⑤">FileSystemEntry</a></code> has an associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept⑨">entry</a>.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/isFile" title="The read-only isFile property of the FileSystemEntry interface is true if the entry represents a file (meaning it&apos;s a FileSystemFileEntry) and false if it&apos;s not.">FileSystemEntry/isFile</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="attribute" data-export id="dom-filesystementry-isfile"><code>isFile</code></dfn> getter steps are to return true if <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this">this</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry">file entry</a> and false otherwise.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/isDirectory" title="The read-only isDirectory property of the FileSystemEntry interface is true if the entry represents a directory (meaning it&apos;s a FileSystemDirectoryEntry) and false if it&apos;s not.">FileSystemEntry/isDirectory</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="attribute" data-export id="dom-filesystementry-isdirectory"><code>isDirectory</code></dfn> getter steps are to return true if <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this①">this</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry①">directory entry</a> and false otherwise.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/name" title="The read-only name property of the FileSystemEntry interface returns a USVString specifying the entry&apos;s name; this is the entry within its parent directory (the last component of the path as indicated by the fullPath property).">FileSystemEntry/name</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="attribute" data-export id="dom-filesystementry-name"><code>name</code></dfn> getter steps are to return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②">this</a>'s <a data-link-type="dfn" href="#entry-name" id="ref-for-entry-name">name</a>.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/fullPath" title="The read-only fullPath property of the FileSystemEntry interface returns a USVString specifying the full, absolute path from the file system&apos;s root to the file represented by the entry.">FileSystemEntry/fullPath</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="attribute" data-export id="dom-filesystementry-fullpath"><code>fullPath</code></dfn> getter steps are to return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this③">this</a>'s <a data-link-type="dfn" href="#full-path" id="ref-for-full-path">full path</a>.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/filesystem" title="The read-only filesystem property of the FileSystemEntry interface contains a FileSystem object that represents the file system on which the entry resides.">FileSystemEntry/filesystem</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="attribute" data-export id="dom-filesystementry-filesystem"><code>filesystem</code></dfn> getter steps are to return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this④">this</a>'s <a data-link-type="dfn" href="#entry-file-system" id="ref-for-entry-file-system">file system</a>.</p>
    <div class="algorithm" data-algorithm="getParent(successCallback, errorCallback)" data-algorithm-for="FileSystemEntry">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/getParent" title="The FileSystemEntry interface&apos;s method getParent() obtains a FileSystemDirectoryEntry.">FileSystemEntry/getParent</a></p>
+      <div class="support">
+       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemEntry" data-dfn-type="method" data-export data-lt="getParent(successCallback, errorCallback)|getParent(successCallback)|getParent()" id="dom-filesystementry-getparent"><code>getParent(<var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -1966,6 +2141,63 @@ path</a>.</p>
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.2" id="api-directoryentry"><span class="secno">7.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryentry" id="ref-for-filesystemdirectoryentry①">FileSystemDirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
+   <aside class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry" title="The FileSystemDirectoryEntry interface of the File and Directory Entries API represents a directory in a file system. It provides methods which make it possible to access and manipulate the files in a directory, as well as to access the entries within the directory.">FileSystemDirectoryEntry</a></p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags/create" title="The create property on the FileSystemFlags dictionary is used to indicate whether or not the file should be created if it&apos;s missing. FileSystemFlags is only used when calling FileSystemDirectoryEntry.getFile() or FileSystemDirectoryEntry.getDirectory().">FileSystemFlags/create</a></p>
+     <p class="less-than-two-engines-text">In no current engines.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags/exclusive" title="The exclusive property on the FileSystemFlags dictionary is used in tandem with the create property to determine whether or not it&apos;s acceptable to require that the file not already exist when the reference to it is created by calling FileSystemDirectoryEntry.getFile() or FileSystemDirectoryEntry.getDirectory().">FileSystemFlags/exclusive</a></p>
+     <p class="less-than-two-engines-text">In no current engines.</p>
+     <div class="support">
+      <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags" title="The FileSystemFlags dictionary defines a set of values which are used when specifying option flags when calling certain methods in the File and Directory Entries API. Methods which accept an options parameter of this type may specify zero or more of these flags as fields in an object, like this:">FileSystemFlags</a></p>
+     <p class="less-than-two-engines-text">In only one current engine.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed①"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystemdirectoryentry"><code><c- g>FileSystemDirectoryEntry</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#filesystementry" id="ref-for-filesystementry⑦"><c- n>FileSystemEntry</c-></a> {
     <a class="n" data-link-type="idl-name" href="#filesystemdirectoryreader" id="ref-for-filesystemdirectoryreader"><c- n>FileSystemDirectoryReader</c-></a> <a class="idl-code" data-link-type="method" href="#dom-filesystemdirectoryentry-createreader" id="ref-for-dom-filesystemdirectoryentry-createreader"><c- g>createReader</c-></a>();
@@ -1994,6 +2226,22 @@ path</a>.</p>
    <p>A <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryentry" id="ref-for-filesystemdirectoryentry②">FileSystemDirectoryEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept①⓪">entry</a> is a <a data-link-type="dfn" href="#directory-entry" id="ref-for-directory-entry③">directory
 entry</a>.</p>
    <div class="algorithm" data-algorithm="createReader()" data-algorithm-for="FileSystemDirectoryEntry">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/createReader" title="The FileSystemDirectoryEntry interface&apos;s method createReader() returns a FileSystemDirectoryReader object which can be used to read the entries in the directory.">FileSystemDirectoryEntry/createReader</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemDirectoryEntry" data-dfn-type="method" data-export id="dom-filesystemdirectoryentry-createreader"><code>createReader()</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -2004,6 +2252,22 @@ associated with <var>reader</var>.</p>
     </ol>
    </div>
    <div class="algorithm" data-algorithm="getFile(path, options, successCallback, errorCallback)" data-algorithm-for="FileSystemDirectoryEntry">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/getFile" title="The FileSystemDirectoryEntry interface&apos;s method getFile() returns a FileSystemFileEntry object corresponding to a file contained somewhere within the directory subtree rooted at the directory on which it&apos;s called.">FileSystemDirectoryEntry/getFile</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemDirectoryEntry" data-dfn-type="method" data-export data-lt="getFile(path, options, successCallback, errorCallback)|getFile(path, options, successCallback)|getFile(path, options)|getFile(path)|getFile()" id="dom-filesystemdirectoryentry-getfile"><code>getFile(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -2035,6 +2299,22 @@ path</a> with <a data-link-type="dfn" href="https://heycam.github.io/webidl/#thi
     </ol>
    </div>
    <div class="algorithm" data-algorithm="getDirectory(path, options, successCallback, errorCallback)" data-algorithm-for="FileSystemDirectoryEntry">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/getDirectory" title="The FileSystemDirectoryEntry interface&apos;s method getDirectory() returns a FileSystemDirectoryEntry object corresponding to a directory contained somewhere within the directory subtree rooted at the directory on which it&apos;s called.">FileSystemDirectoryEntry/getDirectory</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemDirectoryEntry" data-dfn-type="method" data-export data-lt="getDirectory(path, options, successCallback, errorCallback)|getDirectory(path, options, successCallback)|getDirectory(path, options)|getDirectory(path)|getDirectory()" id="dom-filesystemdirectoryentry-getdirectory"><code>getDirectory(<var>path</var>, <var>options</var>, <var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -2214,6 +2494,21 @@ using <code>for-await-of</code>:</p>
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.4" id="api-fileentry"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemfileentry" id="ref-for-filesystemfileentry①">FileSystemFileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
+   <aside class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry" title="The FileSystemFileEntry interface of the File System API represents a file in a file system. It offers properties describing the file&apos;s attributes, as well as the file() method, which creates a File object that can be used to read the file.">FileSystemFileEntry</a></p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystemfileentry"><code><c- g>FileSystemFileEntry</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#filesystementry" id="ref-for-filesystementry①⓪"><c- n>FileSystemEntry</c-></a> {
     <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-filesystemfileentry-file" id="ref-for-dom-filesystemfileentry-file"><c- g>file</c-></a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback"><c- n>FileCallback</c-></a> <dfn class="idl-code" data-dfn-for="FileSystemFileEntry/file(successCallback, errorCallback), FileSystemFileEntry/file(successCallback)" data-dfn-type="argument" data-export id="dom-filesystemfileentry-file-successcallback-errorcallback-successcallback"><code><c- g>successCallback</c-></code><a class="self-link" href="#dom-filesystemfileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
@@ -2223,6 +2518,22 @@ using <code>for-await-of</code>:</p>
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#filesystemfileentry" id="ref-for-filesystemfileentry②">FileSystemFileEntry</a></code>'s associated <a data-link-type="dfn" href="#entry-concept" id="ref-for-entry-concept①①">entry</a> is a <a data-link-type="dfn" href="#file-entry" id="ref-for-file-entry②">file entry</a>.</p>
    <div class="algorithm" data-algorithm="file(successCallback, errorCallback)" data-algorithm-for="FileSystemFileEntry">
+    <aside class="mdn-anno wrapped">
+     <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+     <div class="feature">
+      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry/file" title="The FileSystemFileEntry interface&apos;s method file() returns a File object which can be used to read data from the file represented by the directory entry.">FileSystemFileEntry/file</a></p>
+      <p class="all-engines-text">In all current engines.</p>
+      <div class="support">
+       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>8+</span></span>
+       <hr>
+       <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+       <hr>
+       <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+       <hr>
+       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+      </div>
+     </div>
+    </aside>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystemFileEntry" data-dfn-type="method" data-export data-lt="file(successCallback, errorCallback)|file(successCallback)" id="dom-filesystemfileentry-file"><code>file(<var>successCallback</var>, <var>errorCallback</var>)</code></dfn> method steps are:</p>
     <ol>
      <li data-md>
@@ -2266,6 +2577,21 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
 </pre>
    </aside>
    <h3 class="heading settled" data-level="7.5" id="api-domfilesystem"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystem" id="ref-for-filesystem①">FileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
+   <aside class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem" title="The File and Directory Entries API interface FileSystem is used to represent a file system. These objects can be obtained from the filesystem property on any file system entry. Some browsers offer additional APIs to create and manage file systems, such as Chrome&apos;s requestFileSystem() method.">FileSystem</a></p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </aside>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystem"><code><c- g>FileSystem</c-></code></dfn> {
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-filesystem-name" id="ref-for-dom-filesystem-name"><c- g>name</c-></a>;
@@ -2273,7 +2599,39 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#filesystem" id="ref-for-filesystem②">FileSystem</a></code> has an associated <a data-link-type="dfn" href="#file-system" id="ref-for-file-system⑤">file system</a>.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem/name" title="The read-only name property of the FileSystem interface indicates the file system&apos;s name. This USVString is unique among all file systems currently exposed by the File and Directory Entries API.">FileSystem/name</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>15+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystem" data-dfn-type="attribute" data-export id="dom-filesystem-name"><code>name</code></dfn> getter steps are to return <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②③">this</a>'s <a data-link-type="dfn" href="#file-system-name" id="ref-for-file-system-name②">name</a>.</p>
+   <aside class="mdn-anno wrapped">
+    <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem/root" title="The read-only root property of the FileSystem interface specifies a FileSystemDirectoryEntry object representing the root directory of the file system, for use with the File and Directory Entries API.">FileSystem/root</a></p>
+     <p class="all-engines-text">In all current engines.</p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>7+</span></span>
+      <hr>
+      <span class="opera yes"><span>Opera</span><span>15+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <hr>
+      <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
+     </div>
+    </div>
+   </aside>
    <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="FileSystem" data-dfn-type="attribute" data-export id="dom-filesystem-root"><code>root</code></dfn> getter steps are to return a <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryentry" id="ref-for-filesystemdirectoryentry⑤">FileSystemDirectoryEntry</a></code> associated with <a data-link-type="dfn" href="https://heycam.github.io/webidl/#this" id="ref-for-this②④">this</a>'s <a data-link-type="dfn" href="#file-system-root" id="ref-for-file-system-root">root</a>.</p>
    <h2 class="heading settled" data-level="8" id="acknowledgements"><span class="secno">8. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>This specification is based heavily on the work of Eric Uhrhane in <a data-link-type="biblio" href="#biblio-file-system-api">[file-system-api]</a>, which introduced the <code class="idl"><a data-link-type="idl" href="#filesystementry" id="ref-for-filesystementry①①">FileSystemEntry</a></code> types.</p>
@@ -2434,334 +2792,6 @@ for suggestions, reviews, and other feedback.</p>
 
 })();
 </script>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-datatransferitem-webkitgetasentry">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem/webkitGetAsEntry" title="If the item described by the DataTransferItem is a file, webkitGetAsEntry() returns a FileSystemFileEntry or FileSystemDirectoryEntry representing it. If the item isn&apos;t a file, null is returned.">DataTransferItem/webkitGetAsEntry</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>14+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem" title="The DataTransferItem object represents one drag data item. During a drag operation, each drag event has a dataTransfer property which contains a list of drag data items. Each item in the list is a DataTransferItem object.">DataTransferItem</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>5.1+</span></span><span class="chrome yes"><span>Chrome</span><span>11+</span></span>
-     <hr>
-     <span class="opera yes"><span>Opera</span><span>12+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>5+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>4+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-file-webkitrelativepath">
-   <button class="mdn-anno-btn"><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/File/webkitRelativePath" title="The File.webkitRelativePath is a read-only property that contains a USVString which specifies the file&apos;s path relative to the directory selected by the user in an <input> element with its webkitdirectory attribute set.">File/webkitRelativePath</a></p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>49+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>13+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>49+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystem-name">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem/name" title="The read-only name property of the FileSystem interface indicates the file system&apos;s name. This USVString is unique among all file systems currently exposed by the File and Directory Entries API.">FileSystem/name</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera yes"><span>Opera</span><span>15+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystem-root">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem/root" title="The read-only root property of the FileSystem interface specifies a FileSystemDirectoryEntry object representing the root directory of the file system, for use with the File and Directory Entries API.">FileSystem/root</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera yes"><span>Opera</span><span>15+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>37+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>14+</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="api-domfilesystem">
-   <button class="mdn-anno-btn"><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem" title="The File and Directory Entries API interface FileSystem is used to represent a file system. These objects can be obtained from the filesystem property on any file system entry. Some browsers offer additional APIs to create and manage file systems, such as Chrome&apos;s requestFileSystem() method.">FileSystem</a></p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge yes"><span>Edge (Legacy)</span><span>18</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemdirectoryentry-createreader">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/createReader" title="The FileSystemDirectoryEntry interface&apos;s method createReader() returns a FileSystemDirectoryReader object which can be used to read the entries in the directory.">FileSystemDirectoryEntry/createReader</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemdirectoryentry-getdirectory">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/getDirectory" title="The FileSystemDirectoryEntry interface&apos;s method getDirectory() returns a FileSystemDirectoryEntry object corresponding to a directory contained somewhere within the directory subtree rooted at the directory on which it&apos;s called.">FileSystemDirectoryEntry/getDirectory</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemdirectoryentry-getfile">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry/getFile" title="The FileSystemDirectoryEntry interface&apos;s method getFile() returns a FileSystemFileEntry object corresponding to a file contained somewhere within the directory subtree rooted at the directory on which it&apos;s called.">FileSystemDirectoryEntry/getFile</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="api-directoryentry">
-   <button class="mdn-anno-btn"><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry" title="The FileSystemDirectoryEntry interface of the File and Directory Entries API represents a directory in a file system. It provides methods which make it possible to access and manipulate the files in a directory, as well as to access the entries within the directory.">FileSystemDirectoryEntry</a></p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-filesystem">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/filesystem" title="The read-only filesystem property of the FileSystemEntry interface contains a FileSystem object that represents the file system on which the entry resides.">FileSystemEntry/filesystem</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-fullpath">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/fullPath" title="The read-only fullPath property of the FileSystemEntry interface returns a USVString specifying the full, absolute path from the file system&apos;s root to the file represented by the entry.">FileSystemEntry/fullPath</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-getparent">
-   <button class="mdn-anno-btn"><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/getParent" title="The FileSystemEntry interface&apos;s method getParent() obtains a FileSystemDirectoryEntry.">FileSystemEntry/getParent</a></p>
-    <div class="support">
-     <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-isdirectory">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/isDirectory" title="The read-only isDirectory property of the FileSystemEntry interface is true if the entry represents a directory (meaning it&apos;s a FileSystemDirectoryEntry) and false if it&apos;s not.">FileSystemEntry/isDirectory</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-isfile">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/isFile" title="The read-only isFile property of the FileSystemEntry interface is true if the entry represents a file (meaning it&apos;s a FileSystemFileEntry) and false if it&apos;s not.">FileSystemEntry/isFile</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystementry-name">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry/name" title="The read-only name property of the FileSystemEntry interface returns a USVString specifying the entry&apos;s name; this is the entry within its parent directory (the last component of the path as indicated by the fullPath property).">FileSystemEntry/name</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemfileentry-file">
-   <button class="mdn-anno-btn"><b class="all-engines-flag" title="This feature is in all current engines.">✔</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry/file" title="The FileSystemFileEntry interface&apos;s method file() returns a File object which can be used to read data from the file represented by the directory entry.">FileSystemFileEntry/file</a></p>
-    <p class="all-engines-text">In all current engines.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome yes"><span>Chrome</span><span>13+</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android yes"><span>Android WebView</span><span>Yes</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="api-fileentry">
-   <button class="mdn-anno-btn"><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry" title="The FileSystemFileEntry interface of the File System API represents a file in a file system. It offers properties describing the file&apos;s attributes, as well as the file() method, which creates a File object that can be used to read the file.">FileSystemFileEntry</a></p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemflags-create">
-   <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags/create" title="The create property on the FileSystemFlags dictionary is used to indicate whether or not the file should be created if it&apos;s missing. FileSystemFlags is only used when calling FileSystemDirectoryEntry.getFile() or FileSystemDirectoryEntry.getDirectory().">FileSystemFlags/create</a></p>
-    <p class="less-than-two-engines-text">In no current engines.</p>
-    <div class="support">
-     <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dom-filesystemflags-exclusive">
-   <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags/exclusive" title="The exclusive property on the FileSystemFlags dictionary is used in tandem with the create property to determine whether or not it&apos;s acceptable to require that the file not already exist when the reference to it is created by calling FileSystemDirectoryEntry.getFile() or FileSystemDirectoryEntry.getDirectory().">FileSystemFlags/exclusive</a></p>
-    <p class="less-than-two-engines-text">In no current engines.</p>
-    <div class="support">
-     <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
-  <aside class="mdn-anno wrapped" data-deco data-mdn-for="dictdef-filesystemflags">
-   <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
-   <div class="feature">
-    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFlags" title="The FileSystemFlags dictionary defines a set of values which are used when specifying option flags when calling certain methods in the File and Directory Entries API. Methods which accept an options parameter of this type may specify zero or more of these flags as fields in an object, like this:">FileSystemFlags</a></p>
-    <p class="less-than-two-engines-text">In only one current engine.</p>
-    <div class="support">
-     <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
-     <hr>
-     <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
-     <hr>
-     <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-     <hr>
-     <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-    </div>
-   </div>
-  </aside>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
@@ -3720,43 +3750,11 @@ document.body.addEventListener("click", function(e) {
 </script>
 <script>/* script-mdn-anno */
 
-            function positionAnnos() {
-                var annos = [].slice.call(document.querySelectorAll(".mdn-anno"));
-                for(var i = 0; i < annos.length; i++) {
-                    var anno = annos[i];
-                    id = anno.getAttribute("data-mdn-for");
-                    var dfn = document.querySelector("[id='" + id +"']");
-                    if (dfn !== null) {
-                        var rect = dfn.getBoundingClientRect(id);
-                        anno.style.top = (window.scrollY + rect.top) + "px";
-                        /* See https://domspec.herokuapp.com/#dom-event-cancelable
-                         * for an example of a spec that defines multiple terms in
-                         * the same sentence on the same line. In such cases, we
-                         * need to offset the vertical positioning of each Nth anno
-                         * for that term, to prevent the annos from being placed
-                         * exactly on top of the previous ones at that position. */
-                        var top = anno.style.top;
-                        var offset = 10 * (document.querySelectorAll("[style='top: " + top + ";']").length - 1)
-                        anno.style.top = (Number(top.slice(0, -2)) + offset) + "px";
-                    } else {
-                        console.error('MDN anno references non-existent element ID "%s".%o', id, anno);
-                    }
-                }
-            }
-            window.addEventListener("load", positionAnnos())
             document.body.addEventListener("click", (e) => {
                 if(e.target.closest(".mdn-anno-btn")) {
                     e.target.closest(".mdn-anno").classList.toggle("wrapped");
                 }
             });
-            /* If this is a document styled for W3C publication with a ToC
-             * sidebar, and the ToC "Collapse Sidebar" button is pushed, some
-             * MDN annos seem to end up getting wildly out of place unless we
-             * reposition them where they belong. */
-            const tocToggle = document.querySelector("#toc-toggle");
-            if (tocToggle) {
-                tocToggle.addEventListener("click", () => positionAnnos());
-            }
             </script>
 <script>/* script-var-click-highlighting */
 
