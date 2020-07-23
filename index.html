@@ -1222,10 +1222,10 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 04c91f0f, updated Mon Jun 29 08:51:04 2020 +0200" name="generator">
+  <meta content="Bikeshed version a1fcaa3b, updated Fri Jul 17 17:22:25 2020 -0700" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
   <link href="logo-folder.svg" rel="icon">
-  <meta content="4f90f9a667733ddfb46bd530aee975abfd9e1acb" name="document-revision">
+  <meta content="f665e5a4bff2ce9b0311bbbc6f3414e0b990c58b" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1408,6 +1408,9 @@ figcaption:not(.no-marker)::before {
             .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
             .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
             .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
+            .name-slug-mismatch { color: red }
+            .caniuse-status:hover { z-index: 9; }
+
             /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
             .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
             .h-entry p + .mdn-anno { margin-top: 0; }
@@ -1536,7 +1539,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-06-29">29 June 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Draft Community Group Report, <time class="dt-updated" datetime="2020-07-23">23 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2140,8 +2143,7 @@ path</a>.</p>
 <c- p>}</c->
 </pre>
    </aside>
-   <h3 class="heading settled" data-level="7.2" id="api-directoryentry"><span class="secno">7.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryentry" id="ref-for-filesystemdirectoryentry①">FileSystemDirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
-   <aside class="mdn-anno wrapped after">
+   <aside class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryEntry" title="The FileSystemDirectoryEntry interface of the File and Directory Entries API represents a directory in a file system. It provides methods which make it possible to access and manipulate the files in a directory, as well as to access the entries within the directory.">FileSystemDirectoryEntry</a></p>
@@ -2156,6 +2158,7 @@ path</a>.</p>
      </div>
     </div>
    </aside>
+   <h3 class="heading settled" data-level="7.2" id="api-directoryentry"><span class="secno">7.2. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryentry" id="ref-for-filesystemdirectoryentry①">FileSystemDirectoryEntry</a></code> Interface</span><a class="self-link" href="#api-directoryentry"></a></h3>
    <aside class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><b class="less-than-two-engines-flag" title="This feature is in less than two current engines.">⚠</b><span>MDN</span></button>
     <div class="feature">
@@ -2493,8 +2496,7 @@ using <code>for-await-of</code>:</p>
 <c- p>}</c->
 </pre>
    </aside>
-   <h3 class="heading settled" data-level="7.4" id="api-fileentry"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemfileentry" id="ref-for-filesystemfileentry①">FileSystemFileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
-   <aside class="mdn-anno wrapped after">
+   <aside class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemFileEntry" title="The FileSystemFileEntry interface of the File System API represents a file in a file system. It offers properties describing the file&apos;s attributes, as well as the file() method, which creates a File object that can be used to read the file.">FileSystemFileEntry</a></p>
@@ -2509,6 +2511,7 @@ using <code>for-await-of</code>:</p>
      </div>
     </div>
    </aside>
+   <h3 class="heading settled" data-level="7.4" id="api-fileentry"><span class="secno">7.4. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystemfileentry" id="ref-for-filesystemfileentry①">FileSystemFileEntry</a></code> Interface</span><a class="self-link" href="#api-fileentry"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed③"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystemfileentry"><code><c- g>FileSystemFileEntry</c-></code></dfn> : <a class="n" data-link-type="idl-name" href="#filesystementry" id="ref-for-filesystementry①⓪"><c- n>FileSystemEntry</c-></a> {
     <c- b>void</c-> <a class="idl-code" data-link-type="method" href="#dom-filesystemfileentry-file" id="ref-for-dom-filesystemfileentry-file"><c- g>file</c-></a>(<a class="n" data-link-type="idl-name" href="#callbackdef-filecallback" id="ref-for-callbackdef-filecallback"><c- n>FileCallback</c-></a> <dfn class="idl-code" data-dfn-for="FileSystemFileEntry/file(successCallback, errorCallback), FileSystemFileEntry/file(successCallback)" data-dfn-type="argument" data-export id="dom-filesystemfileentry-file-successcallback-errorcallback-successcallback"><code><c- g>successCallback</c-></code><a class="self-link" href="#dom-filesystemfileentry-file-successcallback-errorcallback-successcallback"></a></dfn>,
@@ -2576,8 +2579,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
 <c- p>}</c->
 </pre>
    </aside>
-   <h3 class="heading settled" data-level="7.5" id="api-domfilesystem"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystem" id="ref-for-filesystem①">FileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
-   <aside class="mdn-anno wrapped after">
+   <aside class="mdn-anno wrapped">
     <button class="mdn-anno-btn"><span>MDN</span></button>
     <div class="feature">
      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystem" title="The File and Directory Entries API interface FileSystem is used to represent a file system. These objects can be obtained from the filesystem property on any file system entry. Some browsers offer additional APIs to create and manage file systems, such as Chrome&apos;s requestFileSystem() method.">FileSystem</a></p>
@@ -2592,6 +2594,7 @@ with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-promise-o
      </div>
     </div>
    </aside>
+   <h3 class="heading settled" data-level="7.5" id="api-domfilesystem"><span class="secno">7.5. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystem" id="ref-for-filesystem①">FileSystem</a></code> Interface</span><a class="self-link" href="#api-domfilesystem"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed④"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystem"><code><c- g>FileSystem</c-></code></dfn> {
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString⑦"><c- b>USVString</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="USVString" href="#dom-filesystem-name" id="ref-for-dom-filesystem-name"><c- g>name</c-></a>;
