@@ -7,7 +7,7 @@
   <meta content="Bikeshed version 5c7bc9381, updated Wed May 12 18:18:08 2021 -0700" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
   <link href="logo-folder.svg" rel="icon">
-  <meta content="17a6c241b3358056185f92056b214e5fae874f26" name="document-revision">
+  <meta content="6293175ee7ae6ef699c7395984e147a0ed5d1ec7" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -1029,19 +1029,6 @@ data store item list</a> as a <i>File</i>. If it is accessed via <code class="id
        <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>Yes</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>Yes</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
       </div>
      </div>
-     <div class="feature">
-      <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransferItem" title="The DataTransferItem object represents one drag data item. During a drag operation, each drag event has a dataTransfer property which contains a list of drag data items. Each item in the list is a DataTransferItem object.">DataTransferItem</a></p>
-      <p class="all-engines-text">In all current engines.</p>
-      <div class="support">
-       <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>5.1+</span></span><span class="chrome yes"><span>Chrome</span><span>11+</span></span>
-       <hr>
-       <span class="opera yes"><span>Opera</span><span>12+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
-       <hr>
-       <span class="edge yes"><span>Edge (Legacy)</span><span>12+</span></span><span class="ie no"><span>IE</span><span>None</span></span>
-       <hr>
-       <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>5+</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>18+</span></span><span class="webview_android yes"><span>Android WebView</span><span>4+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>1.0+</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
-      </div>
-     </div>
     </div>
     <p>The <dfn class="dfn-paneled idl-code" data-dfn-for="DataTransferItem" data-dfn-type="method" data-export id="dom-datatransferitem-webkitgetasentry"><code>webkitGetAsEntry()</code></dfn> method steps are:</p>
     <ol>
@@ -1087,6 +1074,21 @@ elem<c- p>.</c->addEventListener<c- p>(</c-><c- t>'drop'</c-><c- p>,</c-> e <c- 
    <p>An <code class="idl"><a data-link-type="idl" href="#callbackdef-errorcallback" id="ref-for-callbackdef-errorcallback">ErrorCallback</a></code> function is used for operations that may return an
 error asynchronously.</p>
    <h3 class="heading settled" data-level="7.1" id="api-entry"><span class="secno">7.1. </span><span class="content">The <code class="idl"><a data-link-type="idl" href="#filesystementry" id="ref-for-filesystementry④">FileSystemEntry</a></code> Interface</span><a class="self-link" href="#api-entry"></a></h3>
+   <div class="mdn-anno wrapped after">
+    <button class="mdn-anno-btn"><span>MDN</span></button>
+    <div class="feature">
+     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/FileSystemEntry" title="The FileSystemEntry interface of the File and Directory Entries API represents a single entry in a file system. The entry can be a file or a directory (directories are represented by the FileSystemDirectoryEntry interface). It includes methods for working with files—including copying, moving, removing, and reading files—as well as information about a file it points to—including the file name and its path from the root to the entry.">FileSystemEntry</a></p>
+     <div class="support">
+      <span class="firefox yes"><span>Firefox</span><span>50+</span></span><span class="safari yes"><span>Safari</span><span>11.1+</span></span><span class="chrome no"><span>Chrome</span><span>None</span></span>
+      <hr>
+      <span class="opera no"><span>Opera</span><span>None</span></span><span class="edge_blink no"><span>Edge</span><span>None</span></span>
+      <hr>
+      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <hr>
+      <span class="firefox_android yes"><span>Firefox for Android</span><span>50+</span></span><span class="safari_ios yes"><span>iOS Safari</span><span>11.3+</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>None</span></span><span class="webview_android no"><span>Android WebView</span><span>None</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>None</span></span><span class="opera_android no"><span>Opera Mobile</span><span>None</span></span>
+     </div>
+    </div>
+   </div>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="filesystementry"><code><c- g>FileSystemEntry</c-></code></dfn> {
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean①"><c- b>boolean</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="boolean" href="#dom-filesystementry-isfile" id="ref-for-dom-filesystementry-isfile"><c- g>isFile</c-></a>;
@@ -2207,7 +2209,7 @@ for suggestions, reviews, and other feedback.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-fileapi">[FileAPI]
-   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 11 September 2019. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
+   <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 27 April 2021. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
