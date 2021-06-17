@@ -12,8 +12,6 @@ have implemented the API for compatibility.
 
 For more context, please read the [Explainer](EXPLAINER.md).
 
-[![Build Status](https://travis-ci.org/WICG/entries-api.svg?branch=main)](https://travis-ci.org/WICG/entries-api)
-
 ## Draft Specification
 
 https://wicg.github.io/entries-api/
