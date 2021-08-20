@@ -2,6 +2,8 @@
 
 # Files and Directory Entries API
 
+[![CI](https://github.com/WICG/entries-api/actions/workflows/auto-publish.yml/badge.svg)](https://github.com/WICG/entries-api/actions/workflows/auto-publish.yml)
+
 ## What is this?
 
 This specification attempts to document the `FileEntry` and
