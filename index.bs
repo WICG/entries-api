@@ -65,13 +65,12 @@ defines similar types in the context of a sandboxed file system,
 including operations for creating and modifying files and directories,
 but which has not been broadly adopted by web browsers.
 
-<aside class=note>
+note:
   The APIs described by this document was initially implemented in
   Google Chrome. Other browsers (at this time: Edge, Firefox and
   Safari) are starting to support subsets of Chrome's APIs
   and behavior. The intent of this document is to specify the common
   subset to ensure that the implementations are interoperable.
-</aside>
 
 <!-- ============================================================ -->
 # Concepts # {#concepts}
@@ -130,12 +129,11 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
   so that minimal changes are necessary in [[HTML]]?
 </aside>
 
-<aside class=note>
+note:
   In most cases, the files and directories selected by the user will
   be presented by the API as if contained by a <em>virtual root</em>
   that does not exist as an entity in the actual native file system
   backing the interaction with the API.
-</aside>
 
 A <dfn>file system</dfn> consists of a <dfn for="file system">name</dfn>
 and a <dfn for="file system">root</dfn> which is an associated [=root
@@ -144,12 +142,11 @@ directory=]. The [=file system/name=] of a [=/file system=] is a
 [=/file system=]. A [=root directory=] is associated with exactly one
 [=/file system=].
 
-<aside class=note>
+note:
   Implementations could produce a [=file system/name=] by generating a
   UUID for each [=/file system=] instance with some fixed prefix and
   suffix strings applied. Authors using the API are adviised not to make
   assumptions about the structure or content of the names.
-</aside>
 
 
 <!-- ============================================================ -->
@@ -165,14 +162,13 @@ An [=entry=] has an <dfn for=entry>name</dfn> (a [=/name=]) and a
 An [=entry=] also has a <dfn for=entry>root</dfn>, which is an
 associated [=root directory=].
 
-<aside class=note>
+note:
   [=Entries=] are defined in terms of [=paths=] relative to a [=root
   directory=] to account for the fact that a native file system
   backing the interaction with the API could be modified asynchronously
   during operations such as enumerating the contents of a directory.
   Operations exposed on [=entries=] will produce errors in such cases
   where the [=paths=] no longer reference the same entity.
-</aside>
 
 The <dfn for=entry>file system</dfn> of an [=entry=] is the
 [=/file system=] associated with the [=entry=]'s [=entry/root=].
@@ -202,7 +198,7 @@ the following steps which return an [=absolute path=]:
 2. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
-    <aside class=note>The first string will be empty.</aside>
+   note: The first string will be empty.
 
 3. Let |path segments| be the result of [=strictly splitting=]
     |path| on '/' (U+002F SOLIDUS).
@@ -241,8 +237,8 @@ return a [=file=], [=directory=], or <em>failure</em>.
 
 2. Remove the first entry from |segments|.
 
-    <aside class=note>Since |path| was an [=absolute path=],
-      this first entry will always be empty.</aside>
+    note: Since |path| was an [=absolute path=],
+      this first entry will always be empty.
 
 3. For each |segment| in |segments|, switch on |segment|:
 
@@ -347,13 +343,12 @@ to the file.
 
 </aside>
 
-<aside class=note>
+note:
   A user agent could represent any hierarchical data as directories
   during a selection operation. For example, on a device that does not
   expose a native file system directly to the user, photo albums could
   be presented as directories if `"image/*"` is specified
   for the {{HTMLInputElement/accept}} attribute.
-</aside>
 
 
 <aside class=example>
@@ -431,13 +426,12 @@ Additionally, each [=directory=] item is represented in the [=drag
 data store item list=] as a <i>File</i>. If it is accessed via
 {{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
-<aside class=note>
+note:
   A user agent could represent any hierarchical data as files and
   directories during a drag-and-drop operation. For example, audio
   data stored in a relational database with separate tables for albums
   metadata and blobs for tracks could be exposed to script as
   directories and files when dragged from a media player application.
-</aside>
 
 <xmp class=idl>
 partial interface DataTransferItem {
@@ -559,10 +553,9 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
 
 </div>
 
-<aside class=note>
+note:
   An error is possible if files have been modified on disk since the
   {{FileSystemEntry}} was created.
-</aside>
 
 <aside class=example>
 Handling an entry:
@@ -618,14 +611,13 @@ dictionary FileSystemFlags {
 callback FileSystemEntryCallback = undefined (FileSystemEntry entry);
 </xmp>
 
-<aside class=note>
+note:
   The {{FileSystemFlags/create}} member of {{FileSystemFlags}} and
   the associated behavior are included for compatibility with existing
   implementations, even though there is no useful behavior when the
   flag is specified. Similarly, the {{FileSystemFlags/exclusive}}
   member is not explicitly referenced, but the binding behavior is
   observable from script if an object with a getter is passed.
-</aside>
 
 A {{FileSystemDirectoryEntry}}'s associated [=entry=] is a [=directory
 entry=].
