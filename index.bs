@@ -123,11 +123,11 @@ The <dfn>parent</dfn> of a [=file=] or [=directory=] is the
 [=directory=] it is a member of. A [=root directory=] has no
 [=parent=].
 
-<aside class=issue>
+<div class=issue>
   EDITORIAL:
   Should [=directory=] be defined as a special type of [=file=]
   so that minimal changes are necessary in [[HTML]]?
-</aside>
+</div>
 
 note:
   In most cases, the files and directories selected by the user will
@@ -275,10 +275,10 @@ return a [=file=], [=directory=], or <em>failure</em>.
 # The {{File}} Interface # {#file-interface}
 <!-- ============================================================ -->
 
-<aside class=issue>
+<div class=issue>
   EDITORIAL:
   This section should be merged into [[FileAPI]] once it is complete.
-</aside>
+</div>
 
 <xmp class=idl>
 partial interface File {
@@ -293,13 +293,13 @@ The <dfn attribute for=File>webkitRelativePath</dfn> getter steps are to return 
 # HTML: Forms # {#html-forms}
 <!-- ============================================================ -->
 
-<aside class=issue>
+<div class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
   Sections such as the steps to <em>construct the form data set</em>
   need to be extended to include the {{File/webkitRelativePath}}
   property.
-</aside>
+</div>
 
 <xmp class=idl>
 partial interface HTMLInputElement {
@@ -320,7 +320,7 @@ an ancestor were selected. In addition, the
 [=relative path=] starting from (and including) the selected directory
 to the file.
 
-<aside class=example>
+<div class=example>
   Given the following directory structure:
 
   <xmp>
@@ -341,7 +341,7 @@ to the file.
   * An entry with {{File/name}} == "`2.txt`" and {{File/webkitRelativePath}} == "`to_upload/a/b/2.txt`"
   * An entry with {{File/name}} == "`3.txt`" and {{File/webkitRelativePath}} == "`to_upload/a/3.txt`"
 
-</aside>
+</div>
 
 note:
   A user agent could represent any hierarchical data as directories
@@ -351,7 +351,7 @@ note:
   for the {{HTMLInputElement/accept}} attribute.
 
 
-<aside class=example>
+<div class=example>
 Inspecting the {{File/webkitRelativePath}} properties after a
 directory is selected with an <{input}> element:
 
@@ -365,7 +365,7 @@ directory is selected with an <{input}> element:
       console.log(file.name, file.webkitRelativePath);
   });
 ```
-</aside>
+</div>
 
 The {{HTMLInputElement/webkitEntries}} IDL attribute allows scripts to
 access the element's selected entries. On getting, if the IDL
@@ -374,7 +374,7 @@ objects that represent the current [=selected files=] (including
 directories, if permitted). If the IDL attribute does not apply, then
 it must instead return null.
 
-<aside class=example>
+<div class=example>
 Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 
 ```html
@@ -387,16 +387,16 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
       handleEntry(entry);
   });
 ```
-</aside>
+</div>
 
-<aside class=issue>
+<div class=issue>
   INTEROP:
   In Chrome, {{HTMLInputElement/webkitEntries}} is only populated as
   the result of a drag-and-drop operation, not when the element is
   clicked. Should we fix this so it is always populated?
-</aside>
+</div>
 
-<aside class=issue>
+<div class=issue>
   INTEROP:
   In Chrome, if {{HTMLInputElement/webkitdirectory}} is specified on a
   {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
@@ -404,7 +404,7 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
   {{File/webkitRelativePath}} properties must be used instead to
   reconstruct the directory structure. Should we fix this so it is
   always populated?
-</aside>
+</div>
 
 
 
@@ -412,10 +412,10 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 # HTML: Drag and drop # {#html-data}
 <!-- ============================================================ -->
 
-<aside class=issue>
+<div class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
-</aside>
+</div>
 
 During a <em>drag-and-drop operation</em>, [=file=] and
 [=directory=] items are associated with [=entries=]. Each
@@ -454,7 +454,7 @@ The <dfn method for=DataTransferItem>webkitGetAsEntry()</dfn> method steps are:
 
 </div>
 
-<aside class=example>
+<div class=example>
 Handling drag and drop of files and directories:
 ```js
 elem.addEventListener('dragover', e => {
@@ -475,19 +475,19 @@ elem.addEventListener('drop', e => {
   }
 });
 ```
-</aside>
+</div>
 
 
 <!-- ============================================================ -->
 # Files and Directories # {#api-files-directories}
 <!-- ============================================================ -->
 
-<aside class=issue>
+<div class=issue>
   WEB COMPAT:
   The legacy {{TypeMismatchError}} has been replaced in most
   specifications by {{TypeError}}, but the name differs. Is it
   compatible to switch here as well?
-</aside>
+</div>
 
 <xmp class=idl>
 callback ErrorCallback = undefined (DOMException err);
@@ -557,7 +557,7 @@ note:
   An error is possible if files have been modified on disk since the
   {{FileSystemEntry}} was created.
 
-<aside class=example>
+<div class=example>
 Handling an entry:
 ```js
 function handleEntry(entry) {
@@ -570,9 +570,9 @@ function handleEntry(entry) {
   }
 }
 ```
-</aside>
+</div>
 
-<aside class=example>
+<div class=example>
 Helper function to adapt {{FileSystemEntry/getParent()}} for use with
 [=Promises=]
 [[ECMA-262]]:
@@ -583,7 +583,7 @@ function getParentAsPromise(entry) {
   });
 }
 ```
-</aside>
+</div>
 
 <!-- ============================================================ -->
 ## The {{FileSystemDirectoryEntry}} Interface ## {#api-directoryentry}
@@ -716,7 +716,7 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
 
 </div>
 
-<aside class=example>
+<div class=example>
 Helper functions to adapt {{FileSystemDirectoryEntry/getFile()}} and
 {{FileSystemDirectoryEntry/getDirectory()}} for use
 with [=Promises=] [[ECMA-262]]:
@@ -732,7 +732,7 @@ function getDirectoryAsPromise(entry, path) {
   });
 }
 ```
-</aside>
+</div>
 
 
 <!-- ============================================================ -->
@@ -806,7 +806,7 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 </div>
 
 
-<aside class=example>
+<div class=example>
 Enumerating a directory:
 ```js
 let reader = dirEntry.createReader();
@@ -832,9 +832,9 @@ let doBatch = function() {
 // Start reading
 doBatch();
 ```
-</aside>
+</div>
 
-<aside class=example>
+<div class=example>
 Helper function to adapt {{FileSystemDirectoryReader}} for use with
 [=Promises=] [[ECMA-262]]:
 ```js
@@ -856,9 +856,9 @@ function getEntriesAsPromise(dirEntry) {
   });
 }
 ```
-</aside>
+</div>
 
-<aside class=example>
+<div class=example>
 Helper function to adapt {{FileSystemDirectoryReader}} for use with
 [=AsyncIterators=] [[ECMA-262]]:
 ```js
@@ -889,7 +889,7 @@ async function show(entry) {
   }
 }
 ```
-</aside>
+</div>
 
 <!-- ============================================================ -->
 ## The {{FileSystemFileEntry}} Interface ## {#api-fileentry}
@@ -929,7 +929,7 @@ The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)
 
 </div>
 
-<aside class=example>
+<div class=example>
 Read the contents of a dropped file using {{FileReader}}:
 ```js
 function readFileEntry(entry) {
@@ -943,9 +943,9 @@ function readFileEntry(entry) {
   }, error => console.warn(error));
 }
 ```
-</aside>
+</div>
 
-<aside class=example>
+<div class=example>
 Helper function to adapt {{FileSystemFileEntry/file()}} for use
 with [=Promises=] [[ECMA-262]]:
 ```js
@@ -955,7 +955,7 @@ function fileAsPromise(entry) {
   });
 }
 ```
-</aside>
+</div>
 
 
 <!-- ============================================================ -->
