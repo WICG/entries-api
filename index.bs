@@ -195,17 +195,17 @@ the following steps which return an [=absolute path=]:
 
 1. If |path| is an [=absolute path=], return |path|.
 
-2. Let |abspath segments| be the result of [=strictly splitting=]
+1. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
-   note: The first string will be empty.
+    note: The first string will be empty.
 
-3. Let |path segments| be the result of [=strictly splitting=]
+1. Let |path segments| be the result of [=strictly splitting=]
     |path| on '/' (U+002F SOLIDUS).
 
-4. For each |segment| in |path segments|, switch on |segment|:
+1. For each |segment| in |path segments|, switch on |segment|:
 
-    <dl class=switch>
+     <dl class=switch>
 
       <dt>empty string
       <dd>Continue.
@@ -220,9 +220,9 @@ the following steps which return an [=absolute path=]:
       <dt>Otherwise
       <dd>Append |segment| to |abspath segments|.
 
-   </dl>
+     </dl>
 
-5. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
+1. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
 
 </div>
 
@@ -235,12 +235,12 @@ return a [=file=], [=directory=], or <em>failure</em>.
 1. Let |segments| be the result of [=strictly splitting=] |path| on
     '/' (U+002F SOLIDUS).
 
-2. Remove the first entry from |segments|.
+1. Remove the first entry from |segments|.
 
     note: Since |path| was an [=absolute path=],
       this first entry will always be empty.
 
-3. For each |segment| in |segments|, switch on |segment|:
+1. For each |segment| in |segments|, switch on |segment|:
 
     <dl class=switch>
 
@@ -261,12 +261,12 @@ return a [=file=], [=directory=], or <em>failure</em>.
          1. Let |item| be the member of |directory| with [=/name=]
             equal to |segment|, or return <em>failure</em> if none.
 
-         2. If |segment| is the last item in |segments|, return
+         1. If |segment| is the last item in |segments|, return
             |item|.
 
-         3. If |item| is a [=file=], return <em>failure</em>.
+         1. If |item| is a [=file=], return <em>failure</em>.
 
-         4. Let |directory| be |item|.
+         1. Let |directory| be |item|.
     </dl>
 
 </div>
@@ -447,10 +447,10 @@ The <dfn method for=DataTransferItem>webkitGetAsEntry()</dfn> method steps are:
     mode</a> or the [=read-only mode=], return null and abort these
     steps.
 
-2. If the [=drag data item kind=] is not <em>File</em>, then return
+1. If the [=drag data item kind=] is not <em>File</em>, then return
     null and abort these steps.
 
-3. Return a new {{FileSystemEntry}} object representing the [=entry=].
+1. Return a new {{FileSystemEntry}} object representing the [=entry=].
 
 </div>
 
@@ -537,18 +537,18 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
     1. Let |path| be the result of running the steps to [=resolve a
         relative path=] with [=/this=]'s [=full path=] and '..'.
 
-    2. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    3. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is <em>failure</em>, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
-    4. Let |entry| be a new [=directory entry=] with |item|'s
+    1. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    5. [=Invoke=] |successCallback| with a new
+    1. [=Invoke=] |successCallback| with a new
         {{FileSystemDirectoryEntry}} object associated with |entry|.
 
 </div>
@@ -629,7 +629,7 @@ The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn> method steps a
 1. Let |reader| be a new [=directory reader=] associated with the
     [=directory entry=]'s [=directory=].
 
-2. Return a newly created {{FileSystemDirectoryReader}} object
+1. Return a newly created {{FileSystemDirectoryReader}} object
     associated with |reader|.
 
 </div>
@@ -643,34 +643,34 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |path| is not a [=valid path=], [=invoke=]
+    1. If |path| is not a [=valid path=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
-    3. If |options|'s {{FileSystemFlags/create}} member is true,
+    1. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke=] |errorCallback| (if given) with a
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and terminate
         these steps.
 
-    4. Let |path| be the result of running the steps to [=resolve a
+    1. Let |path| be the result of running the steps to [=resolve a
         relative path=] with [=/this=]'s [=full path=]
         and |path|.
 
-    5. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    6. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is <em>failure</em>, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
-    7. If |item| is not a [=file=], [=invoke=]
+    1. If |item| is not a [=file=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
-    8. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
+    1. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
 
-    9. [=Invoke=] |successCallback| (if given) with a new
+    1. [=Invoke=] |successCallback| (if given) with a new
         {{FileSystemFileEntry}} object associated with |entry|.
 
 </div>
@@ -683,35 +683,35 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    2. If |path| is not a [=valid path=], [=invoke=]
+    1. If |path| is not a [=valid path=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
-    3. If |options|'s {{FileSystemFlags/create}} member is true,
+    1. If |options|'s {{FileSystemFlags/create}} member is true,
         [=invoke=] |errorCallback| (if given) with a
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and terminate
         these steps.
 
-    4. Let |path| be the result of running the steps to [=resolve a
+    1. Let |path| be the result of running the steps to [=resolve a
         relative path=] with [=/this=]'s [=full path=]
         and |path|.
 
-    5. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    6. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is <em>failure</em>, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
-    7. If |item| is not a [=directory=], [=invoke=]
+    1. If |item| is not a [=directory=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
-    8. Let |entry| be a new [=directory entry=] with |item|'s
+    1. Let |entry| be a new [=directory entry=] with |item|'s
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    9. [=invoke=] |successCallback| (if given) with a new
+    1. [=invoke=] |successCallback| (if given) with a new
         {{FileSystemDirectoryEntry}} associated with |entry|.
 
 </div>
@@ -759,49 +759,49 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
     [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and terminate these
     steps.
 
-2. If [=/this=]'s [=reader error=] is not null, [=queue
+1. If [=/this=]'s [=reader error=] is not null, [=queue
     a task=] to [=invoke=] |errorCallback| (if given)
     with [=reader error=], and terminate these steps.
 
-3. If [=/this=]'s [=done flag=] is set, [=queue a
+1. If [=/this=]'s [=done flag=] is set, [=queue a
     task=] to [=invoke=] |successCallback| with an empty
     sequence and terminate these steps.
 
-4. Set [=/this=]'s [=reading flag=].
+1. Set [=/this=]'s [=reading flag=].
 
-5. [=Queue a task=] to perform the following substeps:
+1. [=Queue a task=] to perform the following substeps:
 
     1. Clear [=/this=]'s [=reading flag=].
 
-    2. Let |dir| be [=/this=]'s [=directory=].
+    1. Let |dir| be [=/this=]'s [=directory=].
 
-    3. If |dir| is null, run these substeps:
+    1. If |dir| is null, run these substeps:
 
         1. Let |dir| be the result of running the steps to [=evaluate
             a path=] with [=/this=]'s [=entry/root=] and [=full path=].
 
-        2. If |dir| is failure, set [=/this=]'s
+        1. If |dir| is failure, set [=/this=]'s
             [=reader error=] to a newly [=exception/created=]
             "{{NotFoundError}}" {{DOMException}}, [=invoke=] |errorCallback|
             (if given) with [=reader error=], and terminate these
             steps.
 
-        3. Set [=/this=]'s [=directory=] to |dir|.
+        1. Set [=/this=]'s [=directory=] to |dir|.
 
-    4. Let |entries| be a non-zero number of entries from the
+    1. Let |entries| be a non-zero number of entries from the
         |dir| that have not yet been produced by this
         [=directory reader=], if any.
 
-    5. If the previous step failed (for example, the [=directory=] was
+    1. If the previous step failed (for example, the [=directory=] was
         deleted or permission is denied), then set [=/this=]'s
         [=reader error=] to an appropriate {{DOMException}},
         [=invoke=] |errorCallback| (if given) with
         [=reader error=], and terminate these steps.
 
-    6. If |entries| is empty, set [=/this=]'s [=done
+    1. If |entries| is empty, set [=/this=]'s [=done
         flag=].
 
-    7. [=invoke=] |successCallback| with |entries|.
+    1. [=invoke=] |successCallback| with |entries|.
 
 </div>
 
@@ -916,15 +916,15 @@ The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)
         path=] with [=/this=]'s [=entry/root=] and [=full
         path=].
 
-    2. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is <em>failure</em>, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
-    3. If |item| is a [=directory=], [=invoke=]
+    1. If |item| is a [=directory=], [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and terminate these steps.
 
-    4. [=invoke=] |successCallback| with a new {{File}}
+    1. [=invoke=] |successCallback| with a new {{File}}
         object representing |item|.
 
 </div>
