@@ -7,7 +7,7 @@
   <meta content="Bikeshed version 5fcd28d6d, updated Tue May 30 13:12:11 2023 -0700" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
   <link href="logo-folder.svg" rel="icon">
-  <meta content="4985875b4602f9b3cdc39fe646993d0bef165963" name="document-revision">
+  <meta content="edc821ee8436a388acfc068211aad708cffa86c1" name="document-revision">
 <style>
 #speclogo { height: 100px; width: 100px; background-color: transparent; }
 main #speclogo { position: absolute; right: 20px; top: 30px; }
@@ -894,7 +894,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-05-31">31 May 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-06-13">13 June 2023</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1072,25 +1072,25 @@ the following steps which return an <a data-link-type="dfn" href="#absolute-path
       <p>If <var>path</var> is an <a data-link-type="dfn" href="#absolute-path" id="ref-for-absolute-path⑤">absolute path</a>, return <var>path</var>.</p>
      <li data-md>
       <p>Let <var>abspath segments</var> be the result of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#strictly-split" id="ref-for-strictly-split">strictly splitting</a> <var>abspath</var> on '/' (U+002F SOLIDUS).</p>
-    </ol>
-    <p class="note" role="note"><span class="marker">note:</span> The first string will be empty.</p>
-    <ol start="3">
+      <p class="note" role="note"><span class="marker">note:</span> The first string will be empty.</p>
      <li data-md>
       <p>Let <var>path segments</var> be the result of <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#strictly-split" id="ref-for-strictly-split①">strictly splitting</a> <var>path</var> on '/' (U+002F SOLIDUS).</p>
      <li data-md>
       <p>For each <var>segment</var> in <var>path segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
-       <dt>empty string 
-       <dd>Continue. 
-       <dt>'.' (U+002E FULL STOP) 
-       <dd>Continue. 
-       <dt>'..' (U+002E FULL STOP, U+002E FULL STOP) 
-       <dd>Remove the last member of <var>abspath segments</var> unless it is the only member. 
-       <dt>Otherwise 
-       <dd>Append <var>segment</var> to <var>abspath segments</var>. 
+       <dt data-md>empty string
+       <dd data-md>
+        <p>Continue.</p>
+       <dt data-md>'.' (U+002E FULL STOP)
+       <dd data-md>
+        <p>Continue.</p>
+       <dt data-md>'..' (U+002E FULL STOP, U+002E FULL STOP)
+       <dd data-md>
+        <p>Remove the last member of <var>abspath segments</var> unless it is the only member.</p>
+       <dt data-md>Otherwise
+       <dd data-md>
+        <p>Append <var>segment</var> to <var>abspath segments</var>.</p>
       </dl>
-    </ol>
-    <ol start="5">
      <li data-md>
       <p>Return <var>abspath segments</var> joined by '/' (U+002F SOLIDUS).</p>
     </ol>
@@ -1110,16 +1110,19 @@ return a <a data-link-type="dfn" href="#file" id="ref-for-file③">file</a>, <a 
      <li data-md>
       <p>For each <var>segment</var> in <var>segments</var>, switch on <var>segment</var>:</p>
       <dl class="switch">
-       <dt>empty string 
-       <dd>Continue. 
-       <dt>'.' (U+002E FULL STOP) 
-       <dd>Continue. 
-       <dt>'..' (U+002E FULL STOP, U+002E FULL STOP) 
-       <dd>Let <var>directory</var> be <var>directory</var>’s <a data-link-type="dfn" href="#parent" id="ref-for-parent①">parent</a>,
-      or <var>directory</var> if none. 
-       <dt>Otherwise 
-       <dd>
-         Run these substeps: 
+       <dt data-md>empty string
+       <dd data-md>
+        <p>Continue.</p>
+       <dt data-md>'.' (U+002E FULL STOP)
+       <dd data-md>
+        <p>Continue.</p>
+       <dt data-md>'..' (U+002E FULL STOP, U+002E FULL STOP)
+       <dd data-md>
+        <p>Let <var>directory</var> be <var>directory</var>’s <a data-link-type="dfn" href="#parent" id="ref-for-parent①">parent</a>,
+  or <var>directory</var> if none.</p>
+       <dt data-md>Otherwise
+       <dd data-md>
+        <p>Run these substeps:</p>
         <ol>
          <li data-md>
           <p>Let <var>item</var> be the member of <var>directory</var> with <a data-link-type="dfn" href="#name" id="ref-for-name⑥">name</a> equal to <var>segment</var>, or return <em>failure</em> if none.</p>
@@ -1835,7 +1838,7 @@ for suggestions, reviews, and other feedback.</p>
      <li><span class="dfn-paneled" id="5d1a2ad0">TypeMismatchError</span>
      <li><span class="dfn-paneled" id="b0d7f3c3">USVString</span>
      <li><span class="dfn-paneled" id="5372cca8">boolean</span>
-     <li><span class="dfn-paneled" id="c164edfe">created</span>
+     <li><span class="dfn-paneled" id="6a73c310">create</span>
      <li><span class="dfn-paneled" id="10ce5f6f">invoke</span>
      <li><span class="dfn-paneled" id="9cce47fd">sequence</span>
      <li><span class="dfn-paneled" id="4013a022">this</span>
@@ -2648,7 +2651,7 @@ window.dfnpanelData['82ca3efc'] = {"dfnID": "82ca3efc", "url": "https://webidl.s
 window.dfnpanelData['5d1a2ad0'] = {"dfnID": "5d1a2ad0", "url": "https://webidl.spec.whatwg.org/#typemismatcherror", "dfnText": "TypeMismatchError", "refSections": [{"refs": [{"id": "ref-for-typemismatcherror"}], "title": "7. Files and Directories"}, {"refs": [{"id": "ref-for-typemismatcherror\u2460"}, {"id": "ref-for-typemismatcherror\u2461"}, {"id": "ref-for-typemismatcherror\u2462"}, {"id": "ref-for-typemismatcherror\u2463"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-typemismatcherror\u2464"}], "title": "7.4. The FileSystemFileEntry Interface"}], "external": true};
 window.dfnpanelData['b0d7f3c3'] = {"dfnID": "b0d7f3c3", "url": "https://webidl.spec.whatwg.org/#idl-USVString", "dfnText": "USVString", "refSections": [{"refs": [{"id": "ref-for-idl-USVString"}], "title": "2.1. Names and Paths"}, {"refs": [{"id": "ref-for-idl-USVString\u2460"}], "title": "2.2. Files and Directories"}, {"refs": [{"id": "ref-for-idl-USVString\u2461"}], "title": "4. The File Interface"}, {"refs": [{"id": "ref-for-idl-USVString\u2462"}, {"id": "ref-for-idl-USVString\u2463"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-idl-USVString\u2464"}, {"id": "ref-for-idl-USVString\u2465"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-idl-USVString\u2466"}], "title": "7.5. The FileSystem Interface"}], "external": true};
 window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.spec.whatwg.org/#idl-boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-idl-boolean"}], "title": "5. HTML: Forms"}, {"refs": [{"id": "ref-for-idl-boolean\u2460"}, {"id": "ref-for-idl-boolean\u2461"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-idl-boolean\u2462"}, {"id": "ref-for-idl-boolean\u2463"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}], "external": true};
-window.dfnpanelData['c164edfe'] = {"dfnID": "c164edfe", "url": "https://webidl.spec.whatwg.org/#dfn-create-exception", "dfnText": "created", "refSections": [{"refs": [{"id": "ref-for-dfn-create-exception"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2460"}, {"id": "ref-for-dfn-create-exception\u2461"}, {"id": "ref-for-dfn-create-exception\u2462"}, {"id": "ref-for-dfn-create-exception\u2463"}, {"id": "ref-for-dfn-create-exception\u2464"}, {"id": "ref-for-dfn-create-exception\u2465"}, {"id": "ref-for-dfn-create-exception\u2466"}, {"id": "ref-for-dfn-create-exception\u2467"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2468"}, {"id": "ref-for-dfn-create-exception\u2460\u24ea"}], "title": "7.3. The FileSystemDirectoryReader Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2460\u2460"}, {"id": "ref-for-dfn-create-exception\u2460\u2461"}], "title": "7.4. The FileSystemFileEntry Interface"}], "external": true};
+window.dfnpanelData['6a73c310'] = {"dfnID": "6a73c310", "url": "https://webidl.spec.whatwg.org/#dfn-create-exception", "dfnText": "create", "refSections": [{"refs": [{"id": "ref-for-dfn-create-exception"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2460"}, {"id": "ref-for-dfn-create-exception\u2461"}, {"id": "ref-for-dfn-create-exception\u2462"}, {"id": "ref-for-dfn-create-exception\u2463"}, {"id": "ref-for-dfn-create-exception\u2464"}, {"id": "ref-for-dfn-create-exception\u2465"}, {"id": "ref-for-dfn-create-exception\u2466"}, {"id": "ref-for-dfn-create-exception\u2467"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2468"}, {"id": "ref-for-dfn-create-exception\u2460\u24ea"}], "title": "7.3. The FileSystemDirectoryReader Interface"}, {"refs": [{"id": "ref-for-dfn-create-exception\u2460\u2460"}, {"id": "ref-for-dfn-create-exception\u2460\u2461"}], "title": "7.4. The FileSystemFileEntry Interface"}], "external": true};
 window.dfnpanelData['10ce5f6f'] = {"dfnID": "10ce5f6f", "url": "https://webidl.spec.whatwg.org/#invoke-a-callback-function", "dfnText": "invoke", "refSections": [{"refs": [{"id": "ref-for-invoke-a-callback-function"}, {"id": "ref-for-invoke-a-callback-function\u2460"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-invoke-a-callback-function\u2461"}, {"id": "ref-for-invoke-a-callback-function\u2462"}, {"id": "ref-for-invoke-a-callback-function\u2463"}, {"id": "ref-for-invoke-a-callback-function\u2464"}, {"id": "ref-for-invoke-a-callback-function\u2465"}, {"id": "ref-for-invoke-a-callback-function\u2466"}, {"id": "ref-for-invoke-a-callback-function\u2467"}, {"id": "ref-for-invoke-a-callback-function\u2468"}, {"id": "ref-for-invoke-a-callback-function\u2460\u24ea"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2460"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-invoke-a-callback-function\u2460\u2461"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2462"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2463"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2464"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2465"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2466"}], "title": "7.3. The FileSystemDirectoryReader Interface"}, {"refs": [{"id": "ref-for-invoke-a-callback-function\u2460\u2467"}, {"id": "ref-for-invoke-a-callback-function\u2460\u2468"}, {"id": "ref-for-invoke-a-callback-function\u2461\u24ea"}], "title": "7.4. The FileSystemFileEntry Interface"}], "external": true};
 window.dfnpanelData['9cce47fd'] = {"dfnID": "9cce47fd", "url": "https://webidl.spec.whatwg.org/#idl-sequence", "dfnText": "sequence", "refSections": [{"refs": [{"id": "ref-for-idl-sequence"}], "title": "7.3. The FileSystemDirectoryReader Interface"}], "external": true};
 window.dfnpanelData['4013a022'] = {"dfnID": "4013a022", "url": "https://webidl.spec.whatwg.org/#this", "dfnText": "this", "refSections": [{"refs": [{"id": "ref-for-this"}, {"id": "ref-for-this\u2460"}, {"id": "ref-for-this\u2461"}, {"id": "ref-for-this\u2462"}, {"id": "ref-for-this\u2463"}, {"id": "ref-for-this\u2464"}, {"id": "ref-for-this\u2465"}], "title": "7.1. The FileSystemEntry Interface"}, {"refs": [{"id": "ref-for-this\u2466"}, {"id": "ref-for-this\u2467"}, {"id": "ref-for-this\u2468"}, {"id": "ref-for-this\u2460\u24ea"}], "title": "7.2. The FileSystemDirectoryEntry Interface"}, {"refs": [{"id": "ref-for-this\u2460\u2460"}, {"id": "ref-for-this\u2460\u2461"}, {"id": "ref-for-this\u2460\u2462"}, {"id": "ref-for-this\u2460\u2463"}, {"id": "ref-for-this\u2460\u2464"}, {"id": "ref-for-this\u2460\u2465"}, {"id": "ref-for-this\u2460\u2466"}, {"id": "ref-for-this\u2460\u2467"}, {"id": "ref-for-this\u2460\u2468"}, {"id": "ref-for-this\u2461\u24ea"}, {"id": "ref-for-this\u2461\u2460"}], "title": "7.3. The FileSystemDirectoryReader Interface"}, {"refs": [{"id": "ref-for-this\u2461\u2461"}], "title": "7.4. The FileSystemFileEntry Interface"}, {"refs": [{"id": "ref-for-this\u2461\u2462"}, {"id": "ref-for-this\u2461\u2463"}], "title": "7.5. The FileSystem Interface"}], "external": true};
