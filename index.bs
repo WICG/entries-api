@@ -207,18 +207,18 @@ the following steps which return an [=absolute path=]:
 
      <dl class=switch>
 
-      <dt>empty string
-      <dd>Continue.
+      : empty string
+      :: Continue.
 
-      <dt>'.' (U+002E FULL STOP)
-      <dd>Continue.
+      : '.' (U+002E FULL STOP)
+      :: Continue.
 
-      <dt>'..' (U+002E FULL STOP, U+002E FULL STOP)
-      <dd>Remove the last member of |abspath segments|
+      : '..' (U+002E FULL STOP, U+002E FULL STOP)
+      :: Remove the last member of |abspath segments|
          unless it is the only member.
 
-      <dt>Otherwise
-      <dd>Append |segment| to |abspath segments|.
+      : Otherwise
+      :: Append |segment| to |abspath segments|.
 
      </dl>
 
@@ -244,19 +244,18 @@ return a [=file=], [=directory=], or <em>failure</em>.
 
     <dl class=switch>
 
-      <dt>empty string
-      <dd>Continue.
+      : empty string
+      :: Continue.
 
-      <dt>'.' (U+002E FULL STOP)
-      <dd>Continue.
+      : '.' (U+002E FULL STOP)
+      :: Continue.
 
-      <dt>'..' (U+002E FULL STOP, U+002E FULL STOP)
-      <dd>Let |directory| be |directory|'s [=parent=],
+      : '..' (U+002E FULL STOP, U+002E FULL STOP)
+      :: Let |directory| be |directory|'s [=parent=],
           or |directory| if none.
 
-      <dt>Otherwise
-      <dd>
-         Run these substeps:
+      : Otherwise
+      :: Run these substeps:
 
          1. Let |item| be the member of |directory| with [=/name=]
             equal to |segment|, or return <em>failure</em> if none.
@@ -267,6 +266,7 @@ return a [=file=], [=directory=], or <em>failure</em>.
          1. If |item| is a [=file=], return <em>failure</em>.
 
          1. Let |directory| be |item|.
+
     </dl>
 
 </div>
