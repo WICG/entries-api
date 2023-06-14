@@ -288,7 +288,7 @@ partial interface File {
 };
 </xmp>
 
-The <dfn attribute for=File>webkitRelativePath</dfn> getter steps are to return the file's [=relative path=], or the empty string if not specified.
+The <dfn attribute for=File>webkitRelativePath</dfn> getter steps are to return [=/this=]'s [=relative path=], or the empty string if not specified.
 
 
 <!-- ============================================================ -->
