@@ -28,8 +28,10 @@ spec: html; urlPrefix: https://html.spec.whatwg.org/multipage/
     urlPrefix: interaction.html
         type: dfn
             text: drag data store; url: #drag-data-store
-            text: drag data store item list; url: #drag-data-store-item-list
-            text: drag data item kind; url: #the-drag-data-item-kind
+            for: drag data store;
+                text: drag data store item list; url: #drag-data-store-item-list
+                text: drag data store mode; url: #drag-data-store
+            for: drag data store item list; text: drag data item kind; url: #the-drag-data-item-kind
             text: read/write mode; url: #concept-dnd-rw
             text: read-only mode; url: #concept-dnd-ro
 spec: ecma262; urlPrefix: https://tc39.github.io/ecma262/
@@ -296,7 +298,7 @@ The <dfn attribute for=File>webkitRelativePath</dfn> getter steps are to return 
 <div class=issue>
   EDITORIAL:
   This section should be merged into [[HTML]] once it is complete.
-  Sections such as the steps to <em>construct the form data set</em>
+  Sections such as the steps to [=/construct the entry list=]
   need to be extended to include the {{File/webkitRelativePath}}
   property.
 </div>
@@ -422,7 +424,7 @@ During a <em>drag-and-drop operation</em>, [=file=] and
 [=entry=] is a member of a [=root directory=] unique to the
 [=drag data store=].
 
-Additionally, each [=directory=] item is represented in the [=drag
+Additionally, each [=directory=] item is represented in the [=drag data store/drag
 data store item list=] as a <i>File</i>. If it is accessed via
 {{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
@@ -443,11 +445,13 @@ partial interface DataTransferItem {
 
 The <dfn method for=DataTransferItem>webkitGetAsEntry()</dfn> method steps are:
 
-1. If the {{DataTransferItem}} object is not in the <a>read/write
-    mode</a> or the [=read-only mode=], return null and abort these
-    steps.
+1. Let |store| be [=/this=]'s {{DataTransfer}} object's [=drag data store=].
 
-1. If the [=drag data item kind=] is not <em>File</em>, then return
+1. If |store|'s [=drag data store/drag data store mode=] is not <a>read/write mode</a> or [=read-only mode=], return null and abort these steps.
+
+1. Let |item| be the item in |store|'s [=drag data store/drag data store item list=] that [=/this=] represents.
+
+1. If |item|'s [=drag data store item list/drag data item kind=] is not <em>File</em>, then return
     null and abort these steps.
 
 1. Return a new {{FileSystemEntry}} object representing the [=entry=].
