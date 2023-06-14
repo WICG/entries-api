@@ -192,8 +192,8 @@ unset), and a <dfn>reader error</dfn> (initially null).
 <div algorithm>
 
 To <dfn>resolve a relative path</dfn> with |abspath| (an [=absolute
-path=]) and |path| (an [=absolute path=], a [=relative path=], or the empty string), run
-the following steps which return an [=absolute path=]:
+path=]) and |path| (an [=absolute path=], a [=relative path=], or the empty string),
+perform the following steps. They return an [=absolute path=].
 
 1. If |path| is an [=absolute path=], return |path|.
 
@@ -231,7 +231,7 @@ the following steps which return an [=absolute path=]:
 <div algorithm>
 
 To <dfn>evaluate a path</dfn> with |directory| (an [=root directory=])
-and |path| (an [=absolute path=]), run the following steps which
+and |path| (an [=absolute path=]), perform the following steps. They
 return a [=file=], [=directory=], or failure.
 
 1. Let |segments| be the result of [=strictly splitting=] |path| on
@@ -257,7 +257,7 @@ return a [=file=], [=directory=], or failure.
           or |directory| if none.
 
       : Otherwise
-      :: Run these substeps:
+      :: Run these steps:
 
          1. Let |item| be the member of |directory| with [=/name=]
             equal to |segment|, or return failure if none.
@@ -536,7 +536,7 @@ The <dfn attribute for=FileSystemEntry>filesystem</dfn> getter steps are to retu
 
 The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to perform the following substeps:
+1. [=Queue a task=] to perform the following steps:
 
     1. Let |path| be the result of running the steps to [=resolve a
         relative path=] with [=/this=]'s [=full path=] and '..'.
@@ -643,7 +643,7 @@ The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn> method steps a
 
 The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to run the following substeps:
+1. [=Queue a task=] to run the following steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
@@ -683,7 +683,7 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
 
 The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to run the following substeps:
+1. [=Queue a task=] to run the following steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
@@ -773,13 +773,13 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
 1. Set [=/this=]'s [=reading flag=].
 
-1. [=Queue a task=] to perform the following substeps:
+1. [=Queue a task=] to perform the following steps:
 
     1. Clear [=/this=]'s [=reading flag=].
 
     1. Let |dir| be [=/this=]'s [=directory=].
 
-    1. If |dir| is null, run these substeps:
+    1. If |dir| is null, then:
 
         1. Let |dir| be the result of running the steps to [=evaluate
             a path=] with [=/this=]'s [=entry/root=] and [=full path=].
@@ -914,7 +914,7 @@ A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
 
 The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to perform the following substeps:
+1. [=Queue a task=] to perform the following steps:
 
     1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and [=full
