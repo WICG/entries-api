@@ -425,7 +425,7 @@ During a <em>drag-and-drop operation</em>, [=file=] and
 [=drag data store=].
 
 Additionally, each [=directory=] item is represented in the [=drag data store/drag
-data store item list=] as a <i>File</i>. If it is accessed via
+data store item list=] as an item whose [=drag data store item list/drag data item kind|kind=] is <i>File</i>. If it is accessed via
 {{DataTransferItem/getAsFile()}} a zero-length {{File}} is returned.
 
 note:
@@ -451,7 +451,7 @@ The <dfn method for=DataTransferItem>webkitGetAsEntry()</dfn> method steps are:
 
 1. Let |item| be the item in |store|'s [=drag data store/drag data store item list=] that [=/this=] represents.
 
-1. If |item|'s [=drag data store item list/drag data item kind=] is not <em>File</em>, then return
+1. If |item|'s [=drag data store item list/drag data item kind|kind=] is not <i>File</i>, then return
     null and abort these steps.
 
 1. Return a new {{FileSystemEntry}} object representing the [=entry=].
