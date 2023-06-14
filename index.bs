@@ -538,10 +538,10 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
 
 1. [=Queue a task=] to perform the following steps:
 
-    1. Let |path| be the result of running the steps to [=resolve a
+    1. Let |path| be the result of [=resolving a
         relative path=] with [=/this=]'s [=full path=] and '..'.
 
-    1. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
     1. If |item| is failure, [=invoke=]
@@ -656,11 +656,11 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and abort
         these steps.
 
-    1. Let |path| be the result of running the steps to [=resolve a
+    1. Let |path| be the result of [=resolving a
         relative path=] with [=/this=]'s [=full path=]
         and |path|.
 
-    1. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
     1. If |item| is failure, [=invoke=]
@@ -696,11 +696,11 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and abort
         these steps.
 
-    1. Let |path| be the result of running the steps to [=resolve a
+    1. Let |path| be the result of [=resolving a
         relative path=] with [=/this=]'s [=full path=]
         and |path|.
 
-    1. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
     1. If |item| is failure, [=invoke=]
@@ -781,7 +781,7 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
     1. If |dir| is null, then:
 
-        1. Let |dir| be the result of running the steps to [=evaluate
+        1. Let |dir| be the result of [=evaluating
             a path=] with [=/this=]'s [=entry/root=] and [=full path=].
 
         1. If |dir| is failure, set [=/this=]'s
@@ -916,7 +916,7 @@ The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)
 
 1. [=Queue a task=] to perform the following steps:
 
-    1. Let |item| be the result of running the steps to [=evaluate a
+    1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and [=full
         path=].
 
