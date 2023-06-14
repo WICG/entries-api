@@ -232,7 +232,7 @@ the following steps which return an [=absolute path=]:
 
 To <dfn>evaluate a path</dfn> with |directory| (an [=root directory=])
 and |path| (an [=absolute path=]), run the following steps which
-return a [=file=], [=directory=], or <em>failure</em>.
+return a [=file=], [=directory=], or failure.
 
 1. Let |segments| be the result of [=strictly splitting=] |path| on
     '/' (U+002F SOLIDUS).
@@ -260,12 +260,12 @@ return a [=file=], [=directory=], or <em>failure</em>.
       :: Run these substeps:
 
          1. Let |item| be the member of |directory| with [=/name=]
-            equal to |segment|, or return <em>failure</em> if none.
+            equal to |segment|, or return failure if none.
 
          1. If |segment| is the last item in |segments|, return
             |item|.
 
-         1. If |item| is a [=file=], return <em>failure</em>.
+         1. If |item| is a [=file=], return failure.
 
          1. Let |directory| be |item|.
 
@@ -544,7 +544,7 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
     1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is failure, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
@@ -663,7 +663,7 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
     1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is failure, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
@@ -703,7 +703,7 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
     1. Let |item| be the result of running the steps to [=evaluate a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is failure, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
@@ -920,7 +920,7 @@ The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)
         path=] with [=/this=]'s [=entry/root=] and [=full
         path=].
 
-    1. If |item| is <em>failure</em>, [=invoke=]
+    1. If |item| is failure, [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and terminate these steps.
 
