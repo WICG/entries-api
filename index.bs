@@ -363,8 +363,9 @@ directory is selected with an <{input}> element:
 
 ```js
   document.querySelector('#b').addEventListener('change', e => {
-    for (file entry of e.target.files)
+    for (file entry of e.target.files) {
       console.log(file.name, file.webkitRelativePath);
+    }
   });
 ```
 </div>
@@ -385,8 +386,9 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 
 ```js
   document.querySelector('#a').addEventListener('change', e => {
-    for (const entry of e.target.webkitEntries)
+    for (const entry of e.target.webkitEntries) {
       handleEntry(entry);
+    }
   });
 ```
 </div>
@@ -813,25 +815,25 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 <div class=example>
 Enumerating a directory:
 ```js
-let reader = dirEntry.createReader();
-let doBatch = function() {
+const reader = dirEntry.createReader();
+const doBatch = () => {
 
-    // Read a batch.
-    reader.readEntries(entries => {
+  // Read a batch.
+  reader.readEntries(entries => {
 
-      // Complete?
-      if (entries.length === 0) {
-        return;
-      }
+    // Complete?
+    if (entries.length === 0) {
+      return;
+    }
 
-      // Process the batch.
-      entries.forEach(handleEntry);
+    // Process the batch.
+    entries.forEach(handleEntry);
 
-      // Read the next batch.
-      doBatch();
+    // Read the next batch.
+    doBatch();
 
-    }, error => console.warn(error));
-  };
+  }, error => console.warn(error));
+};
 
 // Start reading
 doBatch();
@@ -872,8 +874,9 @@ async function* getEntriesAsAsyncIterator(dirEntry) {
     reader.readEntries(resolve, reject);
   });
 
+  let entries;
   do {
-    const entries = await getNextBatch();
+    entries = await getNextBatch();
     for (const entry of entries) {
       yield entry;
     }
@@ -888,8 +891,9 @@ using `for-await-of`:
 async function show(entry) {
   console.log(entry.fullPath);
   if (entry.isDirectory) {
-    for await (const e of getEntriesAsAsyncIterator(entry))
+    for await (const e of getEntriesAsAsyncIterator(entry)) {
       await show(e);
+    }
   }
 }
 ```
