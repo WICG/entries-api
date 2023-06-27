@@ -4,10 +4,10 @@
   <title>File and Directory Entries API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version 5fcd28d6d, updated Tue May 30 13:12:11 2023 -0700" name="generator">
+  <meta content="Bikeshed version 5edf5e459, updated Thu Jun 22 11:28:01 2023 -0700" name="generator">
   <link href="https://wicg.github.io/entries-api/" rel="canonical">
   <link href="logo-folder.svg" rel="icon">
-  <meta content="2b9e9283b6683c9c7c7f24f8aa76548aa3357043" name="document-revision">
+  <meta content="c58c0e3aec5db337c4d844daa68f84ac2d632894" name="document-revision">
 <style>
 #speclogo { height: 100px; width: 100px; background-color: transparent; }
 main #speclogo { position: absolute; right: 20px; top: 30px; }
@@ -739,33 +739,12 @@ a.self-link::before            { content: "¶"; }
 .heading > a.self-link::before { content: "§"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
-<style>/* Boilerplate: style-style-syntax-highlighting */
+<style>/* Boilerplate: style-syntax-highlighting */
 
             pre.idl.highlight {
                 background: var(--borderedblock-bg, var(--def-bg));
             }
             
-</style>
-<style>/* Boilerplate: style-style-var-click-highlighting */
-/*
-Colors were chosen in Lab using https://nixsensor.com/free-color-converter/
-D50 2deg illuminant, L in [0,100], a and b in [-128, 128]
-0 = lab(85,0,85)
-1 = lab(85,80,30)
-2 = lab(85,-40,40)
-3 = lab(85,-50,0)
-4 = lab(85,5,15)
-5 = lab(85,-10,-50)
-6 = lab(85,35,-15)
-*/
-var { cursor: pointer; }
-var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
-var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
-var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
-var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
-var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
-var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
-var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
 
@@ -890,11 +869,32 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     c-[il] { color: #657b83 } /* Literal.Number.Integer.Long */
 }
 </style>
+<style>/* Boilerplate: style-var-click-highlighting */
+/*
+Colors were chosen in Lab using https://nixsensor.com/free-color-converter/
+D50 2deg illuminant, L in [0,100], a and b in [-128, 128]
+0 = lab(85,0,85)
+1 = lab(85,80,30)
+2 = lab(85,-40,40)
+3 = lab(85,-50,0)
+4 = lab(85,5,15)
+5 = lab(85,-10,-50)
+6 = lab(85,35,-15)
+*/
+var { cursor: pointer; }
+var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
+var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
+var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
+var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
+var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
+var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
+var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
+</style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">File and Directory Entries API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-06-14">14 June 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2023-06-27">27 June 2023</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1187,14 +1187,15 @@ to the file.</p>
   expose a native file system directly to the user, photo albums could
   be presented as directories if <code>"image/*"</code> is specified
   for the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/input.html#dom-input-accept" id="ref-for-dom-input-accept">accept</a></code> attribute.</p>
-   <div class="example" id="example-d964aaf3">
-    <a class="self-link" href="#example-d964aaf3"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath⑥">webkitRelativePath</a></code> properties after a
+   <div class="example" id="example-d01043aa">
+    <a class="self-link" href="#example-d01043aa"></a> Inspecting the <code class="idl"><a data-link-type="idl" href="#dom-file-webkitrelativepath" id="ref-for-dom-file-webkitrelativepath⑥">webkitRelativePath</a></code> properties after a
 directory is selected with an <code><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/input.html#the-input-element" id="ref-for-the-input-element①">input</a></code> element: 
 <pre class="language-html highlight"><c- p>&lt;</c-><c- f>input</c-> <c- e>id</c-><c- o>=</c-><c- s>b</c-> <c- e>type</c-><c- o>=</c-><c- s>file</c-> <c- e>webkitdirectory</c-><c- p>></c->
 </pre>
 <pre class="language-js highlight">document<c- p>.</c->querySelector<c- p>(</c-><c- t>'#b'</c-><c- p>).</c->addEventListener<c- p>(</c-><c- t>'change'</c-><c- p>,</c-> e <c- p>=></c-> <c- p>{</c->
-  <c- k>for</c-> <c- p>(</c->file entry <c- k>of</c-> e<c- p>.</c->target<c- p>.</c->files<c- p>)</c->
+  <c- k>for</c-> <c- p>(</c->file entry <c- k>of</c-> e<c- p>.</c->target<c- p>.</c->files<c- p>)</c-> <c- p>{</c->
     console<c- p>.</c->log<c- p>(</c->file<c- p>.</c->name<c- p>,</c-> file<c- p>.</c->webkitRelativePath<c- p>);</c->
+  <c- p>}</c->
 <c- p>});</c->
 </pre>
    </div>
@@ -1203,13 +1204,14 @@ access the element’s selected entries. On getting, if the IDL
 attribute applies, it must return an array of <code class="idl"><a data-link-type="idl" href="#filesystementry" id="ref-for-filesystementry①">FileSystemEntry</a></code> objects that represent the current <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/forms.html#concept-input-type-file-selected" id="ref-for-concept-input-type-file-selected">selected files</a> (including
 directories, if permitted). If the IDL attribute does not apply, then
 it must instead return null.</p>
-   <div class="example" id="example-e5cc7383">
-    <a class="self-link" href="#example-e5cc7383"></a> Enumerating entries using <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries①">webkitEntries</a></code>: 
+   <div class="example" id="example-eff083fc">
+    <a class="self-link" href="#example-eff083fc"></a> Enumerating entries using <code class="idl"><a data-link-type="idl" href="#dom-htmlinputelement-webkitentries" id="ref-for-dom-htmlinputelement-webkitentries①">webkitEntries</a></code>: 
 <pre class="language-html highlight"><c- p>&lt;</c-><c- f>input</c-> <c- e>id</c-><c- o>=</c-><c- s>a</c-> <c- e>type</c-><c- o>=</c-><c- s>file</c-> <c- e>multiple</c-><c- p>></c->
 </pre>
 <pre class="language-js highlight">document<c- p>.</c->querySelector<c- p>(</c-><c- t>'#a'</c-><c- p>).</c->addEventListener<c- p>(</c-><c- t>'change'</c-><c- p>,</c-> e <c- p>=></c-> <c- p>{</c->
-  <c- k>for</c-> <c- p>(</c-><c- a>const</c-> entry <c- k>of</c-> e<c- p>.</c->target<c- p>.</c->webkitEntries<c- p>)</c->
+  <c- k>for</c-> <c- p>(</c-><c- a>const</c-> entry <c- k>of</c-> e<c- p>.</c->target<c- p>.</c->webkitEntries<c- p>)</c-> <c- p>{</c->
     handleEntry<c- p>(</c->entry<c- p>);</c->
+  <c- p>}</c->
 <c- p>});</c->
 </pre>
    </div>
@@ -1521,27 +1523,27 @@ flag</a>.</p>
       </ol>
     </ol>
    </div>
-   <div class="example" id="example-365d0f51">
-    <a class="self-link" href="#example-365d0f51"></a> Enumerating a directory: 
-<pre class="language-js highlight"><c- a>let</c-> reader <c- o>=</c-> dirEntry<c- p>.</c->createReader<c- p>();</c->
-<c- a>let</c-> doBatch <c- o>=</c-> <c- a>function</c-><c- p>()</c-> <c- p>{</c->
+   <div class="example" id="example-e8cb68d6">
+    <a class="self-link" href="#example-e8cb68d6"></a> Enumerating a directory: 
+<pre class="language-js highlight"><c- a>const</c-> reader <c- o>=</c-> dirEntry<c- p>.</c->createReader<c- p>();</c->
+<c- a>const</c-> doBatch <c- o>=</c-> <c- p>()</c-> <c- p>=></c-> <c- p>{</c->
 
-    <c- c1>// Read a batch.</c->
-    reader<c- p>.</c->readEntries<c- p>(</c->entries <c- p>=></c-> <c- p>{</c->
+  <c- c1>// Read a batch.</c->
+  reader<c- p>.</c->readEntries<c- p>(</c->entries <c- p>=></c-> <c- p>{</c->
 
-      <c- c1>// Complete?</c->
-      <c- k>if</c-> <c- p>(</c->entries<c- p>.</c->length <c- o>===</c-> <c- mf>0</c-><c- p>)</c-> <c- p>{</c->
-        <c- k>return</c-><c- p>;</c->
-      <c- p>}</c->
+    <c- c1>// Complete?</c->
+    <c- k>if</c-> <c- p>(</c->entries<c- p>.</c->length <c- o>===</c-> <c- mf>0</c-><c- p>)</c-> <c- p>{</c->
+      <c- k>return</c-><c- p>;</c->
+    <c- p>}</c->
 
-      <c- c1>// Process the batch.</c->
-      entries<c- p>.</c->forEach<c- p>(</c->handleEntry<c- p>);</c->
+    <c- c1>// Process the batch.</c->
+    entries<c- p>.</c->forEach<c- p>(</c->handleEntry<c- p>);</c->
 
-      <c- c1>// Read the next batch.</c->
-      doBatch<c- p>();</c->
+    <c- c1>// Read the next batch.</c->
+    doBatch<c- p>();</c->
 
-    <c- p>},</c-> error <c- p>=></c-> console<c- p>.</c->warn<c- p>(</c->error<c- p>));</c->
-  <c- p>};</c->
+  <c- p>},</c-> error <c- p>=></c-> console<c- p>.</c->warn<c- p>(</c->error<c- p>));</c->
+<c- p>};</c->
 
 <c- c1>// Start reading</c->
 doBatch<c- p>();</c->
@@ -1568,16 +1570,17 @@ doBatch<c- p>();</c->
 <c- p>}</c->
 </pre>
    </div>
-   <div class="example" id="example-a4632681">
-    <a class="self-link" href="#example-a4632681"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryreader" id="ref-for-filesystemdirectoryreader⑤">FileSystemDirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-asynciterator-interface" id="ref-for-sec-asynciterator-interface">AsyncIterators</a> <a data-link-type="biblio" href="#biblio-ecma-262" title="ECMAScript Language Specification">[ECMA-262]</a>: 
+   <div class="example" id="example-ee6569f7">
+    <a class="self-link" href="#example-ee6569f7"></a> Helper function to adapt <code class="idl"><a data-link-type="idl" href="#filesystemdirectoryreader" id="ref-for-filesystemdirectoryreader⑤">FileSystemDirectoryReader</a></code> for use with <a data-link-type="dfn" href="https://tc39.github.io/ecma262/#sec-asynciterator-interface" id="ref-for-sec-asynciterator-interface">AsyncIterators</a> <a data-link-type="biblio" href="#biblio-ecma-262" title="ECMAScript Language Specification">[ECMA-262]</a>: 
 <pre class="language-js highlight"><c- k>async</c-> <c- a>function</c-><c- o>*</c-> getEntriesAsAsyncIterator<c- p>(</c->dirEntry<c- p>)</c-> <c- p>{</c->
   <c- a>const</c-> reader <c- o>=</c-> dirEntry<c- p>.</c->createReader<c- p>();</c->
   <c- a>const</c-> getNextBatch <c- o>=</c-> <c- p>()</c-> <c- p>=></c-> <c- ow>new</c-> Promise<c- p>((</c->resolve<c- p>,</c-> reject<c- p>)</c-> <c- p>=></c-> <c- p>{</c->
     reader<c- p>.</c->readEntries<c- p>(</c->resolve<c- p>,</c-> reject<c- p>);</c->
   <c- p>});</c->
 
+  <c- a>let</c-> entries<c- p>;</c->
   <c- k>do</c-> <c- p>{</c->
-    <c- a>const</c-> entries <c- o>=</c-> <c- k>await</c-> getNextBatch<c- p>();</c->
+    entries <c- o>=</c-> <c- k>await</c-> getNextBatch<c- p>();</c->
     <c- k>for</c-> <c- p>(</c-><c- a>const</c-> entry <c- k>of</c-> entries<c- p>)</c-> <c- p>{</c->
       <c- k>yield</c-> entry<c- p>;</c->
     <c- p>}</c->
@@ -1589,8 +1592,9 @@ using <code>for-await-of</code>:</p>
 <pre class="language-js highlight"><c- k>async</c-> <c- a>function</c-> show<c- p>(</c->entry<c- p>)</c-> <c- p>{</c->
   console<c- p>.</c->log<c- p>(</c->entry<c- p>.</c->fullPath<c- p>);</c->
   <c- k>if</c-> <c- p>(</c->entry<c- p>.</c->isDirectory<c- p>)</c-> <c- p>{</c->
-    <c- k>for</c-> <c- k>await</c-> <c- p>(</c-><c- a>const</c-> e <c- k>of</c-> getEntriesAsAsyncIterator<c- p>(</c->entry<c- p>))</c->
+    <c- k>for</c-> <c- k>await</c-> <c- p>(</c-><c- a>const</c-> e <c- k>of</c-> getEntriesAsAsyncIterator<c- p>(</c->entry<c- p>))</c-> <c- p>{</c->
       <c- k>await</c-> show<c- p>(</c->e<c- p>);</c->
+    <c- p>}</c->
   <c- p>}</c->
 <c- p>}</c->
 </pre>
