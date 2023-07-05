@@ -769,23 +769,51 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
 1. [=In parallel=], run these steps:
 
-    1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
-
     1. If [=/this=]'s [=FileSystemDirectoryReader/directory=] is null, then:
 
         1. Let |dir| be the result of [=evaluating a path=] with [=/this=]'s [=FileSystemDirectoryReader/entry=]'s [=entry/root=] and [=full path=].
 
-        1. If |dir| is failure, then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}, [=queue a task=] to [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
+        1. If |dir| is failure, then:
+
+            1. [=Queue a task=] to run these steps:
+
+                1. Let |error| be a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+                1. [=Invoke=] |errorCallback| (if given) with |error|.
+
+            1. Abort these steps.
 
         1. Set [=/this=]'s [=FileSystemDirectoryReader/directory=] to |dir|.
 
     1. Let |entries| be a non-zero number of entries from [=/this=]'s [=FileSystemDirectoryReader/directory=] that have not yet been produced by this {{FileSystemDirectoryReader}}, if any.
 
-    1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to an appropriate {{DOMException}}, [=queue a task=] to [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
+    1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then:
 
-    1. If |entries| is empty, set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
+        1. [=Queue a task=] to run these steps:
 
-    1. [=Invoke=] |successCallback| with |entries|.
+            1. Let |error| be a an appropriate {{DOMException}}.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+            1. [=Invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=].
+
+        1. Abort these steps.
+
+    1. [=Queue a task=] to run these steps:
+
+        1. If |entries| is empty, then set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
+
+        1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+        1. [=Invoke=] |successCallback| with |entries|.
+
+NOTE: The use of the the [=FileSystemDirectoryReader/reading flag=] prevents multiple copies of the [=in parallel=] steps above from executing simultaneously. This obviates the need to specify a [=parallel queue=].
 
 </div>
 
