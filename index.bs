@@ -176,16 +176,6 @@ The <dfn for=entry>file system</dfn> of an [=entry=] is the
 [=/file system=] associated with the [=entry=]'s [=entry/root=].
 
 <!-- ============================================================ -->
-## Directory Reader ## {#dir-reader}
-<!-- ============================================================ -->
-
-A <dfn>directory reader</dfn> consists of an associated [=directory
-entry=], an associated [=directory=] (initially null), a <dfn>reading
-flag</dfn> (initially unset), a <dfn>done flag</dfn> (initially
-unset), and a <dfn>reader error</dfn> (initially null).
-
-
-<!-- ============================================================ -->
 # Algorithms # {#algorithms}
 <!-- ============================================================ -->
 
@@ -632,11 +622,8 @@ entry=].
 
 The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn> method steps are:
 
-1. Let |reader| be a new [=directory reader=] associated with the
-    [=directory entry=]'s [=directory=].
-
 1. Return a newly created {{FileSystemDirectoryReader}} object
-    associated with |reader|.
+    associated with [=directory entry=].
 
 </div>
 
@@ -754,60 +741,46 @@ interface FileSystemDirectoryReader {
 callback FileSystemEntriesCallback = undefined (sequence<FileSystemEntry> entries);
 </xmp>
 
-A {{FileSystemDirectoryReader}} has an associated [=directory reader=].
+<div dfn-for=FileSystemDirectoryReader>
+A {{FileSystemDirectoryReader}} has
+an associated <dfn>entry</dfn> (a [=directory entry=]),
+an associated <dfn>directory</dfn> (initially null),
+a <dfn>reading flag</dfn> (initially unset),
+a <dfn>done flag</dfn> (initially unset),
+and a <dfn>reader error</dfn> (initially null).
+</div>
 
 <div algorithm>
 
 The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. If [=/this=]'s [=reading flag=] is set, [=queue a
-    task=] to [=invoke=] |errorCallback| with a newly
-    [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and abort these
-    steps.
+1. If [=/this=]'s [=FileSystemDirectoryReader/reading flag=] is set, [=queue a task=] to [=invoke=] |errorCallback| with a newly [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and abort these steps.
 
-1. If [=/this=]'s [=reader error=] is not null, [=queue
-    a task=] to [=invoke=] |errorCallback| (if given)
-    with [=reader error=], and abort these steps.
+1. If [=/this=]'s [=FileSystemDirectoryReader/reader error=] is not null, [=queue a task=] to [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
 
-1. If [=/this=]'s [=done flag=] is set, [=queue a
-    task=] to [=invoke=] |successCallback| with an empty
-    sequence and abort these steps.
+1. If [=/this=]'s [=FileSystemDirectoryReader/done flag=] is set, [=queue a task=] to [=invoke=] |successCallback| with an empty sequence and abort these steps.
 
-1. Set [=/this=]'s [=reading flag=].
+1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=].
 
 1. [=Queue a task=] to perform the following steps:
 
-    1. Clear [=/this=]'s [=reading flag=].
+    1. Clear [=/this=]'s [=FileSystemDirectoryReader/reading flag=].
 
-    1. Let |dir| be [=/this=]'s [=directory=].
+    1. If [=/this=]'s [=FileSystemDirectoryReader/directory=] is null, then:
 
-    1. If |dir| is null, then:
+        1. Let |dir| be the result of [=evaluating a path=] with [=/this=]'s [=FileSystemDirectoryReader/entry=]'s [=entry/root=] and [=full path=].
 
-        1. Let |dir| be the result of [=evaluating
-            a path=] with [=/this=]'s [=entry/root=] and [=full path=].
+        1. If |dir| is failure, then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}, [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
 
-        1. If |dir| is failure, set [=/this=]'s
-            [=reader error=] to a newly [=exception/created=]
-            "{{NotFoundError}}" {{DOMException}}, [=invoke=] |errorCallback|
-            (if given) with [=reader error=], and abort these
-            steps.
+        1. Set [=/this=]'s [=FileSystemDirectoryReader/directory=] to |dir|.
 
-        1. Set [=/this=]'s [=directory=] to |dir|.
+    1. Let |entries| be a non-zero number of entries from [=/this=]'s [=FileSystemDirectoryReader/directory=] that have not yet been produced by this {{FileSystemDirectoryReader}}, if any.
 
-    1. Let |entries| be a non-zero number of entries from the
-        |dir| that have not yet been produced by this
-        [=directory reader=], if any.
+    1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to an appropriate {{DOMException}}, [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
 
-    1. If the previous step failed (for example, the [=directory=] was
-        deleted or permission is denied), then set [=/this=]'s
-        [=reader error=] to an appropriate {{DOMException}},
-        [=invoke=] |errorCallback| (if given) with
-        [=reader error=], and abort these steps.
+    1. If |entries| is empty, set [=/this=]'s [=FileSystemDirectoryReader/done flag=].
 
-    1. If |entries| is empty, set [=/this=]'s [=done
-        flag=].
-
-    1. [=invoke=] |successCallback| with |entries|.
+    1. [=Invoke=] |successCallback| with |entries|.
 
 </div>
 
