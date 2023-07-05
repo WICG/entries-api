@@ -745,8 +745,8 @@ callback FileSystemEntriesCallback = undefined (sequence<FileSystemEntry> entrie
 A {{FileSystemDirectoryReader}} has
 an associated <dfn>entry</dfn> (a [=directory entry=]),
 an associated <dfn>directory</dfn> (initially null),
-a <dfn>reading flag</dfn> (initially unset),
-a <dfn>done flag</dfn> (initially unset),
+a <dfn>reading flag</dfn> (initially false),
+a <dfn>done flag</dfn> (initially false),
 and a <dfn>reader error</dfn> (initially null).
 </div>
 
@@ -754,17 +754,17 @@ and a <dfn>reader error</dfn> (initially null).
 
 The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. If [=/this=]'s [=FileSystemDirectoryReader/reading flag=] is set, [=queue a task=] to [=invoke=] |errorCallback| with a newly [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and abort these steps.
+1. If [=/this=]'s [=FileSystemDirectoryReader/reading flag=] is true, [=queue a task=] to [=invoke=] |errorCallback| with a newly [=exception/created=] "{{InvalidStateError}}" {{DOMException}}, and abort these steps.
 
 1. If [=/this=]'s [=FileSystemDirectoryReader/reader error=] is not null, [=queue a task=] to [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
 
-1. If [=/this=]'s [=FileSystemDirectoryReader/done flag=] is set, [=queue a task=] to [=invoke=] |successCallback| with an empty sequence and abort these steps.
+1. If [=/this=]'s [=FileSystemDirectoryReader/done flag=] is true, [=queue a task=] to [=invoke=] |successCallback| with an empty sequence and abort these steps.
 
-1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=].
+1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to true.
 
 1. [=Queue a task=] to perform the following steps:
 
-    1. Clear [=/this=]'s [=FileSystemDirectoryReader/reading flag=].
+    1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
 
     1. If [=/this=]'s [=FileSystemDirectoryReader/directory=] is null, then:
 
@@ -778,7 +778,7 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
     1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to an appropriate {{DOMException}}, [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
 
-    1. If |entries| is empty, set [=/this=]'s [=FileSystemDirectoryReader/done flag=].
+    1. If |entries| is empty, set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
 
     1. [=Invoke=] |successCallback| with |entries|.
 
