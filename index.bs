@@ -38,9 +38,6 @@ spec: ecma262; urlPrefix: https://tc39.github.io/ecma262/
     type: dfn
         text: Promise; url: #sec-promise-objects
         text: AsyncIterator; url: #sec-asynciterator-interface
-spec: fileapi; urlPrefix: https://w3c.github.io/FileAPI/
-    type: dfn
-        text: file reading task source; url: #fileReadingTaskSource
 </pre>
 
 <img id="speclogo" src="logo-folder.svg" alt="logo" width="100" height="100">
@@ -497,8 +494,8 @@ error asynchronously.
 
 <div class=issue>
   The [=/task source=] used for [=/queue a task|tasks that are queued=] in steps below is not defined. Chromium-based browsers appear to use the following:
-    * The [=/file reading task source=] [[FileAPI]], for {{FileSystemDirectoryReader/readEntries()}} success and error callbacks.
-    * An unnamed task source used in cases where the specification does not identify the task source.
+    * The <a href="https://w3c.github.io/FileAPI/#fileReadingTaskSource">file reading task source</a> [[FileAPI]], for {{FileSystemDirectoryReader/readEntries()}} success and error callbacks. (The Chromium implementation calls this `TaskType::kFileReading`.)
+    * The [=/DOM manipulation task source=] [[HTML]] elsewhere. (The Chromium implementation uses `TaskType::kMiscPlatformAPI` which targets the same underlying task queue as `TaskType::kDOMManipulation`.)
 </div>
 
 
