@@ -492,6 +492,11 @@ callback ErrorCallback = undefined (DOMException err);
 An {{ErrorCallback}} function is used for operations that may return an
 error asynchronously.
 
+<div class=issue>
+  The [=/task source=] used for [=/queue a task|tasks that are queued=] in steps below is not defined. Chromium-based browsers appear to use the following:
+    * The <a href="https://w3c.github.io/FileAPI/#fileReadingTaskSource">file reading task source</a> [[FileAPI]], for {{FileSystemDirectoryReader/readEntries()}} success and error callbacks. (The Chromium implementation calls this `TaskType::kFileReading`.)
+    * The [=/DOM manipulation task source=] [[HTML]] elsewhere. (The Chromium implementation uses `TaskType::kMiscPlatformAPI` which targets the same underlying task queue as `TaskType::kDOMManipulation`.)
+</div>
 
 
 <!-- ============================================================ -->
@@ -528,7 +533,7 @@ The <dfn attribute for=FileSystemEntry>filesystem</dfn> getter steps are to retu
 
 The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to perform the following steps:
+1. [=In parallel=], run these steps:
 
     1. Let |path| be the result of [=resolving a
         relative path=] with [=/this=]'s [=full path=] and '..'.
@@ -536,7 +541,7 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
     1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is failure, [=invoke=]
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and abort these steps.
 
@@ -544,7 +549,7 @@ The <dfn method for=FileSystemEntry>getParent(|successCallback|, |errorCallback|
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    1. [=Invoke=] |successCallback| with a new
+    1. [=Queue a task=] to [=invoke=] |successCallback| with a new
         {{FileSystemDirectoryEntry}} object associated with |entry|.
 
 </div>
@@ -632,16 +637,16 @@ The <dfn method for=FileSystemDirectoryEntry>createReader()</dfn> method steps a
 
 The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to run the following steps:
+1. [=In parallel=], run these steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    1. If |path| is not a [=valid path=], [=invoke=]
+    1. If |path| is not a [=valid path=], [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and abort these steps.
 
     1. If |options|'s {{FileSystemFlags/create}} member is true,
-        [=invoke=] |errorCallback| (if given) with a
+        [=queue a task=] to [=invoke=] |errorCallback| (if given) with a
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and abort
         these steps.
 
@@ -652,18 +657,18 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
     1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is failure, [=invoke=]
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and abort these steps.
 
-    1. If |item| is not a [=file=], [=invoke=]
+    1. If |item| is not a [=file=], [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and abort these steps.
 
     1. Let |entry| be a new [=file entry=] with |item|'s [=file/name=]
         as [=entry/name=] and |path| as [=full path=].
 
-    1. [=Invoke=] |successCallback| (if given) with a new
+    1. [=Queue a task=] to [=invoke=] |successCallback| (if given) with a new
         {{FileSystemFileEntry}} object associated with |entry|.
 
 </div>
@@ -672,16 +677,16 @@ The <dfn method for=FileSystemDirectoryEntry>getFile(|path|, |options|, |success
 
 The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to run the following steps:
+1. [=In parallel=], run these steps:
 
     1. If |path| is undefined or null let |path| be the empty string.
 
-    1. If |path| is not a [=valid path=], [=invoke=]
+    1. If |path| is not a [=valid path=], [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and abort these steps.
 
     1. If |options|'s {{FileSystemFlags/create}} member is true,
-        [=invoke=] |errorCallback| (if given) with a
+        [=queue a task=] to [=invoke=] |errorCallback| (if given) with a
         newly [=exception/created=] "{{SecurityError}}" {{DOMException}}, and abort
         these steps.
 
@@ -692,7 +697,7 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
     1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and |path|.
 
-    1. If |item| is failure, [=invoke=]
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and abort these steps.
 
@@ -704,7 +709,7 @@ The <dfn method for=FileSystemDirectoryEntry>getDirectory(|path|, |options|, |su
         [=directory/name=] as [=entry/name=] and |path| as [=full
         path=].
 
-    1. [=invoke=] |successCallback| (if given) with a new
+    1. [=Queue a task=] to [=invoke=] |successCallback| (if given) with a new
         {{FileSystemDirectoryEntry}} associated with |entry|.
 
 </div>
@@ -762,25 +767,53 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
 1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to true.
 
-1. [=Queue a task=] to perform the following steps:
-
-    1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+1. [=In parallel=], run these steps:
 
     1. If [=/this=]'s [=FileSystemDirectoryReader/directory=] is null, then:
 
         1. Let |dir| be the result of [=evaluating a path=] with [=/this=]'s [=FileSystemDirectoryReader/entry=]'s [=entry/root=] and [=full path=].
 
-        1. If |dir| is failure, then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}, [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
+        1. If |dir| is failure, then:
+
+            1. [=Queue a task=] to run these steps:
+
+                1. Let |error| be a newly [=exception/created=] "{{NotFoundError}}" {{DOMException}}.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+                1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+                1. [=Invoke=] |errorCallback| (if given) with |error|.
+
+            1. Abort these steps.
 
         1. Set [=/this=]'s [=FileSystemDirectoryReader/directory=] to |dir|.
 
     1. Let |entries| be a non-zero number of entries from [=/this=]'s [=FileSystemDirectoryReader/directory=] that have not yet been produced by this {{FileSystemDirectoryReader}}, if any.
 
-    1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to an appropriate {{DOMException}}, [=invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=], and abort these steps.
+    1. If the previous step failed (for example, the [=directory=] was deleted or permission is denied), then:
 
-    1. If |entries| is empty, set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
+        1. [=Queue a task=] to run these steps:
 
-    1. [=Invoke=] |successCallback| with |entries|.
+            1. Let |error| be a an appropriate {{DOMException}}.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reader error=] to |error|.
+
+            1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+            1. [=Invoke=] |errorCallback| (if given) with [=FileSystemDirectoryReader/reader error=].
+
+        1. Abort these steps.
+
+    1. [=Queue a task=] to run these steps:
+
+        1. If |entries| is empty, then set [=/this=]'s [=FileSystemDirectoryReader/done flag=] to true.
+
+        1. Set [=/this=]'s [=FileSystemDirectoryReader/reading flag=] to false.
+
+        1. [=Invoke=] |successCallback| with |entries|.
+
+NOTE: The use of the the [=FileSystemDirectoryReader/reading flag=] prevents multiple copies of the [=in parallel=] steps above from executing simultaneously. This obviates the need to specify a [=parallel queue=].
 
 </div>
 
@@ -891,21 +924,21 @@ A {{FileSystemFileEntry}}'s associated [=entry=] is a [=file entry=].
 
 The <dfn method for=FileSystemFileEntry>file(|successCallback|, |errorCallback|)</dfn> method steps are:
 
-1. [=Queue a task=] to perform the following steps:
+1. [=In parallel=], run these steps:
 
     1. Let |item| be the result of [=evaluating a
         path=] with [=/this=]'s [=entry/root=] and [=full
         path=].
 
-    1. If |item| is failure, [=invoke=]
+    1. If |item| is failure, [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{NotFoundError}}" {{DOMException}}, and abort these steps.
 
-    1. If |item| is a [=directory=], [=invoke=]
+    1. If |item| is a [=directory=], [=queue a task=] to [=invoke=]
         |errorCallback| (if given) with a newly [=exception/created=]
         "{{TypeMismatchError}}" {{DOMException}}, and abort these steps.
 
-    1. [=invoke=] |successCallback| with a new {{File}}
+    1. [=Queue a task=] to [=invoke=] |successCallback| with a new {{File}}
         object representing |item|.
 
 </div>
