@@ -1,0 +1,23 @@
+{
+  "transition_status": "Ready to transfer",
+  "intended_implementations": [
+    "Chrome",
+    "Firefox",
+    "Safari"
+  ],
+  "implementations": [
+    "Chrome",
+    "Firefox",
+    "Safari"
+  ],
+  "intended_organization": "W3C",
+  "intended_group": "webapps",
+  "transition_plan": {
+    "decision_to_migrate": null,
+    "decision_to_receive": null,
+    "ongoing_discussions": "https://github.com/w3c/webappswg/issues/118#issuecomment-2840981975"
+  },
+  "notes": [
+    "The WebApps WG may add File and Directory Entries to the WD of File APIs after rechartering."
+  ]
+}
