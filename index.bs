@@ -383,24 +383,6 @@ Enumerating entries using {{HTMLInputElement/webkitEntries}}:
 ```
 </div>
 
-<div class=issue>
-  INTEROP:
-  In Chrome, {{HTMLInputElement/webkitEntries}} is only populated as
-  the result of a drag-and-drop operation, not when the element is
-  clicked. Should we fix this so it is always populated?
-</div>
-
-<div class=issue>
-  INTEROP:
-  In Chrome, if {{HTMLInputElement/webkitdirectory}} is specified on a
-  {{HTMLInputElement}}, {{HTMLInputElement/webkitEntries}} is not
-  populated; the {{HTMLInputElement/files}} collection and
-  {{File/webkitRelativePath}} properties must be used instead to
-  reconstruct the directory structure. Should we fix this so it is
-  always populated?
-</div>
-
-
 
 <!-- ============================================================ -->
 # HTML: Drag and drop # {#html-data}
