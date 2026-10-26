@@ -821,7 +821,7 @@ The <dfn method for=FileSystemDirectoryEntry>readEntries(|successCallback|, |err
 
         1. [=Invoke=] |successCallback| with « |entries| » and "`report`".
 
-NOTE: The use of the the [=FileSystemDirectoryReader/reading flag=] prevents multiple copies of the [=in parallel=] steps above from executing simultaneously. This obviates the need to specify a [=parallel queue=].
+NOTE: The use of the [=FileSystemDirectoryReader/reading flag=] prevents multiple copies of the [=in parallel=] steps above from executing simultaneously. This obviates the need to specify a [=parallel queue=].
 
 </div>
 
