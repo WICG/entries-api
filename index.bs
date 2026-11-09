@@ -190,7 +190,9 @@ perform the following steps. They return an [=absolute path=].
 1. Let |abspath segments| be the result of [=strictly splitting=]
     |abspath| on '/' (U+002F SOLIDUS).
 
-    note: The first string will be empty.
+    note: The first string will be empty. If |abspath| ends with '/',
+      the last string will also be empty. For example,
+      [=strictly splitting=] the root's '/' yields two empty strings.
 
 1. Let |path segments| be the result of [=strictly splitting=]
     |path| on '/' (U+002F SOLIDUS).
@@ -214,7 +216,17 @@ perform the following steps. They return an [=absolute path=].
 
      </dl>
 
-1. Return |abspath segments| joined by '/' (U+002F SOLIDUS).
+1. Return '/' (U+002F SOLIDUS) followed by the members of
+    |abspath segments| that are not the empty string, joined by '/'
+    (U+002F SOLIDUS).
+
+    note: The first member of |abspath segments| is empty because
+      |abspath| starts with '/'; it is replaced by the '/' added above.
+      An |abspath| that ends with '/' (such as the root's) also
+      produces a trailing empty member, which is ignored. Thus
+      resolving 'file' against the root's '/' yields '/file', not
+      '//file', and resolving '..' against it yields '/', not the
+      empty string.
 
 </div>
 
