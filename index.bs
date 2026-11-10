@@ -353,7 +353,7 @@ directory is selected with an <{input}> element:
 
 ```js
   document.querySelector('#b').addEventListener('change', e => {
-    for (file entry of e.target.files) {
+    for (const file of e.target.files) {
       console.log(file.name, file.webkitRelativePath);
     }
   });
